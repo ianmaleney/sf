@@ -1,0 +1,39 @@
+.c-content-module--books
+	flex-direction: row
+	flex-wrap: wrap
+	align-content: flex-start
+	margin-bottom: 0
+
+.books-image
+	flex: 1 0 33%
+	margin: 0 5% $baseline 5%
+	min-width: 200px
+	@media #{$min-six-forty}
+		max-width: 33%
+	img
+		max-width: 100%
+
+
+.books-info
+	flex: 1 0 33%
+	margin: 0 5%
+	min-width: 280px
+
+.books-title
+	+type-setting(2)
+	display: block
+
+.books-author
+	+type-setting(1, $sans, c('primary'))
+	display: block
+
+.books-description
+	+type-setting(-1)
+	padding: $grid-gutter 0
+	border-bottom: 1px solid c('spacer')
+
+.books-extra
+	flex: 1 0 100%
+	text-align: right
+	padding-right: 5%
+	+type-setting(1, $sans, c('primary'))

@@ -1,0 +1,28 @@
+.u-page-wrapper
+  display: flex
+  flex-wrap: wrap
+  padding: 0 $grid-gutter
+
+.u-page-wrapper--primary-header
+  margin: 0 $grid-unit 0
+
+.u-page-wrapper--secondary-header
+  margin: 84px $grid-gutter 0
+  @media #{$min-six-forty}
+    margin: 168px $grid-unit 0
+
+.u-page-wrapper--full-width
+  padding: 0
+  margin-left: 0
+  margin-right: 0
+
+main
+  width: 100%
+
+.o-article
+  padding: $grid-gutter
+  margin-right: $grid-unit
+  font-family: $serif
+  @media #{$min-six-forty}
+    flex: 1 0 62%
+    max-width: 62%

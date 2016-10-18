@@ -1,0 +1,51 @@
+@font-face
+  font-family: 'Myriad Pro'
+  src: url('fonts/MyriadPro-Semibold.woff2') format('woff2'), url('fonts/MyriadPro-Semibold.woff') format('woff'), url('fonts/MyriadPro-Semibold.ttf') format('truetype')
+  font-weight: 600
+  font-style: normal
+
+*, *:before, *:after
+  box-sizing: border-box
+
+html
+  font-size: 10px
+  background-color: c('white')
+
+body
+  margin: 0
+  width: 100vw
+  overflow-x: hidden
+  background-color: c('white')
+  color: c('black')
+
+.heading-1
+  +type-setting(5, $serif)
+
+.heading-2
+  +type-setting(4, $serif)
+
+.heading-3
+  +type-setting(3, $serif)
+
+.heading-4
+  +type-setting(2, $serif)
+
+p
+  +type-setting(0, $serif)
+
+a
+  color: c('primary')
+  text-decoration: none
+  &:hover
+    color: c('accent')
+    text-decoration: underline
+
+a.c-author-link
+  color: c('black')
+  text-decoration: none
+  &:hover
+    color: c('black')
+    text-decoration: underline
+
+li
+  +type-setting(0, $sans)

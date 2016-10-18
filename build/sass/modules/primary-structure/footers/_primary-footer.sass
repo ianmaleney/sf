@@ -1,0 +1,83 @@
+footer
+	width: 100vw
+	float: left
+	background-color: c('background-dark', 0.5, black)
+	color: c('background-light')
+
+.u-footer-wrapper
+	min-width: 300px
+	width: 576px
+	max-width: 86vw
+	margin: 0 auto
+	padding: 50px 0
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+	align-items: center
+	@media #{$max-six-forty}
+		justify-content: center
+		padding: 80px 0
+
+.c-footer-nav
+	+type-setting(0, $sans, c('background-light', 1, black))
+
+.c-footer-nav__menu
+	list-style: none
+	line-height: 3rem
+	-webkit-padding-start: 0px
+	padding-start: 0px
+	display: flex
+	flex-direction: column
+	font-family: $sans
+	@supports not (-webkit-padding-start: 0px)
+		margin-left: -40px
+	@media #{$max-six-forty}
+		flex-direction: row
+		flex-wrap: wrap
+		text-align: center
+		line-height: 3.5rem
+		li
+			flex: 1 0 50%
+	a
+		color: c('background-light', 1, black)
+		text-decoration: none
+		&:hover
+			color: c('accent', 1)
+
+.c-footer-logo
+	+type-setting(4, $serif, c('background-light', 1, black))
+	padding: 20px 0
+	text-align: center
+
+.c-footer-info
+	border-top: 1px solid c('background-light', 1, black)
+	p
+		+type-setting(-1, $serif, c('background-light', 1, black))
+
+.c-footer-social
+	padding: 20px 0
+	.c-social-icons
+		position: sticky
+	@media #{$max-six-forty}
+		flex: 1 0 100%
+		display: flex
+		justify-content: center
+	a
+		+type-setting(3, $sans, c('background-light', 1, black))
+		padding: 10px
+		text-decoration: none
+		svg
+			height: 4rem
+			width: 4rem
+			fill: c('background-light', 1, black)
+		@media #{$max-six-forty}
+			padding: 15px
+		&:hover
+			svg
+				fill: c('accent', 1, white)
+
+
+.c-support-logos
+	img
+		max-width: 80px
+		margin: 20px 10px

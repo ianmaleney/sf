@@ -419,3 +419,138 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
+
+// Registering Footer Menu
+function register_my_menus() {
+	register_nav_menus(
+    array(
+      'footer-menu' => __( 'Footer Menu' ),
+      'side-menu' => __( 'Side Menu' )
+    )
+  );
+}
+add_action( 'init', 'register_my_menus' );
+
+// Enqueueing Custom JS
+function my_assets() {
+	wp_enqueue_script( 'theme-scripts', '/wp-content/themes/stingingfly/js/scripts.js', array( 'jquery' ), '1.0', true );
+}
+
+add_action( 'wp_enqueue_scripts', 'my_assets' );
+
+//
+// Enhanced Search - https://adambalee.com/search-wordpress-by-custom-fields-without-a-plugin/
+//
+
+function cf_search_join( $join ) {
+    global $wpdb;
+
+    if ( is_search() ) {
+        $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+    }
+
+    return $join;
+}
+add_filter('posts_join', 'cf_search_join' );
+
+function cf_search_where( $where ) {
+    global $pagenow, $wpdb;
+
+    if ( is_search() ) {
+        $where = preg_replace(
+            "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+            "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+    }
+
+    return $where;
+}
+add_filter( 'posts_where', 'cf_search_where' );
+
+function cf_search_distinct( $where ) {
+    global $wpdb;
+
+    if ( is_search() ) {
+        return "DISTINCT";
+    }
+
+    return $where;
+}
+add_filter( 'posts_distinct', 'cf_search_distinct' );
+
+//
+// Popular Posts Functionality - https://digwp.com/2016/03/diy-popular-posts/
+//
+
+function shapeSpace_popular_posts($post_id) {
+	$count_key = 'popular_posts';
+	$count = get_post_meta($post_id, $count_key, true);
+	if ($count == '') {
+		$count = 0;
+		delete_post_meta($post_id, $count_key);
+		add_post_meta($post_id, $count_key, '0');
+	} else {
+		$count++;
+		update_post_meta($post_id, $count_key, $count);
+	}
+}
+function shapeSpace_track_posts($post_id) {
+	if (!is_single()) return;
+	if (empty($post_id)) {
+		global $post;
+		$post_id = $post->ID;
+	}
+	shapeSpace_popular_posts($post_id);
+}
+add_action('wp_head', 'shapeSpace_track_posts');
+
+//
+// WooCommerce Setup
+//
+remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
+
+add_action('woocommerce_before_main_content', 'my_theme_wrapper_start', 10);
+add_action('woocommerce_after_main_content', 'my_theme_wrapper_end', 10);
+
+function my_theme_wrapper_start() {
+  echo '<div class="u-page-wrapper u-page-wrapper--primary-header"><main id="main" class="site-main" role="main">';
+}
+
+function my_theme_wrapper_end() {
+  echo '</main></div>';
+}
+
+add_action( 'after_setup_theme', 'woocommerce_support' );
+function woocommerce_support() {
+    add_theme_support( 'woocommerce' );
+}
+
+//
+// Guest Authors
+//
+
+function guest_author_link() {
+	if ( function_exists( 'coauthors_posts_links' ) ) {
+		coauthors_posts_links();
+	} else {
+			the_author_posts_link();
+		}
+}
+
+function guest_author() {
+	if ( function_exists( 'coauthors' ) ) {
+		coauthors();
+	} else {
+			the_author();
+		}
+}
+
+function guest_author_bio() {
+	if ( function_exists( 'coauthors_bio' ) ) {
+		coauthors_bio();
+	} else {
+			// the_author();
+		}
+}
+
+?>

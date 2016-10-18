@@ -1,0 +1,105 @@
+.c-archive-module
+  display: flex
+  padding: $grid-gutter
+  margin: $grid-gutter 0
+  align-items: center
+
+.c-archive-module--featured
+  @media #{$min-six-forty}
+    background: c('background-light')
+    flex: 1 0 100%
+    margin: 0 auto $baseline
+    padding: $grid-gutter $grid-gutter
+    .c-archive-module__image
+      flex: 1 0 40%
+      height: $baseline * 10
+    .c-archive-module__info
+      flex: 1 0 50%
+      min-height: $baseline * 10
+      border-bottom: none
+    .c-archive-module__title
+      +type-setting(2)
+      margin: $grid-gutter 0 -10px
+    .c-archive-module__issue
+      margin-top: 5px
+      +type-setting(-1, $sans)
+    .c-archive-module__author
+      +type-setting(0, $sans, c('primary'))
+      border-right: 1px solid c('spacer')
+    .c-archive-module__type
+      +type-setting(0, $sans)
+
+.c-archive-list
+  padding: $grid-gutter
+  flex: 1 0 100%
+  padding: 0 20px 0 10px
+  @media #{$min-six-forty}
+    border-right: 1px solid c('spacer')
+    flex: 1 0 50%
+    .c-archive-module:nth-of-type(even)
+      flex-direction: row-reverse
+
+.c-archive-module__image
+  flex: 1 0 30%
+  @media #{$max-six-forty}
+    display: none
+  img
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+
+.c-archive-module__info
+  flex: 1 0 100%
+  display: flex
+  flex-direction: column
+  margin: $grid-gutter 0
+  border-bottom: 1px solid c('spacer')
+  @media #{$min-six-forty}
+    flex: 1 0 70%
+    margin: $grid-gutter 20px
+
+.c-archive-module__title
+  +type-setting(2, $serif)
+  margin-bottom: -18px
+
+.c-archive-module__author
+  +type-setting(0, $sans, c('primary'))
+  padding-right: $grid-gutter
+  border-right: 1px solid c('spacer')
+
+.c-archive-module__type
+  +type-setting(0, $sans)
+  display: inline
+  padding-left: $grid-gutter
+
+.c-archive-module__issue
+  +type-setting(-1, $sans)
+  display: inline
+  order: -1
+
+.c-archive-module__description
+  +type-setting(-1, $serif)
+  margin-top: 0px
+
+.pagination
+  margin: $baseline
+  h2
+    display: none
+  .nav-links
+    +type-setting(1, $sans)
+  .page-numbers
+    margin-right: 10px
+    &:after
+      content: ','
+  .page-numbers.dots:after
+    display: none
+  .page-numbers:last-of-type, .page-numbers:nth-last-child(2)
+    &:after
+      display: none
+  .page-numbers:nth-last-child(2)
+    padding-right: 5px
+    margin-right: 5px
+    border-right: 1px solid c('spacer')
+  .meta-nav
+    display: none

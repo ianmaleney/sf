@@ -1,0 +1,207 @@
+.c-primary-header
+  position: relative
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  margin: 30px auto
+  max-width: 96vw
+  @media #{$min-six-forty}
+    width: 76vw
+
+.c-primary-header__sub-image
+  display: none
+  @media #{$min-six-forty}
+    position: absolute
+    display: block
+    top: -25px
+    left: 0
+    max-width: 230px
+    img
+      width: 100%
+      height: 100%
+      object-fit: cover
+
+
+.c-primary-header__title
+  flex: 1 0 100%
+  padding-bottom: 0.5rem
+
+#c-primary-header__wordmark
+  max-height: $baseline * 3
+
+.c-primary-header__nav
+  z-index: 100
+  @media #{$max-six-forty}
+    position: fixed
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    overflow: hidden
+    pointer-events: none
+  @media #{$min-six-forty}
+    width: 76vw
+    margin-top: -20px
+
+.c-primary-header__nav--container
+  @media #{$max-six-forty}
+    padding-top: 50px
+    position: relative
+    width: 85%
+    max-width: 420px
+    background: c('white')
+    height: 100%
+    box-shadow: 2px 0 12px rgba(0,0,0,0.4)
+    transform: translateX(-102%)
+    display: flex
+    flex-direction: column
+    will-change: transform
+
+.c-primary-header__nav--menu
+  display: flex
+  flex-direction: column
+  +type-setting(0, $sans)
+  text-transform: uppercase
+  width: 100%
+  -webkit-padding-start: 0px
+  padding-start: 0px
+  @media #{$max-six-forty}
+    padding-top: 32px
+    flex: 1
+    list-style: none
+    padding: 0
+    margin: 0
+    overflow-x: hidden
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
+    max-height: 550px
+  @media #{$min-six-forty}
+    flex-direction: row
+    padding: 1.6rem 0 0
+    align-items: auto
+    flex: 1 0 100%
+    justify-content: center
+
+.side-nav--visible
+  pointer-events: auto
+
+.c-primary-header__nav--menu.side-nav--visible
+  transform: translateX(-15vw)
+
+.c-primary-header__nav--container.side-nav--animatable
+  transition: transform 0.33s cubic-bezier(0,0,0.3,1)
+
+.c-primary-header__nav--container.side-nav--animatable.side-nav--visible
+  transition: transform 0.33s cubic-bezier(0,0,0.3,1)
+
+.c-primary-header__nav--container.side-nav--visible
+  transform: none
+
+.c-primary-header__nav--menu
+  li
+    font-family: $sans
+    font-weight: 600
+    letter-spacing: 0.5px
+    @media #{$max-six-forty}
+      height: 5rem
+      line-height: 5rem
+      padding: 0 16px
+      flex: none
+      text-align: left
+    border-bottom: 1px solid c('spacer')
+    list-style: none
+    padding: 10px 10px 0
+    width: 80%
+    margin: 0 auto
+    flex: 1
+    text-align: center
+    max-height: 45px
+    &:nth-last-child(2)
+      a
+        color: c('highlight')
+    &:last-child
+      @media #{$max-six-forty}
+        display: none
+
+
+    a
+      color: c('black')
+      text-decoration: none
+      &:hover
+        color: c('accent')
+
+.c-bottom-nav
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100vw
+  border-top: 1px solid c('spacer')
+  background-color: c('white')
+  z-index: 500
+  @media #{$min-six-forty}
+    display: none
+
+.c-bottom-nav__menu
+  display: flex
+  list-style: none
+  -webkit-padding-start: 0px
+  padding-start: 0px
+  justify-content: space-around
+  align-content: stretch
+  font-size: 2.5rem
+  margin: 0
+
+.c-bottom-nav__menu--item
+  display: flex
+  flex-flow: column nowrap
+  justify-content: center
+  align-items: center
+  width: 25%
+  border-right: 1px solid c('spacer')
+  padding: 1.5rem
+  svg
+    fill: c('black')
+    height: 3rem
+    &:hover
+      cursor: pointer
+      fill: c('accent')
+  &:hover
+    .c-burger, .c-burger:before, .c-burger:after
+      cursor: pointer
+      background-color: c('accent')
+  &:last-child
+    border-right: none
+
+
+.c-primary-header__social-icons
+  display: none
+  @media #{$min-six-forty}
+    position: absolute
+    opacity: 1
+    pointer-events: auto
+    display: flex
+    flex: 1 0 auto
+    right: 0
+    svg
+      fill: c('spacer')
+      height: 3rem
+      width: 3rem
+  a
+    color: c('spacer')
+    padding: 0 5px
+    text-decoration: none
+    &:hover
+      svg
+        fill: c('accent')
+
+.search-item
+  svg
+    height: 4rem
+    width: 4rem
+    padding-bottom: 0
+    margin-top: -8px
+    margin-bottom: 0
+  &:hover
+    cursor: pointer
+    svg
+      fill: c('accent')

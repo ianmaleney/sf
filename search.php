@@ -2,32 +2,76 @@
 /**
  * The template for displaying search results pages
  *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
  */
 
 get_header(); ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<main id="main" class="site-main" role="main">
+		<div id="primary" class="content-area u-page-wrapper u-page-wrapper--primary-header">
 
-		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentysixteen' ), '<span>' . esc_html( get_search_query() ) . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<?php
+		<?php if ( have_posts() ) :
+			$firstLoop = true;
+			$count = $wp_query->post_count;
 			// Start the loop.
 			while ( have_posts() ) : the_post();
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
+				if ($count < 2) :
+					echo '<div class="c-archive-list">';
+				endif;
+
+				if ($firstLoop && $count > 1) :
+					echo '<div class="c-archive-module c-archive-module--featured">';
+				else :
+					echo '<div class="c-archive-module">';
+				endif;
+
+
+				?>
+
+					<div class="c-archive-module__image">
+						<img src="<?php
+							$magCover = get_field( "magazine_cover" );
+							$bookCover = get_field('book_cover');
+							$thumb = the_post_thumbnail_url( 'small' );
+								if( $magCover ) {
+									echo $magCover;
+								}
+								elseif( $bookCover ) {
+									echo $bookCover;
+								}
+								else {
+									echo $thumb;
+								}
+							?>">
+					</div>
+					<div class="c-archive-module__info">
+						<a class="c-archive-module__title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						<p>
+							<a class="c-archive-module__author"><?php the_field('Author'); ?></a>
+							<a href="<?php $categories = get_the_category(); echo esc_url( get_category_link( $categories[0]->term_id) ); ?>" class="c-archive-module__type"><?php $categories = get_the_category(); if ( ! empty( $categories ) ) { echo esc_html( $categories[0]->name ); } ?></a>
+						</p>
+						<p class="c-archive-module__issue">
+							<?php
+								$issue = get_field( "issue_volume" );
+									if( $issue ) {
+										echo $issue;
+									} else {
+										the_date();
+									}
+							?>
+						</p>
+						<p class="c-archive-module__description"><?php the_field('lede'); ?></p>
+					</div>
+				</div><!-- #post-## -->
+				<?php
+					if ($firstLoop && $count > 1) :
+						echo '<div class="c-archive-list">';
+					endif;
+
+					$firstLoop = false;
+
+				// get_template_part( 'template-parts/content', 'search' );
 
 			// End the loop.
 			endwhile;
@@ -40,14 +84,36 @@ get_header(); ?>
 			) );
 
 		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
+		else : ?>
+			<p> Sorry, we cannot find what you're looking for. </p>
 
-		endif;
-		?>
+		<?php endif;?>
 
-		</main><!-- .site-main -->
-	</section><!-- .content-area -->
+	</div>
+	<nav class="o-search-nav o-search-nav--archive">
+		<h1 class="heading-1 c-search-nav__heading">Search</h1>
+		<p class="c-search-nav__description"><?php printf( __( 'Showing Search Results for: %s', 'twentysixteen' ), '<span> "' . esc_html( get_search_query() ) . '"</span>' ); ?></br></br> Search Again:</p>
+		<div class="o-search-input-group">
+			<div class="c-search-input">
+				<label for=".c-search-input__year">Select by Date:</label>
+				<input type="month" class="c-search-input__year">
+			</div>
+			<div class="c-search-input">
+				<label for=".c-search-input__author">Search by Author:</label>
+				<input type="field" class="c-search-input__author">
+			</div>
+			<div class="c-search-input">
+				<label for=".c-search-input__issue">Search by Issue:</label>
+				<input type="number" class="c-search-input__issue">
+			</div>
+			<div class="c-search-input">
+				<label for=".c-search-input__category">Search by Category:</label>
+				<input type="field" class="c-search-input__category">
+			</div>
+			<button class="o-button">Browse All Issues</button>
+		</div>
+	</nav>
 
-<?php get_sidebar(); ?>
+</div><!-- .content-area -->
+</main><!-- .site-main -->
 <?php get_footer(); ?>

@@ -1,0 +1,56 @@
+.c-search-module
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 200px
+  opacity: 0
+  overflow: hidden
+  pointer-events: none
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 50px 0
+  transform: translateY(200px)
+  transition: transform 0.3s cubic-bezier(0,0,0.3,1), opacity 0.3s cubic-bezier(0,0,0.3,1)
+  @media #{$min-six-forty}
+    top: 0
+    left: 0
+    transform: translateY(-200px)
+
+.c-search-form
+  z-index: 2
+  @media #{$max-six-forty}
+    margin-top: -40px
+
+.c-search-form__input, .c-search-form__button
+  +type-setting(1, $sans, c('white'))
+  padding: 5px
+  &:focus
+    outline: thin
+    outline-color: rgba(255,255,255,0.4)
+
+.c-search-form__input
+  background-color: rgba(0,0,0,0)
+  border: none
+  border-bottom: 1px solid c('spacer')
+  padding: 5px
+
+.c-search-form__button
+  background-color: rgba(0,0,0,0)
+  border: none
+  border-radius: 0 4px 4px 0
+  &:hover
+    background-color: c('accent')
+
+.c-search-module.visible
+  transform: translateY(0)
+  opacity: 1
+  pointer-events: auto
+  @media #{$min-six-forty}
+    transform: translateY(calc(50vh - 100px))
+
+.u-secondary-header-wrapper
+  .c-search-module.visible
+    @media #{$max-six-forty}
+      transform: translateY(40vh)

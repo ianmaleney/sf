@@ -12,48 +12,47 @@
 
 		</div><!-- .site-content -->
 
-		<footer id="colophon" class="site-footer" role="contentinfo">
-			<?php if ( has_nav_menu( 'primary' ) ) : ?>
-				<nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">
+		<footer>
+      <div id="colophon" class="site-footer u-footer-wrapper" role="contentinfo">
+        <nav class="c-footer-nav main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">
 					<?php
 						wp_nav_menu( array(
-							'theme_location' => 'primary',
-							'menu_class'     => 'primary-menu',
+							'theme_location' => 'footer-menu',
+							'menu_class'     => 'c-footer-nav__menu',
 						 ) );
 					?>
-				</nav><!-- .main-navigation -->
-			<?php endif; ?>
+        </nav>
 
-			<?php if ( has_nav_menu( 'social' ) ) : ?>
-				<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentysixteen' ); ?>">
-					<?php
-						wp_nav_menu( array(
-							'theme_location' => 'social',
-							'menu_class'     => 'social-links-menu',
-							'depth'          => 1,
-							'link_before'    => '<span class="screen-reader-text">',
-							'link_after'     => '</span>',
-						) );
-					?>
-				</nav><!-- .social-navigation -->
-			<?php endif; ?>
+        <div class="logo c-footer-logo">The Stinging Fly</div>
 
-			<div class="site-info">
-				<?php
-					/**
-					 * Fires before the twentysixteen footer text for footer customization.
-					 *
-					 * @since Twenty Sixteen 1.0
-					 */
-					do_action( 'twentysixteen_credits' );
-				?>
-				<span class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
-				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentysixteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentysixteen' ), 'WordPress' ); ?></a>
-			</div><!-- .site-info -->
-		</footer><!-- .site-footer -->
-	</div><!-- .site-inner -->
-</div><!-- .site -->
+        <div class="c-footer-info">
+          <p>The Stinging Fly magazine was established in 1997 to seek out, publish and promote the very best new Irish and international writing. We believe that there is a need for a magazine that, first and foremost, gives new and emerging writers an opportunity to get their work out into the world.</p>
+        </div>
 
+        <div class="c-footer-social">
+          <div class="c-social-icons">
+						<a href="https://www.facebook.com/StingingFly" target="_blank" rel="noopener">
+							<?php get_template_part( 'svg/icons/inline', 'fb' ); ?>
+						</a>
+						<a href="http://twitter.com/stingingfly" target="_blank" rel="noopener">
+							<?php get_template_part( 'svg/icons/inline', 'tw' ); ?>
+						</a>
+						<a href="http://www.stingingfly.org/feed" target="_blank" rel="noopener">
+							<?php get_template_part( 'svg/icons/inline', 'rss' ); ?>
+						</a>
+					</div>
+        </div>
+
+        <div class="c-support-logos">
+					<img src="/wp-content/themes/stingingfly/img/Dublin City Council_RGB.jpg" class="dcc-logo">
+					<img src="/wp-content/themes/stingingfly/img/AC_FUND_TheArts_WHT.png" class="ac-logo">
+				</div>
+
+      </div>
+    </footer>
+
+	</div>
+</div>
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -1,0 +1,222 @@
+.c-product
+  section
+    display: flex
+    flex-wrap: wrap
+    padding: 50px 0
+    &:nth-of-type(2n+4)
+      background-color: c('background-light')
+
+.c-product-headline
+  @extend %fwh
+  +fwh-color
+
+.c-product-headline__background
+  @extend %fwh__background
+  +fwh__background-image
+
+.c-product-headline__headings
+  @extend %fwh__heading
+
+.c-product__title
+  +title-oversize
+
+.c-product__author
+  +type-setting(2, $serif, c('white'))
+  font-weight: 400
+
+.c-product-headline__buttons
+  +vertical-buttons(30%)
+  padding-top: 6.3rem
+
+.c-product-button--dark
+  +o-button(rgba(0,0,0,0), c('white'))
+  margin: 10px auto
+  max-width: 100px
+  text-align: center
+  &:hover
+    color: c('black')
+    text-decoration: none
+
+.c-product-gloss
+  &:after
+    content: ''
+    display: block
+    position: relative
+    top: 60px
+    left: 15%
+    width: 70%
+    height: 2px
+    background-color: c('spacer')
+
+.c-product__image
+  flex: 1 0 30%
+  margin: 0 5% 0 10%
+  background-color: c('background-light')
+  display: flex
+  justify-content: center
+  align-items: center
+  box-shadow: 10px 20px 30px rgba(0,0,0,0.25)
+  max-width: 30%
+  min-width: 280px
+  img
+    max-height: 90%
+    max-width: 100%
+    max-width: 300px
+    object-fit: contain
+
+.c-product__magazine-image
+  flex: 1 0 30%
+  margin: 0 5% 0 10%
+  background-color: c('background-light')
+  display: flex
+  justify-content: center
+  align-items: center
+  box-shadow: 10px 20px 30px rgba(0,0,0,0.25)
+  max-width: 30%
+  min-width: 280px
+  min-height: 300px
+  max-height: 600px
+  img
+    max-height: 90%
+    max-width: 100%
+    max-width: 300px
+    object-fit: contain
+
+.c-product__pullquote
+  flex: 1 0 40%
+  margin: 0 10% 0 5%
+
+.c-product__pullquote--quote
+  +type-setting(2, $serif)
+  font-style: italic
+
+.c-product__pullquote--attrib
+  font-weight: 800
+  +type-setting(1, $sans, c('secondary'))
+
+.c-product-info
+  max-width: 700px
+  margin: 0 auto 0
+
+.c-table-of-contents
+  margin: 56px auto 0
+  text-align: center
+  h3
+    @extend .heading-4
+    padding-top: $baseline
+    &:after
+      content: ''
+      display: block
+      position: relative
+      height: 2px
+      width: 30%
+      top: 0
+      left: 35%
+      background-color: c('accent')
+
+.c-magazine-intro
+  flex: 1 0 30%
+  margin: 0 10% 0 5%
+  p
+    +type-setting(2, $serif, c('black'))
+
+.c-product__author-bio__text
+  flex: 1 0 50%
+  padding: 0 10% 0 2%
+  .heading-4
+    text-align: center
+    color: c('secondary')
+    font-family: $sans
+
+.c-product__author-bio__image
+  margin: 0 0 0 15%
+  flex: 1 0 30%
+  img
+    max-width: 300px
+
+.c-product__purchase-info
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: center
+  min-height: 400px
+  .heading-3
+    text-align: center
+    color: c('secondary')
+    font-family: $sans
+    margin: 0
+    flex: 1 0 100%
+
+.c-product__pub-info
+  display: flex
+  line-height: 1.8rem
+  flex-direction: row
+  flex-wrap: wrap
+  align-items: center
+  margin-bottom: 30px
+  margin: 0 5% 0 10%
+  flex: 1 0 30%
+  .heading-4
+    flex: 1 0 100%
+    text-align: center
+    color: c('secondary')
+    font-family: $sans
+  p
+    flex: 1 0 50%
+    text-align: center
+    border: 1px solid c('spacer')
+    padding: 10px 0
+    &:nth-of-type(even)
+      border-left: none
+
+.c-product__purchase-options
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  flex: 1 0 70%
+  .c-purchase-option
+    display: flex
+    flex-direction: column
+    flex: 1 0 50%
+    align-items: center
+    &:first-child
+      border-right: 1px solid c('spacer')
+
+.c-product-price
+  font-size: 6rem
+  color: c('black')
+  border-bottom: 2px solid c('secondary')
+  padding: 40px
+  margin-bottom: 20px
+
+.c-product__purchase-info__list
+  +type-setting(-1, $sans, c('secondary'))
+  list-style: none
+  -webkit-padding-start: 0
+  text-align: center
+  li
+    color: c('secondary')
+    &:first-child
+      color: c('highlight')
+
+.c-product__blurb-group
+  flex-direction: column
+  align-items: center
+  .heading-3
+    color: c('secondary')
+
+.c-product__blurb
+  max-width: 700px
+  margin-bottom: 30px
+  color: c('background-dark')
+  &:after
+    content: ''
+    display: block
+    position: relative
+    top: 10px
+    left: 15%
+    width: 70%
+    height: 1px
+    background-color: c('spacer', 1, black)
+
+.c-product__blurb-attrib
+  text-align: right

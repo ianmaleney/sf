@@ -9,57 +9,130 @@
  * new template file for each one. For example, tag.php (Tag archives),
  * category.php (Category archives), author.php (Author archives), etc.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
  */
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<main id="main" class="site-main" role="main">
+	<div id="primary" class="content-area u-page-wrapper u-page-wrapper--primary-header">
 
-		<?php if ( have_posts() ) : ?>
+		<?php
+			function cat_name() {
+				$categories = get_the_category();
+				if ( ! empty( $categories ) ) {
+					echo esc_html( $categories[0]->name );
+				}
+			}
 
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
+			function cat_name_URL(){
+				$categories = get_the_category();
+				echo esc_url( get_category_link( $categories[0]->term_id) );
+			}
 
-			<?php
-			// Start the Loop.
-			while ( have_posts() ) : the_post();
+			function issue_date() {
+				$issue = get_field( "issue_volume" );
+					if( $issue ) {
+						echo $issue;
+					} else {
+						the_date();
+					}
+			}
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
-
-			// End the loop.
-			endwhile;
-
-			// Previous/next page navigation.
-			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-				'next_text'          => __( 'Next page', 'twentysixteen' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
-			) );
-
-		// If no content, include the "No posts found" template.
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
+			function archive_image_output() {
+				$magCover = get_field( "magazine_cover" );
+				$bookCover = get_field('book_cover');
+				$thumb = the_post_thumbnail_url( 'small' );
+					if( $magCover ) {
+						echo $magCover;
+					}
+					elseif( $bookCover ) {
+						echo $bookCover;
+					}
+					else {
+						echo $thumb;
+					}
+			}
 		?>
 
-		</main><!-- .site-main -->
-	</div><!-- .content-area -->
 
-<?php get_sidebar(); ?>
+	<?php if ( have_posts() ) :
+		$firstLoop = true;
+		$count = $wp_query->post_count;
+		// Start the loop.
+		while ( have_posts() ) : the_post();
+
+			if ($count < 2) :
+				echo '<div class="c-archive-list">';
+			endif;
+
+			if ($firstLoop && $count > 1) :
+				echo '<div class="c-archive-module c-archive-module--featured">';
+			else :
+				echo '<div class="c-archive-module">';
+			endif;
+
+
+			?>
+
+				<div class="c-archive-module__image">
+					<a href="<?php the_permalink(); ?>"><img src="<?php archive_image_output(); ?>"></a>
+				</div>
+				<div class="c-archive-module__info">
+					<a class="c-archive-module__title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					<p><?php guest_author_link(); ?><a href="<?php cat_name_URL(); ?>" class="c-archive-module__type"><?php cat_name(); ?></a></p>
+					<p class="c-archive-module__issue"><?php issue_date(); ?></p>
+					<p class="c-archive-module__description"><?php the_field('lede'); ?></p>
+				</div>
+			</div><!-- #post-## -->
+			<?php
+				if ($firstLoop && $count > 1) :
+					echo '<div class="c-archive-list">';
+				endif;
+
+				$firstLoop = false;
+
+			// get_template_part( 'template-parts/content', 'search' );
+
+		// End the loop.
+		endwhile;
+
+		// Previous/next page navigation.
+		the_posts_pagination( array(
+			'prev_text'          => __( 'Previous page', 'twentysixteen' ),
+			'next_text'          => __( 'Next page', 'twentysixteen' ),
+			'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
+		) );
+
+	// If no content, include the "No posts found" template.
+	else : ?>
+		<p> Sorry, we cannot find what you're looking for. </p>
+
+	<?php endif;?>
+
+</div>
+<nav class="o-search-nav o-search-nav--archive">
+	<h1 class="heading-1 c-search-nav__heading"><?php cat_name(); ?></h1>
+	<div class="o-search-input-group">
+		<div class="c-search-input">
+			<label for=".c-search-input__year">Select by Date:</label>
+			<input type="month" class="c-search-input__year">
+		</div>
+		<div class="c-search-input">
+			<label for=".c-search-input__author">Search by Author:</label>
+			<input type="field" class="c-search-input__author">
+		</div>
+		<div class="c-search-input">
+			<label for=".c-search-input__issue">Search by Issue:</label>
+			<input type="number" class="c-search-input__issue">
+		</div>
+		<div class="c-search-input">
+			<label for=".c-search-input__category">Search by Category:</label>
+			<input type="field" class="c-search-input__category">
+		</div>
+		<button class="o-button">Browse All Issues</button>
+	</div>
+</nav>
+
+</div><!-- .content-area -->
+</main><!-- .site-main -->
 <?php get_footer(); ?>
