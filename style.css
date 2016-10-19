@@ -476,7 +476,20 @@ main {
 
 .o-article {
   padding: 10px;
-  margin: 0 auto;
+  max-width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-family: "Libre Baskerville", Palatino, Georgia; }
   @media only screen and (min-width: 640px) {
     .o-article {
@@ -2327,7 +2340,7 @@ footer {
   margin: 0; }
 
 .c-article__header {
-  max-width: 700px; }
+  max-width: 80vw; }
   .c-article__header:after {
     content: "";
     position: relative;
@@ -2348,6 +2361,9 @@ footer {
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover; }
+
+.c-article__info {
+  text-align: center; }
 
 .c-article__info--title {
   font-size: 49px;
@@ -2396,10 +2412,6 @@ footer {
     .c-article__social-icons .c-social-icons svg {
       width: 30px;
       height: 30px; }
-      @media only screen and (max-width: 960px) {
-        .c-article__social-icons .c-social-icons svg {
-          width: 25px;
-          height: 25px; } }
       .c-article__social-icons .c-social-icons svg:hover {
         fill: #4dadf7; }
   .c-article__social-icons .c-social-icons--hidden {
@@ -2413,21 +2425,64 @@ footer {
         -ms-flex-direction: column;
             flex-direction: column;
     position: relative;
-    -webkit-transform: translateY(-65px);
-        -ms-transform: translateY(-65px);
-            transform: translateY(-65px);
-    -webkit-transition: opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
-    transition: opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
-    transition: transform 0.3s ease-in-out, opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14);
-    transition: transform 0.3s ease-in-out, opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
-    opacity: 0;
+    -webkit-transform: translateY(-32px);
+        -ms-transform: translateY(-32px);
+            transform: translateY(-32px);
+    -webkit-transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
     pointer-events: none; }
+    .c-article__social-icons .c-social-icons--hidden svg {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none; }
+    .c-article__social-icons .c-social-icons--hidden a {
+      -webkit-transition: -webkit-transform 0.3s ease-in-out;
+      transition: -webkit-transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out; }
+    .c-article__social-icons .c-social-icons--hidden svg {
+      -webkit-transition: opacity 0.3s ease-in-out;
+      transition: opacity 0.3s ease-in-out; }
+    .c-article__social-icons .c-social-icons--hidden a {
+      -webkit-transition: -webkit-transform 0.6s ease-in-out;
+      transition: -webkit-transform 0.6s ease-in-out;
+      transition: transform 0.6s ease-in-out;
+      transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out; }
+    .c-article__social-icons .c-social-icons--hidden svg {
+      -webkit-transition: opacity 0.6s ease-in-out;
+      transition: opacity 0.6s ease-in-out; }
   .c-article__social-icons .c-social-icons--hidden.social-visible {
-    -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-            transform: translateY(0);
     pointer-events: auto;
     opacity: 1; }
+    .c-article__social-icons .c-social-icons--hidden.social-visible a:nth-of-type(1) {
+      -webkit-transition: -webkit-transform 0.3s ease-in-out;
+      transition: -webkit-transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+      -webkit-transform: translateY(32px);
+          -ms-transform: translateY(32px);
+              transform: translateY(32px); }
+    .c-article__social-icons .c-social-icons--hidden.social-visible svg {
+      pointer-events: auto;
+      opacity: 1; }
+    .c-article__social-icons .c-social-icons--hidden.social-visible a:nth-of-type(2) {
+      -webkit-transition: -webkit-transform 0.6s ease-in-out;
+      transition: -webkit-transform 0.6s ease-in-out;
+      transition: transform 0.6s ease-in-out;
+      transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+      -webkit-transform: translateY(64px);
+          -ms-transform: translateY(64px);
+              transform: translateY(64px); }
+    .c-article__social-icons .c-social-icons--hidden.social-visible svg {
+      pointer-events: auto;
+      opacity: 1; }
+  .c-article__social-icons .social-expand svg {
+    -webkit-transition: -webkit-transform 0.3s ease-in;
+    transition: -webkit-transform 0.3s ease-in;
+    transition: transform 0.3s ease-in;
+    transition: transform 0.3s ease-in, -webkit-transform 0.3s ease-in; }
   .c-article__social-icons .social-expand:hover svg {
     cursor: pointer;
     fill: #4dadf7; }

@@ -26,13 +26,13 @@ if($featuredPosts) {
     </div>
 
     <div class="books-image">
-      <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
+      <a href="<?php the_permalink(); ?>">
         <img src="<?php the_field('book_cover'); ?>">
       </a>
     </div>
 
     <div class="c-content-text">
-      <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener" class="c-content-title"><?php the_title(); ?></a>
+      <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
     </div>
   </div>
 

@@ -22,13 +22,13 @@ if($latestBook) {
   <div class="c-content-module c-content-module--books">
 
     <div class="books-image">
-      <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
+      <a href="<?php the_permalink(); ?>">
         <img src="<?php the_field('book_cover'); ?>">
       </a>
     </div>
 
     <div class="books-info">
-      <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener" class="books-title"><?php the_title(); ?></a>
+      <a href="<?php the_permalink(); ?>" class="books-title"><?php the_title(); ?></a>
       <p class="books-author"><?php guest_author_link(); ?></a>
       <p class="books-description"><?php the_field('blurb_quote'); ?> — <?php the_field('blurb_attribution'); ?></p>
     </div>
@@ -37,7 +37,7 @@ if($latestBook) {
       <?php
         $bookIndex = get_page_by_title( 'Books' );
         $link = get_page_uri($bookIndex);
-        echo '<a href="'. $link .'" target="_blank" rel="noopener">More Books...</a>';
+        echo '<a href="'. $link .'">More Books...</a>';
       ?>
     </div>
 
