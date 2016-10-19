@@ -1,4 +1,4 @@
-<div class="o-content-row o-content-row--featured">
+<div class="o-content-row o-content-row--featured o-content-row--magazine">
   <div class="c-row-header">Magazine</div>
 
 <?php
@@ -19,7 +19,11 @@ if($featuredPosts) {
 
   <!-- This is where the featured content modules are created -->
 
-  <div class="c-content-module c-content-module--featured">
+  <div class="c-content-module c-content-module--featured c-content-module--magazine">
+
+    <div class="c-mag-home-title">
+      <h2>In the latest issue:</h2>
+    </div>
 
     <div class="books-image">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">

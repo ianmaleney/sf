@@ -476,7 +476,7 @@ main {
 
 .o-article {
   padding: 10px;
-  margin-right: 6.25vw;
+  margin: 0 auto;
   font-family: "Libre Baskerville", Palatino, Georgia; }
   @media only screen and (min-width: 640px) {
     .o-article {
@@ -484,7 +484,7 @@ main {
       -webkit-flex: 1 0 62%;
           -ms-flex: 1 0 62%;
               flex: 1 0 62%;
-      max-width: 62%; } }
+      max-width: 100%; } }
 
 .c-primary-header {
   position: relative;
@@ -930,7 +930,8 @@ footer {
       -ms-flex: 1 0 30%;
           flex: 1 0 30%;
   min-width: 280px;
-  max-width: 450px; }
+  max-width: 450px;
+  margin-top: 55vh; }
   .c-sidebar .widget-title {
     display: none; }
 
@@ -954,7 +955,8 @@ footer {
     left: -10px;
     height: 2px;
     width: 100%;
-    background-color: #0074d9; }
+    background: -webkit-linear-gradient(left, #4dadf7 0%, #fcfcfc 100%);
+    background: linear-gradient(to right, #4dadf7 0%, #fcfcfc 100%); }
 
 .c-sidebar-section__item {
   display: -webkit-box;
@@ -1028,7 +1030,7 @@ footer {
   height: 60px;
   will-change: transform;
   background: #fcfcfc;
-  z-index: 1000;
+  z-index: 9999;
   -webkit-transition: box-shadow 0.5s ease-in-out;
   transition: box-shadow 0.5s ease-in-out; }
 
@@ -1605,7 +1607,8 @@ footer {
   -webkit-transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1);
   transition: opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1);
   transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1), opacity 0.3s cubic-bezier(0, 0, 0.3, 1);
-  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1), opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1); }
+  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1), opacity 0.3s cubic-bezier(0, 0, 0.3, 1), -webkit-transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+  z-index: 9999; }
   @media only screen and (min-width: 640px) {
     .c-search-module {
       top: 0;
@@ -1684,11 +1687,12 @@ footer {
   @media only screen and (min-width: 640px) {
     .o-content-row {
       margin-bottom: 56px; } }
-  .o-content-row .o-content-row--featured {
-    margin-top: -56px;
-    padding-top: 10px; }
   .o-content-row:last-of-type {
     margin-bottom: 0; }
+
+.o-content-row--featured {
+  margin-top: -28px;
+  padding-top: 10px; }
 
 @media only screen and (min-width: 640px) {
   .o-content-row--half-width {
@@ -1696,6 +1700,10 @@ footer {
     max-width: 50vw;
     float: left;
     clear: none; } }
+
+.o-content-row--magazine {
+  background-color: #edf7fe;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3); }
 
 .c-row-header {
   font-size: 25px;
@@ -1750,17 +1758,28 @@ footer {
 .c-content-image-link {
   max-width: 60%;
   margin-bottom: 28px;
-  position: relative; }
+  position: relative;
+  max-width: 280px;
+  height: 180px;
+  overflow: hidden; }
   @media only screen and (min-width: 640px) {
     .c-content-image-link {
-      max-width: 80%; }
-      .c-content-image-link img {
-        max-height: 420px;
-        -o-object-fit: cover;
-           object-fit: cover; } }
+      max-width: 80%;
+      max-height: calc(550px / 14 * 9);
+      -o-object-fit: cover;
+         object-fit: cover; }
+      .c-content-image-link:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block; } }
 
 .c-content-image {
   width: 100%;
+  min-width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover; }
@@ -1783,55 +1802,110 @@ footer {
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   text-decoration: none; }
+  @media only screen and (max-width: 960px) {
+    .c-content-title {
+      font-size: 25px;
+      line-height: 35px;
+      font-family: "Libre Baskerville", Palatino, Georgia;
+      color: #212529; } }
   .c-content-title:after {
     content: "";
-    display: block;
     position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #f03e3e;
+    display: block;
+    top: -2px;
+    left: 10%;
+    height: 1px;
+    width: 80%;
     -webkit-transform: scaleX(0);
         -ms-transform: scaleX(0);
             transform: scaleX(0);
+    background-color: currentColor;
     -webkit-transition: -webkit-transform 0.15s ease-in-out;
     transition: -webkit-transform 0.15s ease-in-out;
     transition: transform 0.15s ease-in-out;
-    transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out; }
+    transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+    -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+            transform-origin: center; }
+  .c-content-title:hover:after {
+    -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+            transform: scaleX(1); }
   .c-content-title:hover {
     color: #212529;
     text-decoration: none; }
-    .c-content-title:hover:after {
-      -webkit-transform: scaleX(0.8);
-          -ms-transform: scaleX(0.8);
-              transform: scaleX(0.8); }
 
 .c-content-type {
-  display: inline-block; }
+  display: block;
+  text-align: center; }
   .c-content-type a {
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 24.7px;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #868e96;
-    border-right: 1px solid #dee2e6;
     padding: 7px;
-    letter-spacing: 0.5px;
-    text-decoration: none; }
-    .c-content-type a:hover {
-      text-decoration: underline; }
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block; }
+    .c-content-type a:after {
+      content: "";
+      position: relative;
+      display: block;
+      top: -2px;
+      left: 40%;
+      height: 1px;
+      width: 20%;
+      -webkit-transform: scaleX(0);
+          -ms-transform: scaleX(0);
+              transform: scaleX(0);
+      background-color: currentColor;
+      -webkit-transition: -webkit-transform 0.15s ease-in-out;
+      transition: -webkit-transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+      -webkit-transform-origin: center;
+          -ms-transform-origin: center;
+              transform-origin: center; }
+    .c-content-type a:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
 
 .c-content-author {
-  display: inline-block;
-  font-size: 16px;
-  line-height: 28px;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #212529;
+  display: block;
   letter-spacing: 0.5px;
   padding: 7px;
   text-decoration: none; }
-  .c-content-author:hover {
-    text-decoration: underline; }
+  .c-content-author a.c-author-link {
+    font-size: 16px;
+    line-height: 28px;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #212529;
+    text-decoration: none; }
+    .c-content-author a.c-author-link:after {
+      content: "";
+      position: relative;
+      display: block;
+      top: -2px;
+      left: 40%;
+      height: 1px;
+      width: 20%;
+      -webkit-transform: scaleX(0);
+          -ms-transform: scaleX(0);
+              transform: scaleX(0);
+      background-color: currentColor;
+      -webkit-transition: -webkit-transform 0.15s ease-in-out;
+      transition: -webkit-transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+      -webkit-transform-origin: center;
+          -ms-transform-origin: center;
+              transform-origin: center; }
+    .c-content-author a.c-author-link:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
 
 .c-content-description {
   font-size: 16px;
@@ -1849,12 +1923,21 @@ footer {
       font-size: 31px;
       line-height: 43.4px;
       font-family: "Libre Baskerville", Palatino, Georgia;
-      color: #212529; }
+      color: #212529; } }
+    @media only screen and (min-width: 640px) and (max-width: 960px) {
+      .c-content-module--featured .c-content-title {
+        font-size: 25px;
+        line-height: 35px;
+        font-family: "Libre Baskerville", Palatino, Georgia;
+        color: #212529; } }
+@media only screen and (min-width: 640px) {
     .c-content-module--featured .c-content-description {
       font-size: 16px;
       line-height: 28px;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; }
+    .c-content-module--featured .c-content-image-link {
+      height: calc((50vw - 190px) / 14 * 9); }
     .c-content-module--featured:nth-of-type(2) {
       display: -webkit-box;
       display: -webkit-flex;
@@ -1869,12 +1952,25 @@ footer {
       -webkit-justify-content: center;
           -ms-flex-pack: center;
               justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
       -webkit-box-flex: 0;
       -webkit-flex: 0 1 100%;
           -ms-flex: 0 1 100%;
-              flex: 0 1 100%; }
+              flex: 0 1 100%;
+      margin-bottom: 56px; }
       .c-content-module--featured:nth-of-type(2) .c-content-image-link {
-        max-width: 45%; }
+        width: 45%;
+        max-width: 600px;
+        height: calc(((100vw - 30px) / 100 * 45) / 3 * 2);
+        max-height: 400px;
+        margin-bottom: 0; }
+        .c-content-module--featured:nth-of-type(2) .c-content-image-link img {
+          height: 100%;
+          -o-object-fit: cover;
+             object-fit: cover; }
       .c-content-module--featured:nth-of-type(2) .c-content-text {
         max-width: 35%;
         padding-left: 5%; }
@@ -1882,7 +1978,14 @@ footer {
         font-size: 49px;
         line-height: 63.7px;
         font-family: "Libre Baskerville", Palatino, Georgia;
-        color: #212529; }
+        color: #212529; } }
+      @media only screen and (min-width: 640px) and (max-width: 960px) {
+        .c-content-module--featured:nth-of-type(2) .c-content-title {
+          font-size: 31px;
+          line-height: 43.4px;
+          font-family: "Libre Baskerville", Palatino, Georgia;
+          color: #212529; } }
+@media only screen and (min-width: 640px) {
         .c-content-module--featured:nth-of-type(2) .c-content-title:hover {
           color: #212529;
           text-decoration: none; } }
@@ -1896,6 +1999,47 @@ footer {
     -webkit-flex: 1 0 33%;
         -ms-flex: 1 0 33%;
             flex: 1 0 33%; } }
+
+.c-content-module--magazine {
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+  .c-content-module--magazine .books-image, .c-content-module--magazine .c-content-text {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 50%;
+        -ms-flex: 1 0 50%;
+            flex: 1 0 50%; }
+  .c-content-module--magazine .c-mag-home-title {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 100%;
+        -ms-flex: 1 0 100%;
+            flex: 1 0 100%;
+    text-align: center;
+    font-size: 25px;
+    line-height: 35px;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #868e96;
+    text-transform: uppercase;
+    line-height: 112px;
+    letter-spacing: 1px; }
+    @media only screen and (max-width: 960px) {
+      .c-content-module--magazine .c-mag-home-title {
+        font-size: 20px;
+        line-height: 35px;
+        font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+        color: #868e96; } }
+    .c-content-module--magazine .c-mag-home-title h2:before, .c-content-module--magazine .c-mag-home-title h2:after {
+      content: "";
+      display: inline-block;
+      position: relative;
+      width: 20px;
+      height: 4px;
+      background-color: currentColor;
+      right: 20px;
+      bottom: 0.7rem;
+      z-index: 1 !important; }
+    .c-content-module--magazine .c-mag-home-title h2:after {
+      left: 20px; }
 
 .c-content-module--books {
   -webkit-box-orient: horizontal;
@@ -1916,13 +2060,20 @@ footer {
   -webkit-flex: 1 0 33%;
       -ms-flex: 1 0 33%;
           flex: 1 0 33%;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
   margin: 0 5% 28px 5%;
   min-width: 200px; }
   @media only screen and (min-width: 640px) {
     .books-image {
-      max-width: 33%; } }
+      max-width: 100%; } }
   .books-image img {
-    max-width: 100%; }
+    display: block;
+    max-width: 100%;
+    max-height: 350px;
+    margin: 0 auto; }
 
 .books-info {
   -webkit-box-flex: 1;
@@ -1933,11 +2084,43 @@ footer {
   min-width: 280px; }
 
 .books-title {
-  font-size: 25px;
-  line-height: 35px;
+  font-size: 31px;
+  line-height: 43.4px;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   display: block; }
+  @media only screen and (max-width: 960px) {
+    .books-title {
+      font-size: 25px;
+      line-height: 35px;
+      font-family: "Libre Baskerville", Palatino, Georgia;
+      color: #212529; } }
+  .books-title:after {
+    content: "";
+    position: relative;
+    display: block;
+    top: -2px;
+    left: 0%;
+    height: 1px;
+    width: 100%;
+    -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+            transform: scaleX(0);
+    background-color: currentColor;
+    -webkit-transition: -webkit-transform 0.15s ease-in-out;
+    transition: -webkit-transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+    -webkit-transform-origin: top left;
+        -ms-transform-origin: top left;
+            transform-origin: top left; }
+  .books-title:hover:after {
+    -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+            transform: scaleX(1); }
+  .books-title:hover {
+    color: #212529;
+    text-decoration: none; }
 
 .books-author {
   font-size: 20px;
@@ -1960,11 +2143,39 @@ footer {
       -ms-flex: 1 0 100%;
           flex: 1 0 100%;
   text-align: right;
-  padding-right: 5%;
-  font-size: 20px;
-  line-height: 35px;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #0074d9; }
+  padding-right: 5%; }
+  .books-extra a {
+    display: inline-block;
+    font-size: 20px;
+    line-height: 35px;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #868e96; }
+    .books-extra a:after {
+      content: "";
+      position: relative;
+      display: block;
+      top: -2px;
+      left: 0%;
+      height: 1px;
+      width: 100%;
+      -webkit-transform: scaleX(0);
+          -ms-transform: scaleX(0);
+              transform: scaleX(0);
+      background-color: currentColor;
+      -webkit-transition: -webkit-transform 0.15s ease-in-out;
+      transition: -webkit-transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+      -webkit-transform-origin: top right;
+          -ms-transform-origin: top right;
+              transform-origin: top right; }
+    .books-extra a:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
+    .books-extra a:hover {
+      color: #4dadf7;
+      text-decoration: none; }
 
 .content-row--news {
   min-height: 300px; }
@@ -2022,9 +2233,7 @@ footer {
     width: 100%;
     height: 100%;
     -o-object-fit: cover;
-       object-fit: cover;
-    -webkit-filter: grayscale(1);
-            filter: grayscale(1); }
+       object-fit: cover; }
 
 .news-text {
   display: -webkit-box;
@@ -2050,40 +2259,61 @@ footer {
   line-height: 24.7px;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
-  font-weight: 800;
   display: block;
   text-decoration: none; }
+  .news-title:after {
+    content: "";
+    position: relative;
+    display: block;
+    top: -2px;
+    left: 0%;
+    height: 1px;
+    width: 100%;
+    -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+            transform: scaleX(0);
+    background-color: currentColor;
+    -webkit-transition: -webkit-transform 0.15s ease-in-out;
+    transition: -webkit-transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+    -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+            transform-origin: center; }
+  .news-title:hover:after {
+    -webkit-transform: scaleX(1);
+        -ms-transform: scaleX(1);
+            transform: scaleX(1); }
+  .news-title:after {
+    -webkit-transform-origin: top left;
+        -ms-transform-origin: top left;
+            transform-origin: top left; }
   @media only screen and (min-width: 1280px) {
     .news-title {
       font-size: 16px;
       line-height: 28px;
       font-family: "Libre Baskerville", Palatino, Georgia;
-      color: #212529;
-      font-weight: 400; } }
+      color: #212529; } }
   .news-title:hover {
-    text-decoration: underline; }
+    color: #212529;
+    text-decoration: none; }
 
 .news-info {
   line-height: 1.8rem; }
 
 .news-type {
-  display: inline-block;
-  font-size: 13px;
-  line-height: 24.7px;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #0074d9;
-  border-right: 1px solid #dee2e6;
-  padding-right: 8px;
-  letter-spacing: 0.5px;
-  text-decoration: none; }
-  @media only screen and (min-width: 1280px) {
-    .news-type {
-      font-size: 16px;
-      line-height: 28px;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #0074d9; } }
-  .news-type:hover {
-    text-decoration: underline; }
+  display: inline-block; }
+  .news-type a {
+    font-size: 13px;
+    line-height: 24.7px;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #212529;
+    border-right: 1px solid #dee2e6;
+    padding-right: 8px;
+    letter-spacing: 0.5px;
+    text-decoration: none; }
+    .news-type a:hover {
+      text-decoration: underline; }
 
 .news-time {
   display: inline-block;
@@ -2095,17 +2325,29 @@ footer {
   text-decoration: none;
   padding-left: 5px;
   margin: 0; }
-  @media only screen and (min-width: 1280px) {
-    .news-time {
-      font-size: 16px;
-      line-height: 28px;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #868e96; } }
-  .news-time:hover {
-    text-decoration: underline; }
 
 .c-article__header {
   max-width: 700px; }
+  .c-article__header:after {
+    content: "";
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 0;
+    background: -webkit-linear-gradient(left, #4dadf7 0%, #fcfcfc 100%);
+    background: linear-gradient(to right, #4dadf7 0%, #fcfcfc 100%); }
+
+.c-article__head-image {
+  max-width: 100%;
+  height: 30vw;
+  max-height: 400px; }
+  .c-article__head-image img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
 
 .c-article__info--title {
   font-size: 49px;
@@ -2127,6 +2369,79 @@ footer {
   line-height: 28px;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #868e96; }
+
+.c-article__social-icons {
+  position: absolute;
+  top: 180px;
+  left: 3.4722222222vw;
+  opacity: 0.1; }
+  @media only screen and (max-width: 639px) {
+    .c-article__social-icons {
+      display: none; } }
+  @media only screen and (max-width: 960px) {
+    .c-article__social-icons {
+      left: 3.125vw; } }
+  .c-article__social-icons:hover {
+    opacity: 1; }
+  .c-article__social-icons .c-social-icons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .c-article__social-icons .c-social-icons svg {
+      width: 30px;
+      height: 30px; }
+      @media only screen and (max-width: 960px) {
+        .c-article__social-icons .c-social-icons svg {
+          width: 25px;
+          height: 25px; } }
+      .c-article__social-icons .c-social-icons svg:hover {
+        fill: #4dadf7; }
+  .c-article__social-icons .c-social-icons--hidden {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: relative;
+    -webkit-transform: translateY(-65px);
+        -ms-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-transition: opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
+    transition: opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14);
+    transition: transform 0.3s ease-in-out, opacity 0.3s cubic-bezier(1, 0.03, 0.96, 0.14), -webkit-transform 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none; }
+  .c-article__social-icons .c-social-icons--hidden.social-visible {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+    pointer-events: auto;
+    opacity: 1; }
+  .c-article__social-icons .social-expand:hover svg {
+    cursor: pointer;
+    fill: #4dadf7; }
+  .c-article__social-icons .social-expand.social-visible svg {
+    -webkit-transform-origin: center center;
+        -ms-transform-origin: center center;
+            transform-origin: center center;
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg); }
+
+.c-article__social-icons.is-scrolling {
+  position: fixed;
+  top: 80px; }
 
 .c-article__body {
   font-size: 16px;

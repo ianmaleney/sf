@@ -6,12 +6,16 @@
 
 .books-image
 	flex: 1 0 33%
+	flex-grow: 1
 	margin: 0 5% $baseline 5%
 	min-width: 200px
 	@media #{$min-six-forty}
-		max-width: 33%
-	img
 		max-width: 100%
+	img
+		display: block
+		max-width: 100%
+		max-height: 350px
+		margin: 0 auto
 
 
 .books-info
@@ -20,8 +24,14 @@
 	min-width: 280px
 
 .books-title
-	+type-setting(2)
+	@media #{$max-nine-sixty}
+		+type-setting(2)
+	+type-setting(3)
 	display: block
+	+underlineHover(currentColor, 1px, 100%, 0.15s, top left)
+	&:hover
+		color: c('black')
+		text-decoration: none
 
 .books-author
 	+type-setting(1, $sans, c('primary'))
@@ -36,4 +46,10 @@
 	flex: 1 0 100%
 	text-align: right
 	padding-right: 5%
-	+type-setting(1, $sans, c('primary'))
+	a
+		display: inline-block
+		+type-setting(1, $sans, c('secondary'))
+		+underlineHover(currentColor, 1px, 100%, 0.15s, top right)
+		&:hover
+			color: c('accent')
+			text-decoration: none

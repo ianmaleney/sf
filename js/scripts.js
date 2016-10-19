@@ -5,6 +5,11 @@
   var underlay = $( ".o-underlay" );
   var sideNav = $( ".js-side-nav-container" );
 
+  var socialIcons = $( ".js-article__social-icons" );
+  var socialPlus = $( ".js-social-expand" );
+  var socialHidden = $( ".js-social-hidden" );
+
+
   showNav.on("click", function(){
   	sideNav.addClass("side-nav--animatable");
   	sideNav.toggleClass("side-nav--visible");
@@ -33,6 +38,13 @@
       } else {
           $( ".c-secondary-header" ).removeClass( "is-scrolling" );
       }
+
+      if(height > 120) {
+        socialIcons.addClass( "is-scrolling" );
+      } else {
+          socialIcons.removeClass( "is-scrolling" );
+      }
+
   });
 
   var homeSearch = $(".c-primary-header__nav--menu li:last-child");
@@ -43,6 +55,11 @@
     $( ".c-search-module" ).toggleClass( "visible" );
   	$( ".c-search-form__input" ).toggleClass( "visible" );
   	$( ".c-search-form__input.visible" ).focus();
+  });
+
+  socialPlus.on("click", function(){
+    socialPlus.toggleClass("social-visible");
+    socialHidden.toggleClass("social-visible");
   });
 
 })( jQuery );

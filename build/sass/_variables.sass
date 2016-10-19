@@ -1,5 +1,6 @@
 $max-six-forty: "only screen and (max-width : 639px)"
 $min-six-forty: "only screen and (min-width : 640px)"
+$max-nine-sixty: "only screen and (max-width : 960px)"
 $min-twelve-eighty: "only screen and (min-width : 1280px)"
 
 // Grid
@@ -74,3 +75,27 @@ $line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.75, 1: ms(1) * 1.75, 2: ms(2) * 1
 // Baseline Multiplier
 @mixin baseline($multiplier)
   line-height: $baseline * $multiplier
+
+
+//
+//
+// Hover Mixin
+//
+//
+
+@mixin underlineHover($color: currentColor, $height: 1px, $width: 20%, $transition: 0.15s, $origin: center)
+  &:after
+    content: ''
+    position: relative
+    display: block
+    top: -2px
+    left: (100% - $width) / 2
+    height: $height
+    width: $width
+    transform: scaleX(0)
+    background-color: $color
+    transition: transform $transition ease-in-out
+    transform-origin: $origin
+  &:hover
+    &:after
+      transform: scaleX(1)
