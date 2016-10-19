@@ -20,7 +20,7 @@ get_header( 'secondary' ); ?>
 			// End of the loop.
 		endwhile;
 		?>
-		<?php get_sidebar(); ?>
+		<!--<?php get_sidebar(); ?>-->
 	</div>
 
 <?php get_footer(); ?>

@@ -2,8 +2,8 @@
 
   <h4 class="c-sidebar-section__title">Most Popular</h4>
 
-  <?php $popular = new WP_Query(array('
-    posts_per_page'=>3,
+  <?php $popular = new WP_Query(array(
+    'posts_per_page'=>3,
     'meta_key'=>'popular_posts',
     'orderby'=>'meta_value_num',
     'order'=>'DESC'));
