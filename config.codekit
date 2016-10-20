@@ -525,6 +525,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
+	"\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_mag-home-module.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_mag-home-module.sass",
+		"outputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/css\/_mag-home-module.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
 	"\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_news-module.sass": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -1128,6 +1144,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/svg\/icons\/inline-book.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/svg\/icons\/inline-book.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/svg\/icons\/inline-fb.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -1160,6 +1185,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/svg\/icons\/inline-ham.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/svg\/icons\/inline-home.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/svg\/icons\/inline-home.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0

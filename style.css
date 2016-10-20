@@ -1714,17 +1714,13 @@ footer {
     float: left;
     clear: none; } }
 
-.o-content-row--magazine {
-  background-color: #edf7fe;
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3); }
-
 .c-row-header {
-  font-size: 25px;
-  line-height: 35px;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  font-size: 31px;
+  line-height: 43.4px;
+  font-family: "Libre Baskerville", Palatino, Georgia;
   color: #868e96;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  font-style: italic;
   text-align: center;
   width: 100%;
   margin-bottom: 1.2rem; }
@@ -1734,7 +1730,7 @@ footer {
     position: relative;
     width: 20px;
     height: 2px;
-    background-color: #868e96;
+    background-color: currentColor;
     right: 20px;
     bottom: 0.7rem;
     z-index: 1 !important; }
@@ -1840,10 +1836,12 @@ footer {
     -webkit-transform-origin: center;
         -ms-transform-origin: center;
             transform-origin: center; }
-  .c-content-title:hover:after {
-    -webkit-transform: scaleX(1);
-        -ms-transform: scaleX(1);
-            transform: scaleX(1); }
+  .c-content-title:hover {
+    text-decoration: none; }
+    .c-content-title:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
   .c-content-title:hover {
     color: #212529;
     text-decoration: none; }
@@ -1880,10 +1878,12 @@ footer {
       -webkit-transform-origin: center;
           -ms-transform-origin: center;
               transform-origin: center; }
-    .c-content-type a:hover:after {
-      -webkit-transform: scaleX(1);
-          -ms-transform: scaleX(1);
-              transform: scaleX(1); }
+    .c-content-type a:hover {
+      text-decoration: none; }
+      .c-content-type a:hover:after {
+        -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+                transform: scaleX(1); }
 
 .c-content-author {
   display: block;
@@ -1915,10 +1915,12 @@ footer {
       -webkit-transform-origin: center;
           -ms-transform-origin: center;
               transform-origin: center; }
-    .c-content-author a.c-author-link:hover:after {
-      -webkit-transform: scaleX(1);
-          -ms-transform: scaleX(1);
-              transform: scaleX(1); }
+    .c-content-author a.c-author-link:hover {
+      text-decoration: none; }
+      .c-content-author a.c-author-link:hover:after {
+        -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+                transform: scaleX(1); }
 
 .c-content-description {
   font-size: 16px;
@@ -2013,46 +2015,39 @@ footer {
         -ms-flex: 1 0 33%;
             flex: 1 0 33%; } }
 
-.c-content-module--magazine {
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
-  .c-content-module--magazine .books-image, .c-content-module--magazine .c-content-text {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 50%;
-        -ms-flex: 1 0 50%;
-            flex: 1 0 50%; }
-  .c-content-module--magazine .c-mag-home-title {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 100%;
-        -ms-flex: 1 0 100%;
-            flex: 1 0 100%;
-    text-align: center;
-    font-size: 25px;
-    line-height: 35px;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96;
-    text-transform: uppercase;
-    line-height: 112px;
-    letter-spacing: 1px; }
-    @media only screen and (max-width: 960px) {
-      .c-content-module--magazine .c-mag-home-title {
-        font-size: 20px;
-        line-height: 35px;
-        font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-        color: #868e96; } }
-    .c-content-module--magazine .c-mag-home-title h2:before, .c-content-module--magazine .c-mag-home-title h2:after {
+.c-home-sub__info {
+  font-size: 20px;
+  line-height: 35px;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529;
+  text-align: center; }
+  .c-home-sub__info a {
+    color: #0074d9; }
+    .c-home-sub__info a:after {
       content: "";
-      display: inline-block;
       position: relative;
-      width: 20px;
-      height: 4px;
+      display: block;
+      top: -2px;
+      left: 10%;
+      height: 1px;
+      width: 80%;
+      -webkit-transform: scaleX(0);
+          -ms-transform: scaleX(0);
+              transform: scaleX(0);
       background-color: currentColor;
-      right: 20px;
-      bottom: 0.7rem;
-      z-index: 1 !important; }
-    .c-content-module--magazine .c-mag-home-title h2:after {
-      left: 20px; }
+      -webkit-transition: -webkit-transform 0.15s ease-in-out;
+      transition: -webkit-transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+      -webkit-transform-origin: center;
+          -ms-transform-origin: center;
+              transform-origin: center; }
+    .c-home-sub__info a:hover {
+      text-decoration: none; }
+      .c-home-sub__info a:hover:after {
+        -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+                transform: scaleX(1); }
 
 .c-content-module--books {
   -webkit-box-orient: horizontal;
@@ -2063,9 +2058,9 @@ footer {
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
-  -webkit-align-content: flex-start;
-      -ms-flex-line-pack: start;
-          align-content: flex-start;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
   margin-bottom: 0; }
 
 .books-image {
@@ -2127,20 +2122,27 @@ footer {
     -webkit-transform-origin: top left;
         -ms-transform-origin: top left;
             transform-origin: top left; }
-  .books-title:hover:after {
-    -webkit-transform: scaleX(1);
-        -ms-transform: scaleX(1);
-            transform: scaleX(1); }
+  .books-title:hover {
+    text-decoration: none; }
+    .books-title:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
   .books-title:hover {
     color: #212529;
     text-decoration: none; }
 
 .books-author {
-  font-size: 20px;
-  line-height: 35px;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #0074d9;
+  font-size: 16px;
+  line-height: 28px;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529;
   display: block; }
+  .books-author a {
+    font-size: 16px;
+    line-height: 28px;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #212529; }
 
 .books-description {
   font-size: 13px;
@@ -2157,38 +2159,17 @@ footer {
           flex: 1 0 100%;
   text-align: right;
   padding-right: 5%; }
-  .books-extra a {
-    display: inline-block;
-    font-size: 20px;
-    line-height: 35px;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
-    .books-extra a:after {
-      content: "";
-      position: relative;
-      display: block;
-      top: -2px;
-      left: 0%;
-      height: 1px;
-      width: 100%;
-      -webkit-transform: scaleX(0);
-          -ms-transform: scaleX(0);
-              transform: scaleX(0);
-      background-color: currentColor;
-      -webkit-transition: -webkit-transform 0.15s ease-in-out;
-      transition: -webkit-transform 0.15s ease-in-out;
-      transition: transform 0.15s ease-in-out;
-      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
-      -webkit-transform-origin: top right;
-          -ms-transform-origin: top right;
-              transform-origin: top right; }
-    .books-extra a:hover:after {
-      -webkit-transform: scaleX(1);
-          -ms-transform: scaleX(1);
-              transform: scaleX(1); }
-    .books-extra a:hover {
-      color: #4dadf7;
-      text-decoration: none; }
+
+.c-books-button {
+  display: inline-block;
+  background-color: transparent;
+  margin-top: 0; }
+  .c-books-button a {
+    height: 100%;
+    width: 100%; }
+  .c-books-button:hover a {
+    color: #fcfcfc;
+    text-decoration: none; }
 
 .content-row--news {
   min-height: 300px; }
@@ -2293,10 +2274,12 @@ footer {
     -webkit-transform-origin: center;
         -ms-transform-origin: center;
             transform-origin: center; }
-  .news-title:hover:after {
-    -webkit-transform: scaleX(1);
-        -ms-transform: scaleX(1);
-            transform: scaleX(1); }
+  .news-title:hover {
+    text-decoration: none; }
+    .news-title:hover:after {
+      -webkit-transform: scaleX(1);
+          -ms-transform: scaleX(1);
+              transform: scaleX(1); }
   .news-title:after {
     -webkit-transform-origin: top left;
         -ms-transform-origin: top left;
@@ -2324,7 +2307,8 @@ footer {
     border-right: 1px solid #dee2e6;
     padding-right: 8px;
     letter-spacing: 0.5px;
-    text-decoration: none; }
+    text-decoration: none;
+    text-transform: uppercase; }
     .news-type a:hover {
       text-decoration: underline; }
 
@@ -2338,6 +2322,138 @@ footer {
   text-decoration: none;
   padding-left: 5px;
   margin: 0; }
+
+.o-content-row--magazine {
+  background: -webkit-linear-gradient(left, #cce3f7 0%, transparent 90%);
+  background: linear-gradient(to right, #cce3f7 0%, transparent 90%); }
+
+.c-content-module--magazine {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 100%;
+      -ms-flex: 0 1 100%;
+          flex: 0 1 100%;
+  margin: 56px 0; }
+
+.c-mag-home__image {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 40%;
+      -ms-flex: 1 0 40%;
+          flex: 1 0 40%;
+  min-width: 280px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .c-mag-home__image a img {
+    max-width: 100%; }
+
+.c-mag-home__text {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 60%;
+      -ms-flex: 1 0 60%;
+          flex: 1 0 60%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 280px; }
+
+.c-mag-home__issue-title {
+  text-align: center;
+  margin-bottom: 28px; }
+  .c-mag-home__issue-title a {
+    font-size: 39px;
+    line-height: 50.7px;
+    font-family: "Libre Baskerville", Palatino, Georgia;
+    color: #005dae; }
+    .c-mag-home__issue-title a:after {
+      content: "";
+      position: relative;
+      display: block;
+      top: -2px;
+      left: 10%;
+      height: 1px;
+      width: 80%;
+      -webkit-transform: scaleX(0);
+          -ms-transform: scaleX(0);
+              transform: scaleX(0);
+      background-color: currentColor;
+      -webkit-transition: -webkit-transform 0.15s ease-in-out;
+      transition: -webkit-transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out;
+      transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+      -webkit-transform-origin: center;
+          -ms-transform-origin: center;
+              transform-origin: center; }
+    .c-mag-home__issue-title a:hover {
+      text-decoration: none; }
+      .c-mag-home__issue-title a:hover:after {
+        -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+                transform: scaleX(1); }
+    .c-mag-home__issue-title a:hover {
+      color: #005dae;
+      text-decoration: none; }
+
+.c-mag-home__issue-contents {
+  max-width: 80%; }
+  .c-mag-home__issue-contents p {
+    font-size: 16px;
+    line-height: 28px;
+    font-family: "Libre Baskerville", Palatino, Georgia;
+    color: #212529;
+    font-style: italic; }
+
+.c-mag-home__button-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 80%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 28px; }
+
+.c-mag-home__button {
+  background-color: transparent; }
+  .c-mag-home__button:hover a {
+    color: #fcfcfc;
+    text-decoration: none; }
 
 .c-article__header {
   max-width: 80vw; }

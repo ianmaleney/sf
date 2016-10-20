@@ -1,0 +1,60 @@
+.o-content-row--magazine
+  background: linear-gradient(to right, c('primary', 8) 0%, rgba(0,0,0,0) 90%)
+  //box-shadow: inset 0 0 12px rgba(0,0,0,0.3)
+
+.c-content-module--magazine
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  flex-wrap: wrap
+  flex: 0 1 100%
+  margin: $baseline * 2 0
+
+.c-mag-home__image
+  flex: 1 0 40%
+  min-width: 280px
+  display: flex
+  justify-content: center
+  a
+    img
+      max-width: 100%
+
+
+.c-mag-home__text
+  flex: 1 0 60%
+  display: flex
+  flex-direction: column
+  align-items: center
+  min-width: 280px
+
+.c-mag-home__issue-title
+  text-align: center
+  margin-bottom: $baseline
+  a
+    +type-setting(4, $serif, c('primary', 2, black))
+    +underlineHover(currentColor, 1px, 80%)
+    &:hover
+      color: c('primary',2,black)
+      text-decoration: none
+
+
+.c-mag-home__issue-contents
+  max-width: 80%
+  p
+    +type-setting(0, $serif, c('black'))
+    font-style: italic
+
+.c-mag-home__button-wrapper
+  display: flex
+  width: 80%
+  justify-content: space-between
+  margin-top: $baseline
+
+
+.c-mag-home__button
+  background-color: rgba(0,0,0,0)
+  &:hover
+    a
+      color: c('white')
+      text-decoration: none

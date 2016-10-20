@@ -6,7 +6,7 @@
 
 $args = array(
   'numberposts' => 3,
-  'category_name' => 'Editorial',
+  'post_type' => 'news',
   'orderby' => 'post_date',
 	'order' => 'DESC'
 );
@@ -23,7 +23,7 @@ if($newsPosts) {
     <div class="news-text">
       <a href="<?php the_permalink(); ?>" class="news-title"><?php the_title(); ?></a>
       <div class="news-info">
-        <p class="news-type"><?php the_category( ' ' ); ?></p>
+        <p class="news-type"><a href="/news"><?php echo get_post_type(); ?></a></p>
         <p class="news-time"><?php the_date(); ?></p>
       </div>
     </div>
