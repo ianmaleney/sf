@@ -1,7 +1,7 @@
 .c-content-module--books
 	flex-direction: row
 	flex-wrap: wrap
-	align-content: flex-start
+	align-content: center
 	margin-bottom: 0
 
 .books-image
@@ -34,8 +34,10 @@
 		text-decoration: none
 
 .books-author
-	+type-setting(1, $sans, c('primary'))
+	+type-setting(0, $serif, c('black'))
 	display: block
+	a
+		+type-setting(0, $sans, c('black'))
 
 .books-description
 	+type-setting(-1)
@@ -46,10 +48,15 @@
 	flex: 1 0 100%
 	text-align: right
 	padding-right: 5%
+
+.c-books-button
+	display: inline-block
+	background-color: rgba(0,0,0,0)
+	margin-top: 0
 	a
-		display: inline-block
-		+type-setting(1, $sans, c('secondary'))
-		+underlineHover(currentColor, 1px, 100%, 0.15s, top right)
-		&:hover
-			color: c('accent')
+		height: 100%
+		width: 100%
+	&:hover
+		a
+			color: c('white')
 			text-decoration: none

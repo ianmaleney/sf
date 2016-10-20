@@ -61,8 +61,8 @@
 
       <nav class="c-bottom-nav">
         <ul class="c-bottom-nav__menu">
-          <li class="c-bottom-nav__menu--item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php get_template_part( 'svg/icons/inline', 'plus' ); ?></a></li>
-          <li class="c-bottom-nav__menu--item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php get_template_part( 'svg/icons/inline', 'mail' ); ?></a></li>
+          <li class="c-bottom-nav__menu--item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php get_template_part( 'svg/icons/inline', 'home' ); ?></a></li>
+          <li class="c-bottom-nav__menu--item"><a href="<?php echo esc_url( home_url( '/magazine' ) ); ?>"><?php get_template_part( 'svg/icons/inline', 'book' ); ?></a></li>
           <li class="c-bottom-nav__menu--item search-item"><?php get_template_part( 'svg/icons/inline', 'mg' ); ?></li>
           <li class="c-bottom-nav__menu--item js-menu-show"><div class="c-burger"></li>
         </ul>

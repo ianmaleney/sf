@@ -420,7 +420,12 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 }
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 
+
+//
+//
 // Registering Footer Menu
+//
+//
 function register_my_menus() {
 	register_nav_menus(
     array(
