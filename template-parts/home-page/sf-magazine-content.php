@@ -19,20 +19,6 @@ if($magazine) {
 
   <div class="c-content-module c-content-module--magazine">
 
-    <!--<div class="c-mag-home__section-title">
-      <h2>In the latest issue:</h2>
-    </div>-->
-
-<<<<<<< HEAD
-    <div class="books-image">
-      <a href="<?php the_permalink(); ?>">
-        <img src="<?php the_field('book_cover'); ?>">
-      </a>
-    </div>
-
-    <div class="c-content-text">
-      <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
-=======
     <div class="c-mag-home__image">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
         <img src="<?php the_post_thumbnail_url( 'large' ); ?>">
@@ -57,7 +43,6 @@ if($magazine) {
           $subLink = get_page_uri($subs); echo $subLink ?>" target="_blank" rel="noopener">Subscribe Now</a>
         </div>
      </div>
->>>>>>> master
     </div>
   </div>
 
