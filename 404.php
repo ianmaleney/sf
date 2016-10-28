@@ -9,26 +9,30 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" class="content-area error-page">
 		<main id="main" class="site-main" role="main">
+			<div class="u-page-wrapper u-page-wrapper--primary-header">
 
-			<section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twentysixteen' ); ?></h1>
-				</header><!-- .page-header -->
+				<section class="error-404 not-found">
+					<header class="page-header">
+						<h1 class="page-title heading-2"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twentysixteen' ); ?></h1>
+					</header><!-- .page-header -->
 
-				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'twentysixteen' ); ?></p>
+					<div class="page-content">
+						<p><?php _e( 'Hmm... Looks like there&rsquo;s been a mixup. Maybe try a search?', 'twentysixteen' ); ?></p>
 
-					<?php get_search_form(); ?>
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
+						<?php get_search_form(); ?>
 
+						<div class="error-image">
+							<?php get_template_part('svg/inline', 'logo') ?>
+						</div>
+					</div><!-- .page-content -->
+				</section><!-- .error-404 -->
+
+				<?php get_sidebar( 'content-bottom' ); ?>
+
+
+			</div>
 		</main><!-- .site-main -->
-
-		<?php get_sidebar( 'content-bottom' ); ?>
-
 	</div><!-- .content-area -->
-
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

@@ -1,0 +1,357 @@
+.woocommerce-page
+  aside
+    display: none
+
+.woocommerce
+  +type-setting(0, $sans, c('black'))
+  input, label
+    +type-setting(0, $sans, c('black'))
+  .button
+    @extend %button
+    +o-button
+
+  .woocommerce-breadcrumb, .woocommerce-result-count
+    display: none
+
+  .c-shop-header-wrapper
+    width: 100%
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    align-items: flex-start
+    margin: -20px 0 0
+    border-bottom: 1px solid c('spacer')
+    padding: 0 0 $baseline
+
+
+  .page-title
+    +type-setting(4, $serif, c('black'))
+    display: block
+    padding: 5px 16px
+    flex: 1 0 33%
+    min-width: 280px
+    text-align: center
+    font-style: italic
+
+  .c-shop-header__nav
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex: 1 0 33%
+    min-width: 280px
+
+  .c-shop-header__nav__title
+    +type-setting(0, $sans, c('secondary'))
+
+  .c-shop-header__nav__links
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    a
+      @extend %button
+      +o-button
+      flex: 1 0 40%
+      margin: 10px
+      text-align: center
+      &:hover
+        text-decoration: none
+
+
+  .search-form
+    //display: inline-block
+    flex: 1 0 33%
+    min-width: 280px
+    margin: 20px auto
+    text-align: center
+    .c-search-form__input
+      width: 70%
+      max-width: 200px
+    .c-search-form__button
+      @extend %button
+      +o-button
+      border-radius: 0
+      &:hover
+        background-color: c('primary')
+        color: c('white')
+
+  .woocommerce-ordering
+    background: rgba(0,0,0,0)
+    +type-setting(-1, $sans, c('black'))
+
+  ul.products
+    width: 100%
+    .c-products
+      width: 100%
+      display: flex
+      flex-wrap: wrap
+      justify-content: space-between
+      align-items: flex-start
+      @media #{$max-six-forty}
+        justify-content: center
+    li.product
+      flex: 1 0 33%
+      max-width: 33%
+      min-width: 225px
+      padding: 30px 15px
+      margin: 0
+      @media #{$max-six-forty}
+        max-width: 100%
+        display: flex
+        align-items: center
+        .c-product__thumb, .c-product__text
+          margin: 0 10px
+      &:nth-of-type(even)
+        background-color: c('background-light')
+      .c-product__thumb
+        width: 60%
+        margin: 0 auto
+        padding: 0 10px
+        img
+          max-width: 100%
+          object-fit: contain
+          min-width: 50px
+
+      h3
+        +type-setting(3, $serif, c('black'))
+        text-align: center
+        +underlineHover(currentColor, 1px, 60%)
+        @media #{$max-six-forty}
+          +type-setting(2, $serif, c('black'))
+      .price
+        text-align: center
+        +type-setting(1, $sans, c('secondary'))
+      .button
+        @extend %button
+        +o-button
+        display: block
+        max-width: 150px
+        text-align: center
+        margin: 0 auto
+
+
+
+  div.product
+    .images
+      img
+        max-width: 400px
+        margin: 0 auto
+
+    .product_title
+      +type-setting(3, $serif, c('black'))
+    p.price
+      .woocommerce-Price-amount
+        +type-setting(1, $sans, c('secondary'))
+
+    .quantity
+      +type-setting(0, $sans, c('black'))
+      .qty
+        height: 36px
+
+    div[itemprop="description"]
+      display: none
+
+    p.stock
+      +type-setting(0, $sans, c('black'))
+
+    .single_add_to_cart_button.button.alt
+      @extend %button
+      +o-button
+      margin: 0
+
+    .product_meta
+      +type-setting(-1, $sans, c('secondary'))
+
+    .product-info
+      p
+        +type-setting(-1, $sans, c('secondary'))
+
+    .product-description
+      padding: 20px 0
+      width: 80%
+      &:before
+        content: ''
+        display: block
+        position: relative
+        top: 0
+        left: 0
+        height: 1px
+        width: 100%
+        background: c('spacer')
+
+    .wc-tabs-wrapper
+      max-width: 700px
+      margin: 0 auto 100px
+      border-bottom: 1px solid c('spacer')
+
+    .woocommerce-Tabs-panel
+      display: flex !important
+      flex-direction: column
+      align-items: center
+      h2
+        display: none
+      h3
+        display: inline-block
+        +type-setting(2, $serif, c('black'))
+        &:after
+          content: ''
+          display: block
+          position: relative
+          top: 0
+          left: 0
+          height: 1px
+          width: 100%
+          background: c('secondary')
+      p
+        text-align: center
+
+    .woocommerce-tabs
+      ul.tabs
+        li.active
+          border: none
+          background: rgba(0,0,0,0)
+          width: 100%
+          text-align: center
+          &:before,
+          &:after
+            content: none
+        .description_tab
+          a
+            +type-setting(3, $serif, c('black'))
+            text-align: center
+
+  .related.products
+    clear: both
+    padding: 40px 0 20px
+    h2
+      +type-setting(2, $serif, c('black'))
+      width: 100%
+      text-align: center
+      &:after
+        content: ''
+        display: block
+        position: relative
+        top: 0
+        left: 0
+        height: 1px
+        width: 100%
+        background: c('spacer')
+    ul.products
+      width: 100%
+      display: flex
+      flex-wrap: wrap
+      li.product
+        flex: 1 0 25%
+        min-width: 150px
+        @media #{$max-six-forty}
+          display: flex
+          flex-direction: column
+          align-items: center
+        .c-product__thumb
+          height: 120px
+          margin: 0 auto
+          img
+            max-height: 100%
+            min-width: 50px
+        .c-product__text
+          h3
+            @media #{$min-six-forty}
+              +type-setting(0)
+          .price
+            @media #{$min-six-forty}
+              +type-setting(-1, $sans, c('secondary'))
+              letter-spacing: 0.5px
+        .button
+          @media #{$min-six-forty}
+            +type-setting(-1, $sans, c('primary'))
+            &:hover
+              +type-setting(-1, $sans, c('white'))
+          padding-top: 5px
+          width: 80%
+          max-width: 150px
+          min-width: 120px
+
+
+
+  .woocommerce-message
+    +type-setting(0, $serif, c('black'))
+    border-top-color: c('primary')
+    background-color: c('background-light')
+    &:before
+      color: c('primary')
+    a
+      @extend %button
+      +o-button
+      margin: 0 20px
+
+  .shop_table
+    background-color: white
+    +type-setting(0, $sans)
+    th
+      +type-setting(0, $sans, c('secondary'))
+    tr
+      +type-setting(0, $sans)
+    +type-setting(0)
+    .actions
+      @media #{$max-six-forty}
+        display: flex
+        flex-direction: column
+        .coupon
+          display: flex
+          flex-direction: column
+          align-items: center
+          input
+            margin: 10px 0
+      #coupon_code
+        +type-setting(-1, $sans)
+        width: 80px
+      .button
+        @extend %button
+        +o-button
+        margin: 0 20px
+        @media #{$max-six-forty}
+          width: auto !important
+        &:hover
+          box-shadow: none
+
+  .shipping-calculator-button
+    +type-setting(0, $sans, c('primary'))
+
+  .variation-Edition
+    +type-setting(0, $sans, c('black'))
+    p
+      +type-setting(0, $sans, c('black'))
+      margin-top: 0
+
+  .wc-proceed-to-checkout
+    .checkout-button.button.alt.wc-forward
+      @extend %button
+      +o-button(c('primary'), c('white'))
+      margin: 0 20px
+      &:hover
+        border-color: c('primary')
+
+  .woocommerce-checkout-payment
+    .button.alt
+      @extend %button
+      +o-button
+      width: 30%
+      min-width: 300px
+      height: 72px
+      +type-setting(2, $sans, c('primary'))
+      @media #{$max-six-forty}
+        +type-setting(1, $sans, c('primary'))
+        min-width: 260px
+
+  form
+    input.input-text
+      +type-setting(-1, $sans, c('secondary'))
+      padding: 5px
+    .form-row.woocommerce-validated
+      input.input-text
+        border: 3px solid
+        border-color: c('primary')
+    .woocommerce-invalid
+      input.input-text
+        border: 3px solid
+        border-color: c('highlight')

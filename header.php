@@ -14,15 +14,12 @@
 	<?php if( is_author() ) : echo '<title>'; guest_author(); echo ' | '; bloginfo('title'); echo '</title>'; endif; ?>
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
 	<?php wp_head(); ?>
-	<title>Test!</title>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 	<div class="site-inner">
 		<header id="masthead" class="c-primary-header c-home-header" role="banner">
-
-      <!--<div class="c-primary-header__sub-image"><?php get_template_part( 'svg/inline', 'logo' ); ?></div> -->
 
       <div class="c-primary-header__title">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">

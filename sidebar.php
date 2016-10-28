@@ -5,7 +5,7 @@
 ?>
 
 <?php if ( is_active_sidebar( 'sidebar-1' )  ) : ?>
-	<aside id="secondary" class="sidebar widget-area c-sidebar" role="complementary">
+	<aside id="secondary" class="sidebar widget-area c-sidebar <?php if (is_single()) : echo 'c-sidebar--bottom'; endif; ?>" role="complementary">
 		<!-- -->
 		<?php
 			get_template_part( 'template-parts/sidebar/sf-sidebar-latest' );

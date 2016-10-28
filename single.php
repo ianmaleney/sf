@@ -12,8 +12,11 @@ get_header( 'secondary' ); ?>
 			get_template_part( 'template-parts/content', 'single' );
 
 		endwhile;
+
+		get_sidebar();
+
 		?>
-		
+
 	</div>
 
 <?php get_footer(); ?>
