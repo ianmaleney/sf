@@ -244,10 +244,10 @@ add_action( 'wp_head', 'twentysixteen_javascript_detection', 0 );
  */
 function twentysixteen_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentysixteen-fonts', twentysixteen_fonts_url(), array(), null );
+	//wp_enqueue_style( 'twentysixteen-fonts', twentysixteen_fonts_url(), array(), null );
 
 	// Add Genericons, used in the main stylesheet.
-	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.4.1' );
+	//wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.4.1' );
 
 	// Theme stylesheet.
 	wp_enqueue_style( 'twentysixteen-style', get_stylesheet_uri() );
@@ -451,12 +451,11 @@ function cf_search_join( $join ) {
     global $wpdb;
 
     if ( is_search() ) {
-        $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+        $join .=' LEFT JOIN '. $wpdb->postmeta . ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
     }
 
     return $join;
 }
-add_filter('posts_join', 'cf_search_join' );
 
 function cf_search_where( $where ) {
     global $pagenow, $wpdb;
@@ -469,7 +468,6 @@ function cf_search_where( $where ) {
 
     return $where;
 }
-add_filter( 'posts_where', 'cf_search_where' );
 
 function cf_search_distinct( $where ) {
     global $wpdb;
@@ -480,7 +478,52 @@ function cf_search_distinct( $where ) {
 
     return $where;
 }
-add_filter( 'posts_distinct', 'cf_search_distinct' );
+
+/*if ( !is_admin() ) {
+	add_filter('posts_join', 'cf_search_join' );
+	add_filter( 'posts_where', 'cf_search_where' );
+	add_filter( 'posts_distinct', 'cf_search_distinct' );
+}*/
+
+function cat_name() {
+	$categories = get_the_category();
+	if ( ! empty( $categories ) ) {
+		echo esc_html( $categories[0]->name );
+	}
+}
+
+function cat_name_URL(){
+	$categories = get_the_category();
+	echo esc_url( get_category_link( $categories[0]->term_id) );
+}
+
+function issue_date() {
+	$issue = get_field( "issue_volume" );
+		if( $issue ) {
+			echo $issue;
+		} else {
+			the_date();
+		}
+}
+
+function archive_image_output() {
+	$magCover = get_field( "magazine_cover" );
+	$bookCover = get_field('book_cover');
+	$thumb = the_post_thumbnail_url( 'small' );
+		if( $magCover ) {
+			echo $magCover;
+		}
+		elseif( $bookCover ) {
+			echo $bookCover;
+		}
+		else {
+			echo $thumb;
+		}
+}
+
+
+
+
 
 //
 // Popular Posts Functionality - https://digwp.com/2016/03/diy-popular-posts/
@@ -530,6 +573,55 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
+add_filter( 'woocommerce_product_tabs', 'wcs_woo_remove_reviews_tab', 98 );
+    function wcs_woo_remove_reviews_tab($tabs) {
+    unset($tabs['reviews']);
+    return $tabs;
+}
+
+/**
+ * Optimize WooCommerce Scripts
+ * Remove WooCommerce Generator tag, styles, and scripts from non WooCommerce pages.
+ */
+add_action( 'wp_enqueue_scripts', 'child_manage_woocommerce_styles', 99 );
+
+function child_manage_woocommerce_styles() {
+ //remove generator meta tag
+ remove_action( 'wp_head', array( $GLOBALS['woocommerce'], 'generator' ) );
+
+ //first check that woo exists to prevent fatal errors
+ if ( function_exists( 'is_woocommerce' ) ) {
+	 //dequeue scripts and styles
+	 if ( ! is_woocommerce() && ! is_cart() && ! is_checkout() ) {
+		 wp_dequeue_style( 'woocommerce_frontend_styles' );
+		 wp_dequeue_style( 'woocommerce-layout' );
+		 wp_dequeue_style( 'woocommerce_fancybox_styles' );
+		 wp_dequeue_style( 'woocommerce_chosen_styles' );
+		 wp_dequeue_style( 'woocommerce_prettyPhoto_css' );
+		 wp_dequeue_style( 'woocommerce-general' );	// Remove the gloss
+	 	 wp_dequeue_style( 'woocommerce-layout' );		// Remove the layout
+	 	 wp_dequeue_style( 'woocommerce-smallscreen' );	// Remove the smallscreen optimisation
+		 wp_dequeue_script( 'wc_price_slider' );
+		 wp_dequeue_script( 'wc-single-product' );
+		 wp_dequeue_script( 'wc-add-to-cart' );
+		 wp_dequeue_script( 'wc-cart-fragments' );
+		 wp_dequeue_script( 'wc-checkout' );
+		 wp_dequeue_script( 'wc-add-to-cart-variation' );
+		 wp_dequeue_script( 'wc-single-product' );
+		 wp_dequeue_script( 'wc-cart' );
+		 wp_dequeue_script( 'wc-chosen' );
+		 wp_dequeue_script( 'woocommerce' );
+		 wp_dequeue_script( 'prettyPhoto' );
+		 wp_dequeue_script( 'prettyPhoto-init' );
+		 wp_dequeue_script( 'jquery-blockui' );
+		 wp_dequeue_script( 'jquery-placeholder' );
+		 wp_dequeue_script( 'fancybox' );
+		 wp_dequeue_script( 'jqueryui' );
+		 }
+	 }
+
+}
+
 //
 // Guest Authors
 //
@@ -551,7 +643,8 @@ function guest_author() {
 }
 
 function guest_author_bio() {
-	if ( function_exists( 'coauthors_bio' ) ) {
+	$author = get_the_author();
+	if ( function_exists( 'coauthors_bio' ) && $author != "The Stinging Fly") {
 		coauthors_bio();
 	} else {
 			// the_author();

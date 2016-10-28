@@ -48,12 +48,17 @@
 .c-mag-home__button-wrapper
   display: flex
   width: 80%
+  max-width: 400px
   justify-content: space-between
   margin-top: $baseline
 
 
 .c-mag-home__button
   background-color: rgba(0,0,0,0)
+  margin: 0 10px
+  @media #{$max-six-forty}
+    text-align: center
+    +type-setting(-1, $sans)
   &:hover
     a
       color: c('white')

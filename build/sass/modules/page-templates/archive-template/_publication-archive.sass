@@ -1,0 +1,54 @@
+.c-publication-wrapper
+  display: flex
+  max-width: 100%
+  flex-wrap: wrap
+
+.c-publication-module
+  flex: 1 0 33%
+  background-color: c('white') !important
+  .c-publication__image
+    height: 355px
+    max-height: 355px
+    margin-bottom: 10px
+    img
+      max-height: 100%
+      object-fit: contain
+  .c-content-text
+    width: 100%
+    text-align: center
+  .c-author-link
+    +type-setting(0, $sans, c('black'))
+    border: none
+    margin: $grid-gutter 0
+    padding: 0
+    display: block
+    &:hover
+      text-decoration: none
+      &:after
+        background: c('black')
+    &:after
+      content: ''
+      display: block
+      position: relative
+      top: 0
+      left: 35%
+      height: 1px
+      width: 30%
+      background: c('spacer')
+  .c-mag-issue
+    +type-setting(0, $sans, c('secondary'))
+    &:after
+      content: ''
+      display: block
+      position: relative
+      top: 0
+      left: 10%
+      height: 1px
+      width: 80%
+      background: c('spacer')
+  .c-content-title
+    +type-setting(2, $serif, c('black'))
+    font-style: italic
+    display: inline-block
+    clear: both
+    margin: 0

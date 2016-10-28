@@ -6,7 +6,7 @@
 
 $args = array(
   'numberposts' => 3,
-  'category_name' => 'Events',
+  'category_name' => 'event',
   'orderby' => 'post_date',
 	'order' => 'DESC'
 );

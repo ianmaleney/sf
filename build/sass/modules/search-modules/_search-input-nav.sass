@@ -33,7 +33,7 @@
   @media #{$min-six-forty}
     width: 80%
   input
-    width: 100%
+    max-width: 100%
     padding: $grid-gutter
     +type-setting(0, $sans)
     letter-spacing: 0.5px
@@ -45,6 +45,11 @@
   .c-search-input
     @media #{$min-six-forty}
       max-width: 60%
+  .c-search-input__form
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
 
 .o-search-nav--sidebar
   flex: 1 0 30%

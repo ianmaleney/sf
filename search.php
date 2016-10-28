@@ -33,15 +33,12 @@ get_header(); ?>
 						<img src="<?php
 							$magCover = get_field( "magazine_cover" );
 							$bookCover = get_field('book_cover');
-							$thumb = the_post_thumbnail_url( 'small' );
-								if( $magCover ) {
+								if( $magCover != null && $bookCover == null ) {
 									echo $magCover;
-								}
-								elseif( $bookCover ) {
+								} elseif ( $magCover == null && $bookCover != null ){
 									echo $bookCover;
-								}
-								else {
-									echo $thumb;
+								} else {
+									the_post_thumbnail_url( 'small' );
 								}
 							?>">
 					</div>

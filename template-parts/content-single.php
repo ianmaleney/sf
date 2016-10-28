@@ -22,6 +22,9 @@
 				</h3>
 			</div>
 		</section>
+		<!--
+
+		} -->
 
 		<div class="js-article__social-icons c-article__social-icons">
 			<?php get_template_part('template-parts/social-icons'); ?>

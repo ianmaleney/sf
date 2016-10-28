@@ -1,0 +1,32 @@
+.error-page
+  .u-page-wrapper
+    display: flex
+
+  .error-404
+    margin: 0 0 100px
+    flex: 1 0 70%
+    max-width: 70%
+
+  .sidebar
+    flex: 1 0 30%
+    margin-top: 0
+
+  .search-form
+    +type-setting(0, $sans, c('black'))
+    display: flex
+    justify-content: flex-start
+    align-items: center
+
+    input
+      height: $baseline
+
+    .search-submit
+      @extend %button
+      +o-button
+      margin: 0
+
+  .error-image
+    padding: 50px
+    svg
+      width: 25vw
+      height: 25vw

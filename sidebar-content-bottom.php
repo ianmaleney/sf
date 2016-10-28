@@ -1,28 +1,17 @@
 <?php
 /**
- * The template for the content bottom widget areas on posts and pages
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
+ * The template for the sidebar containing the main widget area
  */
-
-if ( ! is_active_sidebar( 'sidebar-2' ) && ! is_active_sidebar( 'sidebar-3' ) ) {
-	return;
-}
-
-// If we get this far, we have widgets. Let's do this.
 ?>
-<aside id="content-bottom-widgets" class="content-bottom-widgets" role="complementary">
-	<?php if ( is_active_sidebar( 'sidebar-2' ) ) : ?>
-		<div class="widget-area">
-			<?php dynamic_sidebar( 'sidebar-2' ); ?>
-		</div><!-- .widget-area -->
-	<?php endif; ?>
 
-	<?php if ( is_active_sidebar( 'sidebar-3' ) ) : ?>
-		<div class="widget-area">
-			<?php dynamic_sidebar( 'sidebar-3' ); ?>
-		</div><!-- .widget-area -->
-	<?php endif; ?>
-</aside><!-- .content-bottom-widgets -->
+<?php if ( is_active_sidebar( 'sidebar-1' )  ) : ?>
+	<aside id="secondary" class="sidebar widget-area c-sidebar <?php if (is_single()) : echo 'c-sidebar--bottom'; endif; ?>" role="complementary">
+		<!-- -->
+		<?php
+			get_template_part( 'template-parts/sidebar/sf-sidebar-latest' );
+			get_template_part( 'template-parts/sidebar/sf-sidebar-popular' );
+			//get_template_part( 'template-parts/sidebar/sf-sidebar-newsletter' );
+		?>
+
+	</aside><!-- .sidebar .widget-area -->
+<?php endif; ?>

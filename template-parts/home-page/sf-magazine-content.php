@@ -19,10 +19,6 @@ if($magazine) {
 
   <div class="c-content-module c-content-module--magazine">
 
-    <!--<div class="c-mag-home__section-title">
-      <h2>In the latest issue:</h2>
-    </div>-->
-
     <div class="c-mag-home__image">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
         <img src="<?php the_post_thumbnail_url( 'large' ); ?>">

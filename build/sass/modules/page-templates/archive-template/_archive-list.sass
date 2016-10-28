@@ -13,21 +13,22 @@
     .c-archive-module__image
       flex: 1 0 40%
       height: $baseline * 10
+      max-height: $baseline * 10
     .c-archive-module__info
       flex: 1 0 50%
       min-height: $baseline * 10
       border-bottom: none
     .c-archive-module__title
       +type-setting(2)
-      margin: $grid-gutter 0 -10px
+      margin: $grid-gutter 0 0
     .c-archive-module__issue
       margin-top: 5px
-      +type-setting(-1, $sans)
+      +type-setting(-1, $sans, c('secondary'))
     .c-archive-module__author
-      +type-setting(0, $sans, c('primary'))
+      +type-setting(0, $sans, c('black'))
       border-right: 1px solid c('spacer')
     .c-archive-module__type
-      +type-setting(0, $sans)
+      +type-setting(0, $sans, c('secondary'))
 
 .c-archive-list
   padding: $grid-gutter
@@ -41,11 +42,18 @@
 
 .c-archive-module__image
   flex: 1 0 30%
+  height: 170px
+  min-height: 170px
+  overflow: hidden
+  border-radius: 2px
   @media #{$max-six-forty}
     display: none
   img
     width: 100%
     height: 100%
+    min-height: 100%
+    max-width: 100%
+    max-height: 100%
     object-fit: cover
 
 
@@ -61,20 +69,23 @@
 
 .c-archive-module__title
   +type-setting(2, $serif)
-  margin-bottom: -18px
+  margin-bottom: -$grid-gutter
 
-.c-archive-module__author
-  +type-setting(0, $sans, c('primary'))
+.c-author-link
+  +type-setting(0, $sans, c('black'))
   padding-right: $grid-gutter
-  border-right: 1px solid c('spacer')
+
+.c-archive-module
+  .c-author-link
+    border-right: 1px solid c('spacer')
 
 .c-archive-module__type
-  +type-setting(0, $sans)
+  +type-setting(0, $sans, c('secondary'))
   display: inline
   padding-left: $grid-gutter
 
 .c-archive-module__issue
-  +type-setting(-1, $sans)
+  +type-setting(-1, $sans, c('secondary'))
   display: inline
   order: -1
 

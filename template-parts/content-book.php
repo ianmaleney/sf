@@ -44,15 +44,15 @@
 	<section id="buy" class="c-product__purchase-info">
 		<div class="c-product__purchase-options">
 			<div class="c-purchase-option">
-				<h3 class="heading-1 c-product-price">€<?php the_field('price'); ?></h3>
 				<ul class="c-product__purchase-info__list">
-					<li><?php the_field('product_info_edition'); ?></li>
-					<li>Postage: €<?php the_field('product_info_irish_postage'); ?></li>
-					<li>Published: <?php the_field('date_published'); ?></li>
+					<li>Published: <?php
+						$date = get_field('date_published');
+						$date2 = date("F Y", strtotime($date));
+						echo $date2; ?></li>
 					<li>Pages: <?php the_field('pages'); ?></li>
 					<li>ISBN: <?php the_field('isbn'); ?></li>
 				</ul>
-				<a href="<?php the_field('purchase_link'); ?>" target="_blank" rel="noopener" id="paperback" class="o-button">Paperback: €15.00</a>
+				<a href="<?php the_field('purchase_link'); ?>" target="_blank" rel="noopener" id="paperback" class="o-button">Buy Now</a>
 			</div>
 		</div>
 	</section>

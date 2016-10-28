@@ -4,32 +4,32 @@
 <?php
 
 $args = array(
-  'sort_order' => 'asc',
-	'sort_column' => 'post_date',
-	'hierarchical' => 0,
-	'parent' => 149,
-	'number' => 1,
+	'post_type' => 'product',
+  'posts_per_page' => 1,
+  'meta_key'			=> 'date_published',
+  'orderby'        => 'meta_value_num',
+  'order'          => 'DESC',
 );
 
-$latestBook = get_pages( $args );
+$latestBook = get_posts( $args );
 
 if($latestBook) {
 
 	foreach($latestBook as $post) : setup_postdata( $post ); ?>
 
-  <!-- This is where the "news content" modules are created -->
+  <!-- This is where the "book content" module is created -->
 
   <div class="c-content-module c-content-module--books">
 
     <div class="books-image">
-      <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
+      <a href="<?php the_permalink(); ?>">
         <img src="<?php the_field('book_cover'); ?>">
       </a>
     </div>
 
     <div class="books-info">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener" class="books-title"><?php the_title(); ?></a>
-      <p class="books-author"><i>by</i> <?php guest_author_link(); ?></p>
+      <p class="books-author"><i>by</i> <?php the_field('author') ?></p>
       <p class="books-description"><?php the_field('blurb_quote'); ?> — <?php the_field('blurb_attribution'); ?></p>
     </div>
 
