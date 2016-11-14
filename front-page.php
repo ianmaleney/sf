@@ -13,14 +13,14 @@ get_header(); ?>
 			<?php
 			// Featured Content.
 				get_template_part( 'template-parts/home-page/sf-featured-content' );
-			// Latest Content
-				get_template_part( 'template-parts/home-page/sf-latest-content' );
-			// Featured Content.
+			// Magazine Module
 				get_template_part( 'template-parts/home-page/sf-magazine-content' );
 			// Book Module
 				get_template_part( 'template-parts/home-page/sf-home-book-module' );
 			// News Content
 				get_template_part( 'template-parts/home-page/sf-news-content' );
+			// Latest Content
+				get_template_part( 'template-parts/home-page/sf-latest-content' );
 			// Archive Content
 				get_template_part( 'template-parts/home-page/sf-archive-content' );
 			// Events Module
