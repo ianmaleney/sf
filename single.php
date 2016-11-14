@@ -13,7 +13,7 @@ get_header( 'secondary' ); ?>
 
 		endwhile;
 
-		get_sidebar();
+		get_sidebar('content-bottom');
 
 		?>
 

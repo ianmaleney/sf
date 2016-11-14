@@ -3,8 +3,12 @@
     <?php
       if(is_search()) {
         echo 'Search';
-      } else {
+      }
+			if (is_category()) {
           cat_name();
+      }
+			if (is_author()) {
+          guest_author();
       }
     ?>
   </h1>
@@ -61,6 +65,11 @@
 		</div>
   -->
     <p class="c-search-nav__description"><i>Or</i></p>
-		<button class="o-button">Browse All Issues</button>
+		<a class="o-button" href="
+			<?php
+				$url = home_url( $path = 'magazine', $scheme = 'relative' );
+				echo $url;
+				?>
+			">Browse All Issues</a>
 	</div>
 </nav>

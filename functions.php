@@ -436,6 +436,38 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
+// Registering Sidebars
+add_action( 'widgets_init', 'my_register_sidebars' );
+
+function my_register_sidebars() {
+
+	/* Register the 'primary' sidebar. */
+	register_sidebar(
+		array(
+			'id' => 'primary',
+			'name' => __( 'Primary-Right' ),
+			'description' => __( 'Primary Sidebar on right of page.' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>'
+		)
+	);
+
+	/* Register the 'sidebar-bottom' sidebar. */
+	register_sidebar(
+		array(
+			'id' => 'sidebar-bottom',
+			'name' => __( 'Sidebar-Bottom' ),
+			'description' => __( 'Secondary Sidebar at the bottom of the page.' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>'
+		)
+	);
+}
+
 // Enqueueing Custom JS
 function my_assets() {
 	wp_enqueue_script( 'theme-scripts', '/wp-content/themes/stingingfly/js/scripts.js', array( 'jquery' ), '1.0', true );
@@ -672,5 +704,15 @@ function cubiq_setup () {
 }
 
 add_action('after_setup_theme', 'cubiq_setup');
+
+// Removing JQuery Migrate
+add_filter( 'wp_default_scripts', 'dequeue_jquery_migrate' );
+
+function dequeue_jquery_migrate( &$scripts){
+	if(!is_admin()){
+		$scripts->remove( 'jquery');
+		$scripts->add( 'jquery', false, array( 'jquery-core' ), '1.12.4' );
+	}
+}
 
 ?>

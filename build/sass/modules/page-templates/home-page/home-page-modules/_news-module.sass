@@ -42,12 +42,14 @@
 	flex-direction: column
 	justify-content: space-between
 	align-items: flex-start
+	max-width: calc(100% - 100px)
 
 .news-title
 	+type-setting(-1)
 	display: block
 	text-decoration: none
 	+underlineHover(currentColor, 1px, 100%)
+	max-width: 100%
 	&:after
 		transform-origin: top left
 	@media #{$min-twelve-eighty}

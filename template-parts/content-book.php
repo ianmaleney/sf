@@ -52,7 +52,7 @@
 					<li>Pages: <?php the_field('pages'); ?></li>
 					<li>ISBN: <?php the_field('isbn'); ?></li>
 				</ul>
-				<a href="<?php the_field('purchase_link'); ?>" target="_blank" rel="noopener" id="paperback" class="o-button">Buy Now</a>
+				<a href="<?php the_field('purchase_link'); ?>" target="_blank" rel="noopener" class="o-button">Buy Now</a>
 			</div>
 		</div>
 	</section>

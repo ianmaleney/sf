@@ -4,14 +4,6 @@
  */
 ?>
 
-<?php if ( is_active_sidebar( 'sidebar-1' )  ) : ?>
-	<aside id="secondary" class="sidebar widget-area c-sidebar <?php if (is_single()) : echo 'c-sidebar--bottom'; endif; ?>" role="complementary">
-		<!-- -->
-		<?php
-			get_template_part( 'template-parts/sidebar/sf-sidebar-latest' );
-			get_template_part( 'template-parts/sidebar/sf-sidebar-popular' );
-			//get_template_part( 'template-parts/sidebar/sf-sidebar-newsletter' );
-		?>
-
-	</aside><!-- .sidebar .widget-area -->
-<?php endif; ?>
+<aside id="sidebar-primary" class="sidebar widget-area c-sidebar c-sidebar--bottom" role="complementary">
+	<?php dynamic_sidebar( 'sidebar-bottom' ); ?>
+</aside>

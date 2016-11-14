@@ -1,6 +1,7 @@
 $max-six-forty: "only screen and (max-width : 639px)"
 $min-six-forty: "only screen and (min-width : 640px)"
-$max-nine-sixty: "only screen and (max-width : 960px)"
+$min-nine-sixty: "only screen and (min-width : 960px)"
+$max-nine-sixty: "only screen and (max-width : 959px)"
 $min-twelve-eighty: "only screen and (min-width : 1280px)"
 
 // Grid
@@ -43,7 +44,7 @@ $color-interval: 10% !global
 //
 
 // Modular Scale
-$ms-base: 1.6rem
+$ms-base: 1.8rem
 $ms-ratio: $major-third
 
 // Baseline
@@ -71,6 +72,8 @@ $line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.75, 1: ms(1) * 1.75, 2: ms(2) * 1
   line-height: line-height($level)
   font-family: $family
   color: $color
+  @if $family == $sans
+    font-weight: 600
 
 // Baseline Multiplier
 @mixin baseline($multiplier)

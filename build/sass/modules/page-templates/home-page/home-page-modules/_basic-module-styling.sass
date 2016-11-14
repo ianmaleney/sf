@@ -125,10 +125,13 @@
 	letter-spacing: 0.5px
 	padding: $baseline / 4
 	text-decoration: none
+	height: $baseline * 2
 	a.c-author-link
 		+type-setting(0, $sans, c('black'))
 		text-decoration: none
 		+underlineHover
+		&:after
+			left: calc(40% + 11px)
 
 .c-content-description
 	+type-setting(0)
@@ -177,6 +180,7 @@
 .o-content-row--basic > .c-content-module
 	@media #{$min-six-forty}
 		flex: 1 0 33%
+		max-width: 33%
 
 
 .c-home-sub__info

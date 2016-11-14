@@ -391,7 +391,7 @@ html {
   background-color: #fcfcfc;
   overflow-x: hidden;
   max-width: 100vw; }
-  @media only screen and (max-width: 639px) {
+  @media only screen and (max-width: 959px) {
     html {
       font-size: 9px; } }
 
@@ -403,32 +403,32 @@ body {
   color: #212529; }
 
 .heading-1 {
-  font-size: 4.8828125rem;
-  line-height: 6.34765625rem;
+  font-size: 5.4931640625rem;
+  line-height: 7.1411132813rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
 .heading-2 {
-  font-size: 3.90625rem;
-  line-height: 5.078125rem;
+  font-size: 4.39453125rem;
+  line-height: 5.712890625rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
 .heading-3 {
-  font-size: 3.125rem;
-  line-height: 4.375rem;
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
 .heading-4, .c-table-of-contents h3 {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
+  font-size: 2.8125rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
 p {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
@@ -447,10 +447,11 @@ a.c-author-link {
     text-decoration: underline; }
 
 li {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #212529; }
+  color: #212529;
+  font-weight: 600; }
 
 .u-page-wrapper {
   display: -webkit-box;
@@ -496,13 +497,17 @@ main {
       -ms-flex-align: center;
           align-items: center;
   font-family: "Libre Baskerville", Palatino, Georgia; }
+  .o-article p {
+    width: 100%; }
   @media only screen and (min-width: 640px) {
     .o-article {
       -webkit-box-flex: 1;
       -webkit-flex: 1 0 62%;
           -ms-flex: 1 0 62%;
               flex: 1 0 62%;
-      max-width: 100%; } }
+      max-width: 100%;
+      width: 62%;
+      margin-right: 3vw; } }
 
 .c-primary-header {
   position: relative;
@@ -546,7 +551,17 @@ main {
   padding-bottom: 0.5rem; }
 
 #c-primary-header__wordmark {
-  max-height: 8.4rem; }
+  max-height: 9.45rem;
+  max-width: 100%;
+  max-width: 96vw; }
+  @media only screen and (min-width: 640px) {
+    #c-primary-header__wordmark {
+      max-width: 76vw; } }
+  @media only screen and (max-width: 959px) {
+    #c-primary-header__wordmark {
+      -webkit-transform: scale(0.8);
+          -ms-transform: scale(0.8);
+              transform: scale(0.8); } }
 
 .c-primary-header__nav {
   z-index: 100; }
@@ -597,10 +612,11 @@ main {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   text-transform: uppercase;
   width: 100%;
   -webkit-padding-start: 0px;
@@ -719,8 +735,6 @@ main {
   display: -ms-flexbox;
   display: flex;
   list-style: none;
-  -webkit-padding-start: 0px;
-  padding-start: 0px;
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
@@ -728,7 +742,12 @@ main {
       -ms-flex-line-pack: stretch;
           align-content: stretch;
   font-size: 2.5rem;
-  margin: 0; }
+  margin: 0 0 0 -40px; }
+  @supports (-webkit-padding-start: 0px) or (padding-start: 0px) {
+    .c-bottom-nav__menu {
+      -webkit-padding-start: 0px;
+      padding-start: 0px;
+      margin: 0; } }
 
 .c-bottom-nav__menu--item {
   display: -webkit-box;
@@ -776,7 +795,8 @@ main {
       -webkit-flex: 1 0 auto;
           -ms-flex: 1 0 auto;
               flex: 1 0 auto;
-      right: 0; }
+      right: 0;
+      top: 0; }
       .c-primary-header__social-icons svg {
         fill: #dee2e6;
         height: 3rem;
@@ -835,10 +855,11 @@ footer {
       padding: 80px 0; } }
 
 .c-footer-nav {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #d9dbdd; }
+  color: #d9dbdd;
+  font-weight: 600; }
 
 .c-footer-nav__menu {
   list-style: none;
@@ -882,8 +903,8 @@ footer {
       color: #5fb5f8; }
 
 .c-footer-logo {
-  font-size: 3.90625rem;
-  line-height: 5.078125rem;
+  font-size: 4.39453125rem;
+  line-height: 5.712890625rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #d9dbdd;
   padding: 20px 0;
@@ -892,8 +913,8 @@ footer {
 .c-footer-info {
   border-top: 1px solid #d9dbdd; }
   .c-footer-info p {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+    font-size: 1.44rem;
+    line-height: 2.736rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #d9dbdd; }
 
@@ -917,10 +938,11 @@ footer {
           -ms-flex-pack: center;
               justify-content: center; } }
   .c-footer-social a {
-    font-size: 3.125rem;
-    line-height: 4.375rem;
+    font-size: 3.515625rem;
+    line-height: 4.921875rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #d9dbdd;
+    font-weight: 600;
     padding: 10px;
     text-decoration: none; }
     .c-footer-social a svg {
@@ -939,8 +961,8 @@ footer {
 
 .c-sidebar {
   padding: 10px;
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   -webkit-box-flex: 1;
@@ -949,7 +971,7 @@ footer {
           flex: 1 0 30%;
   min-width: 280px;
   max-width: 450px;
-  margin-top: 55vh; }
+  border-left: 1px solid #dee2e6; }
 
 .c-sidebar--bottom {
   max-width: 100%;
@@ -964,7 +986,15 @@ footer {
   display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+  border-left: none; }
+  .c-sidebar--bottom .widget {
+    min-width: 250px;
+    max-width: 80%; }
+    @media only screen and (min-width: 640px) {
+      .c-sidebar--bottom .widget {
+        max-width: 40%;
+        margin: 0 5%; } }
   .c-sidebar--bottom .c-sidebar-section {
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 30%;
@@ -976,81 +1006,92 @@ footer {
     display: none; }
 
 .c-subscribe-section {
-  height: 28rem; }
+  height: 31.5rem; }
   .c-subscribe-section img {
-    max-height: 22.4rem; }
+    max-height: 25.2rem; }
 
 .c-sidebar-section__title {
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
-  margin: 2.8rem 0 10px;
-  padding: 0 10px; }
-  .c-sidebar-section__title:after {
-    content: "";
-    display: block;
-    position: relative;
-    top: 3px;
-    left: -10px;
-    height: 2px;
-    width: 100%;
-    background: -webkit-linear-gradient(left, #4dadf7 0%, #fcfcfc 100%);
-    background: linear-gradient(to right, #4dadf7 0%, #fcfcfc 100%); }
+  font-weight: 600;
+  margin: 3.15rem 0 10px;
+  padding: 0 10px;
+  border-bottom: 1px solid #dee2e6; }
 
 .c-sidebar-section__item {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+  max-width: 100%;
+  height: 135px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px; }
+  @media only screen and (min-width: 640px) {
+    .c-sidebar-section__item {
+      -webkit-box-align: start;
+      -webkit-align-items: flex-start;
+          -ms-flex-align: start;
+              align-items: flex-start; } }
+
+.c-sidebar-section__item--thumb {
+  height: 70px;
+  margin: 0 20px 0 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 20%;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%; }
+
+.c-sidebar-section__item--info {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 80%;
+      -ms-flex: 1 0 80%;
+          flex: 1 0 80%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-align-content: stretch;
-      -ms-flex-line-pack: stretch;
-          align-content: stretch;
-  max-width: 100%;
-  height: 95px;
-  -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
-  padding: 10px; }
-  .c-sidebar-section__item:nth-of-type(even) {
-    background-color: #f1f3f5; }
-
-.c-sidebar-section--popular .c-sidebar-section__item:nth-of-type(even) {
-  background-color: #fcfcfc; }
-.c-sidebar-section--popular .c-sidebar-section__item:nth-of-type(odd) {
-  background-color: #f1f3f5; }
+          flex-wrap: wrap; }
 
 .c-sidebar-section__item--title {
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 100%;
       -ms-flex: 1 0 100%;
           flex: 1 0 100%;
-  font-size: 1.6rem;
-  line-height: 2.8rem;
-  font-family: "Libre Baskerville", Palatino, Georgia;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   padding: 0;
-  font-weight: 800;
-  margin: 3px 0 -10px 0; }
+  margin: 0 0 -10px 0; }
 
 .c-sidebar-section__item--author {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #0074d9;
+  color: #868e96;
+  font-weight: 600;
   padding: 0 10px 0 0;
   border-right: 1px solid #dee2e6;
   margin-bottom: 0; }
 
 .c-sidebar-section__item--date {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #212529;
+  color: #868e96;
+  font-weight: 600;
   padding: 0 0 0 10px;
   margin-bottom: 0; }
 
@@ -1097,8 +1138,8 @@ footer {
   -webkit-flex: 1 0 50%;
       -ms-flex: 1 0 50%;
           flex: 1 0 50%;
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   padding: 10px; }
@@ -1152,7 +1193,7 @@ footer {
   -webkit-flex: 1 0 50%;
       -ms-flex: 1 0 50%;
           flex: 1 0 50%;
-  height: 5.6rem;
+  height: 6.3rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1179,10 +1220,11 @@ footer {
     padding: 0 5px;
     margin: -5px 0 0; }
   .c-secondary-header__nav--item p, .c-secondary-header__logo p {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+    font-size: 1.44rem;
+    line-height: 2.736rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
+    font-weight: 600;
     text-transform: uppercase;
     padding: 0 5px; }
 
@@ -1203,8 +1245,8 @@ footer {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
   .c-secondary-header__title a {
@@ -1288,10 +1330,11 @@ footer {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   text-transform: uppercase;
   width: 100%;
   -webkit-padding-start: 0px;
@@ -1338,37 +1381,42 @@ footer {
 .u-secondary-header-wrapper .o-underlay {
   top: 60px; }
 
-.c-side-nav__menu li {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #212529;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid #dee2e6;
-  list-style: none;
-  padding: 10px;
-  width: 80%;
-  margin: 0 auto;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  text-align: left; }
-  @media only screen and (max-width: 639px) {
-    .c-side-nav__menu li {
-      height: 5rem;
-      line-height: 5rem;
-      padding: 0 16px;
-      -webkit-box-flex: 0;
-      -webkit-flex: none;
-          -ms-flex: none;
-              flex: none; } }
-  .c-side-nav__menu li a {
+.c-side-nav__menu {
+  height: auto;
+  padding: 20px 0; }
+  .c-side-nav__menu li {
+    min-height: 36px;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
-    text-decoration: none; }
-    .c-side-nav__menu li a:hover {
-      color: #4dadf7; }
+    font-weight: 600;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #dee2e6;
+    list-style: none;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    text-align: left; }
+    @media only screen and (max-width: 639px) {
+      .c-side-nav__menu li {
+        height: 5rem;
+        line-height: 5rem;
+        padding: 0 16px;
+        -webkit-box-flex: 0;
+        -webkit-flex: none;
+            -ms-flex: none;
+                flex: none; } }
+    .c-side-nav__menu li a {
+      color: #212529;
+      text-decoration: none; }
+      .c-side-nav__menu li a:hover {
+        color: #4dadf7; }
 
 .c-secondary-header.is-scrolling {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
@@ -1401,10 +1449,11 @@ footer {
     box-shadow: 0 15px 38px -10px rgba(0, 0, 0, 0.25), 0 15px 12px -10px rgba(0, 0, 0, 0.15); }
 
 .o-button {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #0074d9;
+  font-weight: 600;
   background-color: #fcfcfc;
   border-color: #0074d9; }
   .o-button:hover {
@@ -1412,10 +1461,11 @@ footer {
     color: #fcfcfc; }
 
 .c-form-input {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   margin: 0;
   margin-left: 10px;
   height: 36px;
@@ -1423,10 +1473,11 @@ footer {
   padding: 4px 3px 2px 5px; }
 
 .c-form-button {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   margin: 0;
   margin-left: -1px;
   border: none;
@@ -1474,6 +1525,9 @@ footer {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   width: 100%;
   min-height: 450px;
   -webkit-justify-content: space-around;
@@ -1499,6 +1553,7 @@ footer {
         min-height: 100%; } }
 
 .c-product-headline__headings {
+  max-width: 60%;
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 60%;
       -ms-flex: 1 0 60%;
@@ -1520,10 +1575,11 @@ footer {
   z-index: 2; }
 
 .c-product-button--dark {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #fcfcfc;
+  font-weight: 600;
   background-color: transparent;
   border-color: #fcfcfc;
   margin: 10px auto;
@@ -1632,10 +1688,11 @@ footer {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   letter-spacing: 0.5px;
   width: 100%;
   margin: 10px auto; }
@@ -1645,10 +1702,11 @@ footer {
   .c-search-input input {
     max-width: 100%;
     padding: 10px;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
+    font-weight: 600;
     letter-spacing: 0.5px; }
   .c-search-input label {
     padding: 10px 0; }
@@ -1729,10 +1787,11 @@ footer {
       margin-top: -40px; } }
 
 .c-search-form__input, .c-search-form__button {
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #fcfcfc;
+  font-weight: 600;
   padding: 5px; }
   .c-search-form__input:focus, .c-search-form__button:focus {
     outline: thin;
@@ -1771,7 +1830,7 @@ footer {
 
 /* Base Content Module Styling */
 .o-content-row {
-  margin-top: 2.8rem;
+  margin-top: 3.15rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1791,12 +1850,12 @@ footer {
   clear: both; }
   @media only screen and (min-width: 640px) {
     .o-content-row {
-      margin-bottom: 5.6rem; } }
+      margin-bottom: 6.3rem; } }
   .o-content-row:last-of-type {
     margin-bottom: 0; }
 
 .o-content-row--featured {
-  margin-top: -2.8rem;
+  margin-top: -3.15rem;
   padding-top: 10px; }
 
 @media only screen and (min-width: 640px) {
@@ -1807,8 +1866,8 @@ footer {
     clear: none; } }
 
 .c-row-header {
-  font-size: 3.125rem;
-  line-height: 4.375rem;
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #868e96;
   letter-spacing: 1px;
@@ -1830,7 +1889,7 @@ footer {
     left: 20px; }
   @media only screen and (min-width: 640px) {
     .c-row-header {
-      margin-bottom: 2.8rem; } }
+      margin-bottom: 3.15rem; } }
 
 .c-content-module {
   width: 100%;
@@ -1858,10 +1917,10 @@ footer {
 
 .c-content-image-link {
   max-width: 60%;
-  margin-bottom: 2.8rem;
+  margin-bottom: 3.15rem;
   position: relative;
-  max-width: 28rem;
-  height: 18rem;
+  max-width: 31.5rem;
+  height: 20.25rem;
   overflow: hidden; }
   @media only screen and (min-width: 640px) {
     .c-content-image-link {
@@ -1888,7 +1947,7 @@ footer {
 .c-content-text {
   max-width: 96%;
   text-align: center;
-  line-height: 2.8rem; }
+  line-height: 3.15rem; }
   @media only screen and (min-width: 640px) {
     .c-content-text {
       max-width: 80%; } }
@@ -1896,17 +1955,17 @@ footer {
 .c-content-title {
   display: block;
   max-width: 80%;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.575rem;
   margin-left: 10%;
-  font-size: 3.125rem;
-  line-height: 4.375rem;
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   text-decoration: none; }
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 959px) {
     .c-content-title {
-      font-size: 2.5rem;
-      line-height: 3.5rem;
+      font-size: 2.8125rem;
+      line-height: 3.9375rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; } }
   .c-content-title:after {
@@ -1942,11 +2001,12 @@ footer {
   display: block;
   text-align: center; }
   .c-content-type a {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+    font-size: 1.44rem;
+    line-height: 2.736rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #868e96;
-    padding: 0.7rem;
+    font-weight: 600;
+    padding: 0.7875rem;
     letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
@@ -1980,13 +2040,15 @@ footer {
 .c-content-author {
   display: block;
   letter-spacing: 0.5px;
-  padding: 0.7rem;
-  text-decoration: none; }
+  padding: 0.7875rem;
+  text-decoration: none;
+  height: 6.3rem; }
   .c-content-author a.c-author-link {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
+    font-weight: 600;
     text-decoration: none; }
     .c-content-author a.c-author-link:after {
       content: "";
@@ -2013,10 +2075,12 @@ footer {
         -webkit-transform: scaleX(1);
             -ms-transform: scaleX(1);
                 transform: scaleX(1); }
+    .c-content-author a.c-author-link:after {
+      left: calc(40% + 11px); }
 
 .c-content-description {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529; }
 
@@ -2027,20 +2091,20 @@ footer {
         -ms-flex: 1 0 33%;
             flex: 1 0 33%; }
     .c-content-module--featured .c-content-title {
-      font-size: 3.125rem;
-      line-height: 4.375rem;
+      font-size: 3.515625rem;
+      line-height: 4.921875rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; } }
-    @media only screen and (min-width: 640px) and (max-width: 960px) {
+    @media only screen and (min-width: 640px) and (max-width: 959px) {
       .c-content-module--featured .c-content-title {
-        font-size: 2.5rem;
-        line-height: 3.5rem;
+        font-size: 2.8125rem;
+        line-height: 3.9375rem;
         font-family: "Libre Baskerville", Palatino, Georgia;
         color: #212529; } }
 @media only screen and (min-width: 640px) {
     .c-content-module--featured .c-content-description {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
+      font-size: 1.8rem;
+      line-height: 3.15rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; }
     .c-content-module--featured .c-content-image-link {
@@ -2067,7 +2131,7 @@ footer {
       -webkit-flex: 0 1 100%;
           -ms-flex: 0 1 100%;
               flex: 0 1 100%;
-      margin-bottom: 5.6rem; }
+      margin-bottom: 6.3rem; }
       .c-content-module--featured:nth-of-type(2) .c-content-image-link {
         width: 45%;
         max-width: 600px;
@@ -2082,14 +2146,14 @@ footer {
         max-width: 35%;
         padding-left: 5%; }
       .c-content-module--featured:nth-of-type(2) .c-content-title {
-        font-size: 4.8828125rem;
-        line-height: 6.34765625rem;
+        font-size: 5.4931640625rem;
+        line-height: 7.1411132813rem;
         font-family: "Libre Baskerville", Palatino, Georgia;
         color: #212529; } }
-      @media only screen and (min-width: 640px) and (max-width: 960px) {
+      @media only screen and (min-width: 640px) and (max-width: 959px) {
         .c-content-module--featured:nth-of-type(2) .c-content-title {
-          font-size: 3.125rem;
-          line-height: 4.375rem;
+          font-size: 3.515625rem;
+          line-height: 4.921875rem;
           font-family: "Libre Baskerville", Palatino, Georgia;
           color: #212529; } }
 @media only screen and (min-width: 640px) {
@@ -2105,11 +2169,12 @@ footer {
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 33%;
         -ms-flex: 1 0 33%;
-            flex: 1 0 33%; } }
+            flex: 1 0 33%;
+    max-width: 33%; } }
 
 .c-home-sub__info {
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   text-align: center; }
@@ -2164,7 +2229,7 @@ footer {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  margin: 0 5% 2.8rem 5%;
+  margin: 0 5% 3.15rem 5%;
   min-width: 200px; }
   @media only screen and (min-width: 640px) {
     .books-image {
@@ -2184,15 +2249,15 @@ footer {
   min-width: 280px; }
 
 .books-title {
-  font-size: 3.125rem;
-  line-height: 4.375rem;
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   display: block; }
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 959px) {
     .books-title {
-      font-size: 2.5rem;
-      line-height: 3.5rem;
+      font-size: 2.8125rem;
+      line-height: 3.9375rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; } }
   .books-title:after {
@@ -2225,20 +2290,21 @@ footer {
     text-decoration: none; }
 
 .books-author {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   display: block; }
   .books-author a {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
+    color: #212529;
+    font-weight: 600; }
 
 .books-description {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   padding: 10px 0;
@@ -2275,7 +2341,7 @@ footer {
 .news__wrapper {
   background-color: #f1f3f5;
   width: 100%;
-  padding: 2.8rem;
+  padding: 3.15rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2338,15 +2404,17 @@ footer {
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-          align-items: flex-start; }
+          align-items: flex-start;
+  max-width: calc(100% - 100px); }
 
 .news-title {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   display: block;
-  text-decoration: none; }
+  text-decoration: none;
+  max-width: 100%; }
   .news-title:after {
     content: "";
     position: relative;
@@ -2378,8 +2446,8 @@ footer {
             transform-origin: top left; }
   @media only screen and (min-width: 1280px) {
     .news-title {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
+      font-size: 1.8rem;
+      line-height: 3.15rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529; } }
   .news-title:hover {
@@ -2392,10 +2460,11 @@ footer {
 .news-type {
   display: inline-block; }
   .news-type a {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+    font-size: 1.44rem;
+    line-height: 2.736rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
+    font-weight: 600;
     border-right: 1px solid #dee2e6;
     padding-right: 8px;
     letter-spacing: 0.5px;
@@ -2406,18 +2475,20 @@ footer {
 
 .news-time {
   display: inline-block;
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #868e96;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-decoration: none;
   padding-left: 5px;
   margin: 0; }
 
 .o-content-row--magazine {
-  background: -webkit-linear-gradient(left, #cce3f7 0%, transparent 90%);
-  background: linear-gradient(to right, #cce3f7 0%, transparent 90%); }
+  background: #cce3f7;
+  background: -webkit-linear-gradient(left, #cce3f7 0%, #fcfcfc 90%);
+  background: linear-gradient(to right, #cce3f7 0%, #fcfcfc 90%); }
 
 .c-content-module--magazine {
   display: -webkit-box;
@@ -2444,7 +2515,7 @@ footer {
   -webkit-flex: 0 1 100%;
       -ms-flex: 0 1 100%;
           flex: 0 1 100%;
-  margin: 5.6rem 0; }
+  margin: 6.3rem 0; }
 
 .c-mag-home__image {
   -webkit-box-flex: 1;
@@ -2485,10 +2556,10 @@ footer {
 
 .c-mag-home__issue-title {
   text-align: center;
-  margin-bottom: 2.8rem; }
+  margin-bottom: 3.15rem; }
   .c-mag-home__issue-title a {
-    font-size: 3.90625rem;
-    line-height: 5.078125rem;
+    font-size: 4.39453125rem;
+    line-height: 5.712890625rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #005dae; }
     .c-mag-home__issue-title a:after {
@@ -2523,8 +2594,8 @@ footer {
 .c-mag-home__issue-contents {
   max-width: 80%; }
   .c-mag-home__issue-contents p {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #212529;
     font-style: italic; }
@@ -2540,7 +2611,7 @@ footer {
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-top: 2.8rem; }
+  margin-top: 3.15rem; }
 
 .c-mag-home__button {
   background-color: transparent;
@@ -2548,10 +2619,11 @@ footer {
   @media only screen and (max-width: 639px) {
     .c-mag-home__button {
       text-align: center;
-      font-size: 1.28rem;
-      line-height: 2.432rem;
+      font-size: 1.44rem;
+      line-height: 2.736rem;
       font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #212529; } }
+      color: #212529;
+      font-weight: 600; } }
   .c-mag-home__button:hover a {
     color: #fcfcfc;
     text-decoration: none; }
@@ -2583,25 +2655,27 @@ footer {
   text-align: center; }
 
 .c-article__info--title {
-  font-size: 4.8828125rem;
-  line-height: 6.34765625rem;
+  font-size: 5.4931640625rem;
+  line-height: 7.1411132813rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
-  margin: 2.8rem 0 0; }
+  margin: 3.15rem 0 0; }
 
 .c-article__info--author {
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #0074d9;
+  font-weight: 600;
   margin: 2.5rem 0 -1.2rem 0;
   letter-spacing: 0.5px; }
 
 .c-article__info--date {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #868e96; }
+  color: #868e96;
+  font-weight: 600; }
 
 .c-article__social-icons {
   position: absolute;
@@ -2611,7 +2685,7 @@ footer {
   @media only screen and (max-width: 639px) {
     .c-article__social-icons {
       display: none; } }
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 959px) {
     .c-article__social-icons {
       left: 3.125vw; } }
   .c-article__social-icons:hover {
@@ -2716,14 +2790,23 @@ footer {
   top: 80px; }
 
 .c-article__body {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   padding: 24px 0 20px;
   max-width: 700px; }
   .c-article__body p {
-    margin-bottom: 2.8rem; }
+    font-size: 1.8rem;
+    line-height: 3.15rem;
+    font-family: "Libre Baskerville", Palatino, Georgia;
+    color: #212529;
+    text-align: left;
+    width: 96%;
+    margin-left: 2%;
+    margin-bottom: 3.15rem; }
+    .c-article__body p:first-of-type {
+      initial-letter: 3; }
 
 .c-article__footer {
   font-style: italic;
@@ -2731,14 +2814,14 @@ footer {
   max-width: 700px;
   padding: 0 10px 6.25vw; }
   .c-article__footer p {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+    font-size: 1.44rem;
+    line-height: 2.736rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #212529; }
 
 .o-article--info .heading-1, .o-article--info .heading-2, .o-article--info .heading-3, .o-article--info .heading-4, .o-article--info .c-table-of-contents h3, .c-table-of-contents .o-article--info h3 {
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  line-height: 2.8rem;
+  line-height: 3.15rem;
   font-weight: 600; }
 .o-article--info .heading-1, .o-article--info .heading-2 {
   line-height: 35px; }
@@ -2771,45 +2854,48 @@ footer {
     -webkit-flex: 1 0 100%;
         -ms-flex: 1 0 100%;
             flex: 1 0 100%;
-    margin: 0 auto 2.8rem;
+    margin: 0 auto 3.15rem;
     padding: 10px 10px; }
     .c-archive-module--featured .c-archive-module__image {
       -webkit-box-flex: 1;
       -webkit-flex: 1 0 40%;
           -ms-flex: 1 0 40%;
               flex: 1 0 40%;
-      height: 28rem;
-      max-height: 28rem; }
+      height: 31.5rem;
+      max-height: 31.5rem; }
     .c-archive-module--featured .c-archive-module__info {
       -webkit-box-flex: 1;
       -webkit-flex: 1 0 50%;
           -ms-flex: 1 0 50%;
               flex: 1 0 50%;
-      min-height: 28rem;
+      min-height: 31.5rem;
       border-bottom: none; }
     .c-archive-module--featured .c-archive-module__title {
-      font-size: 2.5rem;
-      line-height: 3.5rem;
+      font-size: 2.8125rem;
+      line-height: 3.9375rem;
       font-family: "Libre Baskerville", Palatino, Georgia;
       color: #212529;
       margin: 10px 0 0; }
     .c-archive-module--featured .c-archive-module__issue {
       margin-top: 5px;
-      font-size: 1.28rem;
-      line-height: 2.432rem;
+      font-size: 1.44rem;
+      line-height: 2.736rem;
       font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #868e96; }
+      color: #868e96;
+      font-weight: 600; }
     .c-archive-module--featured .c-archive-module__author {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
+      font-size: 1.8rem;
+      line-height: 3.15rem;
       font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
       color: #212529;
+      font-weight: 600;
       border-right: 1px solid #dee2e6; }
     .c-archive-module--featured .c-archive-module__type {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
+      font-size: 1.8rem;
+      line-height: 3.15rem;
       font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #868e96; } }
+      color: #868e96;
+      font-weight: 600; } }
 
 .c-archive-list {
   padding: 10px;
@@ -2878,35 +2964,38 @@ footer {
       margin: 10px 20px; } }
 
 .c-archive-module__title {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
+  font-size: 2.8125rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   margin-bottom: -10px; }
 
 .c-author-link {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   padding-right: 10px; }
 
 .c-archive-module .c-author-link {
   border-right: 1px solid #dee2e6; }
 
 .c-archive-module__type {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #868e96;
+  font-weight: 600;
   display: inline;
   padding-left: 10px; }
 
 .c-archive-module__issue {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #868e96;
+  font-weight: 600;
   display: inline;
   -webkit-box-ordinal-group: 0;
   -webkit-order: -1;
@@ -2914,21 +3003,22 @@ footer {
           order: -1; }
 
 .c-archive-module__description {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   margin-top: 0px; }
 
 .pagination {
-  margin: 2.8rem; }
+  margin: 3.15rem; }
   .pagination h2 {
     display: none; }
   .pagination .nav-links {
-    font-size: 2rem;
-    line-height: 3.5rem;
+    font-size: 2.25rem;
+    line-height: 3.9375rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
+    color: #212529;
+    font-weight: 600; }
   .pagination .page-numbers {
     margin-right: 10px; }
     .pagination .page-numbers:after {
@@ -2972,10 +3062,11 @@ footer {
     width: 100%;
     text-align: center; }
   .c-publication-module .c-author-link {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #212529;
+    font-weight: 600;
     border: none;
     margin: 10px 0;
     padding: 0;
@@ -2994,10 +3085,11 @@ footer {
       width: 30%;
       background: #dee2e6; }
   .c-publication-module .c-mag-issue {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
+    color: #868e96;
+    font-weight: 600; }
     .c-publication-module .c-mag-issue:after {
       content: "";
       display: block;
@@ -3008,8 +3100,8 @@ footer {
       width: 80%;
       background: #dee2e6; }
   .c-publication-module .c-content-title {
-    font-size: 2.5rem;
-    line-height: 3.5rem;
+    font-size: 2.8125rem;
+    line-height: 3.9375rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #212529;
     font-style: italic;
@@ -3039,15 +3131,15 @@ footer {
           filter: blur(10px); }
 
 .c-product__title {
-  font-size: 6.103515625rem;
-  line-height: 7.9345703125rem;
+  font-size: 6.8664550781rem;
+  line-height: 8.9263916016rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #fcfcfc;
   font-weight: 400; }
 
 .c-product__author {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
+  font-size: 2.8125rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #fcfcfc;
   font-weight: 400; }
@@ -3071,13 +3163,15 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   z-index: 2;
+  min-width: 300px;
   padding-top: 6.3rem; }
 
 .c-product-button--dark {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #fcfcfc;
+  font-weight: 600;
   background-color: transparent;
   border-color: #fcfcfc;
   margin: 10px auto;
@@ -3168,18 +3262,25 @@ footer {
   margin: 0 10% 0 5%; }
 
 .c-product__pullquote--quote {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Libre Baskerville", Palatino, Georgia;
   color: #212529;
   font-style: italic; }
+  @media only screen and (min-width: 960px) {
+    .c-product__pullquote--quote {
+      font-size: 2.8125rem;
+      line-height: 3.9375rem;
+      font-family: "Libre Baskerville", Palatino, Georgia;
+      color: #212529; } }
 
 .c-product__pullquote--attrib {
   font-weight: 800;
-  font-size: 2rem;
-  line-height: 3.5rem;
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #868e96; }
+  color: #868e96;
+  font-weight: 600; }
 
 .c-product-info {
   max-width: 700px;
@@ -3189,7 +3290,7 @@ footer {
   margin: 56px auto 0;
   text-align: center; }
   .c-table-of-contents h3 {
-    padding-top: 2.8rem; }
+    padding-top: 3.15rem; }
     .c-table-of-contents h3:after {
       content: "";
       display: block;
@@ -3206,13 +3307,24 @@ footer {
       -ms-flex: 1 0 30%;
           flex: 1 0 30%;
   margin: 0 10% 0 5%; }
+  .c-magazine-intro ul.c-product__purchase-info__list {
+    padding: 20px 0;
+    border-bottom: 1px solid #dee2e6; }
+    .c-magazine-intro ul.c-product__purchase-info__list li {
+      text-align: left;
+      font-size: 2.25rem;
+      line-height: 3.9375rem;
+      font-family: "Libre Baskerville", Palatino, Georgia;
+      color: #212529; }
   .c-magazine-intro p {
-    font-size: 2.5rem;
-    line-height: 3.5rem;
+    font-size: 2.25rem;
+    line-height: 3.9375rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
-    color: #212529; }
+    color: #212529;
+    font-style: italic; }
 
 .c-product__author-bio__text {
+  max-width: 55%;
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 50%;
       -ms-flex: 1 0 50%;
@@ -3224,11 +3336,13 @@ footer {
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif; }
 
 .c-product__author-bio__image {
+  float: left;
   margin: 0 0 0 15%;
   -webkit-box-flex: 1;
   -webkit-flex: 1 0 30%;
       -ms-flex: 1 0 30%;
-          flex: 1 0 30%; }
+          flex: 1 0 30%;
+  max-width: 30%; }
   .c-product__author-bio__image img {
     max-width: 300px; }
 
@@ -3245,16 +3359,17 @@ footer {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  min-height: 400px; }
-  .c-product__purchase-info .heading-3 {
-    text-align: center;
-    color: #868e96;
+  padding: 80px 0; }
+  .c-product__purchase-info a {
+    font-size: 2.8125rem;
+    line-height: 3.9375rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    margin: 0;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 100%;
-        -ms-flex: 1 0 100%;
-            flex: 1 0 100%; }
+    color: #0074d9;
+    font-weight: 600;
+    padding: 10px 32px;
+    height: 56px; }
+    .c-product__purchase-info a:hover {
+      text-decoration: none; }
 
 .c-product__pub-info {
   display: -webkit-box;
@@ -3336,6 +3451,8 @@ footer {
             align-items: center; }
     .c-product__purchase-options .c-purchase-option:first-child {
       border-right: 1px solid #dee2e6; }
+    .c-product__purchase-options .c-purchase-option a {
+      margin: 20px auto; }
 
 .c-product-price {
   font-size: 6rem;
@@ -3345,10 +3462,11 @@ footer {
   margin-bottom: 20px; }
 
 .c-product__purchase-info__list {
-  font-size: 1.28rem;
-  line-height: 2.432rem;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #868e96;
+  font-weight: 600;
   list-style: none;
   -webkit-padding-start: 0;
   text-align: center; }
@@ -3417,10 +3535,11 @@ footer {
           flex: 1 0 30%;
   margin-top: 0; }
 .error-page .search-form {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
   color: #212529;
+  font-weight: 600;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -3434,12 +3553,13 @@ footer {
       -ms-flex-align: center;
           align-items: center; }
   .error-page .search-form input {
-    height: 2.8rem; }
+    height: 3.15rem; }
   .error-page .search-form .search-submit {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #0074d9;
+    font-weight: 600;
     background-color: #fcfcfc;
     border-color: #0074d9;
     margin: 0; }
@@ -3455,39 +3575,162 @@ footer {
 .woocommerce-page aside {
   display: none; }
 
-.woocommerce {
-  font-size: 1.6rem;
-  line-height: 2.8rem;
+.woocommerce input, .woocommerce label {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #212529; }
-  .woocommerce input, .woocommerce label {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
-  .woocommerce .button {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+  color: #212529;
+  font-weight: 600; }
+.woocommerce .button {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #0074d9;
+  font-weight: 600;
+  background-color: #fcfcfc;
+  border-color: #0074d9; }
+  .woocommerce .button:hover {
+    background-color: #0074d9;
+    color: #fcfcfc; }
+.woocommerce .woocommerce-breadcrumb, .woocommerce .woocommerce-result-count {
+  display: none; }
+.woocommerce .c-shop-header-wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: -20px 0 0;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0 0 3.15rem; }
+.woocommerce .page-title {
+  font-size: 4.39453125rem;
+  line-height: 5.712890625rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529;
+  display: block;
+  padding: 5px 16px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 33%;
+      -ms-flex: 1 0 33%;
+          flex: 1 0 33%;
+  min-width: 280px;
+  text-align: center;
+  font-style: italic; }
+.woocommerce .c-shop-header__nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 33%;
+      -ms-flex: 1 0 33%;
+          flex: 1 0 33%;
+  min-width: 280px; }
+.woocommerce .c-shop-header__nav__title {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #868e96;
+  font-weight: 600; }
+.woocommerce .c-shop-header__nav__links {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+  .woocommerce .c-shop-header__nav__links a {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #0074d9;
+    font-weight: 600;
     background-color: #fcfcfc;
-    border-color: #0074d9; }
-    .woocommerce .button:hover {
+    border-color: #0074d9;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 40%;
+        -ms-flex: 1 0 40%;
+            flex: 1 0 40%;
+    margin: 10px;
+    text-align: center; }
+    .woocommerce .c-shop-header__nav__links a:hover {
       background-color: #0074d9;
       color: #fcfcfc; }
-  .woocommerce .woocommerce-breadcrumb, .woocommerce .woocommerce-result-count {
-    display: none; }
-  .woocommerce .c-shop-header-wrapper {
+    .woocommerce .c-shop-header__nav__links a:hover {
+      text-decoration: none; }
+.woocommerce .search-form {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 33%;
+      -ms-flex: 1 0 33%;
+          flex: 1 0 33%;
+  min-width: 280px;
+  margin: 20px auto;
+  text-align: center; }
+  .woocommerce .search-form .c-search-form__input {
+    width: 70%;
+    max-width: 200px; }
+  .woocommerce .search-form .c-search-form__button {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #0074d9;
+    font-weight: 600;
+    background-color: #fcfcfc;
+    border-color: #0074d9;
+    border-radius: 0; }
+    .woocommerce .search-form .c-search-form__button:hover {
+      background-color: #0074d9;
+      color: #fcfcfc; }
+    .woocommerce .search-form .c-search-form__button:hover {
+      background-color: #0074d9;
+      color: #fcfcfc; }
+.woocommerce .woocommerce-ordering {
+  background: transparent;
+  font-size: 1.44rem;
+  line-height: 2.736rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #212529;
+  font-weight: 600; }
+.woocommerce ul.products {
+  width: 100%; }
+  .woocommerce ul.products .c-products {
     width: 100%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
     -webkit-flex-wrap: wrap;
         -ms-flex-wrap: wrap;
             flex-wrap: wrap;
@@ -3498,277 +3741,232 @@ footer {
     -webkit-box-align: start;
     -webkit-align-items: flex-start;
         -ms-flex-align: start;
-            align-items: flex-start;
-    margin: -20px 0 0;
-    border-bottom: 1px solid #dee2e6;
-    padding: 0 0 2.8rem; }
-  .woocommerce .page-title {
-    font-size: 3.90625rem;
-    line-height: 5.078125rem;
+            align-items: flex-start; }
+    @media only screen and (max-width: 639px) {
+      .woocommerce ul.products .c-products {
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center; } }
+  .woocommerce ul.products li.product {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 33%;
+        -ms-flex: 1 0 33%;
+            flex: 1 0 33%;
+    max-width: 33%;
+    min-width: 225px;
+    padding: 30px 15px;
+    margin: 0; }
+    @media only screen and (max-width: 639px) {
+      .woocommerce ul.products li.product {
+        max-width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center; }
+        .woocommerce ul.products li.product .c-product__thumb, .woocommerce ul.products li.product .c-product__text {
+          margin: 0 10px; } }
+    .woocommerce ul.products li.product:nth-of-type(even) {
+      background-color: #f1f3f5; }
+    .woocommerce ul.products li.product .c-product__thumb {
+      width: 60%;
+      margin: 0 auto;
+      padding: 0 10px; }
+      .woocommerce ul.products li.product .c-product__thumb img {
+        max-width: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+        min-width: 50px; }
+    .woocommerce ul.products li.product h3 {
+      font-size: 3.515625rem;
+      line-height: 4.921875rem;
+      font-family: "Libre Baskerville", Palatino, Georgia;
+      color: #212529;
+      text-align: center; }
+      .woocommerce ul.products li.product h3:after {
+        content: "";
+        position: relative;
+        display: block;
+        top: -2px;
+        left: 20%;
+        height: 1px;
+        width: 60%;
+        -webkit-transform: scaleX(0);
+            -ms-transform: scaleX(0);
+                transform: scaleX(0);
+        background-color: currentColor;
+        -webkit-transition: -webkit-transform 0.15s ease-in-out;
+        transition: -webkit-transform 0.15s ease-in-out;
+        transition: transform 0.15s ease-in-out;
+        transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+        -webkit-transform-origin: center;
+            -ms-transform-origin: center;
+                transform-origin: center; }
+      .woocommerce ul.products li.product h3:hover {
+        text-decoration: none; }
+        .woocommerce ul.products li.product h3:hover:after {
+          -webkit-transform: scaleX(1);
+              -ms-transform: scaleX(1);
+                  transform: scaleX(1); }
+      @media only screen and (max-width: 639px) {
+        .woocommerce ul.products li.product h3 {
+          font-size: 2.8125rem;
+          line-height: 3.9375rem;
+          font-family: "Libre Baskerville", Palatino, Georgia;
+          color: #212529; } }
+    .woocommerce ul.products li.product .price {
+      text-align: center;
+      font-size: 2.25rem;
+      line-height: 3.9375rem;
+      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+      color: #868e96;
+      font-weight: 600; }
+    .woocommerce ul.products li.product .button {
+      font-size: 1.8rem;
+      line-height: 3.15rem;
+      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+      color: #0074d9;
+      font-weight: 600;
+      background-color: #fcfcfc;
+      border-color: #0074d9;
+      display: block;
+      max-width: 150px;
+      text-align: center;
+      margin: 0 auto; }
+      .woocommerce ul.products li.product .button:hover {
+        background-color: #0074d9;
+        color: #fcfcfc; }
+.woocommerce div.product .images img {
+  max-width: 400px;
+  margin: 0 auto; }
+.woocommerce div.product .product_title {
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529; }
+.woocommerce div.product p.price .woocommerce-Price-amount {
+  font-size: 2.25rem;
+  line-height: 3.9375rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #868e96;
+  font-weight: 600; }
+.woocommerce div.product .quantity {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #212529;
+  font-weight: 600; }
+  .woocommerce div.product .quantity .qty {
+    height: 36px; }
+.woocommerce div.product div[itemprop="description"] {
+  display: none; }
+.woocommerce div.product p.stock {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #212529;
+  font-weight: 600; }
+.woocommerce div.product .single_add_to_cart_button.button.alt {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #0074d9;
+  font-weight: 600;
+  background-color: #fcfcfc;
+  border-color: #0074d9;
+  margin: 0; }
+  .woocommerce div.product .single_add_to_cart_button.button.alt:hover {
+    background-color: #0074d9;
+    color: #fcfcfc; }
+.woocommerce div.product .product_meta {
+  font-size: 1.44rem;
+  line-height: 2.736rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #868e96;
+  font-weight: 600; }
+.woocommerce div.product .product-info p {
+  font-size: 1.44rem;
+  line-height: 2.736rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #868e96;
+  font-weight: 600; }
+.woocommerce div.product .product-description {
+  padding: 20px 0;
+  width: 80%; }
+  .woocommerce div.product .product-description:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: #dee2e6; }
+.woocommerce div.product .wc-tabs-wrapper {
+  max-width: 700px;
+  margin: 0 auto 100px;
+  border-bottom: 1px solid #dee2e6; }
+.woocommerce div.product .woocommerce-Tabs-panel {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .woocommerce div.product .woocommerce-Tabs-panel h2 {
+    display: none; }
+  .woocommerce div.product .woocommerce-Tabs-panel h3 {
+    display: inline-block;
+    font-size: 2.8125rem;
+    line-height: 3.9375rem;
+    font-family: "Libre Baskerville", Palatino, Georgia;
+    color: #212529; }
+    .woocommerce div.product .woocommerce-Tabs-panel h3:after {
+      content: "";
+      display: block;
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background: #868e96; }
+  .woocommerce div.product .woocommerce-Tabs-panel p {
+    text-align: center; }
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active {
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: center; }
+  .woocommerce div.product .woocommerce-tabs ul.tabs li.active:before, .woocommerce div.product .woocommerce-tabs ul.tabs li.active:after {
+    content: none; }
+.woocommerce div.product .woocommerce-tabs ul.tabs .description_tab a {
+  font-size: 3.515625rem;
+  line-height: 4.921875rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529;
+  text-align: center; }
+.woocommerce .related.products {
+  clear: both;
+  padding: 40px 0 20px; }
+  .woocommerce .related.products h2 {
+    font-size: 2.8125rem;
+    line-height: 3.9375rem;
     font-family: "Libre Baskerville", Palatino, Georgia;
     color: #212529;
-    display: block;
-    padding: 5px 16px;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 33%;
-        -ms-flex: 1 0 33%;
-            flex: 1 0 33%;
-    min-width: 280px;
-    text-align: center;
-    font-style: italic; }
-  .woocommerce .c-shop-header__nav {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 33%;
-        -ms-flex: 1 0 33%;
-            flex: 1 0 33%;
-    min-width: 280px; }
-  .woocommerce .c-shop-header__nav__title {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
-  .woocommerce .c-shop-header__nav__links {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap; }
-    .woocommerce .c-shop-header__nav__links a {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #0074d9;
-      background-color: #fcfcfc;
-      border-color: #0074d9;
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 0 40%;
-          -ms-flex: 1 0 40%;
-              flex: 1 0 40%;
-      margin: 10px;
-      text-align: center; }
-      .woocommerce .c-shop-header__nav__links a:hover {
-        background-color: #0074d9;
-        color: #fcfcfc; }
-      .woocommerce .c-shop-header__nav__links a:hover {
-        text-decoration: none; }
-  .woocommerce .search-form {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 33%;
-        -ms-flex: 1 0 33%;
-            flex: 1 0 33%;
-    min-width: 280px;
-    margin: 20px auto;
+    width: 100%;
     text-align: center; }
-    .woocommerce .search-form .c-search-form__input {
-      width: 70%;
-      max-width: 200px; }
-    .woocommerce .search-form .c-search-form__button {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #0074d9;
-      background-color: #fcfcfc;
-      border-color: #0074d9;
-      border-radius: 0; }
-      .woocommerce .search-form .c-search-form__button:hover {
-        background-color: #0074d9;
-        color: #fcfcfc; }
-      .woocommerce .search-form .c-search-form__button:hover {
-        background-color: #0074d9;
-        color: #fcfcfc; }
-  .woocommerce .woocommerce-ordering {
-    background: transparent;
-    font-size: 1.28rem;
-    line-height: 2.432rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
-  .woocommerce ul.products {
-    width: 100%; }
-    .woocommerce ul.products .c-products {
-      width: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-wrap: wrap;
-          -ms-flex-wrap: wrap;
-              flex-wrap: wrap;
-      -webkit-box-pack: justify;
-      -webkit-justify-content: space-between;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
-      -webkit-box-align: start;
-      -webkit-align-items: flex-start;
-          -ms-flex-align: start;
-              align-items: flex-start; }
-      @media only screen and (max-width: 639px) {
-        .woocommerce ul.products .c-products {
-          -webkit-box-pack: center;
-          -webkit-justify-content: center;
-              -ms-flex-pack: center;
-                  justify-content: center; } }
-    .woocommerce ul.products li.product {
-      -webkit-box-flex: 1;
-      -webkit-flex: 1 0 33%;
-          -ms-flex: 1 0 33%;
-              flex: 1 0 33%;
-      max-width: 33%;
-      min-width: 225px;
-      padding: 30px 15px;
-      margin: 0; }
-      @media only screen and (max-width: 639px) {
-        .woocommerce ul.products li.product {
-          max-width: 100%;
-          display: -webkit-box;
-          display: -webkit-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-align: center;
-          -webkit-align-items: center;
-              -ms-flex-align: center;
-                  align-items: center; }
-          .woocommerce ul.products li.product .c-product__thumb, .woocommerce ul.products li.product .c-product__text {
-            margin: 0 10px; } }
-      .woocommerce ul.products li.product:nth-of-type(even) {
-        background-color: #f1f3f5; }
-      .woocommerce ul.products li.product .c-product__thumb {
-        width: 60%;
-        margin: 0 auto;
-        padding: 0 10px; }
-        .woocommerce ul.products li.product .c-product__thumb img {
-          max-width: 100%;
-          -o-object-fit: contain;
-             object-fit: contain;
-          min-width: 50px; }
-      .woocommerce ul.products li.product h3 {
-        font-size: 3.125rem;
-        line-height: 4.375rem;
-        font-family: "Libre Baskerville", Palatino, Georgia;
-        color: #212529;
-        text-align: center; }
-        .woocommerce ul.products li.product h3:after {
-          content: "";
-          position: relative;
-          display: block;
-          top: -2px;
-          left: 20%;
-          height: 1px;
-          width: 60%;
-          -webkit-transform: scaleX(0);
-              -ms-transform: scaleX(0);
-                  transform: scaleX(0);
-          background-color: currentColor;
-          -webkit-transition: -webkit-transform 0.15s ease-in-out;
-          transition: -webkit-transform 0.15s ease-in-out;
-          transition: transform 0.15s ease-in-out;
-          transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
-          -webkit-transform-origin: center;
-              -ms-transform-origin: center;
-                  transform-origin: center; }
-        .woocommerce ul.products li.product h3:hover {
-          text-decoration: none; }
-          .woocommerce ul.products li.product h3:hover:after {
-            -webkit-transform: scaleX(1);
-                -ms-transform: scaleX(1);
-                    transform: scaleX(1); }
-        @media only screen and (max-width: 639px) {
-          .woocommerce ul.products li.product h3 {
-            font-size: 2.5rem;
-            line-height: 3.5rem;
-            font-family: "Libre Baskerville", Palatino, Georgia;
-            color: #212529; } }
-      .woocommerce ul.products li.product .price {
-        text-align: center;
-        font-size: 2rem;
-        line-height: 3.5rem;
-        font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-        color: #868e96; }
-      .woocommerce ul.products li.product .button {
-        font-size: 1.6rem;
-        line-height: 2.8rem;
-        font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-        color: #0074d9;
-        background-color: #fcfcfc;
-        border-color: #0074d9;
-        display: block;
-        max-width: 150px;
-        text-align: center;
-        margin: 0 auto; }
-        .woocommerce ul.products li.product .button:hover {
-          background-color: #0074d9;
-          color: #fcfcfc; }
-  .woocommerce div.product .images img {
-    max-width: 400px;
-    margin: 0 auto; }
-  .woocommerce div.product .product_title {
-    font-size: 3.125rem;
-    line-height: 4.375rem;
-    font-family: "Libre Baskerville", Palatino, Georgia;
-    color: #212529; }
-  .woocommerce div.product p.price .woocommerce-Price-amount {
-    font-size: 2rem;
-    line-height: 3.5rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
-  .woocommerce div.product .quantity {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
-    .woocommerce div.product .quantity .qty {
-      height: 36px; }
-  .woocommerce div.product div[itemprop="description"] {
-    display: none; }
-  .woocommerce div.product p.stock {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
-  .woocommerce div.product .single_add_to_cart_button.button.alt {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #0074d9;
-    background-color: #fcfcfc;
-    border-color: #0074d9;
-    margin: 0; }
-    .woocommerce div.product .single_add_to_cart_button.button.alt:hover {
-      background-color: #0074d9;
-      color: #fcfcfc; }
-  .woocommerce div.product .product_meta {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
-  .woocommerce div.product .product-info p {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96; }
-  .woocommerce div.product .product-description {
-    padding: 20px 0;
-    width: 80%; }
-    .woocommerce div.product .product-description:before {
+    .woocommerce .related.products h2:after {
       content: "";
       display: block;
       position: relative;
@@ -3777,192 +3975,23 @@ footer {
       height: 1px;
       width: 100%;
       background: #dee2e6; }
-  .woocommerce div.product .wc-tabs-wrapper {
-    max-width: 700px;
-    margin: 0 auto 100px;
-    border-bottom: 1px solid #dee2e6; }
-  .woocommerce div.product .woocommerce-Tabs-panel {
-    display: -webkit-box !important;
-    display: -webkit-flex !important;
-    display: -ms-flexbox !important;
-    display: flex !important;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center; }
-    .woocommerce div.product .woocommerce-Tabs-panel h2 {
-      display: none; }
-    .woocommerce div.product .woocommerce-Tabs-panel h3 {
-      display: inline-block;
-      font-size: 2.5rem;
-      line-height: 3.5rem;
-      font-family: "Libre Baskerville", Palatino, Georgia;
-      color: #212529; }
-      .woocommerce div.product .woocommerce-Tabs-panel h3:after {
-        content: "";
-        display: block;
-        position: relative;
-        top: 0;
-        left: 0;
-        height: 1px;
-        width: 100%;
-        background: #868e96; }
-    .woocommerce div.product .woocommerce-Tabs-panel p {
-      text-align: center; }
-  .woocommerce div.product .woocommerce-tabs ul.tabs li.active {
-    border: none;
-    background: transparent;
+  .woocommerce .related.products ul.products {
     width: 100%;
-    text-align: center; }
-    .woocommerce div.product .woocommerce-tabs ul.tabs li.active:before, .woocommerce div.product .woocommerce-tabs ul.tabs li.active:after {
-      content: none; }
-  .woocommerce div.product .woocommerce-tabs ul.tabs .description_tab a {
-    font-size: 3.125rem;
-    line-height: 4.375rem;
-    font-family: "Libre Baskerville", Palatino, Georgia;
-    color: #212529;
-    text-align: center; }
-  .woocommerce .related.products {
-    clear: both;
-    padding: 40px 0 20px; }
-    .woocommerce .related.products h2 {
-      font-size: 2.5rem;
-      line-height: 3.5rem;
-      font-family: "Libre Baskerville", Palatino, Georgia;
-      color: #212529;
-      width: 100%;
-      text-align: center; }
-      .woocommerce .related.products h2:after {
-        content: "";
-        display: block;
-        position: relative;
-        top: 0;
-        left: 0;
-        height: 1px;
-        width: 100%;
-        background: #dee2e6; }
-    .woocommerce .related.products ul.products {
-      width: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-flex-wrap: wrap;
-          -ms-flex-wrap: wrap;
-              flex-wrap: wrap; }
-      .woocommerce .related.products ul.products li.product {
-        -webkit-box-flex: 1;
-        -webkit-flex: 1 0 25%;
-            -ms-flex: 1 0 25%;
-                flex: 1 0 25%;
-        min-width: 150px; }
-        @media only screen and (max-width: 639px) {
-          .woocommerce .related.products ul.products li.product {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-                -ms-flex-direction: column;
-                    flex-direction: column;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-                -ms-flex-align: center;
-                    align-items: center; } }
-        .woocommerce .related.products ul.products li.product .c-product__thumb {
-          height: 120px;
-          margin: 0 auto; }
-          .woocommerce .related.products ul.products li.product .c-product__thumb img {
-            max-height: 100%;
-            min-width: 50px; }
-        @media only screen and (min-width: 640px) {
-          .woocommerce .related.products ul.products li.product .c-product__text h3 {
-            font-size: 1.6rem;
-            line-height: 2.8rem;
-            font-family: "Libre Baskerville", Palatino, Georgia;
-            color: #212529; } }
-        @media only screen and (min-width: 640px) {
-          .woocommerce .related.products ul.products li.product .c-product__text .price {
-            font-size: 1.28rem;
-            line-height: 2.432rem;
-            font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-            color: #868e96;
-            letter-spacing: 0.5px; } }
-        .woocommerce .related.products ul.products li.product .button {
-          padding-top: 5px;
-          width: 80%;
-          max-width: 150px;
-          min-width: 120px; }
-          @media only screen and (min-width: 640px) {
-            .woocommerce .related.products ul.products li.product .button {
-              font-size: 1.28rem;
-              line-height: 2.432rem;
-              font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-              color: #0074d9; }
-              .woocommerce .related.products ul.products li.product .button:hover {
-                font-size: 1.28rem;
-                line-height: 2.432rem;
-                font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-                color: #fcfcfc; } }
-  .woocommerce .woocommerce-message {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Libre Baskerville", Palatino, Georgia;
-    color: #212529;
-    border-top-color: #0074d9;
-    background-color: #f1f3f5; }
-    .woocommerce .woocommerce-message:before {
-      color: #0074d9; }
-    .woocommerce .woocommerce-message a {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #0074d9;
-      background-color: #fcfcfc;
-      border-color: #0074d9;
-      margin: 0 20px; }
-      .woocommerce .woocommerce-message a:hover {
-        background-color: #0074d9;
-        color: #fcfcfc; }
-  .woocommerce .shop_table {
-    background-color: white;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529;
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Libre Baskerville", Palatino, Georgia;
-    color: #212529; }
-    .woocommerce .shop_table th {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #868e96; }
-    .woocommerce .shop_table tr {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #212529; }
-    @media only screen and (max-width: 639px) {
-      .woocommerce .shop_table .actions {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-                flex-direction: column; }
-        .woocommerce .shop_table .actions .coupon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; }
+    .woocommerce .related.products ul.products li.product {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 0 25%;
+          -ms-flex: 1 0 25%;
+              flex: 1 0 25%;
+      min-width: 150px; }
+      @media only screen and (max-width: 639px) {
+        .woocommerce .related.products ul.products li.product {
           display: -webkit-box;
           display: -webkit-flex;
           display: -ms-flexbox;
@@ -3975,96 +4004,213 @@ footer {
           -webkit-box-align: center;
           -webkit-align-items: center;
               -ms-flex-align: center;
-                  align-items: center; }
-          .woocommerce .shop_table .actions .coupon input {
-            margin: 10px 0; } }
-    .woocommerce .shop_table .actions #coupon_code {
-      font-size: 1.28rem;
-      line-height: 2.432rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #212529;
-      width: 80px; }
-    .woocommerce .shop_table .actions .button {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #0074d9;
-      background-color: #fcfcfc;
-      border-color: #0074d9;
-      margin: 0 20px; }
-      .woocommerce .shop_table .actions .button:hover {
-        background-color: #0074d9;
-        color: #fcfcfc; }
-      @media only screen and (max-width: 639px) {
-        .woocommerce .shop_table .actions .button {
-          width: auto !important; } }
-      .woocommerce .shop_table .actions .button:hover {
-        box-shadow: none; }
-  .woocommerce .shipping-calculator-button {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+                  align-items: center; } }
+      .woocommerce .related.products ul.products li.product .c-product__thumb {
+        height: 120px;
+        margin: 0 auto; }
+        .woocommerce .related.products ul.products li.product .c-product__thumb img {
+          max-height: 100%;
+          min-width: 50px; }
+      @media only screen and (min-width: 640px) {
+        .woocommerce .related.products ul.products li.product .c-product__text h3 {
+          font-size: 1.8rem;
+          line-height: 3.15rem;
+          font-family: "Libre Baskerville", Palatino, Georgia;
+          color: #212529; } }
+      @media only screen and (min-width: 640px) {
+        .woocommerce .related.products ul.products li.product .c-product__text .price {
+          font-size: 1.44rem;
+          line-height: 2.736rem;
+          font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+          color: #868e96;
+          font-weight: 600;
+          letter-spacing: 0.5px; } }
+      .woocommerce .related.products ul.products li.product .button {
+        padding-top: 5px;
+        width: 80%;
+        max-width: 150px;
+        min-width: 120px; }
+        @media only screen and (min-width: 640px) {
+          .woocommerce .related.products ul.products li.product .button {
+            font-size: 1.44rem;
+            line-height: 2.736rem;
+            font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+            color: #0074d9;
+            font-weight: 600; }
+            .woocommerce .related.products ul.products li.product .button:hover {
+              font-size: 1.44rem;
+              line-height: 2.736rem;
+              font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+              color: #fcfcfc;
+              font-weight: 600; } }
+.woocommerce .woocommerce-message {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529;
+  border-top-color: #0074d9;
+  background-color: #f1f3f5; }
+  .woocommerce .woocommerce-message:before {
     color: #0074d9; }
-  .woocommerce .variation-Edition {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #212529; }
-    .woocommerce .variation-Edition p {
-      font-size: 1.6rem;
-      line-height: 2.8rem;
-      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-      color: #212529;
-      margin-top: 0; }
-  .woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
-    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #fcfcfc;
-    background-color: #0074d9;
-    border-color: #fcfcfc;
-    margin: 0 20px; }
-    .woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward:hover {
-      background-color: #fcfcfc;
-      color: #0074d9; }
-    .woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward:hover {
-      border-color: #0074d9; }
-  .woocommerce .woocommerce-checkout-payment .button.alt {
-    font-size: 1.6rem;
-    line-height: 2.8rem;
+  .woocommerce .woocommerce-message a {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
     color: #0074d9;
+    font-weight: 600;
     background-color: #fcfcfc;
     border-color: #0074d9;
-    width: 30%;
-    min-width: 300px;
-    height: 72px;
-    font-size: 2.5rem;
-    line-height: 3.5rem;
+    margin: 0 20px; }
+    .woocommerce .woocommerce-message a:hover {
+      background-color: #0074d9;
+      color: #fcfcfc; }
+.woocommerce .shop_table {
+  background-color: white;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #212529;
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #212529; }
+  .woocommerce .shop_table th {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #0074d9; }
-    .woocommerce .woocommerce-checkout-payment .button.alt:hover {
+    color: #868e96;
+    font-weight: 600; }
+  .woocommerce .shop_table tr {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #212529;
+    font-weight: 600; }
+  @media only screen and (max-width: 639px) {
+    .woocommerce .shop_table .actions {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; }
+      .woocommerce .shop_table .actions .coupon {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+            -ms-flex-align: center;
+                align-items: center; }
+        .woocommerce .shop_table .actions .coupon input {
+          margin: 10px 0; } }
+  .woocommerce .shop_table .actions #coupon_code {
+    font-size: 1.44rem;
+    line-height: 2.736rem;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #212529;
+    font-weight: 600;
+    width: 80px; }
+  .woocommerce .shop_table .actions .button {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
+    font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+    color: #0074d9;
+    font-weight: 600;
+    background-color: #fcfcfc;
+    border-color: #0074d9;
+    margin: 0 20px; }
+    .woocommerce .shop_table .actions .button:hover {
       background-color: #0074d9;
       color: #fcfcfc; }
     @media only screen and (max-width: 639px) {
-      .woocommerce .woocommerce-checkout-payment .button.alt {
-        font-size: 2rem;
-        line-height: 3.5rem;
-        font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-        color: #0074d9;
-        min-width: 260px; } }
-  .woocommerce form input.input-text {
-    font-size: 1.28rem;
-    line-height: 2.432rem;
+      .woocommerce .shop_table .actions .button {
+        width: auto !important; } }
+    .woocommerce .shop_table .actions .button:hover {
+      box-shadow: none; }
+.woocommerce .shipping-calculator-button {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #0074d9;
+  font-weight: 600; }
+.woocommerce .variation-Edition {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #212529;
+  font-weight: 600; }
+  .woocommerce .variation-Edition p {
+    font-size: 1.8rem;
+    line-height: 3.15rem;
     font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-    color: #868e96;
-    padding: 5px; }
-  .woocommerce form .form-row.woocommerce-validated input.input-text {
-    border: 3px solid;
+    color: #212529;
+    font-weight: 600;
+    margin-top: 0; }
+.woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #fcfcfc;
+  font-weight: 600;
+  background-color: #0074d9;
+  border-color: #fcfcfc;
+  margin: 0 20px; }
+  .woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward:hover {
+    background-color: #fcfcfc;
+    color: #0074d9; }
+  .woocommerce .wc-proceed-to-checkout .checkout-button.button.alt.wc-forward:hover {
     border-color: #0074d9; }
-  .woocommerce form .woocommerce-invalid input.input-text {
-    border: 3px solid;
-    border-color: #f03e3e; }
+.woocommerce .woocommerce-checkout-payment .button.alt {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #0074d9;
+  font-weight: 600;
+  background-color: #fcfcfc;
+  border-color: #0074d9;
+  width: 30%;
+  min-width: 300px;
+  height: 72px;
+  font-size: 2.8125rem;
+  line-height: 3.9375rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #0074d9;
+  font-weight: 600; }
+  .woocommerce .woocommerce-checkout-payment .button.alt:hover {
+    background-color: #0074d9;
+    color: #fcfcfc; }
+  @media only screen and (max-width: 639px) {
+    .woocommerce .woocommerce-checkout-payment .button.alt {
+      font-size: 2.25rem;
+      line-height: 3.9375rem;
+      font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+      color: #0074d9;
+      font-weight: 600;
+      min-width: 260px; } }
+.woocommerce form input.input-text {
+  font-size: 1.44rem;
+  line-height: 2.736rem;
+  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
+  color: #868e96;
+  font-weight: 600;
+  padding: 5px; }
+.woocommerce form .form-row.woocommerce-validated input.input-text {
+  border: 3px solid;
+  border-color: #0074d9; }
+.woocommerce form .woocommerce-invalid input.input-text {
+  border: 3px solid;
+  border-color: #f03e3e; }
 
 .u-highlight {
   color: #f03e3e !important; }

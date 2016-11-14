@@ -11,11 +11,28 @@
   <div class="c-sidebar-item--magazine">
     <h4 class="c-sidebar-section__title">The Magazine</h4>
     <div class="c-sidebar-item--mag-cover">
-      <a href="">
-        <img src="http://ians-macbook-pro.local:5757/wp-content/uploads/2016/10/Issue_034_cov_0.png">
+      <?php
+
+      $args = array(
+        'numberposts' => 1,
+        'post_type' => 'product',
+        'product_cat' => 'magazine'
+      );
+
+      $magazine = get_posts( $args );
+
+      if($magazine) {
+
+      	foreach($magazine as $post) : setup_postdata( $post ); ?>
+      <a href="<?php the_permalink(); ?>">
+        <img src="<?php the_post_thumbnail_url( 'thumb' ); ?>">
       </a>
     </div>
-    <a href="" class="c-sidebar-item--mag-title"> Issue 34: Summer 2016</a>
+    <a href="<?php the_permalink(); ?>" class="c-sidebar-item--mag-title"><?php the_title(); ?></a>
+  <?php endforeach;
+    wp_reset_postdata();
+    };
+  ?>
   </div>
 
 </div>

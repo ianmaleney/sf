@@ -87,8 +87,10 @@
   margin: 0 10% 0 5%
 
 .c-product__pullquote--quote
-  +type-setting(2, $serif)
+  +type-setting(1, $serif)
   font-style: italic
+  @media #{$min-nine-sixty}
+    +type-setting(2, $serif)
 
 .c-product__pullquote--attrib
   font-weight: 800
@@ -117,10 +119,18 @@
 .c-magazine-intro
   flex: 1 0 30%
   margin: 0 10% 0 5%
+  ul.c-product__purchase-info__list
+    padding: 20px 0
+    border-bottom: 1px solid c('spacer')
+    li
+      text-align: left
+      +type-setting(1, $serif, c('black'))
   p
-    +type-setting(2, $serif, c('black'))
+    +type-setting(1, $serif, c('black'))
+    font-style: italic
 
 .c-product__author-bio__text
+  max-width: 55%
   flex: 1 0 50%
   padding: 0 10% 0 2%
   .heading-4
@@ -129,8 +139,10 @@
     font-family: $sans
 
 .c-product__author-bio__image
+  float: left
   margin: 0 0 0 15%
   flex: 1 0 30%
+  max-width: 30%
   img
     max-width: 300px
 
@@ -138,13 +150,13 @@
   flex-direction: row
   flex-wrap: wrap
   justify-content: center
-  min-height: 400px
-  .heading-3
-    text-align: center
-    color: c('secondary')
-    font-family: $sans
-    margin: 0
-    flex: 1 0 100%
+  padding: 80px 0
+  a
+    +type-setting(2, $sans, c('primary'))
+    padding: 10px 32px
+    height: 56px
+    &:hover
+      text-decoration: none
 
 .c-product__pub-info
   display: flex
@@ -180,6 +192,8 @@
     align-items: center
     &:first-child
       border-right: 1px solid c('spacer')
+    a
+      margin: 20px auto
 
 .c-product-price
   font-size: 6rem

@@ -1,6 +1,7 @@
 // Full Width Headline - Layout & Background
 %fwh
   display: flex
+  flex-wrap: wrap
   width: 100%
   min-height: 450px
   justify-content: space-around
@@ -30,6 +31,7 @@
 
 // Full Width Headline - Type
 %fwh__heading
+  max-width: 60%
   flex: 1 0 60%
   display: flex
   flex-direction: column
@@ -47,6 +49,7 @@
   flex-direction: column
   justify-content: center
   z-index: 2
+  min-width: 300px
 
 .c-product-button--dark
   +o-button(rgba(0,0,0,0), c('white'))

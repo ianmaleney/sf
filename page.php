@@ -18,7 +18,7 @@ get_header(); ?>
 			// End of the loop.
 		endwhile;
 		?>
-		<?php get_sidebar(); ?>
+		<?php get_sidebar('primary'); ?>
 
 	</div><!-- .content-area -->
 </main> <!--.site-main -->

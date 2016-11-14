@@ -11,9 +11,14 @@
 	while ($popular->have_posts()) : $popular->the_post(); ?>
 
   <div class="c-sidebar-section__item">
-    <a href="<?php the_permalink(); ?>" class="c-sidebar-section__item--title"><?php the_title(); ?></a>
-    <p class="c-sidebar-section__item--author"><?php the_field('Author'); ?></p>
-    <p class="c-sidebar-section__item--date"><?php the_date(); ?></p>
+    <a href="<?php the_permalink(); ?>">
+      <img class="c-sidebar-section__item--thumb" src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>">
+    </a>
+    <div class="c-sidebar-section__item--info">
+      <a href="<?php the_permalink(); ?>" class="c-sidebar-section__item--title"><?php the_title(); ?></a>
+      <p class="c-sidebar-section__item--author"><?php the_field('Author'); ?></p>
+      <p class="c-sidebar-section__item--date"><?php the_date('d/m/y'); ?></p>
+    </div>
   </div>
 
 	<?php endwhile; wp_reset_postdata(); ?>
