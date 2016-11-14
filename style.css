@@ -2629,17 +2629,8 @@ footer {
     text-decoration: none; }
 
 .c-article__header {
-  max-width: 80vw; }
-  .c-article__header:after {
-    content: "";
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 2px;
-    left: 0;
-    top: 0;
-    background: -webkit-linear-gradient(left, #4dadf7 0%, #fcfcfc 100%);
-    background: linear-gradient(to right, #4dadf7 0%, #fcfcfc 100%); }
+  max-width: 80vw;
+  border-bottom: 1px solid #dee2e6; }
 
 .c-article__head-image {
   max-width: 100%;
@@ -2661,21 +2652,25 @@ footer {
   color: #212529;
   margin: 3.15rem 0 0; }
 
-.c-article__info--author {
-  font-size: 2.25rem;
+.c-article__info--author .c-author-link {
+  font-size: 2.8125rem;
   line-height: 3.9375rem;
   font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #0074d9;
+  color: #212529;
   font-weight: 600;
-  margin: 2.5rem 0 -1.2rem 0;
-  letter-spacing: 0.5px; }
+  letter-spacing: 0.5px;
+  font-weight: 600; }
 
 .c-article__info--date {
-  font-size: 1.8rem;
-  line-height: 3.15rem;
-  font-family: "Myriad Pro", "Gill Sans MT", "Gill Sans", "Helvetica Neue", "Roboto", Verdana, Arial, sans-serif;
-  color: #868e96;
-  font-weight: 600; }
+  font-size: 1.44rem;
+  line-height: 2.736rem;
+  font-family: "Libre Baskerville", Palatino, Georgia;
+  color: #868e96; }
+  .c-article__info--date a {
+    color: #4dadf7;
+    border-left: 1px solid #dee2e6;
+    margin-left: 10px;
+    padding-left: 10px; }
 
 .c-article__social-icons {
   position: absolute;

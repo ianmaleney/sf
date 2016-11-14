@@ -1,6 +1,7 @@
 .c-article__header
   max-width: 80vw
-  &:after
+  border-bottom: 1px solid c('spacer')
+  //&:after
     content: ''
     position: relative
     display: block
@@ -27,12 +28,18 @@
   margin: $baseline 0 0
 
 .c-article__info--author
-  +type-setting(1, $sans, c('primary'))
-  margin: 2.5rem 0 -1.2rem 0
-  letter-spacing: 0.5px
+  .c-author-link
+    +type-setting(2, $sans, c('black'))
+    letter-spacing: 0.5px
+    font-weight: 600
 
 .c-article__info--date
-  +type-setting(0, $sans, c('secondary'))
+  +type-setting(-1, $serif, c('secondary'))
+  a
+    color: c('accent')
+    border-left: 1px solid c('spacer')
+    margin-left: 10px
+    padding-left: 10px
 
 .c-article__social-icons
   @media #{$max-six-forty}

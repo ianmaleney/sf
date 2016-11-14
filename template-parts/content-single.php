@@ -18,7 +18,7 @@
 					<?php guest_author_link(); ?>
 				</h2>
 				<h3 class="heading-3 c-article__info--date">
-					<?php the_date(); ?> | <?php the_category(', ' ); ?>
+					<?php the_date(); ?><?php the_category(', ' ); ?>
 				</h3>
 			</div>
 		</section>
