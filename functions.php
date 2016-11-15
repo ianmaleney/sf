@@ -118,11 +118,6 @@ function twentysixteen_setup() {
 		'chat',
 	) );
 
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
-	add_editor_style( array( 'css/editor-style.css', twentysixteen_fonts_url() ) );
 
 	// Indicate widget sidebars can use selective refresh in the Customizer.
 	add_theme_support( 'customize-selective-refresh-widgets' );
@@ -184,47 +179,6 @@ function twentysixteen_widgets_init() {
 }
 add_action( 'widgets_init', 'twentysixteen_widgets_init' );
 
-if ( ! function_exists( 'twentysixteen_fonts_url' ) ) :
-/**
- * Register Google fonts for Twenty Sixteen.
- *
- * Create your own twentysixteen_fonts_url() function to override in a child theme.
- *
- * @since Twenty Sixteen 1.0
- *
- * @return string Google fonts URL for the theme.
- */
-function twentysixteen_fonts_url() {
-	$fonts_url = '';
-	$fonts     = array();
-	$subsets   = 'latin,latin-ext';
-
-	/* translators: If there are characters in your language that are not supported by Merriweather, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'twentysixteen' ) ) {
-		$fonts[] = 'Merriweather:400,700,900,400italic,700italic,900italic';
-	}
-
-	/* translators: If there are characters in your language that are not supported by Montserrat, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'twentysixteen' ) ) {
-		$fonts[] = 'Montserrat:400,700';
-	}
-
-	/* translators: If there are characters in your language that are not supported by Inconsolata, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'twentysixteen' ) ) {
-		$fonts[] = 'Inconsolata:400';
-	}
-
-	if ( $fonts ) {
-		$fonts_url = add_query_arg( array(
-			'family' => urlencode( implode( '|', $fonts ) ),
-			'subset' => urlencode( $subsets ),
-		), 'https://fonts.googleapis.com/css' );
-	}
-
-	return $fonts_url;
-}
-endif;
-
 /**
  * Handles JavaScript detection.
  *
@@ -243,11 +197,6 @@ add_action( 'wp_head', 'twentysixteen_javascript_detection', 0 );
  * @since Twenty Sixteen 1.0
  */
 function twentysixteen_scripts() {
-	// Add custom fonts, used in the main stylesheet.
-	//wp_enqueue_style( 'twentysixteen-fonts', twentysixteen_fonts_url(), array(), null );
-
-	// Add Genericons, used in the main stylesheet.
-	//wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.4.1' );
 
 	// Theme stylesheet.
 	wp_enqueue_style( 'twentysixteen-style', get_stylesheet_uri() );
@@ -475,6 +424,31 @@ function my_assets() {
 
 add_action( 'wp_enqueue_scripts', 'my_assets' );
 
+// Defer Custom JS
+function add_defer_attribute($tag, $handle) {
+   // add script handles to the array below
+   $scripts_to_defer = array('theme-scripts', 'twentysixteen-html5', 'twentysixteen-skip-link-focus-fix', 'twentysixteen-script', );
+
+   foreach($scripts_to_defer as $defer_script) {
+      if ($defer_script === $handle) {
+         return str_replace(' src', ' defer="defer" src', $tag);
+      }
+   }
+   return $tag;
+}
+
+add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+
+
+//* Adding DNS Prefetching
+function ism_dns_prefetch() {
+    echo '<meta http-equiv="x-dns-prefetch-control" content="on">
+		<link rel="dns-prefetch" href="//fonts.gstatic.com/" />
+		<link rel="dns-prefetch" href="//pixel.wp.com/" />
+		<link rel="dns-prefetch" href="//stats.wp.com" />';
+}
+add_action('wp_head', 'ism_dns_prefetch', 0);
+
 //
 // Enhanced Search - https://adambalee.com/search-wordpress-by-custom-fields-without-a-plugin/
 //
@@ -684,6 +658,21 @@ function guest_author_bio() {
 }
 
 //
+// Single Category Display Function
+//
+function sf_single_cat(){
+	$categories = get_the_category();
+	$ID = 212;
+	if ( ! empty( $categories ) ) {
+			if ($categories[0]->term_id == $ID) {
+		    echo '<a href="' . esc_url( get_category_link( $categories[1]->term_id ) ) . '">' . esc_html( $categories[1]->name ) . '</a>';
+		} else {
+				echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>';
+		}
+	}
+}
+
+//
 //
 // Cleaning Up the Header
 //
@@ -705,14 +694,25 @@ function cubiq_setup () {
 
 add_action('after_setup_theme', 'cubiq_setup');
 
-// Removing JQuery Migrate
-add_filter( 'wp_default_scripts', 'dequeue_jquery_migrate' );
-
-function dequeue_jquery_migrate( &$scripts){
-	if(!is_admin()){
-		$scripts->remove( 'jquery');
-		$scripts->add( 'jquery', false, array( 'jquery-core' ), '1.12.4' );
+// Removing WP Embed
+function my_deregister_scripts(){
+	if(!is_admin()) {
+	  wp_deregister_script( 'wp-embed' );
 	}
 }
+add_action( 'wp_enqueue_scripts', 'my_deregister_scripts' );
+
+// Removing JQuery Migrate
+function optimize_jquery() {
+if (!is_admin()) {
+wp_deregister_script('jquery');
+wp_deregister_script('jquery-migrate.min');
+wp_deregister_script('comment-reply.min');
+wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, '3.6', true);
+
+wp_enqueue_script('jquery');
+}
+}
+add_action('template_redirect', 'optimize_jquery');
 
 ?>
