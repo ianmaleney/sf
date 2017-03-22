@@ -1,14 +1,17 @@
-$max-six-forty: "only screen and (max-width : 639px)"
-$min-six-forty: "only screen and (min-width : 640px)"
-$min-nine-sixty: "only screen and (min-width : 960px)"
-$max-nine-sixty: "only screen and (max-width : 959px)"
-$min-twelve-eighty: "only screen and (min-width : 1280px)"
+$max-six-forty: "(max-width : 800px)"
+$min-six-forty: "(min-width : 801px)"
+$min-nine-sixty: "(min-width : 960px)"
+$max-nine-sixty: "(max-width : 959px)"
+$min-twelve-eighty: "(min-width : 1280px)"
 
 // Grid
 $body-width: 100vw
 $grid-columns: 16
 $grid-gutter: 10px
 $grid-unit: $body-width / $grid-columns
+
+// Type
+$system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
 
 //
 //
@@ -17,7 +20,7 @@ $grid-unit: $body-width / $grid-columns
 //
 
 // Colour Palette
-$swatch: ( 'white': rgb(252,252,252), 'black': #212529, 'primary': #0074d9, 'accent': #4dadf7, 'secondary': #868e96, 'highlight': #f03e3e, 'background-light': #f1f3f5, 'background-dark': #343a40, 'spacer': #dee2e6 )
+$swatch: ( 'white': rgb(255,255,255), 'black': #212529, 'primary': #0074d9, 'accent': #4dadf7, 'secondary': #868e96, 'highlight': #f03e3e, 'background-light': #f1f3f5, 'background-dark': #343a40, 'spacer': #dee2e6 )
 
 @function swatch-pick($key: 'primary')
   @return map-get($swatch, $key)
@@ -51,8 +54,8 @@ $ms-ratio: $major-third
 $baseline: $ms-base * 1.75
 
 // Fonts
-$serif: 'Libre Baskerville', Palatino, Georgia
-$sans: 'Myriad Pro', 'Gill Sans MT', 'Gill Sans', 'Helvetica Neue', 'Roboto', Verdana, Arial, sans-serif
+$serif: 'Amiri', Palatino, Georgia
+$sans: 'Myriad Pro', 'Gill Sans', $system
 
 // Typographic Scale
 $type-scale: ( -1: ms(-1), 0: ms(0), 1: ms(1), 2: ms(2), 3: ms(3), 4: ms(4), 5: ms(5), 6: ms(6))
@@ -61,7 +64,7 @@ $type-scale: ( -1: ms(-1), 0: ms(0), 1: ms(1), 2: ms(2), 3: ms(3), 4: ms(4), 5: 
   @return map-get($type-scale, $level)
 
 // Baseline Scale
-$line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.75, 1: ms(1) * 1.75, 2: ms(2) * 1.4, 3: ms(3) * 1.4, 4: ms(4) * 1.3, 5: ms(5) * 1.3, 6: ms(6) * 1.3)
+$line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.6, 1: ms(1) * 1.6, 2: ms(2) * 1.4, 3: ms(3) * 1.4, 4: ms(4) * 1.3, 5: ms(5) * 1.3, 6: ms(6) * 1.3)
 
 @function line-height($level)
   @return map-get($line-height, $level)
@@ -74,6 +77,7 @@ $line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.75, 1: ms(1) * 1.75, 2: ms(2) * 1
   color: $color
   @if $family == $sans
     font-weight: 600
+    font-size: type-scale($level - 1)
 
 // Baseline Multiplier
 @mixin baseline($multiplier)
@@ -86,20 +90,29 @@ $line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.75, 1: ms(1) * 1.75, 2: ms(2) * 1
 //
 //
 
-@mixin underlineHover($color: currentColor, $height: 1px, $width: 20%, $transition: 0.15s, $origin: center)
+@mixin underlineHover($color: currentColor, $height: 1px, $width: 20%, $transition: 0.15s, $origin: center center)
   &:after
     content: ''
     position: relative
     display: block
     top: -2px
-    left: (100% - $width) / 2
+    left: 50% - ($width / 2)
     height: $height
     width: $width
-    transform: scaleX(0)
+    transform: scale(0)
     background-color: $color
     transition: transform $transition ease-in-out
     transform-origin: $origin
   &:hover
     text-decoration: none
     &:after
-      transform: scaleX(1)
+      transform: scale(1)
+
+//
+//
+// Background Pattern Mixin
+//
+//
+@mixin pattern($backColor: c('background-light'), $patternColor: ffffff, $opacity: 0.6)
+  background-color: $backColor
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23#{$patternColor}' fill-opacity='#{$opacity}'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")

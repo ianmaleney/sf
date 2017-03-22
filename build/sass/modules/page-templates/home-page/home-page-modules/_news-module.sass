@@ -5,7 +5,7 @@
 		flex: auto
 
 .news__wrapper
-	background-color: c('background-light')
+	+pattern
 	width: 100%
 	padding: $baseline
 	display: flex
@@ -59,9 +59,12 @@
 
 .news-info
 	line-height: 1.8rem
+	width: calc(100% + 80px)
 
 .news-type
 	display: inline-block
+	+type-setting(-1, $sans)
+	margin: 10px 0 0
 	a
 		+type-setting(-1, $sans)
 		border-right: 1px solid c('spacer')
@@ -69,6 +72,7 @@
 		letter-spacing: 0.5px
 		text-decoration: none
 		text-transform: uppercase
+		font-size: 14px
 		&:hover
 			text-decoration: underline
 
@@ -76,7 +80,7 @@
 .news-time
 	display: inline-block
 	+type-setting(-1, $sans, c('secondary'))
-	letter-spacing: 0.5px
 	text-decoration: none
 	padding-left: 5px
 	margin: 0
+	font-size: 14px

@@ -1,0 +1,39 @@
+@media print
+  html
+    width: 8.27in
+  @page
+    margin: 1in 0.5in 0.8in 0.5in
+    orphans: 4
+    widows: 3
+  *
+    background-color: rgba(255,255,255,0)
+  .u-secondary-header-wrapper, .c-secondary-header__nav, .c-woo-cart, .c-side-nav, .c-search-module, footer, .c-article__social-icons, .c-sidebar, .c-article__head-image, .c-secondary-header__title, .c-secondary-header__logo
+    display: none
+  .u-page-wrapper
+    margin-top: 1in
+    width: 7.2in
+    max-width: 7.2in
+    display: block
+    overflow: visible
+  .u-page-wrapper--secondary-header
+    margin: 0 0 0 0 
+  .o-article
+    width: 7.2in
+    display: block
+    overflow: visible
+  .c-article__header, .c-article__body
+    width: 7.2in
+    max-width: 7.2in
+    overflow: visible
+  .c-article__body p
+    margin-bottom: 0
+    display: block
+    width: 7.2in
+    max-width: 7.2in
+    overflow: visible
+    a[href^="http"]:after
+      content: " (" attr(href) ")"
+  .c-article__footer
+    margin-left: 0
+    max-width: 7.2in
+

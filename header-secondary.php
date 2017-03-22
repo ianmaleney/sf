@@ -7,9 +7,9 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
+	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
 	<?php wp_head(); ?>
 </head>
 
@@ -33,7 +33,7 @@
 
         <div class="c-secondary-header__title">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-  					<?php get_template_part( 'svg/inline', 'wordmarktwo' ); ?>
+  					<img id="c-secondary-header__wordmark" src="/wp-content/themes/stingingfly/img/harriet-sf-header.png" alt="The Stinging Fly">
   				</a>
         </div>
 

@@ -50,9 +50,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="summary entry-summary">
 
+		<?php if( get_field('author') ): ?>
     <div class="c-product-page__author">
       <?php the_field('author'); ?>
     </div>
+	<?php endif; ?>
+	<?php if( get_field('issue_volume') ): ?>
+		<div class="c-product-page__issue-volume">
+			<?php the_field('issue_volume'); ?>
+    </div>
+	<?php endif ?>
 
 		<?php
 			/**
@@ -69,8 +76,43 @@ if ( ! defined( 'ABSPATH' ) ) {
 			do_action( 'woocommerce_single_product_summary' );
 		?>
 
-	</div><!-- .summary -->
+		<div class="c-woo-out-of-stock">
+			<p class="c-product-page__patron-description">
+				<?php 
+					global $product;
+					if ( ! $product->is_in_stock() ){ 
+						if ( has_term( 'Archive', 'product_tag' ) ) {
+							echo "This item is out of print. <a href='https://stingingfly.org/product/subscription/'>Become a subscriber</a> to read it on our online archive, and also receive two print issues delivered to your door each year.";
+						} else {
+							echo "This item is out of print. It will soon be available to read on our online archive. <a href='https://stingingfly.org/product/subscription/'>Subscribe here for access</a>, plus two print issues delivered to your door each year";
+						}
+					} ?>
+			</p>
+		</div>
 
+		<?php if ( get_field('patron_description') ) { ?>
+			<p class="c-product-page__patron-description"> <?php the_field('patron_description'); ?> </p>
+		<?php } else { ?>
+
+			<ul class="c-product-page__meta-info">
+				<li>Pages: <?php the_field('pages'); ?></li>
+	      <li>ISBN: <?php the_field('isbn'); ?></li>
+				<li>Published: <?php
+					$date = get_field('date_published', false, false);
+					$date = new DateTime($date);
+					echo $date->format('M Y'); ?></li>
+	    </ul>
+
+			<?php if( get_field('pullquote') ): ?>
+			<div class="c-product-page__pullquote">
+				<p class="c-product-page__pullquote-quote"><?php the_field('pullquote'); ?></p>
+				<p class="c-product-page__pullquote-attrib">– <?php the_field('pullquote_author'); ?></p>
+			</div>
+		<?php endif; 
+
+		} ?>
+		
+	</div><!-- .summary -->
 	<?php
 		/**
 		 * woocommerce_after_single_product_summary hook.

@@ -8,12 +8,6 @@
 	clear: both
 	@media #{$min-six-forty}
 		margin-bottom: $baseline * 2
-	&:last-of-type
-		margin-bottom: 0
-
-.o-content-row--featured
-	margin-top: $baseline * -1
-	padding-top: $grid-gutter
 
 .o-content-row--half-width
 	@media #{$min-six-forty}
@@ -52,8 +46,10 @@
 	flex-direction: column
 	justify-content: flex-start
 	align-items: center
+.c-content-module--basic
 	&:nth-of-type(odd)
 		background-color: c('background-light')
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23ffffff' fill-opacity='0.6'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
 
 .c-content-image-link
 	max-width: 60%
@@ -74,8 +70,6 @@
 			width: 100%
 			height: 100%
 			display: block
-			//background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(252,252,252,0.5) 60%, rgba(252,252,252,1) 100%)
-			//z-index: 20
 
 .c-content-image
 	width: 100%
@@ -94,9 +88,9 @@
 	@media #{$max-nine-sixty}
 		+type-setting(2)
 	display: block
-	max-width: 80%
-	margin-bottom: $baseline / 2
-	margin-left: 10%
+	max-width: 100%
+	margin-bottom: 0
+	margin-left: 0
 	+type-setting(3)
 	text-decoration: none
 	+underlineHover(currentColor, 1px, 80%)
@@ -105,25 +99,34 @@
 		text-decoration: none
 
 
-
 .c-content-type
 	display: block
 	text-align: center
+	margin: 0
 	a
 		+type-setting(-1, $sans, c('secondary'))
+		font-size: 12px
 		padding: $baseline / 4
 		letter-spacing: 1px
 		text-decoration: none
 		text-transform: uppercase
-		display: block
+		display: inline-block
 		+underlineHover
+
+.c-content-module--archive
+	.c-content-type
+		a
+			display: inline-block
+	&:last-of-type
+		justify-content: center
 
 .c-content-author
 	display: block
 	letter-spacing: 0.5px
 	padding: $baseline / 4
 	text-decoration: none
-	height: $baseline * 2
+	height: $baseline * 1.5
+	margin: 0
 	a.c-author-link
 		+type-setting(0, $sans, c('black'))
 		text-decoration: none
@@ -133,53 +136,15 @@
 
 .c-content-description
 	+type-setting(0)
+	margin: 8px 0
 
-.c-content-module--featured
-	@media #{$min-six-forty}
-		flex: 1 0 33%
-		.c-content-title
-			@media #{$max-nine-sixty}
-				+type-setting(2)
-			+type-setting(3)
-		.c-content-description
-			+type-setting
-		.c-content-image-link
-			height: calc((50vw - 190px) / 14 * 9)
-		&:nth-of-type(2)
-			display: flex
-			flex-direction: row
-			justify-content: center
-			align-items: center
-			flex: 0 1 100%
-			margin-bottom: $baseline * 2
-			.c-content-image-link
-				width: 45%
-				max-width: 600px
-				height: calc(((100vw - 30px) / 100 * 45) / 3 * 2)
-				max-height: 400px
-				margin-bottom: 0
-				img
-					height: 100%
-					object-fit: cover
-			.c-content-text
-				max-width: 35%
-				padding-left: 5%
-			.c-content-title
-				@media #{$max-nine-sixty}
-					+type-setting(3)
-				+type-setting(5)
-				&:hover
-					color: c('black')
-					text-decoration: none
-
-.o-content-row--featured > .c-row-header
-	display: none
+.c-content-description--issue
+	+type-setting(-1, $sans, c('secondary'))
 
 .o-content-row--basic > .c-content-module
 	@media #{$min-six-forty}
 		flex: 1 0 33%
 		max-width: 33%
-
 
 .c-home-sub__info
 	+type-setting(1, $serif, c('black'))
@@ -187,3 +152,23 @@
 	a
 		color: c('primary')
 		+underlineHover(currentColor, 1px, 80%)
+
+.c-content-module--archive__button
+	line-height: 3rem
+	font-family: $sans
+	color: c('primary')
+	font-size: 2rem
+	background-color: rgba(255,255,255,0)
+	border-color: c('primary')
+	display: block
+	text-align: center
+	margin: 0 auto
+	border: none
+	border-bottom: 2px solid c('primary')
+	padding: 15px
+	&:hover
+		background-color: c('primary')
+		color: c('white')
+		text-decoration: none
+		cursor: pointer
+		box-shadow: 0 15px 12px -10px rgba(0, 0, 0, 0.15)

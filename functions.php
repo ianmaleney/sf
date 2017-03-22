@@ -420,7 +420,10 @@ function my_register_sidebars() {
 // Enqueueing Custom JS
 function my_assets() {
 	wp_enqueue_script( 'theme-scripts', '/wp-content/themes/stingingfly/js/scripts.js', array( 'jquery' ), '1.0', true );
+	wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDyOSJHHEtVA9dipjBHm8FL7ehWF0BxeM0', array(), '3', true );
+  wp_enqueue_script( 'acf_map_script', '/wp-content/themes/stingingfly/js/acf-maps.js', array( 'jquery' ), '1.0', true );
 }
+
 
 add_action( 'wp_enqueue_scripts', 'my_assets' );
 
@@ -449,48 +452,6 @@ function ism_dns_prefetch() {
 }
 add_action('wp_head', 'ism_dns_prefetch', 0);
 
-//
-// Enhanced Search - https://adambalee.com/search-wordpress-by-custom-fields-without-a-plugin/
-//
-
-function cf_search_join( $join ) {
-    global $wpdb;
-
-    if ( is_search() ) {
-        $join .=' LEFT JOIN '. $wpdb->postmeta . ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
-    }
-
-    return $join;
-}
-
-function cf_search_where( $where ) {
-    global $pagenow, $wpdb;
-
-    if ( is_search() ) {
-        $where = preg_replace(
-            "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-            "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
-    }
-
-    return $where;
-}
-
-function cf_search_distinct( $where ) {
-    global $wpdb;
-
-    if ( is_search() ) {
-        return "DISTINCT";
-    }
-
-    return $where;
-}
-
-/*if ( !is_admin() ) {
-	add_filter('posts_join', 'cf_search_join' );
-	add_filter( 'posts_where', 'cf_search_where' );
-	add_filter( 'posts_distinct', 'cf_search_distinct' );
-}*/
-
 function cat_name() {
 	$categories = get_the_category();
 	if ( ! empty( $categories ) ) {
@@ -513,18 +474,11 @@ function issue_date() {
 }
 
 function archive_image_output() {
-	$magCover = get_field( "magazine_cover" );
+	$magCover = get_field( 'magazine_cover' );
 	$bookCover = get_field('book_cover');
 	$thumb = the_post_thumbnail_url( 'small' );
-		if( $magCover ) {
-			echo $magCover;
-		}
-		elseif( $bookCover ) {
-			echo $bookCover;
-		}
-		else {
-			echo $thumb;
-		}
+
+
 }
 
 
@@ -633,12 +587,26 @@ function child_manage_woocommerce_styles() {
 //
 
 function guest_author_link() {
-	if ( function_exists( 'coauthors_posts_links' ) ) {
-		coauthors_posts_links();
-	} else {
-			the_author_posts_link();
-		}
+	global $post;
+	$terms = wp_get_post_terms( $post->ID, 'product_cat' );
+	
+	if ( $terms ) {
+		foreach ( $terms as $term ) $categories[] = $term->slug;
+		if ( ! in_array( 'product', $categories ) || in_array( 'book', $categories )) {
+			if ( function_exists( 'coauthors_posts_links' ) ) {
+				coauthors_posts_links();
+			} else {
+					the_author_posts_link();
+				}
+			}
+	} elseif ( function_exists( 'coauthors_posts_links' ) ) {
+				coauthors_posts_links();
+		} else {
+				the_author_posts_link();
+			}
 }
+
+	
 
 function guest_author() {
 	if ( function_exists( 'coauthors' ) ) {
@@ -660,16 +628,16 @@ function guest_author_bio() {
 //
 // Single Category Display Function
 //
-function sf_single_cat(){
-	$categories = get_the_category();
-	$ID = 212;
-	if ( ! empty( $categories ) ) {
-			if ($categories[0]->term_id == $ID) {
-		    echo '<a href="' . esc_url( get_category_link( $categories[1]->term_id ) ) . '">' . esc_html( $categories[1]->name ) . '</a>';
-		} else {
-				echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>';
-		}
-	}
+function sf_single_cat($excludedcats = array(212, 1190, 4, 5, 1406, 1, 1268, 1374)){
+
+    $categories = get_the_category();
+    $output = '';
+    foreach($categories as $category) {
+        if ( !in_array($category->cat_ID, $excludedcats) ) {
+            $output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a> ';
+        }
+    }
+    echo trim($output);
 }
 
 //
@@ -714,5 +682,282 @@ wp_enqueue_script('jquery');
 }
 }
 add_action('template_redirect', 'optimize_jquery');
+
+// Registing Google Maps API Key for ACF Maps
+function my_acf_google_map_api( $api ){
+
+	$api['key'] = 'AIzaSyDyOSJHHEtVA9dipjBHm8FL7ehWF0BxeM0';
+
+	return $api;
+
+}
+
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+
+// Woocommerce Edits for Magazine Content
+add_filter( 'woocommerce_product_tabs', 'woo_custom_description_tab', 98 );
+function woo_custom_description_tab( $tabs ) {
+	if (has_term( 'magazine', 'product_cat') ){
+		if (has_term( 'archive', 'product_tag') ){
+			$tabs['description']['callback'] = 'woo_custom_toc';	// Custom description callback
+			$tabs['description']['title'] = 'Table Of Contents';
+		}
+	}
+	return $tabs;
+}
+
+function woo_custom_toc() {
+	get_template_part( 'template-parts/woocommerce/archival-content' );
+}
+
+
+/**
+//
+//
+// Enhanced Search
+//
+//
+*/
+
+if ( !is_admin() ) {
+	add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
+}
+
+/**
+ * This function modifies the main WordPress query to include an array of
+ * post types instead of the default 'post' post type.
+ *
+ * @param object $query  The original query.
+ * @return object $query The amended query.
+ */
+function tgm_io_cpt_search( $query ) {
+
+    if( is_search() || is_author() ) {
+			// Get post types
+			$post_types = get_post_types(array('public' => true, 'exclude_from_search' => false), 'objects');
+			$searchable_types = array();
+			// Add available post types
+			if( $post_types ) {
+				foreach( $post_types as $type) {
+					$searchable_types[] = $type->name;
+				}
+			}
+			$query->set( 'post_type', $searchable_types );
+			$query->set('orderby', 'relevance');
+		}
+    return $query;
+
+}
+
+// Weight Relevancy Towards Posts over Products
+add_filter( 'posts_search_orderby', function( $search_orderby ) {
+    global $wpdb;
+    return "{$wpdb->posts}.post_type LIKE 'post' OR {$wpdb->posts}.post_type LIKE 'review' DESC, {$search_orderby}";
+});
+
+// Weight Relevancy towards Book Pages
+add_filter( 'posts_search_orderby', function( $search_orderby ) {
+    global $wpdb;
+    return "{$wpdb->posts}.post_parent LIKE 149 DESC, {$search_orderby}";
+});
+
+
+/*
+ // ACF Search
+ // [list_searcheable_acf list all the custom fields we want to include in our search query]
+ // @return [array] [list of custom fields]
+*/
+
+// Define list of ACF fields you want to search through - do NOT include taxonomies here
+function list_searcheable_acf(){
+  $list_searcheable_acf = array(
+    // Post Fields
+  	"lede", 
+  	// Podcast Fields
+  	"podcast_series", 
+  	"podcast_episode title",
+  	// Product Fields
+  	"isbn",
+  	"author",
+  	"excerpt", 
+  	"blurb_attribution", 
+  	"pullquote_author",
+  	"issue_volume",
+  	"magazine_description",
+  	// Reviews Fields
+  	"book_author",
+  	"book_publisher",
+  	// Event Fields
+  	"venue");
+  return $list_searcheable_acf;
+}
+
+/*
+ * [advanced_custom_search search that encompasses ACF/advanced custom fields and taxonomies and split expression before request]
+ * @param  [query-part/string]      $search    [the initial "where" part of the search query]
+ * @param  [object]                 $wp_query []
+ * @return [query-part/string]      $search    [the "where" part of the search query as we customized]
+ * modified from gist: https://gist.github.com/FutureMedia/9581381/73afa809f38527d57f4213581eeae6a8e5a1340a
+ * see https://vzurczak.wordpress.com/2013/06/15/extend-the-default-wordpress-search/
+ * credits to Vincent Zurczak for the base query structure/spliting tags section and Sjouw for comment cleanup
+*/
+
+function advanced_custom_search( $search, $wp_query ) {
+  global $wpdb;
+
+  if ( empty( $search )) {
+    return $search;
+  }
+
+  // 1- get search expression
+  $terms_raw = $wp_query->query_vars[ 's' ];
+
+  // 2- check search term for XSS attacks
+  $terms_xss_cleared = strip_tags($terms_raw);
+
+  // 3- do another check for SQL injection, use WP esc_sql
+  $terms = esc_sql($terms_xss_cleared);
+
+  // 4- explode search expression to get search terms
+  $exploded = explode( ' ', $terms );
+  if( $exploded === FALSE || count( $exploded ) == 0 ) {
+    $exploded = array( 0 => $terms );
+  }
+
+  // 5- setup search variable as a string
+  $search = '';
+
+  // 6- get searcheable_acf, a list of advanced custom fields you want to search content in
+  $list_searcheable_acf = list_searcheable_acf();
+
+  // 7- get custom table prefixes, thanks to Brian Douglas @bmdinteractive on github for this improvement
+  $table_prefix = $wpdb->prefix;
+    
+  // 8- search through tags, inject each into SQL query
+  foreach( $exploded as $tag ) {
+    $search .= "
+      AND (
+        (".$table_prefix."posts.post_title LIKE '%$tag%')
+        OR (".$table_prefix."posts.post_content LIKE '%$tag%')
+
+        OR EXISTS (
+          SELECT * FROM ".$table_prefix."postmeta
+          WHERE post_id = ".$table_prefix."posts.ID
+          AND (";
+            // 9b - reads through $list_searcheable_acf array to see which custom post types you want to include in the search string
+            foreach ($list_searcheable_acf as $searcheable_acf) {
+              if ($searcheable_acf == $list_searcheable_acf[0]) {
+                $search .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+              } else {
+                $search .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+              }
+            }
+          $search .= ")
+        )
+        
+        OR EXISTS (
+          SELECT * FROM ".$table_prefix."comments
+          WHERE comment_post_ID = ".$table_prefix."posts.ID
+          AND comment_content LIKE '%$tag%'
+        )
+
+        OR EXISTS (
+          SELECT * FROM ".$table_prefix."terms
+          INNER JOIN ".$table_prefix."term_taxonomy
+          ON ".$table_prefix."term_taxonomy.term_id = ".$table_prefix."terms.term_id
+          INNER JOIN ".$table_prefix."term_relationships
+          ON ".$table_prefix."term_relationships.term_taxonomy_id = ".$table_prefix."term_taxonomy.term_taxonomy_id
+
+          WHERE (
+            taxonomy = 'magazine'
+            OR taxonomy = 'archive'
+            OR taxonomy = 'event'
+            OR taxonomy = 'review'
+            OR taxonomy = 'product'
+            OR taxonomy = 'author'
+          )
+          AND object_id = ".$table_prefix."posts.ID
+          AND ".$table_prefix."terms.name LIKE '%$tag%'
+        )
+      )"; // closes $search
+    } // closes foreach
+  return $search;
+} 
+
+add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
+
+/*************************************
+//
+//
+// Widgetising the Home Page /////////
+//
+//
+*************************************/
+
+/**
+ * Register widgetized areas.
+ *
+ */
+function hp_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => 'Home Featured Image',
+		'id'            => 'home_featured_image',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>'
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Home Page',
+		'id'            => 'home_page',
+		'before_widget' => '<div class="c-hp-widget">',
+    'after_widget'  => '</div>'
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Title Image',
+		'id'            => 'title_image'
+	) );
+
+	
+
+}
+add_action( 'widgets_init', 'hp_widgets_init' );
+
+
+/*************************************
+//
+//
+// Log In Page Styles ////////////////
+//
+//
+*************************************/
+
+function site_login_styles() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/img/sf-logo-drawn-80x80.png);
+            padding-bottom: 30px;
+        }
+
+        body.login {
+				  background-color: #4dadf7;
+  				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); 
+  			}
+
+  			#login #loginform {
+  				box-shadow: 0 10px 20px rgba(0,0,0,0.3)
+  			}
+
+  			#login #nav, #login #backtoblog {
+  				padding: 14px 24px;
+  				background-color: white;
+  				margin-top: 0;
+  				box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  				border-top: 1px solid rgba(200,200,200,0.5);
+  			}
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'site_login_styles' );
 
 ?>

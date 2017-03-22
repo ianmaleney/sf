@@ -3,9 +3,14 @@
     font-family: $sans
     +baseline(1)
     font-weight: 600
+    @media #{$max-six-forty}
+      font-size: 22px
 
   .heading-1,.heading-2
     line-height: 35px
+    @media #{$max-six-forty}
+      line-height: 30px
+      margin: 0 0
     &:after
       content: ''
       display: inline-block

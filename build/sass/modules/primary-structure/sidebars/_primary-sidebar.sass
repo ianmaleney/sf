@@ -1,10 +1,12 @@
 .c-sidebar
-  padding: $grid-gutter
+  padding: 0
   +type-setting(-1, $serif)
   flex: 1 0 30%
   min-width: 280px
-  max-width: 450px
+  max-width: 400px
   border-left: 1px solid c('spacer')
+  @media #{$min-six-forty}
+    padding: $grid-gutter
 
 .c-sidebar--bottom
   max-width: 100%
@@ -15,10 +17,11 @@
   border-left: none
   .widget
     min-width: 250px
-    max-width: 80%
+    max-width: 100%
     @media #{$min-six-forty}
       max-width: 40%
       margin: 0 5%
+      flex: 1 0
 
   .c-sidebar-section
     flex: 1 0 30%
@@ -63,12 +66,13 @@
 .c-sidebar-section__item--title
   flex: 1 0 100%
   +type-setting(1, $sans)
+  line-height: 2.2rem
   padding: 0
   margin: 0 0 -10px 0
 
 .c-sidebar-section__item--author
   +type-setting(-1, $sans, c('secondary'))
-  padding: 0 10px 0 0
+  padding: 0 0
   border-right: 1px solid c('spacer')
   margin-bottom: 0
 
@@ -87,6 +91,9 @@
   .c-sidebar-section__title
     flex: 1 0 100%
 
+.c-sidebar-section__latest-mag
+  align-items: center
+
 .c-sidebar-item--mag-cover
   height: 180px
   max-height: 180px
@@ -101,3 +108,68 @@
   flex: 1 0 50%
   +type-setting(1, $serif, c('black'))
   padding: 10px
+
+.c-sidebar-section__item--description
+  max-width: 80%
+  p
+    +type-setting(0, $sans, c('secondary'))
+    font-weight: 400 !important
+
+.widget_facebook_likebox, .widget_twitter_timeline
+  margin: 65px 15px
+
+.widget_search
+  .widget-title
+    +type-setting(0, $sans)
+    margin: $baseline 0 0
+    padding: 0 $grid-gutter
+    border-bottom: 1px solid c('spacer')
+  .search-form
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 0 10px
+  .screen-reader-text
+    visibility: hidden
+    position: fixed
+  .search-field
+    width: 240px
+    font-family: $sans
+    font-size: 14px
+    height: 28px
+  .search-submit
+    @extend %button
+    +o-button
+    margin-left: 5px
+
+.widget_mc4wp_form_widget
+  .widget-title
+    +type-setting(0, $sans)
+    margin: $baseline 0 0
+    padding: 0 $grid-gutter
+    border-bottom: 1px solid c('spacer')
+
+.mc4wp-form-basic
+  margin: 0 0 0 0 !important
+  margin-top: 0 !important
+
+.mc4wp-form-fields
+  p
+    padding: 0 10px
+    display: flex
+    align-items: center
+    margin: 0 0 0 0
+    label
+      visibility: none
+      position: fixed
+    input[type="email"]
+      display: inline-block
+      width: 240px
+      font-family: $sans
+      font-size: 14px
+      height: 28px
+    input[type="submit"] 
+      display: inline-block
+      @extend %button
+      +o-button
+      margin-left: 5px

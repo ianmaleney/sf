@@ -40,7 +40,12 @@ get_header(); ?>
 				</div>
 				<div class="c-archive-module__info">
 					<a class="c-archive-module__title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-					<p><?php guest_author_link(); ?><a href="<?php cat_name_URL(); ?>" class="c-archive-module__type"><?php cat_name(); ?></a></p>
+					<p><?php
+						if( 'page' === get_post_type() ) {
+							// Do Nothing
+						} else {
+							guest_author_link(); 
+						} ?><a href="<?php cat_name_URL(); ?>" class="c-archive-module__type"><?php cat_name(); ?></a></p>
 					<p class="c-archive-module__issue"><?php issue_date(); ?></p>
 					<p class="c-archive-module__description"><?php the_field('lede'); ?></p>
 				</div>
@@ -71,7 +76,7 @@ get_header(); ?>
 	<?php endif;?>
 
 </div>
-<?php get_template_part( 'template-parts/archive-nav/search' ); ?>
+<?php get_sidebar(); ?>
 
 </div><!-- .content-area -->
 </main><!-- .site-main -->

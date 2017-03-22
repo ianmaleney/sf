@@ -14,7 +14,13 @@
 			<h1 class="heading-1 c-product__title"><?php the_title(); ?></h1>
 			<h2 class="heading-2 c-product__author"><i>by</i> <?php the_field('author'); ?></h2>
 		</div>
-		<div class="c-product-headline__buttons"><a href="#buy" class="o-button c-product-button--dark">Buy</a><a href="#info" class="o-button c-product-button--dark">Info</a><a href="#reviews" class="o-button c-product-button--dark">Reviews</a></div>
+		<div class="c-product-headline__buttons">
+		<?php if (get_field('purchase_link')) : ?>
+			<a href="<?php the_field('purchase_link'); ?>" class="o-button c-product-button--dark">Buy</a>
+		<?php endif; ?>
+		<a href="#info" class="o-button c-product-button--dark">Info</a>
+		<a href="#reviews" class="o-button c-product-button--dark">Reviews</a>
+		<a href="<?php the_field('story_link'); ?>" class="o-button c-product-button--dark c-product-button--read">Read <i>'<?php the_field('story_title'); ?>'</i></a></div>
 	</section>
 
 	<section class="c-product-gloss">
@@ -36,24 +42,24 @@
 	<section class="c-product__author-bio">
 		<div class="c-product__author-bio__image"><img src="<?php the_field('author_photo'); ?>"></div>
 		<div class="c-product__author-bio__text">
-			<h3 class="heading-4">– About <?php the_field('author'); ?> –</h3>
+			<h3 class="heading-4">– About 
+				<?php 
+					$a = get_field('author'); 
+					function seoUrl($string) {
+				    //Lower case everything
+				    $string = strtolower($string);
+				    //Make alphanumeric (removes all other characters)
+				    $string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+				    //Clean up multiple dashes or whitespaces
+				    $string = preg_replace("/[\s-]+/", " ", $string);
+				    //Convert whitespaces and underscore to dash
+				    $string = preg_replace("/[\s_]/", "-", $string);
+				    return $string;
+				}
+				$slug = seoUrl($a);
+				?><a href="<?php $url = home_url('author/' . $slug); echo $url; ?>"><?php the_field('author'); ?></a>
+			–</h3>
 			<p><?php the_field('author_bio'); ?></p>
-		</div>
-	</section>
-
-	<section id="buy" class="c-product__purchase-info">
-		<div class="c-product__purchase-options">
-			<div class="c-purchase-option">
-				<ul class="c-product__purchase-info__list">
-					<li>Published: <?php
-						$date = get_field('date_published');
-						$date2 = date("F Y", strtotime($date));
-						echo $date2; ?></li>
-					<li>Pages: <?php the_field('pages'); ?></li>
-					<li>ISBN: <?php the_field('isbn'); ?></li>
-				</ul>
-				<a href="<?php the_field('purchase_link'); ?>" target="_blank" rel="noopener" class="o-button">Buy Now</a>
-			</div>
 		</div>
 	</section>
 

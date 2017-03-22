@@ -4,7 +4,7 @@
 <?php
 
 $args = array(
-  'numberposts' => 3,
+  'numberposts' => 1,
 	'meta_key' => 'featured_content',
 	'meta_value' => true
 );
@@ -14,8 +14,6 @@ $featuredPosts = get_posts( $args );
 if($featuredPosts) {
 
 	foreach($featuredPosts as $post) : setup_postdata( $post ); ?>
-
-  <!-- This is where the featured content modules are created -->
 
   <div class="c-content-module c-content-module--featured">
     <a href="<?php the_permalink(); ?>" class="c-content-image-link">
@@ -34,5 +32,50 @@ if($featuredPosts) {
 };
 
 ?>
+<div class="c-featured-second-row__wrapper">
+<div class="c-secondary-featured__wrapper">
+<?php
+
+$args = array(
+  'numberposts' => 5,
+	'meta_key' => 'featured_content',
+	'meta_value' => true,
+  'offset' => 1
+);
+
+$secondaryPosts = get_posts( $args );
+
+if($secondaryPosts) {
+
+	foreach($secondaryPosts as $post) : setup_postdata( $post ); ?>
+
+  <div class="c-content-module c-content-module--secondary-featured">
+    <a href="<?php the_permalink(); ?>" class="c-content-image-link">
+      <img class="c-content-image" src="<?php the_post_thumbnail_url( 'large' ); ?>">
+    </a>
+    <div class="c-content-text">
+      <p class="c-content-type"><?php sf_single_cat() ?></p>
+      <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
+      <p class="c-content-author"><i>by</i> <?php guest_author_link(); ?></p>
+      <p class="c-content-description"><?php the_field('lede'); ?></p>
+    </div>
+  </div>
+
+
+  <?php endforeach;
+  wp_reset_postdata();
+};
+
+?>
+</div>
+
+  <?php if ( is_active_sidebar( 'home_featured_image' ) ) : ?>
+    <div class="c-featured-content__big-sub-ad" role="complementary">
+      <a href="/subscribe">
+        <?php dynamic_sidebar( 'home_featured_image' ); ?>
+      </a>
+    </div>
+  <?php endif; ?>
+</div>
 
 </div>

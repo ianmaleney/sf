@@ -34,15 +34,6 @@ get_header( 'shop' ); ?>
 				</div>
 			</div>
 
-      <form role="search" method="get" class="search-form" action="http://ians-macbook-pro.local:5757/">
-				<h2 class="c-shop-header__nav__title">Search:</h2>
-	      <label for="#primary-search">
-	        <input id="primary-search" type="search" placeholder="Search the Shop" class="search-field c-search-form__input visible" value="<?php echo get_search_query() ?>" name="s">
-	        <input type="hidden" value="any" name="post_type" id="post_type">
-	      </label>
-	      <button type="submit" class="search-submit c-search-form__button">Go</button>
-    	</form>
-
 		</div>
 
 		<?php endif; ?>
@@ -52,33 +43,29 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-				<div class="c-product-category" id="magazines">
-	        <h2 class="c-row-header">Magazines</h2>
-					<ul class="c-products c-products--magazines">
+
+				<div class="c-product-category" id="subs">
+					<ul class="c-products c-products--subs">
 						<?php
-						$args = array(
-							'post_type' => 'product',
-							'meta_key'	=> 'date_published',
-							'orderby'   => 'meta_value_num',
-					    'order'     => 'DESC',
-							'posts_per_page' => 6,
-							'paged' => get_query_var( 'paged' ),
-							'product_cat' => 'magazine',
-						);
-
-						$products = new WP_Query( $args );
-
-						if ( $products->have_posts() ) :
-							while ( $products->have_posts() ) : $products->the_post();
-								wc_get_template_part( 'content', 'product' );
-							endwhile;
-							else : echo __( 'No products found' );
+							$args = array(
+								'post_type' => 'product',
+								'meta_key'	=> 'date_published',
+								'orderby'   => 'meta_value_num',
+						    'order'     => 'DESC',
+								'product_cat' => 'subscriptions, bundles, patron',
+								'posts_per_page' => -1
+							);
+							$loop = new WP_Query( $args );
+							if ( $loop->have_posts() ) {
+								while ( $loop->have_posts() ) : $loop->the_post();
+									wc_get_template_part( 'content', 'product' );
+								endwhile;
+							} else {
+								echo __( 'No products found' );
+							}
 							wp_reset_postdata();
-						endif;
-
 						?>
-
-					</ul><!--/.c-products-magazines-->
+					</ul><!--/.c-products-subscriptions-->
 				</div>
 
 				<div class="c-product-category" id="books">
@@ -90,8 +77,7 @@ get_header( 'shop' ); ?>
 								'meta_key'	=> 'date_published',
 								'orderby'   => 'meta_value_num',
 						    'order'     => 'DESC',
-								'posts_per_page' => 6,
-								'paged' => get_query_var( 'paged' ),
+								'posts_per_page' => -1,
 								'tax_query' => array(
 									'relation' => 'AND',
 									array(
@@ -129,9 +115,8 @@ get_header( 'shop' ); ?>
 								'meta_key'	=> 'date_published',
 								'orderby'   => 'meta_value_num',
 						    'order'     => 'DESC',
-								'posts_per_page' => 6,
-								'paged' => get_query_var( 'paged' ),
-								'product_cat' => 'anthologies'
+								'product_cat' => 'anthologies',
+								'posts_per_page' => -1
 							);
 							$loop = new WP_Query( $args );
 							if ( $loop->have_posts() ) {
@@ -144,6 +129,34 @@ get_header( 'shop' ); ?>
 							wp_reset_postdata();
 						?>
 					</ul><!--/.c-products-anthologies-->
+				</div>
+
+				<div class="c-product-category" id="magazines">
+	        <h2 class="c-row-header">Magazines</h2>
+					<ul class="c-products c-products--magazines">
+						<?php
+						$args = array(
+							'post_type' => 'product',
+							'meta_key'	=> 'date_published',
+							'orderby'   => 'meta_value_num',
+					    'order'     => 'DESC',
+							'product_cat' => 'magazine',
+							'posts_per_page' => -1
+						);
+
+						$products = new WP_Query( $args );
+
+						if ( $products->have_posts() ) :
+							while ( $products->have_posts() ) : $products->the_post();
+								wc_get_template_part( 'content', 'product' );
+							endwhile;
+							else : echo __( 'No products found' );
+							wp_reset_postdata();
+						endif;
+
+						?>
+
+					</ul><!--/.c-products-magazines-->
 				</div>
 
 			<?php woocommerce_product_loop_end(); ?>

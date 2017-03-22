@@ -3,6 +3,7 @@
     display: flex
     flex-wrap: wrap
     padding: 50px 0
+    align-items: center
     &:nth-of-type(2n+4)
       background-color: c('background-light')
 
@@ -26,18 +27,26 @@
 
 .c-product-headline__buttons
   +vertical-buttons(30%)
-  padding-top: 6.3rem
+  padding-top: 1.3rem
+  @media #{$min-nine-sixty}
+    padding-top: 6.3rem
 
-.c-product-button--dark
-  +o-button(rgba(0,0,0,0), c('white'))
-  margin: 10px auto
-  max-width: 100px
-  text-align: center
-  &:hover
-    color: c('black')
-    text-decoration: none
+.c-product-button--read
+  height: auto
+  max-width: 250px
 
 .c-product-gloss
+  @media (max-width: 768px)
+    justify-content: center
+    .c-product__image
+      margin: 0 0 0 0
+    .c-product__pullquote
+      padding-top: 30px
+    .c-product__pullquote--quote
+      font-size: 2rem
+      line-height: 2.8rem
+    .c-product__pullquote--attrib
+      text-align: right
   &:after
     content: ''
     display: block
@@ -47,6 +56,9 @@
     width: 70%
     height: 2px
     background-color: c('spacer')
+    @media (max-width: 768px)
+      left: 0
+
 
 .c-product__image
   flex: 1 0 30%
@@ -96,6 +108,10 @@
   font-weight: 800
   +type-setting(1, $sans, c('secondary'))
 
+.c-product__excerpt
+  @media (max-width: 768px)
+    padding: 0 5%
+
 .c-product-info
   max-width: 700px
   margin: 0 auto 0
@@ -130,21 +146,33 @@
     font-style: italic
 
 .c-product__author-bio__text
-  max-width: 55%
   flex: 1 0 50%
-  padding: 0 10% 0 2%
+  padding: 0 5 0 5%
+  @media #{$min-nine-sixty}
+    max-width: 55%
+    padding: 0 10% 0 2%
   .heading-4
     text-align: center
     color: c('secondary')
     font-family: $sans
+    a
+      color: c('secondary')
+    @media #{$max-six-forty}
+      font-size: 2rem
+    @media #{$min-nine-sixty}
+      width: 100%
+  p
+    @media #{$max-nine-sixty}
+      padding: 0 5%
 
 .c-product__author-bio__image
-  float: left
-  margin: 0 0 0 15%
   flex: 1 0 30%
-  max-width: 30%
+  @media #{$min-nine-sixty}
+    max-width: 30%
+    margin: 0 0 0 15%
   img
     max-width: 300px
+    margin: 0 10px
 
 .c-product__purchase-info
   flex-direction: row
@@ -153,6 +181,7 @@
   padding: 80px 0
   a
     +type-setting(2, $sans, c('primary'))
+    line-height: 3.2rem
     padding: 10px 32px
     height: 56px
     &:hover
@@ -215,11 +244,15 @@
   align-items: center
   .heading-3
     color: c('secondary')
+    @media #{$max-nine-sixty}
+      padding: 0 5%
 
 .c-product__blurb
   max-width: 700px
   margin-bottom: 30px
   color: c('background-dark')
+  @media #{$max-nine-sixty}
+    padding: 0 5%
   &:after
     content: ''
     display: block

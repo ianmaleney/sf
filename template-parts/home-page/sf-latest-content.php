@@ -7,7 +7,7 @@ $args = array(
   'numberposts' => 3,
   'orderby' => 'post_date',
 	'order' => 'DESC',
-  'category__not_in' => array(72, 168, 159)
+  'category__not_in' => array(72, 168, 159, 1190, 1250)
 );
 
 $latestPosts = get_posts( $args );

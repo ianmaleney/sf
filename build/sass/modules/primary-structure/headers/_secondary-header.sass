@@ -23,10 +23,11 @@
 .c-secondary-header__nav
   display: flex
   flex: 1 0 15%
+  height: 100%
 
 .c-secondary-header__nav--item
   flex: 1 0 50%
-  height: $baseline * 2
+  height: 100%
   display: flex
   justify-content: space-around
   align-items: center
@@ -47,6 +48,7 @@
     margin: -5px 0 0
   p
     +type-setting(-1, $sans)
+    font-size: 1.2rem
     text-transform: uppercase
     padding: 0 5px
 
@@ -61,12 +63,16 @@
     text-align: center
   @media #{$max-six-forty}
     display: none
+  @media (max-width: 800px)
+    flex: 1 0 25%
+  @media (max-width: 1050px)
+    flex: 1 0 50%
 
 #c-secondary-header__wordmark
-  transform: translateY(40px)
+  transform: translateY(20px)
   transition: transform 0.4s ease-in-out
   width: 30%
-  height: 86px
+  //height: 86px
   min-width: 250px
   margin-left: -5%
 

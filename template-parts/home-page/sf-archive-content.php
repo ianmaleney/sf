@@ -4,8 +4,9 @@
 <?php
 
 $args = array(
-  'numberposts' => 3,
+  'numberposts' => 5,
   'orderby' => 'rand',
+  'category' => 'archive',
   'date_query' => array(
         'before' => date('Y-m-d h:i',time() - 60 * 60 * 24 * 365 ))
 );
@@ -18,15 +19,37 @@ if($archivePosts) {
 
   <!-- This is where the "archive content" modules are created -->
 
-  <div class="c-content-module c-content-module--basic">
-    <a href="<?php the_permalink(); ?>" class="c-content-image-link">
-      <img class="c-content-image" src="<?php the_post_thumbnail_url( 'medium' ); ?>">
-    </a>
+  <div class="c-content-module c-content-module--basic c-content-module--archive">
     <div class="c-content-text">
-      <p class="c-content-type"><?php sf_single_cat(); ?></p>
+      <p class="c-content-type">
+        <?php
+          if ( in_category('locked') ) {
+            if ( current_user_can('read') ) {
+              // Do Nothing
+            } else {
+              echo '&#128274; ';
+            }
+          } else {
+            // Do Nothing
+          }
+        ?>
+        <?php sf_single_cat(); ?>
+      </p>
       <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
       <p class="c-content-author"><i>by</i> <?php guest_author_link(); ?></p>
-      <p class="c-content-description"><?php the_field('lede'); ?></p>
+      <p class="c-content-description
+        <?php
+          if ( in_category('magazine') ) {
+            echo 'c-content-description--issue';
+          }
+        ?>">
+        <?php
+        if ( in_category('magazine') ) {
+          the_field("issue");
+        } else {
+          the_field('lede');
+        }?>
+      </p>
     </div>
   </div>
 
@@ -35,5 +58,9 @@ if($archivePosts) {
 };
 
 ?>
-
+  <div class="c-content-module c-content-module--basic c-content-module--archive">
+    <div class="c-content-text">
+      <a class="c-content-module--archive__button" href="/category/archive">Discover more great writing in our Archives</a>
+    </div>
+  </div>
 </div>

@@ -6,16 +6,16 @@
 
 $args = array(
   'numberposts' => 3,
-  'category_name' => 'event',
+  'post_type' => 'events',
   'orderby' => 'post_date',
-	'order' => 'DESC'
+  'order' => 'DESC'
 );
 
-$newsPosts = get_posts( $args );
+$eventsPosts = get_posts( $args );
 
-if($newsPosts) {
+if($eventsPosts) {
 
-	foreach($newsPosts as $post) : setup_postdata( $post ); ?>
+	foreach($eventsPosts as $post) : setup_postdata( $post ); ?>
 
   <!-- This is where the "news content" modules are created -->
 
@@ -23,7 +23,7 @@ if($newsPosts) {
     <div class="news-text">
       <a href="<?php the_permalink(); ?>" class="news-title"><?php the_title(); ?></a>
       <div class="news-info">
-        <p class="news-type"><?php the_category( ' ' ); ?></p>
+        <p class="news-type"><?php sf_single_cat(); ?></p>
         <p class="news-time"><?php the_date(); ?></p>
       </div>
     </div>

@@ -1,0 +1,122 @@
+/* Featured Content Module Styling */
+.o-content-row--featured
+	margin-top: $baseline * -1
+	padding-top: $grid-gutter
+	overflow: hidden
+
+// Headline Module
+.c-content-module--featured
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	justify-content: center
+	align-items: center
+	flex: 0 1 100%
+	@media #{$min-six-forty}
+		margin-bottom: $baseline * 2
+	.c-content-image-link
+		width: 45%
+		max-width: 600px
+		height: calc(((100vw - 30px) / 100 * 45) / 3 * 2)
+		max-height: 320px
+		margin-bottom: 0
+		min-width: 260px
+		flex: 1 0
+		img
+			height: 100%
+			object-fit: cover
+	.c-content-text
+		max-width: 35%
+		min-width: 300px
+		@media #{$min-six-forty}
+			padding-left: 5%
+	.c-content-description
+		+type-setting
+	.c-content-title
+		@media #{$max-nine-sixty}
+			+type-setting(3)
+		+type-setting(5)
+		&:hover
+			color: c('black')
+			text-decoration: none
+
+.o-content-row--featured > .c-row-header
+	display: none
+
+// Secondary Featured Modules - 5
+.c-featured-second-row__wrapper
+	width: 90%
+	display: flex
+	align-items: flex-start
+	@media #{$max-nine-sixty}
+		flex-wrap: wrap
+
+.c-secondary-featured__wrapper
+	flex: 1 0 66%
+	display: flex
+	flex-wrap: wrap
+	@media #{$min-nine-sixty}
+		max-width: 66%
+	// First Two Modules in Second Row
+	.c-content-module--secondary-featured
+		flex: 1 0 50%
+		&:nth-of-type(even)
+			@media #{$min-six-forty}
+				border-left: 1px solid c('spacer')
+		&:nth-last-of-type(1)
+			@media #{$min-six-forty}
+				border-left: 1px solid c('spacer')
+		.c-content-image-link
+			max-height: 160px
+			margin-bottom: 20px
+		.c-content-text
+			min-width: 96%
+			.c-content-type
+				a
+					padding: 0 0 12px
+					line-height: 1.44rem
+			.c-content-title
+				max-width: 96%
+				margin-left: 2%
+				+type-setting(2)
+	// Final Three Modules in Second Row
+	.c-content-module--secondary-featured:nth-of-type(3),
+	.c-content-module--secondary-featured:nth-of-type(4),
+	.c-content-module--secondary-featured:nth-of-type(5)
+		flex: 1 0 33%
+		margin-top: 15px
+		border-top: 1px solid c('spacer')
+		@media #{$max-six-forty}
+			display: none
+		.c-content-image-link
+			display: none
+		.c-content-description
+			font-size: 1.6rem
+			line-height: 2.2rem
+
+
+.c-featured-content__big-sub-ad
+	@media #{$min-nine-sixty}
+		flex: 1 0 33%
+		border-left: 1px solid c('spacer')
+		margin-left: 15px
+		height: 100%
+		img
+			width: 80%
+			height: auto
+			object-fit: contain
+			margin-left: 10%
+			margin-top: 30px
+	@media #{$max-nine-sixty}
+		min-width: 320px
+		flex: 1 0 100%
+		justify-content: center
+		div:nth-of-type(1)
+			.jetpack-image-container
+				display: flex
+				justify-content: center
+				img
+					width: 300px
+					height: auto
+		div:nth-of-type(2)
+			display: none

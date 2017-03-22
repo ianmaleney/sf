@@ -21,11 +21,10 @@ get_header(); ?>
 					<div class="page-content">
 						<p><?php _e( 'Hmm... Looks like there&rsquo;s been a mixup. Maybe try a search?', 'twentysixteen' ); ?></p>
 
-						<?php get_search_form(); ?>
-
-						<div class="error-image">
-							<?php get_template_part('svg/inline', 'logo') ?>
+						<div class="c-archive-page-search"> 
+							<?php get_template_part('searchform'); ?>
 						</div>
+
 					</div><!-- .page-content -->
 				</section><!-- .error-404 -->
 

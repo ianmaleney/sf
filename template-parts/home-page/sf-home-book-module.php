@@ -5,6 +5,7 @@
 
 $args = array(
 	'post_type' => 'product',
+  'product_cat' => 'book',
   'posts_per_page' => 1,
   'meta_key'			=> 'date_published',
   'orderby'        => 'meta_value_num',

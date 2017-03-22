@@ -3,19 +3,24 @@
 	flex-wrap: wrap
 	align-content: center
 	margin-bottom: 0
+	@media #{$max-six-forty}
+		padding-top: 0
 
 .books-image
 	flex: 1 0 33%
 	flex-grow: 1
-	margin: 0 5% $baseline 5%
-	min-width: 200px
+	margin: 0 5%
+	min-width: 150px
 	@media #{$min-six-forty}
 		max-width: 100%
 	img
 		display: block
 		max-width: 100%
-		max-height: 350px
-		margin: 0 auto
+		max-height: 300px
+		margin: 0 auto 20px
+		@media #{$min-six-forty}
+			max-height: 350px
+			margin: 0 auto 0
 
 
 .books-info
@@ -43,6 +48,7 @@
 	+type-setting(-1)
 	padding: $grid-gutter 0
 	border-bottom: 1px solid c('spacer')
+	line-height: 2rem
 
 .books-extra
 	flex: 1 0 100%

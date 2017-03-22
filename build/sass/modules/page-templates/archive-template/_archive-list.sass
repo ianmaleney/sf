@@ -6,7 +6,7 @@
 
 .c-archive-module--featured
   @media #{$min-six-forty}
-    background: c('background-light')
+    +pattern
     flex: 1 0 100%
     margin: 0 auto $baseline
     padding: $grid-gutter $grid-gutter
@@ -66,6 +66,9 @@
   @media #{$min-six-forty}
     flex: 1 0 70%
     margin: $grid-gutter 20px
+  a:last-child
+    +type-setting(0, $sans, c('secondary'))
+    display: inline
 
 .c-archive-module__title
   +type-setting(2, $serif)

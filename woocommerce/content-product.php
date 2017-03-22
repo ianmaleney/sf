@@ -45,6 +45,12 @@ if ( empty( $product ) || ! $product->is_visible() ) {
   	do_action( 'woocommerce_before_shop_loop_item_title' );?>
   </div>
   <div class="c-product__text">
+		<?php if ( get_field('author') ) : ?>
+			<p class="c-product-loop__author"><?php the_field('author'); ?></p>
+		<?php endif; ?>
+		<?php if ( get_field('issue_volume') ) : ?>
+			<p class="c-product-loop__issue-volume"><?php the_field('issue_volume'); ?></p>
+		<?php endif; ?>
     <?php
 
   	/**

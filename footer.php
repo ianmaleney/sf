@@ -11,7 +11,14 @@
 ?>
 
 		</div><!-- .site-content -->
-
+		<?php
+			$count = WC()->cart->get_cart_contents_count();
+			if ( $count > 0 ) { ?>
+		<div class="c-woo-cart">
+			<h3><?php get_template_part( 'svg/icons/inline', 'cart' ); ?>:</h3>
+			<a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php _e( 'View your shopping cart' ); ?>"><?php echo sprintf ( _n( '%d item', '%d items', WC()->cart->get_cart_contents_count() ), WC()->cart->get_cart_contents_count() ); ?> - <?php echo WC()->cart->get_cart_total(); ?></a>
+		</div>
+		<?php } ?>
 		<footer>
       <div id="colophon" class="site-footer u-footer-wrapper" role="contentinfo">
         <nav class="c-footer-nav main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">

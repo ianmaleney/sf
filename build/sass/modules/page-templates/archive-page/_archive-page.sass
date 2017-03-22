@@ -1,0 +1,87 @@
+#refresh
+	.c-content-module--archive-page
+		flex: 1 0 25%
+		max-width: 25%
+		width: 25%
+		.c-content-title
+			+type-setting(2)
+
+#reviews
+	.c-content-module--archive-page
+		flex: 1 0 25%
+		max-width: 25%
+		width: 25%
+		.c-content-image-link
+			margin-bottom: 1rem
+		.c-content-image
+			object-fit: contain
+		.c-content-text
+			max-width: 100%
+		.c-content-title
+			font-size: 2rem
+			max-width: 100%
+			margin-left: 0
+			line-height: 3rem
+			font-style: italic
+		.c-content-book-author
+			margin: 15px 0 0
+		.c-content-author
+			+type-setting(0, $sans)
+			width: calc(100% + 30px)
+			margin-left: -15px
+			padding: 15px 0 0 0
+		.c-author-link
+			&:after
+				width: 0
+			&:hover
+				color: c('accent')
+				&:after
+					width: 0
+
+.c-archive-page-search
+	width: 60%
+	margin: 30px auto
+	.search-form
+		width: 100%
+		display: flex
+		justify-content: space-between
+		label
+			flex: 1 0 80%
+	.screen-reader-text
+		position: fixed
+		top: -100px
+		left: -100px
+		visibility: none
+		width: 0
+		height: 0
+	.search-field
+		width: 90%
+		border: none
+		border-bottom: 1px solid c('primary')
+		font-size: 1.88rem
+		font-family: $sans
+		padding: 8px 0
+		&:focus
+			outline: none
+			border-bottom: 1px solid c('highlight')
+	.search-submit
+		border: none
+		border-bottom: 1px solid c('primary')
+		color: c('primary')
+		border-radius: 0 0 0 0
+		background-color: rgba(255,255,255,0)
+		font-size: 1.88rem
+		font-family: $sans
+		width: 18%
+		padding: 8px 0
+		flex: 1 0 20%
+		&:hover
+			cursor: pointer
+			background-color: c('primary')
+			color: c('white')
+
+.c-archive-page-info
+	max-width: 960px
+	margin: 0 auto
+	.heading-1
+		text-align: center

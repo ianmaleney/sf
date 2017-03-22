@@ -8,23 +8,26 @@
   @media #{$min-six-forty}
     width: 76vw
 
-.c-primary-header__sub-image
+.c-primary-header__sub-ad
   display: none
-  @media #{$min-six-forty}
+  @media (min-width: 1179px)
     position: absolute
     display: block
-    top: -25px
+    top: -10px
     left: 0
     max-width: 230px
+    max-width: 20%
     img
       width: 100%
       height: 100%
-      object-fit: cover
+      object-fit: contain
 
 
 .c-primary-header__title
   flex: 1 0 100%
   padding-bottom: 0.5rem
+  display: flex
+  justify-content: center
 
 #c-primary-header__wordmark
   max-height: $baseline * 3
@@ -88,6 +91,10 @@
     align-items: auto
     flex: 1 0 100%
     justify-content: center
+  @media #{$min-nine-sixty}
+    font-size: 1.4rem
+  @media #{$max-nine-sixty}
+    font-size: 1.3rem
 
 .side-nav--visible
   pointer-events: auto
@@ -109,12 +116,15 @@
     font-family: $sans
     font-weight: 600
     letter-spacing: 0.5px
+    font-size: 1.4rem
     @media #{$max-six-forty}
       height: 5rem
       line-height: 5rem
       padding: 0 16px
       flex: none
-      text-align: left
+      text-align: left  
+    @media #{$max-nine-sixty}
+      font-size: 1.3rem
     border-bottom: 1px solid c('spacer')
     list-style: none
     padding: 10px 10px 0
@@ -129,8 +139,6 @@
     &:last-child
       @media #{$max-six-forty}
         display: none
-
-
     a
       color: c('black')
       text-decoration: none
@@ -164,17 +172,27 @@
 .c-bottom-nav__menu--item
   display: flex
   flex-flow: column nowrap
-  justify-content: center
+  justify-content: space-between
   align-items: center
   width: 25%
   border-right: 1px solid c('spacer')
-  padding: 1.5rem
+  padding: 0.7rem 1.5rem
+  &:last-of-type
+    span
+      margin-top: 13px
   svg
     fill: c('black')
     height: 3rem
     &:hover
       cursor: pointer
       fill: c('accent')
+  .c-burger
+    margin-top: 15px
+  span
+    font-size: 10px
+    text-transform: uppercase
+    letter-spacing: 1px
+    margin-top: -20px
   &:hover
     .c-burger, .c-burger:before, .c-burger:after
       cursor: pointer
@@ -182,6 +200,9 @@
   &:last-child
     border-right: none
 
+.c-bottom-nav__menu--item.search-item
+  svg
+    margin-top: -5px
 
 .c-primary-header__social-icons
   display: none
@@ -190,9 +211,20 @@
     opacity: 1
     pointer-events: auto
     display: flex
+    flex-direction: column
     flex: 1 0 auto
     right: 0
     top: 0
+    .c-log-in
+      padding: 8px 0
+      text-align: right
+      a
+        font-size: 12px
+        font-family: $system
+        color: c('secondary')
+        font-weight: 600
+        &:hover
+          color: c('accent')
     svg
       fill: c('spacer')
       height: 3rem

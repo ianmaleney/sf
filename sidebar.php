@@ -5,5 +5,5 @@
 ?>
 
 	<aside id="sidebar-primary" class="sidebar widget-area c-sidebar" role="complementary">
-		<?php dynamic_sidebar( 'primary' ); ?>
+		<?php dynamic_sidebar(); ?>
 	</aside>

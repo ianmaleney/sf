@@ -5,8 +5,11 @@
 
 $args = array(
   'numberposts' => 1,
-  'post_type' => 'product',
-  'product_cat' => 'magazine'
+  'post_type'   => 'product',
+  'product_cat' => 'magazine',
+  'meta_key'		=> 'date_published',
+  'orderby'     => 'meta_value_num',
+  'order'       => 'DESC',
 );
 
 $magazine = get_posts( $args );
@@ -26,8 +29,7 @@ if($magazine) {
     </div>
 
     <div class="books-info c-home-sub__info">
-      <a href="<?php $subs = get_page_by_title( 'Subscribe' );
-      $subLink = get_page_uri($subs); echo $subLink ?>" target="_blank" rel="noopener">Get <i>The Stinging Fly</i> delivered to your door, three times a year — Subscribe Now!</a>
+      <a href="<?php $url = home_url('/product/subscription-one-year-three-issues/'); echo $url; ?>" target="_blank" rel="noopener">Subscribe now and receive access to the <i>Stinging Fly</i> online archive.</a>
     </div>
 
   </div>

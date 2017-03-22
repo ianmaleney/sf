@@ -9,7 +9,7 @@
     @extend %button
     +o-button
 
-  .woocommerce-breadcrumb, .woocommerce-result-count
+  .woocommerce-breadcrumb, .woocommerce-result-count, .woocommerce-pagination
     display: none
 
   .c-shop-header-wrapper
@@ -17,8 +17,8 @@
     display: flex
     flex-direction: row
     flex-wrap: wrap
-    justify-content: space-between
-    align-items: flex-start
+    justify-content: space-around
+    align-items: center
     margin: -20px 0 0
     border-bottom: 1px solid c('spacer')
     padding: 0 0 $baseline
@@ -32,6 +32,7 @@
     min-width: 280px
     text-align: center
     font-style: italic
+    margin: 0 0
 
   .c-shop-header__nav
     display: flex
@@ -56,24 +57,6 @@
       &:hover
         text-decoration: none
 
-
-  .search-form
-    //display: inline-block
-    flex: 1 0 33%
-    min-width: 280px
-    margin: 20px auto
-    text-align: center
-    .c-search-form__input
-      width: 70%
-      max-width: 200px
-    .c-search-form__button
-      @extend %button
-      +o-button
-      border-radius: 0
-      &:hover
-        background-color: c('primary')
-        color: c('white')
-
   .woocommerce-ordering
     background: rgba(0,0,0,0)
     +type-setting(-1, $sans, c('black'))
@@ -84,42 +67,89 @@
       width: 100%
       display: flex
       flex-wrap: wrap
-      justify-content: space-between
-      align-items: flex-start
+      justify-content: center
+      align-items: stretch
       @media #{$max-six-forty}
         justify-content: center
     li.product
-      flex: 1 0 33%
-      max-width: 33%
+      flex: 1 0 30%
+      max-width: 30%
       min-width: 225px
-      padding: 30px 15px
-      margin: 0
+      margin: 30px 15px
+      padding: 0
+      display: flex
+      align-items: center
+      flex-wrap: wrap
       @media #{$max-six-forty}
         max-width: 100%
         display: flex
         align-items: center
         .c-product__thumb, .c-product__text
           margin: 0 10px
-      &:nth-of-type(even)
-        background-color: c('background-light')
+      &:nth-of-type(3n + 2)
+        @media #{$min-twelve-eighty}
+          border-left: 1px solid c('spacer')
+          border-right: 1px solid c('spacer')
+          padding-right: 15px
+      &:last-of-type
+        border-right: none
       .c-product__thumb
-        width: 60%
+        width: 40%
         margin: 0 auto
         padding: 0 10px
+        @media #{$min-six-forty}
+          width: 50%
         img
           max-width: 100%
           object-fit: contain
           min-width: 50px
+          max-width: 150px
+          margin: 0 auto
+          @media #{$max-six-forty}
+            max-height: 140px
 
-      h3
-        +type-setting(3, $serif, c('black'))
+
+      .c-product__text
+        width: 60%
+        margin: 0 auto
+        @media #{$min-six-forty}
+          width: 50%
+      .c-product-loop__issue-volume
+        +type-setting(0, $sans, c('secondary'))
+        margin: 0 0
         text-align: center
-        +underlineHover(currentColor, 1px, 60%)
+        a
+          color: c('secondary')
+      .c-product-loop__author
+        text-align: center
+        +type-setting(0, $sans, c('black'))
+        margin: 0 0 5px
+        a
+          color: c('black')
+        &:after
+          content: ''
+          width: 20%
+          height: 1px
+          position: relative
+          display: block
+          top: 1px
+          left: 40%
+          background-color: c('spacer')
+      h3
+        +type-setting(1, $sans, c('black'))
+        line-height: 2.3rem
+        text-align: center
+        padding: 0 0
+        font-weight: 400
         @media #{$max-six-forty}
-          +type-setting(2, $serif, c('black'))
+          +type-setting(1, $sans, c('black'))
+          line-height: 2.6rem
+        a
+          color: c('black')
       .price
         text-align: center
-        +type-setting(1, $sans, c('secondary'))
+        +type-setting(0, $sans, c('secondary'))
+        margin-bottom: 0
       .button
         @extend %button
         +o-button
@@ -127,17 +157,37 @@
         max-width: 150px
         text-align: center
         margin: 0 auto
+        border: none
+        border-bottom: 2px solid c('primary')
+        font-size: 1.2rem
 
 
 
   div.product
+    form.cart
+      .variations
+        max-width: 400px
+        td.label
+          padding-top: 2px
+        td
+          vertical-align: middle
+          padding-bottom: 5px
     .images
       img
+        width: auto !important
         max-width: 400px
         margin: 0 auto
 
+    .c-product-page__author
+      +type-setting(1, $serif, c('black'))
+      margin-bottom: $baseline / 2
+
+    .c-product-page__issue-volume
+      +type-setting(0, $sans, c('secondary'))
+
     .product_title
       +type-setting(3, $serif, c('black'))
+      font-style: italic
     p.price
       .woocommerce-Price-amount
         +type-setting(1, $sans, c('secondary'))
@@ -160,10 +210,42 @@
 
     .product_meta
       +type-setting(-1, $sans, c('secondary'))
+      font-size: 10px
+      a
+        color: c('accent')
+
+    .sku_wrapper
+      display: none
 
     .product-info
       p
         +type-setting(-1, $sans, c('secondary'))
+
+    ul.c-product-page__meta-info
+      list-style: none
+      li
+        margin-left: -40px
+        color: c('secondary')
+
+    .c-product-page__pullquote-quote
+      font-style: italic
+      max-width: 85%
+      &:before
+        content: '"'
+      &:after
+        content: '"'
+
+    .c-product-page__pullquote-attrib
+      max-width: 85%
+      text-align: right
+      margin-top: -1rem
+
+    .woocommerce-variation-price
+      padding-bottom: 2rem
+      font-size: 2.8rem
+      .price
+        color: c('primary')
+        font-family: $sans
 
     .product-description
       padding: 20px 0
@@ -218,8 +300,28 @@
           a
             +type-setting(3, $serif, c('black'))
             text-align: center
+      .c-table-of-contents 
+        margin-top: 0
 
-  .related.products
+    .c-table-of-contents__section
+      h2
+        display: block
+      .c-table-of-contents__section-header
+        font-size: 2.3rem
+        font-family: $sans
+      .c-table-of-contents__list
+        list-style: none
+        text-align: left
+      .c-table-of-contents__link
+        +type-setting(0, $serif)
+        .c-author-link
+          padding-right: 0
+        a
+          +type-setting(0, $serif)
+          font-weight: 400
+
+
+  .related.products, .upsells.products
     clear: both
     padding: 40px 0 20px
     h2
@@ -241,9 +343,13 @@
       flex-wrap: wrap
       li.product
         flex: 1 0 25%
+        margin: 0 0
         min-width: 150px
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        border: none
         @media #{$max-six-forty}
-          display: flex
           flex-direction: column
           align-items: center
         .c-product__thumb
@@ -253,6 +359,7 @@
             max-height: 100%
             min-width: 50px
         .c-product__text
+          min-width: 120px
           h3
             @media #{$min-six-forty}
               +type-setting(0)
@@ -263,8 +370,12 @@
         .button
           @media #{$min-six-forty}
             +type-setting(-1, $sans, c('primary'))
+            font-size: 1.2rem
+            line-height: 2.2rem
             &:hover
               +type-setting(-1, $sans, c('white'))
+              font-size: 1.2rem
+              line-height: 2.2rem
           padding-top: 5px
           width: 80%
           max-width: 150px
@@ -354,3 +465,24 @@
       input.input-text
         border: 3px solid
         border-color: c('highlight')
+
+// Floating WooCommerce Cart
+.c-woo-cart
+  position: fixed
+  bottom: 30px
+  right: 30px
+  padding: 10px
+  text-align: center
+  background-color: rgba( c('spacer'), 0.6)
+  h3
+    +type-setting(0, $sans, c('secondary'))
+    line-height: 1.5rem
+    display: inline-block
+    margin: 0 0
+    svg
+      width: 18px
+      height: 14px
+      fill: c('secondary')
+  a
+    +type-setting(0, $sans, c('primary'))
+    line-height: 1.5rem

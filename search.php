@@ -30,33 +30,41 @@ get_header(); ?>
 				?>
 
 					<div class="c-archive-module__image">
-						<img src="<?php
-							$magCover = get_field( "magazine_cover" );
-							$bookCover = get_field('book_cover');
-								if( $magCover != null && $bookCover == null ) {
-									echo $magCover;
-								} elseif ( $magCover == null && $bookCover != null ){
-									echo $bookCover;
-								} else {
-									the_post_thumbnail_url( 'small' );
-								}
-							?>">
+						<img src="
+						<?php 
+							global $post;
+							$pageID = 149;
+							if( $post->post_parent==$pageID ) {
+								the_field('book_cover');
+							} else {
+								the_post_thumbnail_url('full');
+							}
+						?>">
 					</div>
 					<div class="c-archive-module__info">
 						<a class="c-archive-module__title" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 						<p>
-							<a class="c-archive-module__author"><?php the_field('Author'); ?></a>
-							<a href="<?php $categories = get_the_category(); echo esc_url( get_category_link( $categories[0]->term_id) ); ?>" class="c-archive-module__type"><?php $categories = get_the_category(); if ( ! empty( $categories ) ) { echo esc_html( $categories[0]->name ); } ?></a>
+							<span class="c-archive-module__author"><?php 
+								$terms = wp_get_post_terms( $post->ID, 'product_cat' );
+								foreach ( $terms as $term ) $categories[] = $term->slug;
+								if ( in_array( 'magazine', $categories ) ) {
+									// Do Nothing 
+								} elseif( 'page' === get_post_type() ) {
+									// Do Nothing
+								} else {
+									 guest_author_link(); 
+								} ?></span>
+								<?php sf_single_cat() ?>
 						</p>
 						<p class="c-archive-module__issue">
 							<?php
-								$issue = get_field( "issue_volume" );
-									if( $issue ) {
-										echo $issue;
-									} else {
-										the_date();
-									}
-							?>
+			        if ( in_array( 'magazine', $categories ) ) {
+			          the_field("issue_volume");
+			        } elseif( $post->post_parent==$pageID ) {
+			          // Do Nothing
+			        } else {
+			          the_date();
+			        }?>
 						</p>
 						<p class="c-archive-module__description"><?php the_field('lede'); ?></p>
 					</div>
@@ -87,29 +95,7 @@ get_header(); ?>
 		<?php endif;?>
 
 	</div>
-	<nav class="o-search-nav o-search-nav--archive">
-		<h1 class="heading-1 c-search-nav__heading">Search</h1>
-		<p class="c-search-nav__description"><?php printf( __( 'Showing Search Results for: %s', 'twentysixteen' ), '<span> "' . esc_html( get_search_query() ) . '"</span>' ); ?></br></br> Search Again:</p>
-		<div class="o-search-input-group">
-			<div class="c-search-input">
-				<label for=".c-search-input__year">Select by Date:</label>
-				<input type="month" class="c-search-input__year">
-			</div>
-			<div class="c-search-input">
-				<label for=".c-search-input__author">Search by Author:</label>
-				<input type="field" class="c-search-input__author">
-			</div>
-			<div class="c-search-input">
-				<label for=".c-search-input__issue">Search by Issue:</label>
-				<input type="number" class="c-search-input__issue">
-			</div>
-			<div class="c-search-input">
-				<label for=".c-search-input__category">Search by Category:</label>
-				<input type="field" class="c-search-input__category">
-			</div>
-			<button class="o-button">Browse All Issues</button>
-		</div>
-	</nav>
+	<?php get_sidebar(); ?>
 
 </div><!-- .content-area -->
 </main><!-- .site-main -->

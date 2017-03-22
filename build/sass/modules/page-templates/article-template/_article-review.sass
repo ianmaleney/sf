@@ -1,0 +1,85 @@
+.c-article__header--review
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  width: 100%
+  padding: 10px 0
+
+.c-article__head-image--review
+  flex: 1 0 30%
+  height: auto
+  max-height: none
+  margin-right: 10%
+  min-width: 125px
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  overflow: hidden
+  @media (max-width: 600px)
+    align-items: center
+    flex: 1 0 100%
+    order: 2
+    margin-top: 20px
+  img
+    width: auto
+    height: auto
+    object-fit: contain
+    max-height: 260px
+
+.c-article__info--review
+  flex: 1 0 50%
+  @media (max-width: 600px)
+    order: 1
+
+.c-article__info--title--review
+  font-size: 4rem
+  line-height: 5.5rem
+  margin: 0 0
+  @media (max-width: 600px)
+    font-size: 2.5rem
+    line-height: 4rem
+
+.c-book-review__info-list
+  list-style: none
+  margin: 20px 0
+  padding: 0 0
+  @media (max-width: 600px)
+    width: 100%
+  .c-book-review__info-list-item
+    font-weight: 400
+    margin-left: 0px
+    font-size: 12px
+    line-height: 18px
+    .c-list-item--title
+      color: c('secondary')
+      margin-right: 2px
+
+.c-book-review__author
+  padding-bottom: 2rem
+  border-bottom: 1px solid c('spacer')
+  margin-bottom: 10px
+  @media (max-width: 600px)
+    font-size: 2rem
+    line-height: 2.8rem
+
+.c-author-link--unlinked
+  padding-right: 0 !important
+
+.c-article__info--date--event
+  font-size: 12px
+
+.c-event__info-list
+  border-top: 1px solid c('spacer')
+  list-style: none
+  margin: 20px 0
+  padding: 10px 0
+  @media (max-width: 600px)
+    width: 100%
+  .c-event__info-list-item
+    font-weight: 400
+    margin-left: 0px
+    +type-setting(0, $sans, c('black'))
+    line-height: 2.4rem
+    .c-list-item--title
+      color: c('secondary')
+      margin-right: 2px

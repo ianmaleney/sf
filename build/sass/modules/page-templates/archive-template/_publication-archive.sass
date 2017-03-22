@@ -3,6 +3,11 @@
   max-width: 100%
   flex-wrap: wrap
 
+.c-magazine-archive__info
+  border-bottom: 1px solid c('spacer')
+  margin-bottom: 10px
+  padding-bottom: 10px
+
 .c-publication-module
   flex: 1 0 33%
   background-color: c('white') !important
@@ -52,3 +57,48 @@
     display: inline-block
     clear: both
     margin: 0
+
+.c-magazine-archive__info
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  justify-content: center
+  .c-magazine-archive__info--text
+    flex: 1 0 60%
+    min-width: 300px
+    max-width: 640px
+    @media #{$max-six-forty}
+      padding: 0 10px
+    h2
+      +type-setting(2, $sans)
+      margin-top: 0
+      @media #{$min-six-forty}
+        +type-setting(5, $sans)
+      &:after
+        content: ''
+        display: block
+        position: relative
+        height: 3px
+        width: 100%
+        top: 0
+        left: 0
+        background-color: c('primary')
+        @media #{$min-six-forty}
+          top: -10px
+.c-product-category
+  width: 100%
+.c-products--magazines
+  padding: 0 0 0 0
+  display: flex
+  flex-wrap: wrap
+  .c-publication__image
+    height: 260px
+    max-height: 260px
+  .c-content-title
+    font-style: normal
+
+.c-publication-wrapper--anthologies
+  .c-content-text
+    margin-top: 10px
+    padding: 10px
+    border-top: 1px solid c('spacer')
