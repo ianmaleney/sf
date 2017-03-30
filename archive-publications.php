@@ -57,47 +57,6 @@ get_header(); ?>
 
 			<?php endif; wp_reset_query(); ?>
 		</div>
-		<div class="c-publication-wrapper c-publication-wrapper--anthologies">
-			
-						<?php
-							$args = array(
-								'post_type' => 'product',
-								'meta_key'	=> 'date_published',
-								'orderby'   => 'meta_value_num',
-						    'order'     => 'DESC',
-								'product_cat' => 'anthologies',
-								'posts_per_page' => -1
-							);
-							$loop = new WP_Query( $args );
-							if ( $loop->have_posts() ) {
-								while ( $loop->have_posts() ) : $loop->the_post(); ?>
-								<div class="c-content-module c-content-module--basic c-publication-module">
-									<a href="<?php the_permalink(); ?>">
-										<div class="c-publication__image">
-							        <img src="<?php the_field('book_cover'); ?>">
-										</div>
-									</a>
-									<div class="c-content-text">
-										<a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title();?></a>
-							    </div>
-							  </div>
-								<?php endwhile;
-							} else {
-								echo __( 'No products found' );
-							}
-							wp_reset_postdata();
-						?>
-		</div>
 	</main><!-- .site-main -->
-
-	<?php
-		// Previous/next page navigation.
-		the_posts_pagination( array(
-			'prev_text'          => __( 'Previous page', 'twentysixteen' ),
-			'next_text'          => __( 'Next page', 'twentysixteen' ),
-			'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentysixteen' ) . ' </span>',
-		) );
-	?>
 </div><!-- .content-area -->
-
 <?php get_footer(); ?>
