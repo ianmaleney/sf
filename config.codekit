@@ -959,6 +959,15 @@
 		"shouldRunBless": 1,
 		"useLibsass": false
 		},
+	"\/category-archive.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/category-archive.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/category.php": {
 		"fileType": 8192,
 		"ignore": 0,

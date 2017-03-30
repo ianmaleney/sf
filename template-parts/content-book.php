@@ -12,7 +12,9 @@
 		</div>
 		<div class="c-product-headline__headings">
 			<h1 class="heading-1 c-product__title"><?php the_title(); ?></h1>
-			<h2 class="heading-2 c-product__author"><i>by</i> <?php the_field('author'); ?></h2>
+			<?php if ( get_field('author') ) { ?>
+				<h2 class="heading-2 c-product__author"><i>by</i> <?php the_field('author'); ?></h2>
+			<?php } ?>
 		</div>
 		<div class="c-product-headline__buttons">
 		<?php if (get_field('purchase_link')) : ?>
@@ -20,7 +22,11 @@
 		<?php endif; ?>
 		<a href="#info" class="o-button c-product-button--dark">Info</a>
 		<a href="#reviews" class="o-button c-product-button--dark">Reviews</a>
-		<a href="<?php the_field('story_link'); ?>" class="o-button c-product-button--dark c-product-button--read">Read <i>'<?php the_field('story_title'); ?>'</i></a></div>
+		<?php if ( get_field('story_link') ) { ?>
+			<a href="<?php the_field('story_link'); ?>" class="o-button c-product-button--dark c-product-button--read">
+				Read <i>'<?php the_field('story_title'); ?>'</i>
+			</a> <?php } ?>	
+		</div>
 	</section>
 
 	<section class="c-product-gloss">
