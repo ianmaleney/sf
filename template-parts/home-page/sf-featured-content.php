@@ -4,16 +4,17 @@
 <?php
 
 $args = array(
-  'numberposts' => 1,
+  'post_type' => 'any',
+  'posts_per_page' => 1,
 	'meta_key' => 'featured_content',
 	'meta_value' => true
 );
 
-$featuredPosts = get_posts( $args );
+$featuredPost = new WP_Query( $args );
 
-if($featuredPosts) {
-
-	foreach($featuredPosts as $post) : setup_postdata( $post ); ?>
+if ( $featuredPost->have_posts() ) {
+  while ( $featuredPost->have_posts() ) {
+    $featuredPost->the_post(); ?>
 
   <div class="c-content-module c-content-module--featured">
     <a href="<?php the_permalink(); ?>" class="c-content-image-link">
@@ -27,16 +28,16 @@ if($featuredPosts) {
     </div>
   </div>
 
-  <?php endforeach;
-  wp_reset_postdata();
-};
+  <?php } wp_reset_postdata();
+    } ?>
 
-?>
+
 <div class="c-featured-second-row__wrapper">
 <div class="c-secondary-featured__wrapper">
 <?php
 
 $args = array(
+  'post_type' => 'any',
   'numberposts' => 5,
 	'meta_key' => 'featured_content',
 	'meta_value' => true,
