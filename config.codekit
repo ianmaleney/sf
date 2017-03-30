@@ -11,6 +11,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/archive-magazine.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/archive-magazine.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/archive-publications.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -422,6 +431,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
+	"\/build\/sass\/modules\/components\/_newsletter-form.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/sass\/modules\/components\/_newsletter-form.sass",
+		"outputAbbreviatedPath": "\/build\/sass\/modules\/css\/_newsletter-form.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
 	"\/build\/sass\/modules\/components\/_underlay.sass": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -447,6 +472,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/_page-templates.sass",
 		"outputAbbreviatedPath": "\/build\/sass\/modules\/css\/_page-templates.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/build\/sass\/modules\/page-templates\/archive-page\/_archive-page.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/archive-page\/_archive-page.sass",
+		"outputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/css\/_archive-page.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -607,6 +648,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_book-module.sass",
 		"outputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/css\/_book-module.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_featured-module-styling.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/home-page-modules\/_featured-module-styling.sass",
+		"outputAbbreviatedPath": "\/build\/sass\/modules\/page-templates\/home-page\/css\/_featured-module-styling.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -902,6 +959,15 @@
 		"shouldRunBless": 1,
 		"useLibsass": false
 		},
+	"\/category-archive.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/category-archive.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/category.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -1014,6 +1080,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/img\/bodoni-sf-header.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 15097,
+		"inputAbbreviatedPath": "\/img\/bodoni-sf-header.png",
+		"outputAbbreviatedPath": "\/img\/bodoni-sf-header.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/Dublin City Council_RGB.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
@@ -1021,6 +1098,17 @@
 		"initialSize": 14045,
 		"inputAbbreviatedPath": "\/img\/Dublin City Council_RGB.jpg",
 		"outputAbbreviatedPath": "\/img\/Dublin City Council_RGB.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/harriet-sf-header.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 11791,
+		"inputAbbreviatedPath": "\/img\/harriet-sf-header.png",
+		"outputAbbreviatedPath": "\/img\/harriet-sf-header.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -1043,6 +1131,72 @@
 		"initialSize": 21414,
 		"inputAbbreviatedPath": "\/img\/sf-header-ad-v1.jpg",
 		"outputAbbreviatedPath": "\/img\/sf-header-ad-v1.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/sf-logo-drawn-80x80.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 7834,
+		"inputAbbreviatedPath": "\/img\/sf-logo-drawn-80x80.png",
+		"outputAbbreviatedPath": "\/img\/sf-logo-drawn-80x80.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/subs\/Stinging-Fly-Big-Sub-Orange.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 88047,
+		"inputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Big-Sub-Orange.jpg",
+		"outputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Big-Sub-Orange.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/subs\/Stinging-Fly-Big-Sub.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 87710,
+		"inputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Big-Sub.jpg",
+		"outputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Big-Sub.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/subs\/Stinging-Fly-Podcast-Logo.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 272976,
+		"inputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast-Logo.jpg",
+		"outputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast-Logo.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/subs\/Stinging-Fly-Podcast-Red.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 298905,
+		"inputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast-Red.jpg",
+		"outputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast-Red.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/subs\/Stinging-Fly-Podcast.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 255851,
+		"inputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast.jpg",
+		"outputAbbreviatedPath": "\/img\/subs\/Stinging-Fly-Podcast.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -1382,6 +1536,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/svg\/icons\/inline-itunes.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/svg\/icons\/inline-itunes.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/svg\/icons\/inline-mail.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -1679,6 +1842,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/template-parts\/newsletter-signup.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/template-parts\/newsletter-signup.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/template-parts\/sidebar\/sf-sidebar-latest.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -1715,6 +1887,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/template-parts\/woocommerce\/archival-content.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/template-parts\/woocommerce\/archival-content.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/woocommerce\/archive-product.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -1747,6 +1928,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/woocommerce\/loop\/orderby.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/woocommerce\/single-product\/product-image.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/woocommerce\/single-product\/product-image.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
