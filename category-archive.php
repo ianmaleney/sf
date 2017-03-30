@@ -11,7 +11,7 @@ get_header(); ?>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="fiction">
-			  <div class="c-row-header">Fiction</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/fiction/">Fiction</a>
 				<?php
 				$args = array(
 				  'numberposts' => 3,
@@ -77,7 +77,7 @@ get_header(); ?>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="poetry">
-			  <div class="c-row-header">Poetry</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/poetry/">Poetry</a>
 				<?php
 				$args = array(
 				  'numberposts' => 3,
@@ -148,7 +148,7 @@ get_header(); ?>
 				<?php get_template_part('searchform'); ?>
 			</div>
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="essays">
-			  <div class="c-row-header">Essays</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/essay/">Essays</a>
 				<?php
 				$args = array(
 				  'numberposts' => 3,
@@ -218,7 +218,7 @@ get_header(); ?>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="interviews">
-			  <div class="c-row-header">Interviews</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/interview/">Interviews</a>
 				<?php
 				$args = array(
 				  'numberposts' => 1,
@@ -288,7 +288,7 @@ get_header(); ?>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="refresh">
-			  <div class="c-row-header">Re:fresh</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/refresh/">Re:fresh</a>
 				<?php
 				$args = array(
 				  'numberposts' => 2,
@@ -358,7 +358,7 @@ get_header(); ?>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="reviews">
-			  <div class="c-row-header">Reviews</div>
+			  <a class="c-row-header" href="https://stingingfly.org/category/review/">Reviews</a>
 				<?php
 				$args = array(
 				  'numberposts' => 8,
