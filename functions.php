@@ -960,4 +960,34 @@ function site_login_styles() { ?>
 <?php }
 add_action( 'login_enqueue_scripts', 'site_login_styles' );
 
+/*************************************************
+*
+* Temporary Function To Remove Category From Posts
+*
+*************************************************/
+
+/*add_action( 'init', function()
+{
+    // Get all the posts which is assigned to the Poetry category
+    $args = [
+        'posts_per_page' => 100, // Adjust as needed
+        'cat'            => 252, // Category ID for Poetry category
+        'fields'         => 'ids', // Only get post ID's for performance
+        //'offset'         => 0
+    ];
+    $q = get_posts( $args );
+
+    // Make sure we have posts
+    if ( !$q )
+        return;
+
+    // We have posts, lets loop through them and remove the category
+    foreach ( $q as $id )
+        wp_remove_object_terms(
+            $id, // Post ID
+            1424, // Term ID to remove
+            'category' // The taxonomy the term belongs to
+        );
+}, PHP_INT_MAX );*/
+
 ?>

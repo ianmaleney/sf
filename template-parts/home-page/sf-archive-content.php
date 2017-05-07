@@ -23,14 +23,14 @@ if($archivePosts) {
     <div class="c-content-text">
       <p class="c-content-type">
         <?php
-          if ( in_category('locked') ) {
+          if ( in_category('unlocked') ) {
+            // Do Nothing
+          } else {
             if ( current_user_can('read') ) {
               // Do Nothing
             } else {
               echo '&#128274; ';
             }
-          } else {
-            // Do Nothing
           }
         ?>
         <?php sf_single_cat(); ?>

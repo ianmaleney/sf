@@ -21,9 +21,13 @@ if ( $featuredPost->have_posts() ) {
       <img class="c-content-image" src="<?php the_post_thumbnail_url( 'large' ); ?>">
     </a>
     <div class="c-content-text">
-      <p class="c-content-type"><?php sf_single_cat() ?></p>
+      <p class="c-content-type"><?php sf_single_cat() ?><?php the_field('issue_volume'); ?></p>
       <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
-      <p class="c-content-author"><i>by</i> <?php guest_author_link(); ?></p>
+      <?php if( get_field('issue_volume') ) { ?>
+        <!-- Do Nothing -->
+      <?php } else { ?>
+        <p class="c-content-author"><i>by</i> <?php guest_author_link(); ?></p>    
+      <?php } ?>
       <p class="c-content-description"><?php the_field('lede'); ?></p>
     </div>
   </div>
