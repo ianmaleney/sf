@@ -20,7 +20,7 @@ if($latestPosts) {
 
   <div class="c-content-module c-content-module--basic">
     <a href="<?php the_permalink(); ?>" class="c-content-image-link">
-      <img class="c-content-image" src="<?php the_post_thumbnail_url( 'medium' ); ?>">
+      <img class="c-content-image" src="<?php the_post_thumbnail_url( 'large' ); ?>">
     </a>
     <div class="c-content-text">
       <p class="c-content-type"><?php sf_single_cat(); ?></p>
