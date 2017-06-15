@@ -15,14 +15,18 @@
 			<div class="c-article__info">
 				<h1 class="heading-1 c-article__info--title">
 					<?php
-						if ( in_category('unlocked') ) {
-							// Do Nothing
-						} else {
-							if ( current_user_can('read') ) {
+						if ( in_category('magazine') ) {
+							if ( in_category('unlocked') ) {
 								// Do Nothing
 							} else {
-								echo '&#128274; ';
+								if ( current_user_can('read') ) {
+									// Do Nothing
+								} else {
+									echo '&#128274; ';
+								}
 							}
+						} else {
+							// Do Nothing
 						}
 					?>
 					<?php the_title(); ?>
@@ -45,15 +49,8 @@
 			<?php get_template_part('template-parts/social-icons'); ?>
 		</div>
 		<?php
-			if ( in_category('unlocked') ) {
-				echo '<div class="entry-content c-article__body">';
-				the_content();
-				echo '</div>';
-				echo '<section class="entry-footer c-article__footer"><p>';
-				guest_author_bio();
-				echo '</p></section>';
-			} else {
-				if ( current_user_can('read') ) {
+			if ( in_category('magazine') ) {
+				if ( in_category('unlocked') ) {
 					echo '<div class="entry-content c-article__body">';
 					the_content();
 					echo '</div>';
@@ -61,9 +58,25 @@
 					guest_author_bio();
 					echo '</p></section>';
 				} else {
-					$sub_url = home_url( '/shop/#subs' );
-					echo '<p class="c-subscriber-only-message">Sorry, this content is only available to subscribers. You can subscribe <a href="' . $sub_url . '">here</a>.</p>';
+					if ( current_user_can('read') ) {
+						echo '<div class="entry-content c-article__body">';
+						the_content();
+						echo '</div>';
+						echo '<section class="entry-footer c-article__footer"><p>';
+						guest_author_bio();
+						echo '</p></section>';
+					} else {
+						$sub_url = home_url( '/shop/#subs' );
+						echo '<p class="c-subscriber-only-message">Sorry, this content is only available to subscribers. You can subscribe <a href="' . $sub_url . '">here</a>.</p>';
+					}
 				}
+			} else {
+					echo '<div class="entry-content c-article__body">';
+					the_content();
+					echo '</div>';
+					echo '<section class="entry-footer c-article__footer"><p>';
+					guest_author_bio();
+					echo '</p></section>';
 			};
 			?>
 		<!--<div class="entry-content c-article__body">
