@@ -960,18 +960,54 @@ function site_login_styles() { ?>
 <?php }
 add_action( 'login_enqueue_scripts', 'site_login_styles' );
 
+
+/*
+/
+/ Guest Authors Endpoints for WP-API
+/
+*/
+
+if ( function_exists('get_coauthors') ) {
+    add_action( 'rest_api_init', 'custom_register_coauthors' );
+    
+    function custom_register_coauthors() {
+        register_rest_field( 'post',
+            'coauthors',
+            array(
+                'get_callback'    => 'custom_get_coauthors',
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
+    }
+ 
+    function custom_get_coauthors( $object, $field_name, $request ) {
+        $coauthors = get_coauthors($object['id']);
+ 
+        $authors = array();
+        foreach ($coauthors as $author) {
+            $authors[] = array(
+                'display_name' => $author->display_name,
+                'user_nicename' => $author->user_nicename
+            );
+        };
+ 
+        return $authors;
+    }
+}
+
 /*************************************************
 *
 * Temporary Function To Remove Category From Posts
 *
 *************************************************/
 
-/*add_action( 'init', function()
+/* add_action( 'init', function()
 {
     // Get all the posts which is assigned to the Poetry category
     $args = [
         'posts_per_page' => 100, // Adjust as needed
-        'cat'            => 252, // Category ID for Poetry category
+        'cat'            => 92, // Category ID for Fiction category
         'fields'         => 'ids', // Only get post ID's for performance
         //'offset'         => 0
     ];
@@ -988,6 +1024,7 @@ add_action( 'login_enqueue_scripts', 'site_login_styles' );
             1424, // Term ID to remove
             'category' // The taxonomy the term belongs to
         );
-}, PHP_INT_MAX );*/
+}, PHP_INT_MAX ); */
+
 
 ?>
