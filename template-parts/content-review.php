@@ -8,7 +8,12 @@
 
 		<section class="entry-header c-article__header c-article__header--review">
 			<div class="c-article__head-image c-article__head-image--review">
-				<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
+				<?php $book_cover = get_field("book_cover");
+					if ($book_cover){ ?>
+						<img src="<?php echo $book_cover['url']; ?>" alt="<?php echo $book_cover['alt']; ?>" />
+					<?php } else { ?>
+						<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
+					<?php } ?>
 				<ul class="c-book-review__info-list">
 					<li class="c-book-review__info-list-item"><span class="c-list-item--title">Title:</span> <?php the_title(); ?></li>
 					<li class="c-book-review__info-list-item"><span class="c-list-item--title">Author:</span> <?php the_field("book_author"); ?></li>

@@ -266,6 +266,9 @@
       margin: 0 auto 100px
       border-bottom: 1px solid c('spacer')
 
+    .woocommerce-tabs ul.tabs li.active a
+      display: none
+
     .woocommerce-Tabs-panel
       display: flex !important
       flex-direction: column
@@ -285,7 +288,7 @@
           width: 100%
           background: c('secondary')
       p
-        text-align: center
+        text-align: left
 
     .woocommerce-tabs
       ul.tabs
@@ -325,10 +328,12 @@
   .related.products, .upsells.products
     clear: both
     padding: 40px 0 20px
-    h2
-      +type-setting(2, $serif, c('black'))
+    h2:first-child
+      +type-setting(2, $serif, c('secondary'))
       width: 100%
       text-align: center
+      text-transform: uppercase
+      letter-spacing: 1px
       &:after
         content: ''
         display: block
@@ -361,10 +366,25 @@
             min-width: 50px
         .c-product__text
           min-width: 120px
-          h3
+          .c-product-loop__author, .c-product-loop__issue-volume
+            font-size: 1.28rem
+            line-height: 1.8rem
+            padding-bottom: 5px
+          .c-product-loop__author a, .c-product-loop__issue-volume a
+            color: c('secondary')
+            font-size: 1.28rem
+            line-height: 1.8rem
+          h2
             @media #{$min-six-forty}
-              +type-setting(0)
+              +type-setting(-1, $sans, c('black'))
+              font-size: 1.28rem
+              line-height: 2rem
+              padding: 0 0 0 0
+            a
+              color: c('black')
+              line-height: 2rem
           .price
+            display: none
             @media #{$min-six-forty}
               +type-setting(-1, $sans, c('secondary'))
               letter-spacing: 0.5px
@@ -373,6 +393,7 @@
             +type-setting(-1, $sans, c('primary'))
             font-size: 1.2rem
             line-height: 2.2rem
+            margin-top: 10px
             &:hover
               +type-setting(-1, $sans, c('white'))
               font-size: 1.2rem
@@ -487,3 +508,4 @@
   a
     +type-setting(0, $sans, c('primary'))
     line-height: 1.5rem
+
