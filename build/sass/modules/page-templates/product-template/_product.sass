@@ -1,3 +1,8 @@
+.page-template-sf-book-page
+  @media (min-width: 801px)
+    .u-page-wrapper--secondary-header
+      margin-top: 70px
+
 .c-product
   section
     display: flex
@@ -63,11 +68,9 @@
 .c-product__image
   flex: 1 0 30%
   margin: 0 5% 0 10%
-  background-color: c('background-light')
   display: flex
   justify-content: center
   align-items: center
-  box-shadow: 10px 20px 30px rgba(0,0,0,0.25)
   max-width: 30%
   min-width: 280px
   img
@@ -75,6 +78,7 @@
     max-width: 100%
     max-width: 300px
     object-fit: contain
+    box-shadow: 10px 20px 30px rgba(0,0,0,0.25)
 
 .c-product__magazine-image
   flex: 1 0 30%

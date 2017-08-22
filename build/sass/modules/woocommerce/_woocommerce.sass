@@ -266,13 +266,14 @@
       margin: 0 auto 100px
       border-bottom: 1px solid c('spacer')
 
-    .woocommerce-tabs ul.tabs li.active a
+    .woocommerce-tabs ul.tabs.wc-tabs
       display: none
 
     .woocommerce-Tabs-panel
       display: flex !important
       flex-direction: column
       align-items: center
+      border-top: 1px solid c('spacer')
       h2
         display: none
       h3
@@ -324,6 +325,8 @@
           +type-setting(0, $serif)
           font-weight: 400
 
+  .shop_attributes
+    display: none
 
   .related.products, .upsells.products
     clear: both
