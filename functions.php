@@ -1038,5 +1038,68 @@ function exclude_these( $categories ) {
         );
 }, PHP_INT_MAX ); */
 
+/*************************
+*
+* Custom Category Pages 
+*
+*************************/
+
+
+add_filter( 'pre_get_posts', 'sf_category_archives' );
+function sf_category_archives( $query ) {
+if ( $query->is_category() && $query->is_main_query()  )  {
+	$query->set( 'posts_per_page', '12');
+}
+
+return $query;
+
+}
+
+function category_load_more_scripts() {
+	
+		global $wp_query; 
+	
+		// register our main script but do not enqueue it yet
+		wp_register_script( 'category_loadmore', get_stylesheet_directory_uri() . '/js/category_loadmore.js', array('jquery') );
+	
+		wp_localize_script( 'category_loadmore', 'misha_loadmore_params', array(
+			'ajaxurl' => site_url() . '/wp-admin/admin-ajax.php', // WordPress AJAX
+			'posts' => json_encode( $wp_query->query_vars ), // everything about your loop is here
+			'current_page' => get_query_var( 'paged' ) ? get_query_var('paged') : 1,
+			'max_page' => $wp_query->max_num_pages
+		) );
+	
+		wp_enqueue_script( 'category_loadmore' );
+	}
+	
+add_action( 'wp_enqueue_scripts', 'category_load_more_scripts' );
+
+function misha_loadmore_ajax_handler(){
+ 
+	// prepare our arguments for the query
+	$args = json_decode( stripslashes( $_POST['query'] ), true );
+	$args['paged'] = $_POST['page'] + 1; // we need next page to be loaded
+	$args['post_status'] = 'publish';
+ 
+	// it is always better to use WP_Query but not here
+	query_posts( $args );
+ 
+	if( have_posts() ) :
+ 
+		// run the loop
+		while( have_posts() ): the_post();
+ 
+			get_template_part( 'template-parts/content', 'archive__module' );
+ 
+		endwhile;
+ 
+	endif;
+	die; // here we exit the script and even no wp_reset_query() required!
+}
+ 
+ 
+ 
+add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{action}
+add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
 
 ?>
