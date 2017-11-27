@@ -712,11 +712,11 @@ function woo_custom_toc() {
 
 
 /**
-//
-//
-// Enhanced Search
-//
-//
+*
+*
+* Enhanced Search
+*
+*
 */
 
 if ( !is_admin() ) {
@@ -994,6 +994,18 @@ if ( function_exists('get_coauthors') ) {
  
         return $authors;
     }
+}
+
+/*
+*
+* Function To Stop Archive Posts Being Emailed to Blog Followers
+*
+*/
+
+add_filter( 'jetpack_subscriptions_exclude_these_categories', 'exclude_these' );
+function exclude_these( $categories ) {
+    $categories = array( 'archive');
+    return $categories;
 }
 
 /*************************************************

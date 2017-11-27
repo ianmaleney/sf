@@ -6,8 +6,7 @@ get_header(); ?>
 		<div id="primary" class="content-area u-page-wrapper u-page-wrapper--primary-header">
 		<div class="c-archive-page-info o-article--info">
 			<h2 class="heading-2">The Stinging Fly Archives</h2>
-			<p>Welcome to the archives of <i>The Stinging Fly</i> magazine. Our back-catalogue contains over fifty issues full of fiction, poetry, essays and more, and we are in the process of making that material available online. Some pieces will be available for all to read, but the entire archive will only be available to subscribers. If you're not already a subscriber, you can become one <a href="https://stingingfly.org/product/subscription/">here</a>.</p>
-			<p>The first half of our archive, covering everything back to Winter 2006-07, is now available below. The remaining material will become available to subscribers over the coming months, with the entire archive due to be online by the time we celebrate our 20th birthday in November.</p>
+			<p>Welcome to the archives of <i>The Stinging Fly</i> magazine. Our back-catalogue contains over fifty issues full of fiction, poetry, essays and more, all available for subscribers to read online. If you're not already a subscriber, you can become one <a href="https://stingingfly.org/product/subscription/">here</a>.</p>
 			</div>
 
 			<div class="o-content-row o-content-row--basic c-content-row--archive-page" id="fiction">
