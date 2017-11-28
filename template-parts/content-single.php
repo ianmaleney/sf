@@ -10,7 +10,7 @@
 		<?php foreach((get_the_category()) as $category){
 			echo $category->name." ";
 		} ?>">
-			<?php if ( get_the_post_thumbnail_url() && in_category( array('Interview', 'Criticism','News','Podcast','RE:fresh'))){ ?>
+			<?php if ( get_the_post_thumbnail_url() && in_category( array('Interview', 'Criticism','News','Podcast','RE:fresh','Online'))){ ?>
 				<div class="c-article__head-image">
 					<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
 				</div>

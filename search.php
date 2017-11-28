@@ -36,7 +36,6 @@ get_header('secondary'); ?>
 	?>
 
 	</div>
-	<?php get_sidebar(); ?>
 
 </div><!-- .content-area -->
 </main><!-- .site-main -->
@@ -62,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		if (i === 1){
 			el.classList.add("featured");
 		}
-		if (i === 2 || i === 10){
+		if (i === 0 || i === 2 || i === 10){
 			el.classList.add(classes[1]);
 		}
 
