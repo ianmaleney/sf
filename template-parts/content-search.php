@@ -5,11 +5,7 @@
 ?>
 
 <?php
-if ($firstLoop) :
-	echo '<div class="c-archive-module c-archive-module--featured">';
-else :
-	echo '<div class="c-archive-module">';
-endif;
+	echo '<div class="c-search-result">';
 ?>
 
 	<div class="c-archive-module__image">

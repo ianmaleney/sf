@@ -1055,6 +1055,16 @@ return $query;
 
 }
 
+add_filter( 'pre_get_posts', 'sf_search_query' );
+function sf_search_query( $query ) {
+if ( $query->is_search() )  {
+	$query->set( 'posts_per_page', '13');
+}
+
+return $query;
+
+}
+
 function category_load_more_scripts() {
 	
 		global $wp_query; 

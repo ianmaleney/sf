@@ -6,8 +6,11 @@
 
 	<article class="o-article" id="post-<?php the_ID(); ?>">
 
-		<section class="entry-header c-article__header">
-			<?php if ( get_the_post_thumbnail_url() ) { ?>
+		<section class="entry-header c-article__header 
+		<?php foreach((get_the_category()) as $category){
+			echo $category->name." ";
+		} ?>">
+			<?php if ( get_the_post_thumbnail_url() && in_category( array('Interview', 'Criticism','News','Podcast','RE:fresh'))){ ?>
 				<div class="c-article__head-image">
 					<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
 				</div>
@@ -31,18 +34,20 @@
 					?>
 					<?php the_title(); ?>
 				</h1>
+				<div class="c-article__info--details">
 				<h2 class="heading-2 c-article__info--author">
 					<?php guest_author_link(); ?>
 				</h2>
 				<h3 class="heading-3 c-article__info--date">
-					<?php
+					<?php sf_single_cat(); ?><?php
 						if ( in_category('magazine') ) {
 							the_field("issue");
 						} else {
 							the_date();
 						}
-					 ?><?php sf_single_cat(); ?>
+					 ?>
 				</h3>
+				</div>
 			</div>
 		</section>
 		<div class="js-article__social-icons c-article__social-icons">

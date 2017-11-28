@@ -11,6 +11,19 @@ $mont: 'Montserrat', $system
   width: 100vw
   height: 100vh
   opacity: 0.2
+  pointer-events: none
+
+.c-search-query-box
+  width: 300px
+  margin: 100px auto -50px
+  padding: 20px
+  background-color: white
+  z-index: 2
+  position: relative
+  text-align: center
+  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
+  p
+    font-family: $mont
 
 .c-archive-list 
   flex: 1 0 100%
@@ -60,6 +73,8 @@ $mont: 'Montserrat', $system
   &.two-one
     flex: 1 0 20%
     height: 200px
+    .c-archive-module__title
+      min-height: 78px
     .c-archive-module__description
       display: none
     @media (max-width: 450px)
@@ -111,7 +126,7 @@ $mont: 'Montserrat', $system
 .c-archive-module__info 
   flex: 1 0 60%
   margin: 0 0 0 0
-  padding: 1rem
+  padding: 1rem 2rem
   height: 100%
   display: flex
   flex-direction: column
@@ -145,6 +160,7 @@ $mont: 'Montserrat', $system
   margin: 10px 0
   color: c('black')
   font-style: italic
+  font-family: $serif
   &:hover
     color: c('secondary')
     text-decoration: none
@@ -265,6 +281,7 @@ $mont: 'Montserrat', $system
 
 .c-archive-module--category-box 
   display: flex
+  flex-wrap: wrap
   justify-content: center
   align-items: center
   box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
