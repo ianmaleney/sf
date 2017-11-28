@@ -1,119 +1,325 @@
-.c-archive-module
+$mont: 'Montserrat', $system
+
+.background 
+  position: fixed
+  top: 0
+  left: 0
+  mix-blend-mode: difference
+  z-index: 0
+  background-image: url('/wp-content/themes/stingingfly/img/curls.png')
+  background-repeat: tile
+  width: 100vw
+  height: 100vh
+  opacity: 0.2
+
+.c-archive-list 
+  flex: 1 0 100%
   display: flex
-  padding: $grid-gutter
-  margin: $grid-gutter 0
-  align-items: center
+  flex-direction: row
+  flex-wrap: wrap
+  max-width: 1280px
+  margin: 350px auto 0
+  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
+  background-color: white
+  z-index: 2
 
-.c-archive-module--featured
-  @media #{$min-six-forty}
-    +pattern
-    flex: 1 0 100%
-    margin: 0 auto $baseline
-    padding: $grid-gutter $grid-gutter
-    .c-archive-module__image
-      flex: 1 0 40%
-      height: $baseline * 10
-      max-height: $baseline * 10
-    .c-archive-module__info
-      flex: 1 0 50%
-      min-height: $baseline * 10
-      border-bottom: none
-    .c-archive-module__title
-      +type-setting(2)
-      margin: $grid-gutter 0 0
-    .c-archive-module__issue
-      margin-top: 5px
-      +type-setting(-1, $sans, c('secondary'))
-    .c-archive-module__author
-      +type-setting(0, $sans, c('black'))
-      border-right: 1px solid c('spacer')
-    .c-archive-module__type
-      +type-setting(0, $sans, c('secondary'))
-
-.c-archive-list
-  padding: $grid-gutter
-  flex: 1 0 100%
-  padding: 0 20px 0 10px
-  @media #{$min-six-forty}
-    border-right: 1px solid c('spacer')
-    flex: 1 0 50%
-    .c-archive-module:nth-of-type(even)
-      flex-direction: row-reverse
-
-.c-archive-module__image
-  flex: 1 0 30%
-  height: 170px
-  min-height: 170px
+.c-archive-module
+  order: 3
+  position: relative
+  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
+  background-color: white
+  padding: 0 0 0 0
+  display: flex
+  align-items: flex-start
+  margin: 30px
   overflow: hidden
-  border-radius: 2px
-  @media #{$max-six-forty}
-    display: none
-  img
+  min-width: 280px
+  &:first-of-type 
+    order: 2
+    flex: 1 0 40%
+  &.featured
+    order: 1
+    width: 75%
+    max-width: 960px
+    min-height: 400px
+    flex-direction: row
+    margin: -200px auto 30px
+    @media (max-width: 700px)
+      flex-direction: column
+      .c-archive-module__image
+        height: 400px
+        width: 100%
+      .c-archive-module__info
+        max-height: 230px
+        justify-content: flex-start
+  &.four-two
+    flex: 1 0 40%
+    height: 200px
+    @media (min-width: 700px)
+      height: 400px
+  &.two-one
+    flex: 1 0 20%
+    height: 200px
+    .c-archive-module__description
+      display: none
+    @media (max-width: 450px)
+      min-width: 280px
+      height: auto
+    .c-archive-module__image 
+      display: none
+  &.four-one
+    flex: 1 0 40%
+    max-width: 580px
+    height: 200px
+    .c-archive-module__image 
+      display: none
+  &.six-two
+    flex: 1 0 75%
+    flex-direction: row
+    margin: 30px
     width: 100%
-    height: 100%
-    min-height: 100%
-    max-width: 100%
-    max-height: 100%
-    object-fit: cover
+    @media (min-width: 700px)
+      margin: 30px auto
+      height: 400px
+      max-width: 75%
+  &.three-three
+    flex: 1 0 40%
+    height: 660px
+    .c-archive-module__image
+      width: 100%
+      height: 400px
+    & + .four-one
+      @media (min-width: 701px)
+        margin-top: -230px
 
 
-.c-archive-module__info
-  flex: 1 0 100%
+.c-archive-module__image 
+  height: 400px
+  flex: 1 0 40%
+  a 
+    background-color: #3c465c
+    height: 400px
+    display: block
+    img 
+      opacity: 1
+      mix-blend-mode: luminosity
+      filter: contrast(1.1)
+      width: 100%
+      height: 100%
+      object-fit: cover
+
+.c-archive-module__info 
+  flex: 1 0 60%
+  margin: 0 0 0 0
+  padding: 1rem
+  height: 100%
   display: flex
   flex-direction: column
-  margin: $grid-gutter 0
-  border-bottom: 1px solid c('spacer')
-  @media #{$min-six-forty}
-    flex: 1 0 70%
-    margin: $grid-gutter 20px
-  a:last-child
-    +type-setting(0, $sans, c('secondary'))
-    display: inline
+  justify-content: space-between
+  .c-archive-module__details
+    margin: 0
+    min-height: 40px
+  .c-archive-module__details > span:first-child
+    padding-left: 0 !important
+  .c-archive-module__details:before
+    content: ''
+    position: relative
+    top: -1.2rem
+    left: 0
+    width: 50%
+    height: 1px 
+    background-color: c('spacer')
+    display: block
+  .c-author-link 
+    font-family: $mont
+    font-weight: 400
+    color: #56CCF2 !important
+    font-size: 1.5rem
+    margin: 0
+    border: none
+    font-variant: small-caps
 
-.c-archive-module__title
-  +type-setting(2, $serif)
-  margin-bottom: -$grid-gutter
-
-.c-author-link
-  +type-setting(0, $sans, c('black'))
-  padding-right: $grid-gutter
-
-.c-archive-module
-  .c-author-link
-    border-right: 1px solid c('spacer')
-
-.c-archive-module__type
-  +type-setting(0, $sans, c('secondary'))
-  display: inline
-  padding-left: $grid-gutter
-
-.c-archive-module__issue
-  +type-setting(-1, $sans, c('secondary'))
-  display: inline
-  order: -1
+.c-archive-module__title 
+  font-size: 2.5rem
+  line-height: 3.5rem
+  margin: 10px 0
+  color: c('black')
+  font-style: italic
+  &:hover
+    color: c('secondary')
+    text-decoration: none
+  
 
 .c-archive-module__description
-  +type-setting(-1, $serif)
-  margin-top: 0px
+  font-family: $mont
+  font-weight: 400
+  color: #828282
+  letter-spacing: 0.3px
+  font-size: 1.2rem
+  line-height: 1.8rem
+  padding: 10px 0 20px
+  margin: 0 0 0 0
 
-.pagination
-  margin: $baseline
-  h2
-    display: none
-  .nav-links
-    +type-setting(1, $sans)
-  .page-numbers
-    margin-right: 10px
-    &:after
-      content: ','
-  .page-numbers.dots:after
-    display: none
-  .page-numbers:last-of-type, .page-numbers:nth-last-child(2)
-    &:after
+.c-archive-module__type 
+  font-family: $mont
+  font-weight: 400
+  color: #828282
+  letter-spacing: 0.8px
+  font-size: 1.1rem
+  line-height: 1.8rem
+  padding: 12px 0
+  display: block
+  a
+    color: #828282
+
+
+.c-archive-module__issue 
+  font-family: $mont
+  font-weight: 400
+  color: #828282
+  letter-spacing: 0.8px
+  font-size: 1.1rem
+  line-height: 1.8rem
+  padding: 0
+  display: block
+
+.c-archive-module__type a 
+  padding: 0 0 0 0
+
+.featured, .six-two
+  .c-author-link
+    @media (min-width: 700px)
+      font-size: 2.2rem
+      margin: 20px 0
+  .c-archive-module__title
+    @media (min-width: 700px)
+      font-size: 4.5rem
+      line-height: 5.2rem
+    align-self: flex-start
+  .c-archive-module__description
+    min-height: 40px
+  .c-archive-module__details:before
+    top: -2rem
+  .c-archive-module__type
+    @media (min-width: 700px)
+      font-size: 1.5rem
+      line-height: 1.8rem
+      padding: 12px 2rem 12px 0
+      display: inline-block
+      border-right: 1px solid c('spacer')
+      font-weight: 400
+  .c-archive-module__issue
+    @media (min-width: 700px)
+      font-size: 1.5rem
+      line-height: 1.8rem
+      padding: 12px 0 12px 1.8rem
+      display: inline-block
+      font-weight: 400
+
+.four-two
+  .c-author-link
+    @media (min-width: 700px)
+      font-size: 1.8rem
+      margin: 20px 0
+  .c-archive-module__title
+    @media (min-width: 700px)
+      font-size: 3.5rem
+      line-height: 4.5rem
+  .c-archive-module__description
+    @media (min-width: 700px)
+      min-height: 40px
+  .c-archive-module__details:before
+    top: -1.6rem
+  .c-archive-module__type
+    @media (min-width: 700px)
+      font-size: 1.2rem
+      line-height: 1.8rem
+      padding: 12px 1rem 12px 0
+      display: inline-block
+      border-right: 1px solid c('spacer')
+      font-weight: 400
+  .c-archive-module__issue
+    @media (min-width: 700px)
+      font-size: 1.2rem
+      line-height: 1.8rem
+      padding: 12px 0 12px 0.8rem
+      display: inline-block
+      font-weight: 400
+  @media (max-width: 900px)
+    .c-archive-module__image
       display: none
-  .page-numbers:nth-last-child(2)
-    padding-right: 5px
-    margin-right: 5px
-    border-right: 1px solid c('spacer')
-  .meta-nav
-    display: none
+
+.three-three
+  flex-direction: column
+  .c-archive-module__info
+    max-height: 230px
+  .c-author-link
+    font-size: 1.8rem
+    margin: 0
+    font-variant: small-caps
+  .c-archive-module__title
+    font-size: 3.5rem
+    line-height: 4.5rem
+
+// Category Box
+
+.c-archive-module--category-box 
+  display: flex
+  justify-content: center
+  align-items: center
+  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
+  min-width: 280px
+  padding: 20px 40px
+  font-family: $mont
+  flex: 1 0 40%
+
+.c-archive-module--category-box__heading
+  text-transform: uppercase
+  font-weight: 400
+  border-top: 1px solid black
+  border-bottom: 1px solid black
+  font-size: 3rem
+  text-align: center
+  padding: 12px 0 4px
+  margin: 0
+  letter-spacing: 2px
+  flex: 1 0 100%
+
+
+.c-archive-module--category-box__info 
+  flex: 1 0 100%
+  p
+    font-family: $mont
+    color: #828282
+    font-size: 1.5rem
+    line-height: 2.25rem
+    letter-spacing: 0.4px
+    font-weight: 300
+		
+
+// Load More Button
+
+.c-button__loadmore
+  z-index: 10
+  clear: both
+  margin: 20px auto
+  background-color: white
+  border: 1px solid #BDBDBD
+  border-radius: 2px
+  color: #828282
+  display: block
+  text-align: center
+  font-size: 2.5rem
+  font-weight: 400
+  font-family: $mont
+  letter-spacing: 3px
+  cursor: pointer
+  font-variant: small-caps
+  text-transform: uppercase
+  width: 320px
+  height: 90px
+  padding: 16px 32px
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out
+  &:hover
+    background-color: #767676
+    color: #fff

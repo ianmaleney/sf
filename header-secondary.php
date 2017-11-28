@@ -8,6 +8,7 @@
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800" rel="stylesheet">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
@@ -20,22 +21,22 @@
 
       <header class="c-secondary-header">
 
+      <div class="c-secondary-header__title">
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+  					 <?php get_template_part( 'svg/inline', 'wordmarkthree' ); ?>
+  				</a>
+        </div>
+
         <nav class="c-secondary-header__nav">
           <div class="c-secondary-header__nav--item js-menu-show">
 						<div class="c-burger"></div>
-            <p>Browse</p>
+            <p>Menu</p>
           </div>
           <div class="c-secondary-header__nav--item search-item">
             <?php get_template_part( 'svg/icons/inline', 'mg' ); ?>
             <p>Search</p>
           </div>
         </nav>
-
-        <div class="c-secondary-header__title">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-  					<img id="c-secondary-header__wordmark" src="/wp-content/themes/stingingfly/img/harriet-sf-header.png" alt="The Stinging Fly">
-  				</a>
-        </div>
 
         <div class="c-secondary-header__logo">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">

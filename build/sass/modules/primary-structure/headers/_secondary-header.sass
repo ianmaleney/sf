@@ -7,7 +7,7 @@
   min-width: 100vw
   height: 60px
   will-change: transform
-  background: c('white')
+  background: rgba(255,255,255,0)
   z-index: 9999
   transition: box-shadow 0.5s ease-in-out
 
@@ -59,8 +59,16 @@
   justify-content: center
   align-items: center
   +type-setting
+  padding-left: 40px
+  padding-top: 10px
+  justify-content: flex-start
+  height: 60px
   a
     text-align: center
+    svg
+      width: 17vw
+      height: auto
+
   @media #{$max-six-forty}
     display: none
   @media (max-width: 800px)
@@ -187,6 +195,7 @@
 
 .c-secondary-header.is-scrolling
   box-shadow: 0 3px 8px rgba(0,0,0,0.3)
+  background-color: white
   .c-secondary-header__nav--item
     border-right: 1px solid c('spacer')
   #c-secondary-header__wordmark
