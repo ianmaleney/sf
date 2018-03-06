@@ -10,7 +10,7 @@
 		<?php foreach((get_the_category()) as $category){
 			echo $category->name." ";
 		} ?>">
-			<?php if ( get_the_post_thumbnail_url() && in_category( array('Interview', 'Criticism','News','Podcast','RE:fresh','Online'))){ ?>
+			<?php if ( get_the_post_thumbnail_url() && !in_category( array('Fiction', 'Poetry', 'Drama'))){ ?>
 				<div class="c-article__head-image">
 					<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
 				</div>
@@ -72,7 +72,12 @@
 						echo '</p></section>';
 					} else {
 						$sub_url = home_url( '/shop/#subs' );
-						echo '<p class="c-subscriber-only-message">Sorry, this content is only available to subscribers. You can subscribe <a href="' . $sub_url . '">here</a>.</p>';
+						echo '<div class="c-subscriber-only-message">
+						<p>Sorry, this content is only available to subscribers.</p>
+						<p>You can subscribe <a href="' . $sub_url . '">here</a>.</p>
+						<p>If you are already a subscriber, you can log in here:</p>';
+						wp_login_form( $args );
+						echo '</div>';
 					}
 				}
 			} else {

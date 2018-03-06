@@ -16,18 +16,27 @@
 	<meta name="google-site-verification" content="Lmtt__dhrumGOWi5jBSkWEekZMqCpPjkoWFNzxhjAbA" />
 	<?php if( is_author() ) : echo '<title>'; guest_author(); echo ' | '; bloginfo('title'); echo '</title>'; endif; ?>
 	<?php wp_head(); ?>
+	<?php 
+		if (is_page( 'Subscribe' )) { ?>
+			<script src="https://js.braintreegateway.com/web/dropin/1.9.2/js/dropin.min.js"></script>
+		<?php } 
+	?>
 </head>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
 	<div class="site-inner">
 		<header id="masthead" class="c-primary-header c-home-header" role="banner">
-		<?php if( is_user_logged_in() ) {
-				// Do Nothing
-		} else { ?>
+		<?php if( is_user_logged_in() ) { ?>
+				<!--<div class="c-primary-header__sub-ad">
+					<a href="/shop">
+						<img src="/wp-content/themes/stingingfly/img/sf-header-ad-sale.jpg" alt="Stinging Fly Sale!">
+					</a>
+				</div>-->
+		<?php } else { ?>
 				<div class="c-primary-header__sub-ad">
-					<a href="/product/subscription-one-year-three-issues/">
-						<img src="/wp-content/themes/stingingfly/img/sf-header-ad-v1.jpg" alt="Subscribe to the Stinging Fly">
+					<a href="/shop">
+						<img src="/wp-content/themes/stingingfly/img/sf-header-ad-v1.jpg" alt="Stinging Fly Sale!">
 					</a>
 				</div>
 		<?php } ?>

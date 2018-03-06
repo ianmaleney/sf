@@ -43,7 +43,25 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-
+				<div class="c-product-category" id="specialoffers"> 
+				<ul id="specialoffers__list">
+					<?php
+						$args = array(
+							'post_type' => 'product',
+							'p' => 7766
+						);
+						$loop = new WP_Query( $args );
+						if ( $loop->have_posts() ) {
+							while ( $loop->have_posts() ) : $loop->the_post();
+								wc_get_template_part( 'content', 'product' );
+							endwhile;
+						} else {
+							echo __( 'No products found' );
+						}
+						wp_reset_postdata();
+					?>
+					</ul>
+				</div>
 				<div class="c-product-category" id="subs">
 					<ul class="c-products c-products--subs">
 						<?php

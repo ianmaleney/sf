@@ -27,10 +27,8 @@
 		</div>
 
 		<div class="entry-content c-article__body">
-			<?php
-				the_content();
-			?>
-			<div class="c-podcast-player">
+		<p></p>
+		<div class="c-podcast-player">
 				<img class="c-podcast-player__image" src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>">
 				<audio
 					type="audio/mpeg"
@@ -47,7 +45,7 @@
 				  </div>
 					<div class="c-podcast-player__title">
 						<h2><?php the_field("podcast_episode_title"); ?></h2>
-						<span class="c-podcast-player__series-title"><?php the_field("podcast_series"); ?></span>
+						<span style="display: none;" class="c-podcast-player__series-title"><?php the_field("podcast_series"); ?></span>
 					</div>
 					<div class="c-podcast-player__info">
 						<div class="c-podcast-player__progress-bar">
@@ -102,6 +100,10 @@
 					</div>
 				</div>
 			</div>
+			<?php
+				the_content();
+			?>
+			
 		</div>
 
 	</article>
