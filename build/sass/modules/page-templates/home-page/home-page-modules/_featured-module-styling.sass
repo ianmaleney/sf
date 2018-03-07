@@ -120,3 +120,77 @@
 					height: auto
 		div:nth-of-type(2)
 			display: none
+
+
+//
+// Issue One – Featured Content
+//
+
+$thirds: 2 3 4 7 8 9 12 13 14
+$half: 5 6 10 11
+$quarters: 15 16 17 18
+
+.o-content-row--issue-one
+	max-width: 1280px
+	margin: 0 auto
+	margin-bottom: 6.4rem
+	border-bottom: 1px solid c('spacer')
+
+.c-content-module--issue-one
+	padding-top: 3rem
+	padding-bottom: 3rem
+	@each $el in $thirds
+		&:nth-of-type(#{$el})
+			flex: 1 0 30%
+	@each $el in $half
+		&:nth-of-type(#{$el})
+			flex: 1 0 50%
+			border-top: 1px solid #fbfbfb
+			border-bottom: 1px solid #fbfbfb
+			background-color: #fbfbfb
+			margin: 0.6em 0
+			line-height: 5rem
+	@each $el in $quarters
+		&:nth-of-type(#{$el})
+			flex: 1 0 25%
+			border-top: 1px solid #fbfbfb
+			border-bottom: 1px solid #fbfbfb
+			background-color: #fbfbfb
+			margin: 0.6em 0
+			line-height: 5rem
+
+.c-content-module--notice
+	flex: 1 0 100%
+	max-width: 100%
+	border-bottom: 1px solid c('spacer')
+	display: flex
+	flex-direction: row
+	justify-content: center
+	align-items: center
+	padding-top: 0
+	flex-wrap: wrap
+
+.c-content-module--notice__img-wrapper, .c-content-module--notice__text-wrapper
+	flex: 1 0 40%
+	max-width: 40%
+	display: flex
+	justify-content: center
+	flex-direction: column
+	align-items: center
+	min-width: 280px
+
+.c-content-module--notice__img
+	max-height: 450px
+	max-height: 65vmin
+	max-width: 100%
+	object-fit: contain
+
+.c-content-module--notice__title
+	font-size: 4.2rem
+	line-height: 5.5rem
+	border-bottom: 1px solid c('black')
+	padding: 25px 0
+	font-weight: normal
+	@media (min-width: 768px)
+		margin-top: -10px
+		padding-top: 0

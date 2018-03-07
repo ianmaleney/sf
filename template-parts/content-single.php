@@ -39,13 +39,13 @@
 					<?php guest_author_link(); ?>
 				</h2>
 				<h3 class="heading-3 c-article__info--date">
-					<?php sf_single_cat(); ?><?php
+					<?php
 						if ( in_category('magazine') ) {
 							the_field("issue");
 						} else {
 							the_date();
 						}
-					 ?>
+					 ?> <?php sf_single_cat(); ?>
 				</h3>
 				</div>
 			</div>
