@@ -3,7 +3,7 @@
  * The template for displaying pages
  */
 
-get_header(); ?>
+get_header('secondary'); ?>
 
 <main>
 	<div class="u-page-wrapper u-page-wrapper--primary-header">
