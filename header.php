@@ -10,6 +10,7 @@
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/zsp1myo.css">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,11 +43,11 @@
 		<?php } ?>
 			
 
-					<?php 
-						if ( is_active_sidebar( 'title_image' ) ) :
-						dynamic_sidebar( 'title_image' );
-						endif; 
-					?>
+		<div class="c-primary-header__title">
+    	<a href="http://stingingfly.org/" rel="home">
+    		<?php get_template_part( 'svg/inline', 'wordmarkbodoni' ); ?>
+    	</a>
+    </div>
 
       <div class="c-primary-header__social-icons">
         <div class="c-social-icons">
