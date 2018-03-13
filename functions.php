@@ -628,12 +628,14 @@ function guest_author_bio() {
 //
 // Single Category Display Function
 //
-function sf_single_cat($excludedcats = array(212, 1190, 4, 5, 1406, 1, 1268, 1374)){
+
+// 
+function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252)){
 
     $categories = get_the_category();
     $output = '';
     foreach($categories as $category) {
-        if ( !in_array($category->cat_ID, $excludedcats) ) {
+        if ( in_array($category->cat_ID, $primarycats) ) {
             $output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a> ';
         }
     }
