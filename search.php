@@ -4,83 +4,89 @@
  *
  */
 
-get_header('secondary'); ?>
+get_header(); ?>
 
 	<main id="main" class="site-main" role="main">
 		<div id="primary" class="content-area u-page-wrapper u-page-wrapper--secondary-header u-page-wrapper--category">
-		<div class="background"></div>
-		<div class="c-search-query-box">
-		<p>Showing Results for: </p>
-		<p> <?php echo get_search_query( __( '', 'textdomain' ) ); ?> </p>
-		</div>
-		<?php 
-			if ( have_posts() ) {
-				$firstLoop = true;
-				$count = $wp_query->post_count;
-				// Start the loop.
-				echo '<div class="c-archive-list">';
-					
-				while ( have_posts() ) : the_post();
 
-				get_template_part( 'template-parts/content', 'archive__module' );
+			<div class="c-archive-wrapper">
+				<!-- Results Box -->
+				<div class="c-archive-list">
+					<?php 
+						if ( have_posts() ) {		
+							while ( have_posts() ) : the_post();
+							get_template_part( 'template-parts/content', 'archive__module' );
+							endwhile;
+						}
+					?>
+				</div>
 
-				// End the loop.
-				endwhile;
-				echo '</div>';
-				if (  $wp_query->max_num_pages > 1 ) :
-					echo '<button class="c-button__loadmore">More?</button>';
-				endif;
-			}
-			
-		
-	?>
 
+				<!-- Filter Box -->
+				<div class="c-archive-filters">
+
+					<!-- Query -->
+					<div class="c-search-query-box">
+						<p>Showing <?php $count = $wp_query->post_count; echo $count; ?> Results for: <span id="query"><?php echo get_search_query( __( '', 'textdomain' ) ); ?></span></p>
+					</div>
+
+					<!-- Search Box -->
+					<div class="c-search-box">
+						<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
+							<label>
+								<input type="search" class="search-field"
+									placeholder="<?php echo esc_attr_x( 'Search …', 'placeholder' ) ?>"
+									value="<?php echo get_search_query() ?>" name="s"
+									title="<?php echo esc_attr_x( 'Search for:', 'label' ) ?>" />
+							</label>
+							<input type="submit" class="search-submit"
+								value="<?php echo esc_attr_x( 'Search', 'submit button' ) ?>" />
+						</form>
+					</div>
+
+					<!-- Category List -->
+					<div class="c-category-list c-filter-list">
+						<h3 class="c-category-list__heading">Categories</h3>
+						<ul>
+							<?php 
+								if ( have_posts() ) {
+									$i = 0;
+									$cats = array();
+									while ( have_posts() ) : the_post();
+										$post_categories = wp_get_post_categories( get_the_ID() );
+										foreach($post_categories as $c){
+											$cat = get_category( $c );
+											$cats[$i] = $cat->slug;
+											$i++;
+										}
+									endwhile;
+									$cat_kv_array = array_count_values($cats);
+									foreach ($cat_kv_array as $name => $number) { ?>
+										<li class="c-category__list-item c-category-name"><span class="category-name"><?php echo ucfirst($name); ?></span> <span class="category-count">(<?php echo $number; ?>)</span></li>
+									<?php }
+							}
+							?>
+						</ul>
+					</div>
+
+					<!-- Sort By -->
+					<div class="c-results-sort__list c-filter-list">
+						<h3 class="c-category-list__heading">Sort By</h3>
+						<ul>
+							<li class="c-category__list-item c-results-sort">Date Published</li>
+							<li class="c-category__list-item c-results-sort">Title</li>
+							<li class="c-category__list-item c-results-sort">Relevance</li>
+						</ul>
+						<button class="c-results-sort__reverse">— Reverse</button>
+					</div>
+
+
+				</div>
+
+			</div>
 	</div>
 
 </div><!-- .content-area -->
 </main><!-- .site-main -->
-<script>
-var lengthCheck = function() {
-	titles = document.querySelectorAll(".c-archive-module__title");
-	titles.forEach(function(el) {
-		var string = el.innerHTML;
-		var length = string.length;
-		if (length > 40) {
-		console.log(length);
-		var str2 = string.slice(0, 37);
-		var newTitle = str2 + "...";
-		el.innerHTML = newTitle;
-		}
-	});
-};
 
-document.addEventListener("DOMContentLoaded", function(){
-	var items = document.querySelectorAll(".c-archive-module");
-	var classes = ['two-one', 'four-two', 'three-three', 'six-two', 'four-one' ];
-	items.forEach(function(el, i){
-		if (i === 1){
-			el.classList.add("featured");
-		}
-		if (i === 0 || i === 2 || i === 10){
-			el.classList.add(classes[1]);
-		}
-
-		if (i === 3 || i === 4 || i === 6 || i === 8 ){
-			el.classList.add(classes[0]);
-		}
-		if (i === 5 || i === 7 || i === 12) {
-			el.classList.add(classes[4]);
-		}
-		if (i === 9) {
-			el.classList.add(classes[3]);
-		}
-		if (i === 11){
-			el.classList.add(classes[2]);
-		}
-	});
-
-	lengthCheck();
-});
-	
-</script>
 <?php get_footer(); ?>
