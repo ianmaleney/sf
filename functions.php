@@ -1091,12 +1091,14 @@ function ajax_search_handler(){
 	$query = $_POST['query'];
 	$order = $_POST['order'];
 	$orderby = $_POST['orderby'];
+	$category_name = $_POST['category_name'];
     
     $args = array(
         'post_status' => 'publish',
 		'orderby' => $orderby,
 		'order' => $order,
 		's' => $query,
+		'category_name' => $category_name,
 		'posts_per_page' => -1
     );
 	$search = new WP_Query( $args );
