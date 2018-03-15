@@ -1,7 +1,7 @@
 jQuery(function($) {
   var order = "DESC";
   var orderby = "date";
-  var q;
+  var q = document.getElementById("query").textContent;
   var reverse = document.querySelector(".c-results-sort__reverse");
   var catNameFilters = document.querySelectorAll(".category-name");
   var authNameFilters = document.querySelectorAll(".author-name");

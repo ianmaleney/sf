@@ -4,17 +4,22 @@ $mont: $sans
   display: flex
   width: 100%
   align-items: flex-start
+  flex-wrap: wrap
 
 .c-archive-list 
-  flex: 1 0 60%
   display: flex
   flex-direction: column
-  max-width: 60vw
-  margin: 80px 1vw 80px 4vw
-  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
   background-color: white
   z-index: 2
   overflow: hidden
+  order: 2
+  min-width: 100%
+  @media (min-width: 900px)
+    flex: 1 0 60%
+    max-width: 60vw
+    order: 1
+    margin: 80px 1vw 80px 4vw
+    box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
 
 .search-error-message
   font-family: "proxima-nova", $sans
@@ -22,14 +27,23 @@ $mont: $sans
   text-align: center
   font-weight: 400
   color: #68767e
-  
+
 .c-archive-filters
-  flex: 1 0 30%
-  max-width: 30vw
-  margin: 80px 1vw
-  position: -webkit-sticky
-  position: sticky
-  top: 80px
+  flex: 1 0 100%
+  order: 1
+  @media (min-width: 900px)
+    flex: 1 0 30%
+    max-width: 30vw
+    margin: 80px 1vw
+    order: 2
+  @media (max-width: 900px)
+    display: flex
+    flex-wrap: wrap
+    .c-search-query-box, .c-search-box
+      flex: 1 0 100%
+    .c-filter-list
+      flex: 1 0 50%
+      max-width: 50%
 
 
 .c-archive-module
@@ -40,6 +54,11 @@ $mont: $sans
   &.removed
     display: none
 
+.c-archive-module__info
+  @media (max-width: 900px)
+    display: flex
+    flex-direction: column
+
 .c-archive-module__title 
   font-size: 2.5rem
   line-height: 3.5rem
@@ -47,6 +66,7 @@ $mont: $sans
   color: c('black')
   font-variant: small-caps
   font-family: "bodoni-urw", $serif
+  order: 2
   &:hover
     color: c('secondary')
     text-decoration: none
@@ -60,10 +80,14 @@ $mont: $sans
   line-height: 2.2rem
   font-style: italic
   margin: 10px 0
+  order: 3
 
 .c-archive-module__details
   display: flex
   justify-content: flex-start
+  @media (max-width: 900px)
+    order: 1
+    margin: 8px 0
 
 .c-author-link 
   font-family: "proxima-nova", $sans
@@ -78,23 +102,35 @@ $mont: $sans
   a
     line-height: 1.65
     color: #2D9CDB
+  @media (max-width: 900px)
+    margin: 0 10px 0 0
+    padding-right: 10px
+    
 
 .c-archive-module__type, .c-archive-module__issue
   font-family: "proxima-nova", $sans
   font-weight: 600
   color: #686e75
-  letter-spacing: 0.8px
   font-size: 1.1rem
   line-height: 1.8rem
   padding: 6px 10px
   display: inline-flex
-  background-color: c('spacer')
   border-radius: 100px
   margin: 0 10px
   a
     color: #686e75
+  @media (max-width: 900px)
+    font-size: 1.5rem
+    line-height: 2.3rem
+    padding: 1px 0 0 0
+    margin: 0 0 0 0
+  @media (min-width: 900px)
+    background-color: c('spacer')
+    letter-spacing: 0.8px
 
-
+.c-archive-module__issue
+  @media (max-width: 900px)
+    display: none
 //
 // Filters + Info
 //
@@ -102,9 +138,15 @@ $mont: $sans
 .c-search-query-box p
   font-family: "proxima-nova"
   font-size: 1.5rem
+  @media (max-width: 900px)
+    text-align: center
 
 .c-search-box
   margin-bottom: 30px
+  @media (max-width: 900px)
+    padding: 0 30px
+    form
+      margin: 0 auto
 
 .search-field
   height: 2rem
@@ -126,8 +168,24 @@ $mont: $sans
   &:hover
     color: c('secondary')
 
+.c-filter-list
+  @media (max-width: 900px)
+    padding: 10px
+    ul 
+      padding-left: 0
+    .c-category__list-item
+      margin: 4px 0
+      padding: 0 5px
+      max-width: 90%
+
+
 .c-category-list
-  margin: 40px 0
+  @media (min-width: 900px)
+    margin: 40px 0
+    max-height: 500px
+    overflow-y: scroll
+
+.category .c-category-list
   max-height: 500px
   overflow-y: scroll
 
@@ -135,6 +193,8 @@ $mont: $sans
   font-size: 1.4rem
   color: rgba(#081D29, 0.3)
   letter-spacing: 0.3px
+  @media (max-width: 900px)
+    text-align: center
 
 .c-category__list-item
   font-size: 1.4rem
@@ -168,12 +228,16 @@ $mont: $sans
 .author-box
   max-width: 80%
   margin-bottom: 30px
-  .author-name
+  @media (max-width: 900px)
+    margin: 10px auto
+  .author-name, .page-title
     font-size: 1.4rem
     color: rgba(#081D29, 0.9)
     letter-spacing: 0.3px
     font-family: "proxima-nova", $sans
     font-weight: 600
+    @media (max-width: 900px)
+      font-size: 2.2rem
   .author-description
     font-size: 1.4rem
     font-family: "proxima-nova", $sans
