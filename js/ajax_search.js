@@ -7,6 +7,7 @@ jQuery(function($) {
   var sortFilters = document.querySelectorAll(".c-results-sort");
   var archiveList = document.querySelector(".c-archive-list");
   var archiveWrapper = document.querySelector(".c-archive-wrapper");
+  var showAll = document.getElementById("show_all");
   var archiveModules;
   var moduleCatch = function() {
     archiveModules = document.querySelectorAll(".c-archive-module");
@@ -50,6 +51,13 @@ jQuery(function($) {
       p = el.parentNode;
       p.classList.add("selected");
     });
+  });
+
+  showAll.addEventListener("click", function() {
+    archiveModules.forEach(function(el) {
+      el.classList.remove("removed");
+    });
+    clearCat();
   });
 
   sortFilters.forEach(function(el, i) {
