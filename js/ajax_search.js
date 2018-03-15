@@ -54,7 +54,7 @@ jQuery(function($) {
     var auth_name = document.querySelector(".selected .author-name");
     var cat_name = document.querySelector(".page-title").textContent;
     auth_name ? (auth_name = auth_name.textContent) : (auth_name = "");
-    var auth_name_clean = auth_name.replace(/['"]+/g, " ");
+    var auth_name_clean = auth_name.replace(/['"’.]+/g, " ");
     var data = {
       action: "filter",
       query: auth_name_clean,
@@ -66,6 +66,16 @@ jQuery(function($) {
     return data;
   };
 
+  var errorMessage = function(el) {
+    var errMess = document.createElement("div");
+    var errMesTitle = document.createElement("h2");
+    errMesTitle.innerHTML =
+      "Sorry, we could not find any posts that matched your query.";
+    errMess.appendChild(errMesTitle);
+    errMess.classList.add("search-error-message");
+    el.appendChild(errMess);
+  };
+
   var ajaxRequest = function(data = dataSet()) {
     $.ajax({
       url: myAjax.ajaxurl, // AJAX handler
@@ -73,12 +83,14 @@ jQuery(function($) {
       type: "POST",
       beforeSend: function(xhr) {
         spinner(archiveList);
+        console.log(data);
       },
       success: function(data) {
         if (data) {
           archiveList.innerHTML = data;
         } else {
           console.log("nodata");
+          errorMessage(archiveList);
         }
       },
       error: function(err) {

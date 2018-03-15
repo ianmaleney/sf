@@ -14,8 +14,15 @@ $mont: $sans
   box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
   background-color: white
   z-index: 2
+  overflow: hidden
 
-
+.search-error-message
+  font-family: "proxima-nova", $sans
+  padding: 2rem
+  text-align: center
+  font-weight: 400
+  color: #68767e
+  
 .c-archive-filters
   flex: 1 0 30%
   max-width: 30vw
@@ -180,7 +187,7 @@ $mont: $sans
 /// Loader /////
 ///
 ///
-
+$lbg: #68767e
 .loader
   font-size: 10px
   margin: 50px auto
@@ -188,23 +195,17 @@ $mont: $sans
   width: 11em
   height: 11em
   border-radius: 50%
-  background: #4caeff
-  background: -moz-linear-gradient(left, #4caeff 10%, rgba(76,174,255, 0) 42%)
-  background: -webkit-linear-gradient(left, #4caeff 10%, rgba(76,174,255, 0) 42%)
-  background: -o-linear-gradient(left, #4caeff 10%, rgba(76,174,255, 0) 42%)
-  background: -ms-linear-gradient(left, #4caeff 10%, rgba(76,174,255, 0) 42%)
-  background: linear-gradient(to right, #4caeff 10%, rgba(76,174,255, 0) 42%)
+  background: $lbg
+  background: linear-gradient(to right, $lbg 10%, rgba(76,174,255, 0) 42%)
   position: relative
   -webkit-animation: load3 1.4s infinite linear
   animation: load3 1.4s infinite linear
-  -webkit-transform: translateZ(0)
-  -ms-transform: translateZ(0)
   transform: translateZ(0)
 
 .loader:before
   width: 50%
   height: 50%
-  background: #4caeff
+  background: $lbg
   border-radius: 100% 0 0 0
   position: absolute
   top: 0
@@ -226,20 +227,16 @@ $mont: $sans
 
 @-webkit-keyframes load3 
   0% 
-    -webkit-transform: rotate(0deg)
     transform: rotate(0deg)
   
   100% 
-    -webkit-transform: rotate(360deg)
     transform: rotate(360deg)
   
 
 @keyframes load3 
   0% 
-    -webkit-transform: rotate(0deg)
     transform: rotate(0deg)
   
   100% 
-    -webkit-transform: rotate(360deg)
     transform: rotate(360deg)
   

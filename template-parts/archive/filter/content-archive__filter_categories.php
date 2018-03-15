@@ -16,9 +16,10 @@
 				$cat_kv_array = array_count_values($cats);
 				foreach ($cat_kv_array as $name => $number) { ?>
 					<li class="c-category__list-item c-category-name"><span class="category-name"><?php echo ucfirst($name); ?></span> <span class="category-count">(<?php echo $number; ?>)</span></li>
-				<?php }
-		}
+				<?php } ?>
+				<li class="c-category__list-item c-category-name" id="show_all">Show All</li>
+		<?php }
 		?>
-		<li class="c-category__list-item c-category-name" id="show_all">Show All</li>
+		
 	</ul>
 </div>
