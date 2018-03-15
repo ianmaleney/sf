@@ -721,7 +721,10 @@ function woo_custom_toc() {
 *
 */
 
-add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
+if ( !is_admin() ){
+	add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
+}
+
 
 /**
  * This function modifies the main WordPress query to include an array of
@@ -731,7 +734,7 @@ add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
  * @return object $query The amended query.
  */
 function tgm_io_cpt_search( $query ) {
-    if( is_search() || is_author() ) {
+    if( is_search() || is_author() || is_category() ) {
 			// Get post types
 			$post_types = get_post_types(array('public' => true, 'exclude_from_search' => false), 'objects');
 			$searchable_types = array();
@@ -741,7 +744,8 @@ function tgm_io_cpt_search( $query ) {
 					$searchable_types[] = $type->name;
 				}
 			}
-			$query->set( 'post_type', $searchable_types );
+			array_push($searchable_types, 'nav_menu_item');
+			$query->set( 'post_type', $searchable_types);
 			$query->set('orderby', 'relevance');
 			$query->set( 'posts_per_page', -1);
 		}
@@ -1092,6 +1096,7 @@ function ajax_search_handler(){
 	$order = $_POST['order'];
 	$orderby = $_POST['orderby'];
 	$category_name = $_POST['category_name'];
+	$sentence = $_Post['sentence'];
     
     $args = array(
         'post_status' => 'publish',
@@ -1099,7 +1104,8 @@ function ajax_search_handler(){
 		'order' => $order,
 		's' => $query,
 		'category_name' => $category_name,
-		'posts_per_page' => -1
+		'posts_per_page' => 50,
+		'sentence' => $sentence
     );
 	$search = new WP_Query( $args );
     

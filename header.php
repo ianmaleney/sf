@@ -29,11 +29,7 @@
 	<div class="site-inner">
 		<header id="masthead" class="c-primary-header c-home-header" role="banner">
 		<?php if( is_user_logged_in() ) { ?>
-				<!--<div class="c-primary-header__sub-ad">
-					<a href="/shop">
-						<img src="/wp-content/themes/stingingfly/img/sf-header-ad-sale.jpg" alt="Stinging Fly Sale!">
-					</a>
-				</div>-->
+				<!-- Do Nothing -->
 		<?php } else { ?>
 				<div class="c-primary-header__sub-ad">
 					<a href="/shop">
@@ -73,7 +69,7 @@
 				</div>
       </div>
 
-      <nav class="c-primary-header__nav">
+      <div class="c-primary-header__nav">
 
         <div class="o-underlay"></div>
 
@@ -86,7 +82,7 @@
 					?>
         </nav>
 
-      </nav>
+      </div>
 
       <nav class="c-bottom-nav">
         <ul class="c-bottom-nav__menu">
