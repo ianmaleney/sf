@@ -10,6 +10,12 @@ jQuery(function($) {
   var archiveWrapper = document.querySelector(".c-archive-wrapper");
   var showAll = document.getElementById("show_all");
 
+  if (document.body.classList.contains("search-results")) {
+    var isSearch = true;
+  } else {
+    var isSearch = false;
+  }
+
   var clearCat = function() {
     catNameFilters.forEach(function(el) {
       p = el.parentNode;
@@ -35,11 +41,10 @@ jQuery(function($) {
     el.appendChild(loader);
   };
 
-  var dataSet = function() {
-    q = document.getElementById("query").textContent;
+  var categoryQuery = function() {
     var catQ = document.querySelector(".selected .category-name");
     var cat_name;
-    catQ ? (cat_name = catQ.textContent) : null;
+    catQ ? (cat_name = catQ.textContent) : q;
     var data = {
       action: "filter",
       query: q,
@@ -52,7 +57,7 @@ jQuery(function($) {
 
   var authorQuery = function() {
     var auth_name = document.querySelector(".selected .author-name");
-    var cat_name = document.querySelector(".page-title").textContent;
+    var cat_name = q;
     auth_name ? (auth_name = auth_name.textContent) : (auth_name = "");
     var auth_name_clean = auth_name.replace(/['"’.]+/g, " ");
     var data = {
@@ -76,20 +81,18 @@ jQuery(function($) {
     el.appendChild(errMess);
   };
 
-  var ajaxRequest = function(data = dataSet()) {
+  var ajaxRequest = function(data) {
     $.ajax({
       url: myAjax.ajaxurl, // AJAX handler
       data: data,
       type: "POST",
       beforeSend: function(xhr) {
         spinner(archiveList);
-        console.log(data);
       },
       success: function(data) {
         if (data) {
           archiveList.innerHTML = data;
         } else {
-          console.log("nodata");
           errorMessage(archiveList);
         }
       },
@@ -104,7 +107,7 @@ jQuery(function($) {
       clearCat();
       var p = this.parentNode;
       p.classList.add("selected");
-      ajaxRequest();
+      ajaxRequest(categoryQuery());
     });
   });
 
@@ -117,9 +120,21 @@ jQuery(function($) {
     });
   });
 
+  var show = function(num) {
+    switch (num) {
+      case 0:
+        clearCat();
+        ajaxRequest(categoryQuery());
+        break;
+      case 1:
+        clearAuth();
+        ajaxRequest(authorQuery());
+        break;
+    }
+  };
+
   showAll.addEventListener("click", function() {
-    q ? clearCat() : clearAuth();
-    q ? ajaxRequest() : ajaxRequest(authorQuery());
+    isSearch ? show(0) : show(1);
   });
 
   sortFilters.forEach(function(el, i) {
@@ -137,12 +152,12 @@ jQuery(function($) {
           orderby = "relevance";
           break;
       }
-      q ? ajaxRequest() : ajaxRequest(authorQuery());
+      isSearch ? ajaxRequest(categoryQuery()) : ajaxRequest(authorQuery());
     });
   });
 
   reverse.addEventListener("click", function() {
     order === "DESC" ? (order = "ASC") : (order = "DESC");
-    q ? ajaxRequest() : ajaxRequest(authorQuery());
+    isSearch ? ajaxRequest(categoryQuery()) : ajaxRequest(authorQuery());
   });
 });

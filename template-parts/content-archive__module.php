@@ -18,14 +18,19 @@
 		<p class="c-archive-module__details">
 
 			<!-- Author Name -->
+			<?php 
+			$type = $post->post_type;
+			if (guest_author_link() && $type !== 'page' && $type !== 'product') { ?>
 			<span class="c-author-link">
 				<?php guest_author_link(); ?>
 			</span>
+			<?php } ?>
 
 			<!-- Post Category -->
 			<?php 
-				$type = $post->post_type;
-				if ($type !== 'page') { ?>
+				// var_dump($post);
+				
+				if ($type !== 'page' && $type !== 'product') { ?>
 					<span class="c-archive-module__type">
 						<?php sf_single_cat(); ?>
 					</span>
@@ -34,12 +39,13 @@
 			
 			
 			<!-- Post Date/Magazine Issue -->
+			<?php if ($type !== 'page' && $type !== 'product') { ?>
 			<span class="c-archive-module__issue"><?php if ( in_category('magazine') ) {
 				the_field("issue");
 			} else {
 				the_date();
 			} ?></span>
-
+			<?php } ?>
 		</p>
 		
 	</div>

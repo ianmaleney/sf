@@ -13,7 +13,8 @@ $mont: $sans
   z-index: 2
   overflow: hidden
   order: 2
-  min-width: 100%
+  @media (max-width: 899px)
+    min-width: 100%
   @media (min-width: 900px)
     flex: 1 0 60%
     max-width: 60vw
@@ -39,11 +40,8 @@ $mont: $sans
   @media (max-width: 900px)
     display: flex
     flex-wrap: wrap
-    .c-search-query-box, .c-search-box
+    .c-search-query-box, .c-search-box, .c-filter-list
       flex: 1 0 100%
-    .c-filter-list
-      flex: 1 0 50%
-      max-width: 50%
 
 
 .c-archive-module
@@ -186,7 +184,7 @@ $mont: $sans
     overflow-y: scroll
 
 .category .c-category-list
-  max-height: 500px
+  max-height: 40vh
   overflow-y: scroll
 
 .c-category-list__heading
@@ -224,6 +222,9 @@ $mont: $sans
   &:hover
     color: rgba(#081D29, 0.3)
     cursor: pointer
+  @media (max-width: 768px)
+    margin: 0 0 0 0
+
 
 .author-box
   max-width: 80%

@@ -17,7 +17,7 @@ get_header(); ?>
 				<!-- Filter Box -->
 				<div class="c-archive-filters">
 					<div class="author-box">
-						<h2 class="page-title"><?php single_cat_title(); ?></h2>
+						<h2 class="page-title" id="query"><?php single_cat_title(); ?></h2>
 					</div>
 
 					<!-- Search Box -->
