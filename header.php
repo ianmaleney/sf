@@ -10,6 +10,7 @@
 <html <?php language_attributes(); ?> class="no-js">
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/zsp1myo.css">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,11 +29,7 @@
 	<div class="site-inner">
 		<header id="masthead" class="c-primary-header c-home-header" role="banner">
 		<?php if( is_user_logged_in() ) { ?>
-				<!--<div class="c-primary-header__sub-ad">
-					<a href="/shop">
-						<img src="/wp-content/themes/stingingfly/img/sf-header-ad-sale.jpg" alt="Stinging Fly Sale!">
-					</a>
-				</div>-->
+				<!-- Do Nothing -->
 		<?php } else { ?>
 				<div class="c-primary-header__sub-ad">
 					<a href="/shop">
@@ -42,11 +39,11 @@
 		<?php } ?>
 			
 
-					<?php 
-						if ( is_active_sidebar( 'title_image' ) ) :
-						dynamic_sidebar( 'title_image' );
-						endif; 
-					?>
+		<div class="c-primary-header__title">
+    	<a href="http://stingingfly.org/" rel="home">
+    		<?php get_template_part( 'svg/inline', 'wordmarkbodoni' ); ?>
+    	</a>
+    </div>
 
       <div class="c-primary-header__social-icons">
         <div class="c-social-icons">
@@ -72,7 +69,7 @@
 				</div>
       </div>
 
-      <nav class="c-primary-header__nav">
+      <div class="c-primary-header__nav">
 
         <div class="o-underlay"></div>
 
@@ -85,7 +82,7 @@
 					?>
         </nav>
 
-      </nav>
+      </div>
 
       <nav class="c-bottom-nav">
         <ul class="c-bottom-nav__menu">

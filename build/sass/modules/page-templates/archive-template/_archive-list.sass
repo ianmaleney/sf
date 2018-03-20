@@ -1,325 +1,307 @@
-$mont: 'Montserrat', $system
+$mont: $sans
 
-.background 
-  position: fixed
-  top: 0
-  left: 0
-  mix-blend-mode: difference
-  z-index: 0
-  background-image: url('/wp-content/themes/stingingfly/img/curls.png')
-  background-repeat: tile
-  width: 100vw
-  height: 100vh
-  opacity: 0.2
+.c-archive-wrapper
+  display: flex
+  width: 100%
+  align-items: flex-start
+  flex-wrap: wrap
 
 .c-archive-list 
-  flex: 1 0 100%
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  max-width: 1280px
-  margin: 350px auto 0
-  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
-  background-color: white
-  z-index: 2
-
-.c-archive-module
-  order: 3
-  position: relative
-  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
-  background-color: white
-  padding: 0 0 0 0
-  display: flex
-  align-items: flex-start
-  margin: 30px
-  overflow: hidden
-  min-width: 280px
-  &:first-of-type 
-    order: 2
-    flex: 1 0 40%
-  &.featured
-    order: 1
-    width: 75%
-    max-width: 960px
-    min-height: 400px
-    flex-direction: row
-    margin: -200px auto 30px
-    @media (max-width: 700px)
-      flex-direction: column
-      .c-archive-module__image
-        height: 400px
-        width: 100%
-      .c-archive-module__info
-        max-height: 230px
-        justify-content: flex-start
-  &.four-two
-    flex: 1 0 40%
-    height: 200px
-    @media (min-width: 700px)
-      height: 400px
-  &.two-one
-    flex: 1 0 20%
-    height: 200px
-    .c-archive-module__description
-      display: none
-    @media (max-width: 450px)
-      min-width: 280px
-      height: auto
-    .c-archive-module__image 
-      display: none
-  &.four-one
-    flex: 1 0 40%
-    max-width: 580px
-    height: 200px
-    .c-archive-module__image 
-      display: none
-  &.six-two
-    flex: 1 0 75%
-    flex-direction: row
-    margin: 30px
-    width: 100%
-    @media (min-width: 700px)
-      margin: 30px auto
-      height: 400px
-      max-width: 75%
-  &.three-three
-    flex: 1 0 40%
-    height: 660px
-    .c-archive-module__image
-      width: 100%
-      height: 400px
-    & + .four-one
-      @media (min-width: 701px)
-        margin-top: -230px
-
-
-.c-archive-module__image 
-  height: 400px
-  flex: 1 0 40%
-  a 
-    background-color: #3c465c
-    height: 400px
-    display: block
-    img 
-      opacity: 1
-      mix-blend-mode: luminosity
-      filter: contrast(1.1)
-      width: 100%
-      height: 100%
-      object-fit: cover
-
-.c-archive-module__info 
-  flex: 1 0 60%
-  margin: 0 0 0 0
-  padding: 1rem
-  height: 100%
   display: flex
   flex-direction: column
-  justify-content: space-between
-  .c-archive-module__details
-    margin: 0
-    min-height: 40px
-  .c-archive-module__details > span:first-child
-    padding-left: 0 !important
-  .c-archive-module__details:before
-    content: ''
-    position: relative
-    top: -1.2rem
-    left: 0
-    width: 50%
-    height: 1px 
-    background-color: c('spacer')
-    display: block
-  .c-author-link 
-    font-family: $mont
-    font-weight: 400
-    color: #56CCF2 !important
-    font-size: 1.5rem
-    margin: 0
-    border: none
-    font-variant: small-caps
+  background-color: white
+  z-index: 2
+  overflow: hidden
+  order: 2
+  @media (max-width: 899px)
+    min-width: 100%
+  @media (min-width: 900px)
+    flex: 1 0 60%
+    max-width: 60vw
+    order: 1
+    margin: 80px 1vw 80px 4vw
+    box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
+
+.search-error-message
+  font-family: "proxima-nova", $sans
+  padding: 2rem
+  text-align: center
+  font-weight: 400
+  color: #68767e
+
+.c-archive-filters
+  flex: 1 0 100%
+  order: 1
+  @media (min-width: 900px)
+    flex: 1 0 30%
+    max-width: 30vw
+    margin: 80px 1vw
+    order: 2
+  @media (max-width: 900px)
+    display: flex
+    flex-wrap: wrap
+    .c-search-query-box, .c-search-box, .c-filter-list
+      flex: 1 0 100%
+
+
+.c-archive-module
+  width: 100%
+  margin-top: 20px
+  padding: 0 22px 10px
+  border-bottom: 1px solid c('spacer')
+  &.removed
+    display: none
+
+.c-archive-module__info
+  @media (max-width: 900px)
+    display: flex
+    flex-direction: column
 
 .c-archive-module__title 
   font-size: 2.5rem
   line-height: 3.5rem
   margin: 10px 0
   color: c('black')
-  font-style: italic
+  font-variant: small-caps
+  font-family: "bodoni-urw", $serif
+  order: 2
   &:hover
     color: c('secondary')
     text-decoration: none
-  
 
 .c-archive-module__description
-  font-family: $mont
+  font-family: $serif
   font-weight: 400
   color: #828282
   letter-spacing: 0.3px
-  font-size: 1.2rem
-  line-height: 1.8rem
-  padding: 10px 0 20px
-  margin: 0 0 0 0
+  font-size: 1.5rem
+  line-height: 2.2rem
+  font-style: italic
+  margin: 10px 0
+  order: 3
 
-.c-archive-module__type 
-  font-family: $mont
-  font-weight: 400
-  color: #828282
-  letter-spacing: 0.8px
-  font-size: 1.1rem
-  line-height: 1.8rem
-  padding: 12px 0
-  display: block
-  a
-    color: #828282
-
-
-.c-archive-module__issue 
-  font-family: $mont
-  font-weight: 400
-  color: #828282
-  letter-spacing: 0.8px
-  font-size: 1.1rem
-  line-height: 1.8rem
-  padding: 0
-  display: block
-
-.c-archive-module__type a 
-  padding: 0 0 0 0
-
-.featured, .six-two
-  .c-author-link
-    @media (min-width: 700px)
-      font-size: 2.2rem
-      margin: 20px 0
-  .c-archive-module__title
-    @media (min-width: 700px)
-      font-size: 4.5rem
-      line-height: 5.2rem
-    align-self: flex-start
-  .c-archive-module__description
-    min-height: 40px
-  .c-archive-module__details:before
-    top: -2rem
-  .c-archive-module__type
-    @media (min-width: 700px)
-      font-size: 1.5rem
-      line-height: 1.8rem
-      padding: 12px 2rem 12px 0
-      display: inline-block
-      border-right: 1px solid c('spacer')
-      font-weight: 400
-  .c-archive-module__issue
-    @media (min-width: 700px)
-      font-size: 1.5rem
-      line-height: 1.8rem
-      padding: 12px 0 12px 1.8rem
-      display: inline-block
-      font-weight: 400
-
-.four-two
-  .c-author-link
-    @media (min-width: 700px)
-      font-size: 1.8rem
-      margin: 20px 0
-  .c-archive-module__title
-    @media (min-width: 700px)
-      font-size: 3.5rem
-      line-height: 4.5rem
-  .c-archive-module__description
-    @media (min-width: 700px)
-      min-height: 40px
-  .c-archive-module__details:before
-    top: -1.6rem
-  .c-archive-module__type
-    @media (min-width: 700px)
-      font-size: 1.2rem
-      line-height: 1.8rem
-      padding: 12px 1rem 12px 0
-      display: inline-block
-      border-right: 1px solid c('spacer')
-      font-weight: 400
-  .c-archive-module__issue
-    @media (min-width: 700px)
-      font-size: 1.2rem
-      line-height: 1.8rem
-      padding: 12px 0 12px 0.8rem
-      display: inline-block
-      font-weight: 400
-  @media (max-width: 900px)
-    .c-archive-module__image
-      display: none
-
-.three-three
-  flex-direction: column
-  .c-archive-module__info
-    max-height: 230px
-  .c-author-link
-    font-size: 1.8rem
-    margin: 0
-    font-variant: small-caps
-  .c-archive-module__title
-    font-size: 3.5rem
-    line-height: 4.5rem
-
-// Category Box
-
-.c-archive-module--category-box 
+.c-archive-module__details
   display: flex
-  justify-content: center
-  align-items: center
-  box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
-  min-width: 280px
-  padding: 20px 40px
-  font-family: $mont
-  flex: 1 0 40%
+  justify-content: flex-start
+  @media (max-width: 900px)
+    order: 1
+    margin: 8px 0
 
-.c-archive-module--category-box__heading
-  text-transform: uppercase
-  font-weight: 400
-  border-top: 1px solid black
-  border-bottom: 1px solid black
-  font-size: 3rem
-  text-align: center
-  padding: 12px 0 4px
-  margin: 0
-  letter-spacing: 2px
-  flex: 1 0 100%
+.c-author-link 
+  font-family: "proxima-nova", $sans
+  font-weight: 600
+  font-size: 1.5rem
+  line-height: 2.3rem
+  margin: 0 20px 0 0
+  border: none
+  display: inline-flex
+  padding-right: 30px
+  border-right: 1px solid c('spacer')
+  a
+    line-height: 1.65
+    color: #2D9CDB
+  @media (max-width: 900px)
+    margin: 0 10px 0 0
+    padding-right: 10px
+    
 
-
-.c-archive-module--category-box__info 
-  flex: 1 0 100%
-  p
-    font-family: $mont
-    color: #828282
+.c-archive-module__type, .c-archive-module__issue
+  font-family: "proxima-nova", $sans
+  font-weight: 600
+  color: #686e75
+  font-size: 1.1rem
+  line-height: 1.8rem
+  padding: 6px 10px
+  display: inline-flex
+  border-radius: 100px
+  margin: 0 10px
+  a
+    color: #686e75
+  @media (max-width: 900px)
     font-size: 1.5rem
-    line-height: 2.25rem
-    letter-spacing: 0.4px
-    font-weight: 300
-		
+    line-height: 2.3rem
+    padding: 1px 0 0 0
+    margin: 0 0 0 0
+  @media (min-width: 900px)
+    background-color: c('spacer')
+    letter-spacing: 0.8px
 
-// Load More Button
+.c-archive-module__issue
+  @media (max-width: 900px)
+    display: none
+//
+// Filters + Info
+//
 
-.c-button__loadmore
-  z-index: 10
-  clear: both
-  margin: 20px auto
-  background-color: white
-  border: 1px solid #BDBDBD
-  border-radius: 2px
-  color: #828282
-  display: block
-  text-align: center
-  font-size: 2.5rem
-  font-weight: 400
-  font-family: $mont
-  letter-spacing: 3px
-  cursor: pointer
-  font-variant: small-caps
-  text-transform: uppercase
-  width: 320px
-  height: 90px
-  padding: 16px 32px
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out
+.c-search-query-box p
+  font-family: "proxima-nova"
+  font-size: 1.5rem
+  @media (max-width: 900px)
+    text-align: center
+
+.c-search-box
+  margin-bottom: 30px
+  @media (max-width: 900px)
+    padding: 0 30px
+    form
+      margin: 0 auto
+
+.search-field
+  height: 2rem
+  width: 60%
+  font-size: 1.4rem
+  font-family: "proxima-nova"
+  border-radius: 3px
+  border: 1px solid #ddd
+  padding: 4px
+
+.search-submit
+  background-color: transparent
+  border: none
+  padding: 5px 12px
+  font-family: "proxima-nova"
+  font-size: 1.4rem
+  font-weight: 600
+  color: c('background-dark')
   &:hover
-    background-color: #767676
-    color: #fff
+    color: c('secondary')
+
+.c-filter-list
+  @media (max-width: 900px)
+    padding: 10px
+    ul 
+      padding-left: 0
+    .c-category__list-item
+      margin: 4px 0
+      padding: 0 5px
+      max-width: 90%
+
+
+.c-category-list
+  @media (min-width: 900px)
+    margin: 40px 0
+    max-height: 500px
+    overflow-y: scroll
+
+.category .c-category-list
+  max-height: 40vh
+  overflow-y: scroll
+
+.c-category-list__heading
+  font-size: 1.4rem
+  color: rgba(#081D29, 0.3)
+  letter-spacing: 0.3px
+  @media (max-width: 900px)
+    text-align: center
+
+.c-category__list-item
+  font-size: 1.4rem
+  color: rgba(#081D29, 0.6)
+  list-style: none
+  display: flex
+  justify-content: space-between
+  max-width: 50%
+  margin: 4px 0px 4px -25px
+  border-radius: 100px
+  padding: 0 12px
+  &:hover, &.selected
+    background-color: #E0E0E0
+    cursor: pointer
+  &.c-author-name
+    max-width: 80%
+
+.c-results-sort__reverse
+  font-size: 1.4rem
+  color: rgba(#081D29, 0.6)
+  background-color: rgba(#f6f9fc, 0)
+  font-family: $sans
+  font-weight: 600
+  border: none
+  margin-left: 28px
+  margin-top: 20px
+  &:hover
+    color: rgba(#081D29, 0.3)
+    cursor: pointer
+  @media (max-width: 768px)
+    margin: 0 0 0 0
+
+
+.author-box
+  max-width: 80%
+  margin-bottom: 30px
+  @media (max-width: 900px)
+    margin: 10px auto
+  .author-name, .page-title
+    font-size: 1.4rem
+    color: rgba(#081D29, 0.9)
+    letter-spacing: 0.3px
+    font-family: "proxima-nova", $sans
+    font-weight: 600
+    @media (max-width: 900px)
+      font-size: 2.2rem
+  .author-description
+    font-size: 1.4rem
+    font-family: "proxima-nova", $sans
+    color: rgba(#081D29, 0.9)
+    line-height: 2.3rem
+
+
+
+///
+///
+/// Loader /////
+///
+///
+$lbg: #68767e
+.loader
+  font-size: 10px
+  margin: 50px auto
+  text-indent: -9999em
+  width: 11em
+  height: 11em
+  border-radius: 50%
+  background: $lbg
+  background: linear-gradient(to right, $lbg 10%, rgba(76,174,255, 0) 42%)
+  position: relative
+  -webkit-animation: load3 1.4s infinite linear
+  animation: load3 1.4s infinite linear
+  transform: translateZ(0)
+
+.loader:before
+  width: 50%
+  height: 50%
+  background: $lbg
+  border-radius: 100% 0 0 0
+  position: absolute
+  top: 0
+  left: 0
+  content: ''
+
+.loader:after 
+  background: #ffffff
+  width: 75%
+  height: 75%
+  border-radius: 50%
+  content: ''
+  margin: auto
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+
+@-webkit-keyframes load3 
+  0% 
+    transform: rotate(0deg)
+  
+  100% 
+    transform: rotate(360deg)
+  
+
+@keyframes load3 
+  0% 
+    transform: rotate(0deg)
+  
+  100% 
+    transform: rotate(360deg)
+  

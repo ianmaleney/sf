@@ -628,12 +628,14 @@ function guest_author_bio() {
 //
 // Single Category Display Function
 //
-function sf_single_cat($excludedcats = array(212, 1190, 4, 5, 1406, 1, 1268, 1374)){
+
+// 
+function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252, 161, 128)){
 
     $categories = get_the_category();
     $output = '';
     foreach($categories as $category) {
-        if ( !in_array($category->cat_ID, $excludedcats) ) {
+        if ( in_array($category->cat_ID, $primarycats) ) {
             $output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a> ';
         }
     }
@@ -719,9 +721,10 @@ function woo_custom_toc() {
 *
 */
 
-if ( !is_admin() ) {
+if ( !is_admin() ){
 	add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
 }
+
 
 /**
  * This function modifies the main WordPress query to include an array of
@@ -731,8 +734,7 @@ if ( !is_admin() ) {
  * @return object $query The amended query.
  */
 function tgm_io_cpt_search( $query ) {
-
-    if( is_search() || is_author() ) {
+    if( is_search() || is_author() || is_category() ) {
 			// Get post types
 			$post_types = get_post_types(array('public' => true, 'exclude_from_search' => false), 'objects');
 			$searchable_types = array();
@@ -742,24 +744,22 @@ function tgm_io_cpt_search( $query ) {
 					$searchable_types[] = $type->name;
 				}
 			}
-			$query->set( 'post_type', $searchable_types );
+			array_push($searchable_types, 'nav_menu_item');
+			$query->set( 'post_type', $searchable_types);
 			$query->set('orderby', 'relevance');
+			$query->set( 'posts_per_page', -1);
 		}
     return $query;
-
 }
 
-// Weight Relevancy Towards Posts over Products
-add_filter( 'posts_search_orderby', function( $search_orderby ) {
-    global $wpdb;
-    return "{$wpdb->posts}.post_type LIKE 'post' OR {$wpdb->posts}.post_type LIKE 'review' DESC, {$search_orderby}";
-});
 
-// Weight Relevancy towards Book Pages
-add_filter( 'posts_search_orderby', function( $search_orderby ) {
-    global $wpdb;
-    return "{$wpdb->posts}.post_parent LIKE 149 DESC, {$search_orderby}";
-});
+// Weight Relevancy Towards Posts over Products
+if (!is_admin()){
+	add_filter( 'posts_search_orderby', function( $search_orderby ) {
+		global $wpdb;
+		return "{$wpdb->posts}.post_type LIKE 'post' OR {$wpdb->posts}.post_type LIKE 'review' OR {$wpdb->posts}.post_parent LIKE 149 DESC, {$search_orderby}";
+	});
+}
 
 
 /*
@@ -1044,27 +1044,6 @@ function exclude_these( $categories ) {
 *
 *************************/
 
-
-add_filter( 'pre_get_posts', 'sf_category_archives' );
-function sf_category_archives( $query ) {
-if ( $query->is_category() && $query->is_main_query()  )  {
-	$query->set( 'posts_per_page', '12');
-}
-
-return $query;
-
-}
-
-add_filter( 'pre_get_posts', 'sf_search_query' );
-function sf_search_query( $query ) {
-if ( $query->is_search() )  {
-	$query->set( 'posts_per_page', '13');
-}
-
-return $query;
-
-}
-
 function category_load_more_scripts() {
 	
 		global $wp_query; 
@@ -1080,36 +1059,68 @@ function category_load_more_scripts() {
 		) );
 	
 		wp_enqueue_script( 'category_loadmore' );
+
 	}
 	
 add_action( 'wp_enqueue_scripts', 'category_load_more_scripts' );
 
-function misha_loadmore_ajax_handler(){
- 
-	// prepare our arguments for the query
-	$args = json_decode( stripslashes( $_POST['query'] ), true );
-	$args['paged'] = $_POST['page'] + 1; // we need next page to be loaded
-	$args['post_status'] = 'publish';
- 
-	// it is always better to use WP_Query but not here
-	query_posts( $args );
- 
-	if( have_posts() ) :
- 
-		// run the loop
-		while( have_posts() ): the_post();
- 
-			get_template_part( 'template-parts/content', 'archive__module' );
- 
-		endwhile;
- 
-	endif;
-	die; // here we exit the script and even no wp_reset_query() required!
-}
- 
- 
- 
 add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{action}
 add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
+
+
+
+
+
+
+
+
+function ajax_localize() {
+	global $wp_query; 
+	
+	wp_register_script( 'ajax_search', get_stylesheet_directory_uri() . '/js/ajax_search.js', array('jquery') );
+
+	wp_localize_script( 'ajax_search', 'myAjax', 
+		array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ) // WordPress AJAX
+		) 
+	);
+
+	wp_enqueue_script( 'ajax_search' );
+}
+
+add_action( 'wp_enqueue_scripts', 'ajax_localize' );
+
+function ajax_search_handler(){
+	remove_filter( 'posts_search_orderby', 'wpautop' );
+	$query = $_POST['query'];
+	$order = $_POST['order'];
+	$orderby = $_POST['orderby'];
+	$category_name = $_POST['category_name'];
+	$sentence = $_Post['sentence'];
+    
+    $args = array(
+        'post_status' => 'publish',
+		'orderby' => $orderby,
+		'order' => $order,
+		's' => $query,
+		'category_name' => $category_name,
+		'posts_per_page' => 50,
+		'sentence' => $sentence
+    );
+	$search = new WP_Query( $args );
+    
+	if ( $search->have_posts() ) :
+		while ( $search->have_posts() ) : $search->the_post();
+			get_template_part( 'template-parts/content', 'archive__module' );
+		endwhile;
+		wp_reset_postdata();
+	endif;
+ 
+	
+	die();
+}
+
+add_action('wp_ajax_filter', 'ajax_search_handler'); // wp_ajax_{action}
+add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{action}
 
 ?>
