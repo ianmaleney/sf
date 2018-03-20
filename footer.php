@@ -51,7 +51,6 @@
         </div>
 
         <div class="c-support-logos">
-					<img src="/wp-content/themes/stingingfly/img/Dublin City Council_RGB.jpg" class="dcc-logo">
 					<img src="/wp-content/themes/stingingfly/img/AC_FUND_TheArts_WHT.png" class="ac-logo">
 				</div>
 
