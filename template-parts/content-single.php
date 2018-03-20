@@ -38,6 +38,7 @@
 				<h2 class="heading-2 c-article__info--author">
 					<?php guest_author_link(); ?>
 				</h2>
+				
 				<h3 class="heading-3 c-article__info--date">
 					<?php
 						if ( in_category('magazine') ) {

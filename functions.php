@@ -630,7 +630,7 @@ function guest_author_bio() {
 //
 
 // 
-function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252, 161, 128)){
+function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252, 251, 161, 128, 32)){
 
     $categories = get_the_category();
     $output = '';
@@ -713,13 +713,18 @@ function woo_custom_toc() {
 }
 
 
-/**
-*
-*
-* Enhanced Search
-*
-*
-*/
+
+
+
+
+
+/*************************/
+//
+//
+// Enhanced Search
+//
+//
+/*************************/
 
 if ( !is_admin() ){
 	add_filter( 'pre_get_posts', 'tgm_io_cpt_search' );
@@ -886,6 +891,11 @@ function advanced_custom_search( $search, $wp_query ) {
 
 add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
 
+
+
+
+
+
 /*************************************
 //
 //
@@ -923,6 +933,11 @@ function hp_widgets_init() {
 
 }
 add_action( 'widgets_init', 'hp_widgets_init' );
+
+
+
+
+
 
 
 /*************************************
@@ -1008,35 +1023,89 @@ function exclude_these( $categories ) {
     return $categories;
 }
 
+
+
+
+
+
 /*************************************************
 *
-* Temporary Function To Remove Category From Posts
+* Function To Lock & Unlock Posts
 *
 *************************************************/
 
-/* add_action( 'init', function()
-{
-    // Get all the posts which is assigned to the Poetry category
-    $args = [
-        'posts_per_page' => 100, // Adjust as needed
-        'cat'            => 92, // Category ID for Fiction category
-        'fields'         => 'ids', // Only get post ID's for performance
-        //'offset'         => 0
-    ];
-    $q = get_posts( $args );
 
-    // Make sure we have posts
+/* Add Customer Interval to WP_Cron */
+add_filter( 'cron_schedules', 'example_add_cron_interval' );
+ 
+function example_add_cron_interval( $schedules ) {
+    $schedules['two_weeks'] = array(
+        'interval' => 1209600,
+        'display'  => esc_html__( 'Every Two Weeks' ),
+    );
+    return $schedules;
+}
+
+/* Function to Run with WP_Cron */
+function sf_archive_cron_exec() {
+	// Get Unlocked posts in the Archive
+	$args = [
+		'numberposts' => -1,
+		'category'    => 1424,
+		'fields'      => 'ids'
+	];
+	$q = get_posts( $args );
+
+	// Make sure we have posts
     if ( !$q )
         return;
 
-    // We have posts, lets loop through them and remove the category
-    foreach ( $q as $id )
+	// Loop through posts and remove the category
+	foreach ( $q as $id ) {
         wp_remove_object_terms(
             $id, // Post ID
             1424, // Term ID to remove
             'category' // The taxonomy the term belongs to
-        );
-}, PHP_INT_MAX ); */
+		);
+	};
+	
+	// Get Magazine Posts
+	$mag_args = [
+		'numberposts' => -1,
+		'category'    => 212,
+		'fields'      => 'ids'
+	];
+	$mq = get_posts( $mag_args );
+	
+	// Make sure we have posts
+    if ( !$mq )
+		return;
+	
+	// Number of Posts in Magazine Category
+	$l = sizeof($mq);
+
+	// Store 30 Random numbers in Array
+	$random_ids = [];
+	for ($i=0; $i < 30; $i++) {
+		$r = rand(0, $l);
+		array_push($random_ids, $r);
+	}
+
+	// Loop through Matched Magazine Posts & Add Category
+	foreach ($random_ids as $id) {
+		wp_set_object_terms( $mq[$id], 1424, 'category' );
+	};
+
+}
+
+// Custom Hook for WP_Cron 
+add_action( 'sf_archive_cron_hook', 'sf_archive_cron_exec' );
+
+// Schedule WP_Cron function 
+if ( ! wp_next_scheduled( 'sf_archive_cron_hook' ) ) {
+    wp_schedule_event( time(), 'two_weeks', 'sf_archive_cron_hook' );
+}
+
 
 /*************************
 *
