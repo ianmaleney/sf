@@ -22,6 +22,24 @@ $mont: $sans
     margin: 80px 1vw 80px 4vw
     box-shadow: 1px 6px 12px rgba(0,0,0,0.2)
 
+.pagination__wrapper
+  display: flex
+  justify-content: space-between
+  .page-nav
+    font-size: 1.8rem
+    padding: 12px 16px
+    font-family: "proxima-nova", $sans
+    font-variant: small-caps
+    border: 1px solid c('secondary')
+    margin: 28px
+    a
+      color: c('secondary')
+      text-decoration: none
+      &:hover
+        color: c('primary')
+        text-decoration: none
+
+
 .search-error-message
   font-family: "proxima-nova", $sans
   padding: 2rem
