@@ -747,7 +747,7 @@ function tgm_io_cpt_search( $query ) {
 			array_push($searchable_types, 'nav_menu_item');
 			$query->set( 'post_type', $searchable_types);
 			$query->set('orderby', 'relevance');
-			$query->set( 'posts_per_page', -1);
+			$query->set( 'posts_per_page', 30);
 		}
     return $query;
 }
