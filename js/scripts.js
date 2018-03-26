@@ -63,4 +63,8 @@
     socialPlus.toggleClass("social-visible");
     socialHidden.toggleClass("social-visible");
   });
+
+  $(".woocommerce-store-notice__dismiss-link").on("click", function() {
+    $(".woocommerce-store-notice").style.display = "none";
+  });
 })(jQuery);
