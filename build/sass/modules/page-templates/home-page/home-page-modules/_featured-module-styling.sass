@@ -22,8 +22,10 @@
 		margin-bottom: 0
 		min-width: 260px
 		flex: 1 0
-		img
+		.c-content-image
 			height: 100%
+			width: 90%
+			min-width: 90%
 			object-fit: cover
 	.c-content-text
 		max-width: 35%
@@ -35,7 +37,8 @@
 	.c-content-title
 		@media #{$max-nine-sixty}
 			+type-setting(3)
-		+type-setting(5)
+		font-size: 4.4rem
+		line-height: 5.8rem
 		&:hover
 			color: c('black')
 			text-decoration: none

@@ -1,7 +1,8 @@
 *, *:before, *:after
-  box-sizing: border-box
+  box-sizing: inherit
 
 html
+  box-sizing: border-box
   font-size: 11px
   background-color: c('white')
   overflow-x: hidden
@@ -16,18 +17,6 @@ body
   background-color: c('white')
   color: c('black')
 
-.heading-1
-  +type-setting(5, $serif)
-
-.heading-2
-  +type-setting(4, $serif)
-
-.heading-3
-  +type-setting(3, $serif)
-
-.heading-4
-  +type-setting(2, $serif)
-
 p
   +type-setting(0, $serif)
 
@@ -36,7 +25,7 @@ a
   text-decoration: none
   &:hover
     color: c('accent')
-    text-decoration: underline
+    text-decoration: none
 
 a.c-author-link
   color: c('black')
@@ -45,5 +34,4 @@ a.c-author-link
     color: c('black')
     text-decoration: underline
 
-li
-  +type-setting(0, $sans)
+

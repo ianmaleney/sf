@@ -94,7 +94,7 @@
   @media #{$min-six-forty}
     flex-direction: row
     padding: 0 4%
-    align-items: auto
+    align-items: center
     flex: 1 0 100%
     justify-content: center
   @media #{$min-nine-sixty}
@@ -124,7 +124,7 @@
     letter-spacing: 0.5px
     font-size: 1.3rem
     list-style: none
-    padding: 8px 10px 10px
+    padding: 8px 10px
     width: 80%
     margin: 0 auto
     flex: 1
@@ -192,10 +192,12 @@
   .c-burger
     margin-top: 15px
   span
-    font-size: 10px
+    font-size: 11px
     text-transform: uppercase
     letter-spacing: 1px
     margin-top: -20px
+    font-family: 'Proxima Nova', $sans
+    font-weight: 400
   &:hover
     .c-burger, .c-burger:before, .c-burger:after
       cursor: pointer
@@ -206,6 +208,7 @@
 .c-bottom-nav__menu--item.search-item
   svg
     margin-top: -5px
+    fill: c('black')
 
 .c-primary-header__social-icons
   display: none
