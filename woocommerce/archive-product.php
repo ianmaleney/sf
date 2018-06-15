@@ -43,10 +43,10 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-				<div class="c-product-category" id="specialoffers"> 
+				<!--<div class="c-product-category" id="specialoffers"> 
 				<ul id="specialoffers__list">
 					<?php
-						$args = array(
+						/*$args = array(
 							'post_type' => 'product',
 							'p' => 7766
 						);
@@ -58,10 +58,10 @@ get_header( 'shop' ); ?>
 						} else {
 							echo __( 'No products found' );
 						}
-						wp_reset_postdata();
+						wp_reset_postdata();*/
 					?>
 					</ul>
-				</div>
+				</div>-->
 				<div class="c-product-category" id="subs">
 					<ul class="c-products c-products--subs">
 						<?php
