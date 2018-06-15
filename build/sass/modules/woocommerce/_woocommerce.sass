@@ -184,18 +184,28 @@
         margin: 0 auto
 
     .c-product-page__author
-      +type-setting(1, $serif, c('black'))
+      font-size: 1.6rem
+      line-height: 3.6rem
+      font-family: "Proxima Nova", $sans
+      color: rgba(33, 37, 41, 0.72)
       margin-bottom: $baseline / 2
 
     .c-product-page__issue-volume
-      +type-setting(0, $sans, c('secondary'))
+      font-size: 1.6rem
+      line-height: 3.6rem
+      font-family: "Proxima Nova", $sans
+      color: rgba(33, 37, 41, 0.72)
 
     .product_title
-      +type-setting(3, $serif, c('black'))
-      font-style: italic
+      font-family: $sans
+      font-size: 3.5rem
+      line-height: 5rem
     p.price
       .woocommerce-Price-amount
         +type-setting(1, $sans, c('secondary'))
+        font-family: "Proxima Nova", $sans
+        font-weight: 400
+        color: rgba(33, 37, 41, 0.72)
 
     .quantity
       +type-setting(0, $sans, c('black'))
@@ -214,12 +224,6 @@
       margin: 0
 
     .product_meta
-      +type-setting(-1, $sans, c('secondary'))
-      font-size: 10px
-      a
-        color: c('accent')
-
-    .sku_wrapper
       display: none
 
     .product-info
@@ -231,6 +235,9 @@
       li
         margin-left: -40px
         color: c('secondary')
+        font-family: "Proxima Nova", $sans
+        font-size: 1.28rem
+        line-height: 2.8rem
 
     .c-product-page__pullquote-quote
       font-style: italic
@@ -247,10 +254,10 @@
 
     .woocommerce-variation-price
       padding-bottom: 2rem
-      font-size: 2.8rem
+      font-size: 2.5rem
       .price
         color: c('primary')
-        font-family: $sans
+        font-family: "Proxima Nova", $sans
 
     .product-description
       padding: 20px 0
@@ -535,3 +542,11 @@
     font-family: Proxima Nova
     margin: 0 0 0 0
 
+#wc-stripe-payment-request-button-separator
+  font-size: 1.28rem
+  line-height: 2.8rem
+  font-family: "Proxima Nova"
+  color: rgba(33, 37, 41, 0.72)
+
+#wc-stripe-payment-request-wrapper
+  max-width: 280px
