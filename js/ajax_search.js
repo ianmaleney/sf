@@ -1,7 +1,11 @@
 jQuery(function($) {
+  var tc = document.getElementById("query");
+  if (!tc) {
+    return;
+  }
+  var q = document.getElementById("query").textContent;
   var order = "DESC";
   var orderby = "date";
-  var q = document.getElementById("query").textContent;
   var reverse = document.querySelector(".c-results-sort__reverse");
   var catNameFilters = document.querySelectorAll(".category-name");
   var authNameFilters = document.querySelectorAll(".author-name");
