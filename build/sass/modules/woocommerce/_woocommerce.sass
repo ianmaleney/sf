@@ -109,6 +109,9 @@
             max-height: 140px
       .woocommerce-loop-product__title
         text-align: center
+        font-size: 2rem
+        line-height: 2.65rem
+        color: c('black')
 
       .c-product__text
         width: 60%
@@ -116,14 +119,22 @@
         @media #{$min-six-forty}
           width: 50%
       .c-product-loop__issue-volume
-        +type-setting(0, $sans, c('secondary'))
+        font-size: 1.28rem
+        line-height: 1.8rem
+        font-weight: 400
+        color: rgba(33, 37, 41, 0.72)
+        font-family: "Proxima Nova", $sans
         margin: 0 0
         text-align: center
         a
           color: c('secondary')
       .c-product-loop__author
         text-align: center
-        +type-setting(0, $sans, c('black'))
+        font-size: 1.44rem
+        line-height: 1.9rem
+        color: rgba(33, 37, 41, 0.72)
+        font-family: "Proxima Nova", $sans
+        font-weight: 400
         margin: 0 0 5px
         a
           color: c('black')
@@ -136,20 +147,13 @@
           top: 1px
           left: 40%
           background-color: c('spacer')
-      h3
-        +type-setting(1, $sans, c('black'))
-        line-height: 2.3rem
-        text-align: center
-        padding: 0 0
-        font-weight: 400
-        @media #{$max-six-forty}
-          +type-setting(1, $sans, c('black'))
-          line-height: 2.6rem
-        a
-          color: c('black')
       .price
         text-align: center
-        +type-setting(0, $sans, c('secondary'))
+        font-size: 1.28rem
+        line-height: 2.8rem
+        color: rgba(33, 37, 41, 0.72)
+        font-family: "Proxima Nova", $sans
+        font-weight: 400
         margin-bottom: 0
       .button
         @extend %button
@@ -481,7 +485,8 @@
 
   form
     input.input-text
-      +type-setting(-1, $sans, c('secondary'))
+      font-family: "Proxima Nova", $sans
+      font-size: 14px
       padding: 5px
     .form-row.woocommerce-validated
       input.input-text
@@ -491,6 +496,10 @@
       input.input-text
         border: 3px solid
         border-color: c('highlight')
+    .selection
+      font-family: "Proxima Nova", $sans
+      font-size: 14px
+
 
 // Floating WooCommerce Cart
 .c-woo-cart
@@ -512,3 +521,17 @@
   a
     +type-setting(0, $sans, c('primary'))
     line-height: 1.5rem
+
+
+.wc_payment_method
+  p 
+    font-size: 14px
+    font-family: Proxima Nova
+    margin: 0 0 0 0
+
+.woocommerce-billing-fields, .woocommerce-additional-fields
+  p 
+    font-size: 14px
+    font-family: Proxima Nova
+    margin: 0 0 0 0
+
