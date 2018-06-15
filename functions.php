@@ -674,27 +674,17 @@ add_action( 'wp_enqueue_scripts', 'my_deregister_scripts' );
 
 // Removing JQuery Migrate
 function optimize_jquery() {
-if (!is_admin()) {
-wp_deregister_script('jquery');
-wp_deregister_script('jquery-migrate.min');
-wp_deregister_script('comment-reply.min');
-wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, '3.6', true);
+	if (!is_admin()) {
+		wp_deregister_script('jquery');
+		wp_deregister_script('jquery-migrate.min');
+		wp_deregister_script('comment-reply.min');
+		wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', false, '3.6', true);
 
-wp_enqueue_script('jquery');
-}
+		wp_enqueue_script('jquery');
+	}
 }
 add_action('template_redirect', 'optimize_jquery');
 
-// Registing Google Maps API Key for ACF Maps
-function my_acf_google_map_api( $api ){
-
-	$api['key'] = 'AIzaSyDyOSJHHEtVA9dipjBHm8FL7ehWF0BxeM0';
-
-	return $api;
-
-}
-
-add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
 
 // Woocommerce Edits for Magazine Content
 add_filter( 'woocommerce_product_tabs', 'woo_custom_description_tab', 98 );
