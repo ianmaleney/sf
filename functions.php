@@ -618,8 +618,8 @@ function guest_author() {
 
 function guest_author_bio() {
 	$author = get_the_author();
-	if ( function_exists( 'coauthors_bio' ) && $author != "The Stinging Fly") {
-		coauthors_bio();
+	if ( function_exists( 'the_coauthor_meta' ) && $author != "The Stinging Fly") {
+		the_coauthor_meta('description', $author->id);
 	} else {
 			// the_author();
 		}
