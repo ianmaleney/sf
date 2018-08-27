@@ -264,7 +264,7 @@
 	<div id="success-container" class="invisible">
 		<h2>Success!</h2>
 		<p>Thank you for subscribing to The Stinging Fly. You will receive an email with your login details shortly – these will allow you to access our entire online archive.</p>
-		<p>If you have any questions, or if your email doesn't show up, please email web.stingingfly@gmail.com with your query.</p> 
+		<p>If you have any questions, or if your email doesn't show up, please email web.stingingfly@gmail.com with your query.</p>  
 	</div>
 	<!-- The needed JS files -->
 	<!-- JQUERY File -->
