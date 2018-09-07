@@ -7,7 +7,6 @@
 
 			<?php 
 			$paged = get_query_var('paged');
-			echo $paged;
 			if ( $paged ) : ?>
 			<div class="pagination__wrapper">
 				<div class="page-nav nav-previous alignleft"><?php next_posts_link( 'Older posts' ); ?></div>
