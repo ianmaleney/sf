@@ -33,17 +33,25 @@
       font-size: 1.3rem
       display: flex
       flex-direction: column
+      align-items: center
       margin: 2rem 0
+    label
+      width: 90%
+      text-align: left
     input 
       background-color: white
       border: none
       padding: 8px 4px
       border-radius: 3px
+      width: 90%
       &.button
         background-color: c('primary')
         color: white
       &.button:hover
         background-color: rgba(c('primary'), 0.8)
+    .login-remember
+      label, input
+        width: auto
       
 
 
