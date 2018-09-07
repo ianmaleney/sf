@@ -21,25 +21,12 @@
   .c-content-text
     width: 100%
     text-align: center
-  .c-author-link
-    +type-setting(0, $sans, c('black'))
-    border: none
-    margin: $grid-gutter 0
-    padding: 0
-    display: block
-    &:hover
-      text-decoration: none
-      &:after
-        background: c('black')
-    &:after
-      content: ''
+    .author
       display: block
-      position: relative
-      top: 0
-      left: 35%
-      height: 1px
-      width: 30%
-      background: c('spacer')
+      font-size: 1.6rem
+      font-family: "Proxima Nova", $sans
+      margin-top: 12px
+      color: c('secondary')
   .c-mag-issue
     +type-setting(0, $sans, c('secondary'))
     &:after
