@@ -1037,12 +1037,12 @@ function exclude_these( $categories ) {
 
 
 /* Add Customer Interval to WP_Cron */
-add_filter( 'cron_schedules', 'example_add_cron_interval' );
+add_filter( 'cron_schedules', 'add_cron_interval' );
  
-function example_add_cron_interval( $schedules ) {
+function add_cron_interval( $schedules ) {
     $schedules['two_weeks'] = array(
-        'interval' => 1209600,
-        'display'  => esc_html__( 'Every Two Weeks' ),
+		'interval' => 1209600,
+        'display'  => esc_html__( 'Every Two Weeks' )
     );
     return $schedules;
 }
@@ -1056,19 +1056,19 @@ function sf_archive_cron_exec() {
 		'fields'      => 'ids'
 	];
 	$q = get_posts( $args );
+	
 
 	// Make sure we have posts
-    if ( !$q )
-        return;
-
-	// Loop through posts and remove the category
-	foreach ( $q as $id ) {
-        wp_remove_object_terms(
-            $id, // Post ID
-            1424, // Term ID to remove
-            'category' // The taxonomy the term belongs to
-		);
-	};
+    if ( $q ) {
+		// Loop through posts and remove the category
+		foreach ( $q as $id ) {
+			wp_remove_object_terms(
+				$id, // Post ID
+				1424, // Term ID to remove
+				'category' // The taxonomy the term belongs to
+			);
+		};
+	}
 	
 	// Get Magazine Posts
 	$mag_args = [
@@ -1079,24 +1079,23 @@ function sf_archive_cron_exec() {
 	$mq = get_posts( $mag_args );
 	
 	// Make sure we have posts
-    if ( !$mq )
-		return;
-	
-	// Number of Posts in Magazine Category
-	$l = sizeof($mq);
+	if ( $mq ) {
+		// Number of Posts in Magazine Category
+		$l = sizeof($mq);
 
-	// Store 30 Random numbers in Array
-	$random_ids = [];
-	for ($i=0; $i < 30; $i++) {
-		$r = rand(0, $l);
-		array_push($random_ids, $r);
+		// Store 30 Random numbers in Array
+		$random_ids = [];
+		for ($i=0; $i < 30; $i++) {
+			$r = rand(0, $l);
+			array_push($random_ids, $r);
+		}
+
+		// Loop through Matched Magazine Posts & Add Category
+		foreach ($random_ids as $id) {
+			//wp_set_object_terms( $mq[$id], $terms, 'category' );
+			wp_set_post_categories( $mq[$id], 1424, true );
+		};
 	}
-
-	// Loop through Matched Magazine Posts & Add Category
-	foreach ($random_ids as $id) {
-		wp_set_object_terms( $mq[$id], 1424, 'category' );
-	};
-
 }
 
 // Custom Hook for WP_Cron 
