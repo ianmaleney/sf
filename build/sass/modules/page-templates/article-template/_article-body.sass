@@ -4,14 +4,6 @@
   max-width: 670px
   p, form
     +type-setting(0)
-<<<<<<< HEAD
-    margin-bottom: $baseline
-    &:first-of-type
-      initial-letter: 3
-    img 
-      max-width: 100%
-      object-fit: contain
-=======
     margin-bottom: 1rem
     @supports (display: grid)
       grid-column: 2
@@ -25,6 +17,8 @@
     display: grid
     max-width: none
     grid-template-columns: 1fr minmax(300px, 780px) 1fr
+    figure 
+      margin: 0 -70px
   #loginform
     background-color: c('spacer')
     border-radius: 2px
@@ -45,7 +39,6 @@
       &.button:hover
         background-color: rgba(c('primary'), 0.8)
       
->>>>>>> dev
 
 
 .c-article__footer
