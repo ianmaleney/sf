@@ -1090,11 +1090,28 @@ function sf_archive_cron_exec() {
 			array_push($random_ids, $r);
 		}
 
+		$unlocked = [];
 		// Loop through Matched Magazine Posts & Add Category
 		foreach ($random_ids as $id) {
 			//wp_set_object_terms( $mq[$id], $terms, 'category' );
 			wp_set_post_categories( $mq[$id], 1424, true );
+			array_push($unlocked, $mq[$id]);
 		};
+
+		$email_content = [];
+		
+		foreach( $unlocked as $post ) {
+			$p = get_post($post);
+			$title = $p->post_title;
+			$link = get_permalink( $p->ID );
+			$output = $title . "\r\n" . $link . "\r\n\r\n";
+			array_push($email_content, $output);
+		}
+
+		$recipients = ["web.stingingfly@gmail.com", "stingingfly@gmail.com"];
+		$subject = 'Newly Unlocked Posts - ' . date("d-m-Y");
+
+		wp_mail($recipients, $subject, implode($email_content));
 	}
 }
 
