@@ -41,6 +41,7 @@ Thumbs.db
 build/sass/.sass-cache
 *.sass-cache
 *.sassc
+.cache/
 
 # Node Modules Folder #
 node_modules/
