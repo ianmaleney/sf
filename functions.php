@@ -415,13 +415,24 @@ function my_register_sidebars() {
 			'after_title' => '</h3>'
 		)
 	);
+
+	/* Register the 'sidebar-aside' sidebar. */
+	register_sidebar(
+		array(
+			'id' => 'sidebar-aside',
+			'name' => __( 'Sidebar-Aside' ),
+			'description' => __( 'Read More Sidebar.' ),
+			'before_widget' => '<div id="%1$s" class="article-readmore">',
+			'after_widget' => '</div>',
+			'before_title' => '<h3 class="widget-title widget-title-readmore">',
+			'after_title' => '</h3>'
+		)
+	);
 }
 
 // Enqueueing Custom JS
 function my_assets() {
 	wp_enqueue_script( 'theme-scripts', '/wp-content/themes/stingingfly/js/scripts.js', array( 'jquery' ), '1.0', true );
-	wp_enqueue_script( 'google-map', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDyOSJHHEtVA9dipjBHm8FL7ehWF0BxeM0', array(), '3', true );
-  wp_enqueue_script( 'acf_map_script', '/wp-content/themes/stingingfly/js/acf-maps.js', array( 'jquery' ), '1.0', true );
 }
 
 

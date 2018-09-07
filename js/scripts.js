@@ -30,6 +30,15 @@
 
   $(window).scroll(function() {
     var height = $(window).scrollTop();
+    var article = document.querySelector(".single-post");
+    var vh = window.innerHeight;
+    var dh = document.body.getBoundingClientRect().height;
+
+    if (height > (dh / 4) * 3 && height < dh - vh * 3 && article) {
+      $(".c-sidebar--aside").addClass("visible");
+    } else {
+      $(".c-sidebar--aside").removeClass("visible");
+    }
 
     if (height > 40) {
       $(".c-secondary-header").addClass("is-scrolling");

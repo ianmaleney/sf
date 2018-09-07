@@ -66,3 +66,41 @@
     grid-column: 2
     max-width: none
     padding: 0 40px
+
+.c-sidebar--aside
+  position: fixed
+  right: 0
+  top: 100px
+  border: none
+  border-left: 1px solid c('spacer')
+  padding: 0 20px
+  max-width: 16vw
+  transform: translateX(301px)
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+  will-change: transform
+  @media (max-width: 1050px)
+    display: none
+  &.visible
+    transform: translateX(0)
+  .c-sidebar-section__readmore
+    margin-bottom: 25px
+  .c-sidebar-section__title
+    border: none
+    margin: 0 0 1rem
+    padding: 0
+  .c-sidebar-section__readmore--thumb
+    width: 90%
+    height: 100px
+    object-fit: cover
+  .c-sidebar-section__readmore--title, .c-sidebar-section__readmore--author
+    font-family: $sans
+    font-weight: 600
+    color: c('black')
+    font-size: 1.3rem
+    line-height: 1.6rem
+    margin: 0
+  .c-sidebar-section__readmore--author a 
+    color: c('secondary')
+    &:hover
+      color: c('primary')
+
