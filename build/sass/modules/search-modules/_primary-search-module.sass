@@ -3,7 +3,7 @@
   bottom: 0
   left: 0
   width: 100%
-  height: 200px
+  height: 100vh
   opacity: 0
   overflow: hidden
   pointer-events: none
@@ -24,18 +24,18 @@
   @media #{$max-six-forty}
     margin-top: -40px
 
-.c-search-form__input, .c-search-form__button
-  +type-setting(1, $sans, c('white'))
-  padding: 5px
-  &:focus
-    outline: thin
-    outline-color: rgba(255,255,255,0.4)
-
-.c-search-form__input
-  background-color: rgba(0,0,0,0)
+.c-search-form__input.search-field
+  font-family: "Proxima Nova", $sans
+  font-size: 3rem
+  color: c('white')
+  padding: 8px 0
   border: none
-  border-bottom: 1px solid c('spacer')
-  padding: 5px
+  border-radius: 0
+  width: 50vw
+  min-width: 300px
+  background-color: rgba(0,0,0,0)
+  &:focus
+    border-bottom: 1px solid c('primary')
 
 .c-search-form__button
   background-color: rgba(0,0,0,0)
@@ -48,8 +48,6 @@
   transform: translateY(0)
   opacity: 1
   pointer-events: auto
-  @media #{$min-six-forty}
-    transform: translateY(calc(50vh - 100px))
 
 .u-secondary-header-wrapper
   .c-search-module.visible
