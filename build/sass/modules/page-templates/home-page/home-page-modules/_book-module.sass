@@ -29,20 +29,18 @@
 	min-width: 280px
 
 .books-title
-	@media #{$max-nine-sixty}
-		+type-setting(2)
 	+type-setting(3)
 	display: block
-	+underlineHover(currentColor, 1px, 100%, 0.15s, top left)
+	@media #{$max-nine-sixty}
+		+type-setting(2)
 	&:hover
-		color: c('black')
+		color: c('primary')
 		text-decoration: none
 
 .books-author
-	+type-setting(0, $serif, c('black'))
+	+type-setting(0, $serif, c('secondary'))
 	display: block
-	a
-		+type-setting(0, $sans, c('black'))
+	margin: 0
 
 .books-description
 	+type-setting(-1)
