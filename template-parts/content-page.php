@@ -6,7 +6,7 @@
 ?>
 
 <article class="o-article o-article--info">
-
+	<div class="c-article__body">
 		<?php
 		the_content();
 
@@ -23,5 +23,5 @@
 			'</span></footer><!-- .entry-footer -->'
 		);
 	?>
-
+</div>
 </article><!-- #post-## -->

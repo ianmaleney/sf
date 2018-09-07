@@ -29,22 +29,23 @@
 				</ul>
 			</div>
 			<div class="c-article__info c-article__info--review">
-				<h1 class="heading-1 c-article__info--title c-article__info--title--review">
-					<?php the_title(); ?>
-				</h1>
-				<h2 class="heading-4 c-book-review__author"><i>by</i> <?php the_field("book_author"); ?></h2>
-				<h2 class="heading-3 c-article__info--author">
-					<span class="c-author-link c-author-link--unlinked">Reviewed by </span><?php guest_author_link(); ?>
-				</h2>
 				<h3 class="heading-3 c-article__info--date">
 					<?php
 						if ( in_category('magazine') ) {
 							the_field("issue");
 						} else {
-							the_date();
+							the_date("M d, Y");
 						}
 					 ?><?php sf_single_cat(); ?>
 				</h3>
+				<h1 class="heading-1 c-article__info--title c-article__info--title--review">
+					<?php the_title(); ?>
+				</h1>
+				<h2 class="heading-4 c-book-review__author"><i>by</i> <?php the_field("book_author"); ?></h2>
+				<h2 class="heading-3 c-article__info--author">
+					<span class="c-author-link c-author-link--unlinked">Reviewed by&nbsp;</span><?php guest_author_link(); ?>
+				</h2>
+				
 			</div>
 		</section>
 		<div class="js-article__social-icons c-article__social-icons">

@@ -1,0 +1,28 @@
+{
+  "name": "stingingfly",
+  "version": "1.0.0",
+  "description": "Stinging Fly Wordpress Theme",
+  "main": "build/js/index.js",
+  "scripts": {
+    "test": "null",
+    "start": "parcel build/js/style.js -d ./ --hmr-hostname sfwp.test",
+    "build": "parcel build build/js/style.js -d ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ianmaleney/sf.git"
+  },
+  "author": "Ian Maleney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ianmaleney/sf/issues"
+  },
+  "homepage": "https://github.com/ianmaleney/sf#readme",
+  "dependencies": {
+    "node-sass": "^4.9.2",
+    "posthtml-include": "^1.2.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.0.5"
+  }
+}

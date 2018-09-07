@@ -2,14 +2,50 @@
   +type-setting(0)
   padding: 24px 0 20px
   max-width: 670px
-  p
+  p, form
     +type-setting(0)
+<<<<<<< HEAD
     margin-bottom: $baseline
     &:first-of-type
       initial-letter: 3
     img 
       max-width: 100%
       object-fit: contain
+=======
+    margin-bottom: 1rem
+    @supports (display: grid)
+      grid-column: 2
+      @media (min-width: 400px)
+        padding: 0 20px
+      @media (min-width: 640px)
+        padding: 0 40px
+  @supports (display: grid)
+    grid-column: 1 / -1
+    width: 100%
+    display: grid
+    max-width: none
+    grid-template-columns: 1fr minmax(300px, 780px) 1fr
+  #loginform
+    background-color: c('spacer')
+    border-radius: 2px
+    p 
+      font-family: "Proxima Nova", $sans
+      font-size: 1.3rem
+      display: flex
+      flex-direction: column
+      margin: 2rem 0
+    input 
+      background-color: white
+      border: none
+      padding: 8px 4px
+      border-radius: 3px
+      &.button
+        background-color: c('primary')
+        color: white
+      &.button:hover
+        background-color: rgba(c('primary'), 0.8)
+      
+>>>>>>> dev
 
 
 .c-article__footer
@@ -19,3 +55,7 @@
   padding: 0 $grid-gutter $grid-unit
   p
     +type-setting(-1)
+  @supports (display: grid)
+    grid-column: 2
+    max-width: none
+    padding: 0 40px

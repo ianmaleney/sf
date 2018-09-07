@@ -14,6 +14,8 @@
   margin: 84px $grid-gutter 0
   @media #{$min-six-forty}
     margin: 168px $grid-unit 0
+  @supports (display: grid)
+    margin: 13vh 0 0 
 
 .u-page-wrapper--category
   margin: 0 auto
@@ -40,6 +42,14 @@ main
     max-width: 62%
     width: 62%
     margin: 0 auto
+  @supports (display: grid)
+    width: 100%
+    display: grid
+    max-width: none
+    grid-template-columns: 1fr minmax(300px, 780px) 1fr
+    h1, h2, h3, h4, h5, h6, p, table, form
+      grid-column: 2
+
 
 .c-hp-widget
   margin-top: 3.15rem
