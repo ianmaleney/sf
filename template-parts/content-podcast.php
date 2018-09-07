@@ -7,16 +7,10 @@
 	<article class="o-article" id="post-<?php the_ID(); ?>">
 
 		<section class="entry-header c-article__header c-article__header--review">
-			<div class="c-article__head-image c-article__head-image--review">
-				<img src="<?php the_post_thumbnail_url( 'large' ); ?>" />
-			</div>
 			<div class="c-article__info c-article__info--review">
 				<h3 class="heading-3 c-article__info--date">
 					<?php the_date(); ?><?php sf_single_cat(); ?>
 				</h3>
-				<!--<h3 class="heading-3 c-article__info--date">
-					<?php //the_field("podcast_series"); ?>
-				</h3>-->
 				<h1 class="heading-1 c-article__info--title c-article__info--title--review">
 					<?php the_title(); ?>
 				</h1>

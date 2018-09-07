@@ -5,12 +5,16 @@
   display: flex
   width: 100%
   min-width: 280px
+  min-height: 160px
   justify-content: space-between
   align-items: flex-start
   overflow: hidden
   position: relative
+  @supports (display: grid)
+    grid-column: 2
 
 .c-podcast-player__image
+  height: 160px
   @media (max-width: 600px)
     display: none
 
@@ -70,10 +74,10 @@
   flex: 1 0 100%
   max-width: 100%
   justify-content: space-between
-  align-items: flex-end
+  align-items: center
   font-family: $sans
-  font-size: 1.1rem
-  line-height: 1.1rem
+  font-size: 1.4rem
+  line-height: 1.4rem
   color: c('secondary')
   padding: 0 10px 0 110px
   margin-top: -30px
@@ -108,8 +112,8 @@
       margin: 0 0
       display: inline
       font-family: $sans
-      font-size: 1.1rem
-      line-height: 1.1rem
+      font-size: 1.4rem
+      line-height: 1.4rem
       color: c('secondary')
   #vol-control
     margin: 0 10px 0
@@ -132,10 +136,10 @@
 
 .c-podcast-player__slide
   position: absolute
-  left: 150px
+  left: 160px
   top: 0
   height: 100%
-  width: calc(100% - 150px)
+  width: calc(100% - 160px)
   display: block
   background-color: c('white')
   padding: 10px
@@ -152,8 +156,8 @@
 .c-podcast-player__button-bar
   position: absolute
   bottom: 0
-  left: 150px
-  width: calc(100% - 150px)
+  left: 160px
+  width: calc(100% - 160px)
   height: 24px
   font-size: 12px
   line-height: 16px

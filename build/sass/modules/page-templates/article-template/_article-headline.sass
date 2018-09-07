@@ -1,51 +1,70 @@
 .c-article__header
   max-width: 80vw
   border-bottom: 1px solid c('spacer')
+  @supports (display: grid)
+    grid-column: 2
+    max-width: none
 
 .c-article__head-image
   max-width: 100%
-  height: 30vw
+  height: 50vh
   max-height: 400px
+  padding: 20px 0
+  border-top: 1px solid c('spacer')
   img
     width: 100%
     height: 100%
     object-fit: cover
 
 .c-article__info
-  text-align: center
+  padding-bottom: 8px
+
+.c-article__category
+  font-family: "Proxima Nova", $sans
+  font-size: 1.7rem
+  color: c('primary')
+  margin: 0
 
 .c-article__info--title
-  +type-setting(5)
-  margin: $baseline 0 0
+  margin: 1.3rem 0 0.8rem
+  font-size: 4.8rem
+  line-height: 4.8rem
+  .lock-icon
+    font-size: 3rem
 
 .c-article__info--author
   margin: 0
-  font-size: 1.8rem
-  font-weight: 600
-  font-family: $sans
+  font-size: 1.4rem
+  font-family: "Proxima Nova", $sans
+  font-weight: normal
+  display: inline
+  margin-right: 10px
   .c-author-link
     +type-setting(1, $sans, c('black'))
     letter-spacing: 0.5px
     font-weight: 600
 
 .c-article__info--date
-  +type-setting(-1, $sans, c('secondary'))
-  font-weight: 600
-  a
-    color: c('accent')
+  font-size: 1.4rem
+  font-family: "Proxima Nova", $sans
+  color: c('secondary')
+  display: inline
+  font-weight: normal
+  a 
+    color: c('secondary')
     border-left: 1px solid c('spacer')
-    margin-left: 10px
     padding-left: 10px
+    margin-left: 10px
+  a:hover
+    color: c('accent')
 
 .c-article__social-icons
-  @media #{$max-six-forty}
-    display: none
-  @media #{$max-nine-sixty}
-    left: $grid-unit / 2
   position: absolute
   top: 180px
   left: $grid-unit / 1.8
   opacity: 0.1
+  @media #{$max-nine-sixty}
+    display: none
   &:hover
     opacity: 1
   .c-social-icons

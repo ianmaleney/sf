@@ -15,6 +15,7 @@
   flex-direction: column
   align-items: flex-start
   overflow: hidden
+  border: none
   @media (max-width: 600px)
     align-items: center
     flex: 1 0 100%
@@ -32,10 +33,15 @@
   flex: 1 0 50%
   @media (max-width: 600px)
     order: 1
+  .author
+    border: none
+    font-size: 1.6rem
+    font-family: "Proxima Nova", $sans
+    line-height: 2.1rem
 
 .c-article__info--title--review
   font-size: 4rem
-  line-height: 5.5rem
+  line-height: 4.3rem
   margin: 0 0
   @media (max-width: 600px)
     font-size: 2.5rem
@@ -60,12 +66,19 @@
   padding-bottom: 2rem
   border-bottom: 1px solid c('spacer')
   margin-bottom: 10px
+  margin-top: 8px
   @media (max-width: 600px)
     font-size: 2rem
     line-height: 2.8rem
 
 .c-author-link--unlinked
   padding-right: 0 !important
+  border-right: none !important
+  margin-right: 0 !important
+  font-size: 1.6rem !important
+  line-height: 2.1rem !important
+  font-family: "Proxima Nova", $sans !important
+  font-weight: normal !important
 
 .c-article__info--date--event
   font-size: 12px
