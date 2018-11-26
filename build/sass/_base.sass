@@ -33,3 +33,9 @@ a.c-author-link
   &:hover
     color: c('black')
     text-decoration: underline
+
+@supports (display: grid)
+  .c-article__body hr 
+    grid-column: 2
+    min-width: 96%
+    
