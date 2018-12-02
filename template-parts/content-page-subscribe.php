@@ -12,6 +12,7 @@
 		width: 100%;
 		max-width: 700px;
 		position: relative;
+		grid-column: 1 / -1;
 	}
 
 	#card-element {
@@ -207,6 +208,7 @@
 	}
 </style>
 <article class="o-article o-article--info">
+	<?php the_content() ?>
 	<div class="stripe-form-wrapper">
 		<form action="" method="post" id="payment-form">
 			<!-- a Stripe Element will be inserted here. -->
