@@ -182,8 +182,10 @@
     .images
       img
         width: auto !important
-        max-width: 400px
+        max-width: 300px
         margin: 0 auto
+        @media (min-width: 960px)
+          max-width: 400px
 
     .c-product-page__author
       font-size: 1.6rem
