@@ -23,6 +23,7 @@
     "posthtml-include": "^1.2.0"
   },
   "devDependencies": {
-    "cssnano": "^4.0.5"
+    "cssnano": "^4.0.5",
+    "sass": "^1.16.1"
   }
 }
