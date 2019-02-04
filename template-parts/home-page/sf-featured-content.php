@@ -18,7 +18,13 @@ if ( $featuredPost->have_posts() ) {
 
   <div class="c-content-module c-content-module--featured">
     <a href="<?php the_permalink(); ?>" class="c-content-image-link">
-      <img class="c-content-image" src="<?php the_post_thumbnail_url(); ?>">
+      <?php 
+      $image = get_field('featured_image');
+      if( !empty($image) ) { ?>
+        <img class="c-content-image" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
+      <?php } else {
+        ?> <img class="c-content-image" src="<?php the_post_thumbnail_url(); ?>">
+      <?php } ?>
     </a>
     <div class="c-content-text">
       <p class="c-content-type"><?php sf_single_cat() ?><?php the_field('issue_volume'); ?></p>
