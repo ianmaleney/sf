@@ -50,8 +50,236 @@ main
     h1, h2, h3, h4, h5, h6, p, table, form, ul, ol, figure, blockquote, footer
       grid-column: 2
 
-
 .c-hp-widget
   margin-top: 3.15rem
   &:first-of-type
     margin-top: 0
+
+
+//
+// Subscriptions Page
+//
+
+.page-id-184
+  .u-page-wrapper--primary-header
+    margin: 0 0 0 0
+    margin-top: 0 !important
+    padding: 0 0 0 0
+  .o-article--subs
+    @media #{$min-nine-sixty}
+      display: flex
+      flex-direction: row
+      justify-content: center
+      padding: 0 0 0 0
+      min-height: 100vh
+      .subs-image, .subs-text
+        flex: 1 0 50%
+        height: 100%
+        padding-top: 60px
+    .subs-image
+      background-color: #FDF2B9
+      display: flex
+      justify-content: center
+      align-items: center
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffdd9c' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    .subs-image__cover
+      width: 30vw
+    .subs-text
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      padding-bottom: 40px
+    .subs-text__content
+      max-width: 40vw
+      h1
+        font-size: 3.5rem
+        text-align: center
+      p 
+        font-family: "Proxima Nova", $serif, $system
+        font-size: 1.4rem
+        line-height: 2rem
+        text-align: center
+    .stripe-form-wrapper
+      max-width: 40vw
+      background-color: #F5F5F5
+      padding: 2rem
+      font-family: "Proxima Nova", $system
+      position: relative
+      &.locked
+        border: 1px solid c('primary')
+        #payment-form
+          opacity: 0.15
+          pointer-events: none
+    .stripe-form-group
+      font-size: 1.2rem
+      display: flex
+      max-width: 100%
+      flex-wrap: wrap
+      label
+        display: flex
+        flex-direction: column
+        padding: 10px
+      span
+        font-weight: 700
+        margin-bottom: 4px
+      input
+        border: none
+        background-color: white
+        padding: 3px 5px
+        border-radius: 2px
+        line-height: 1.8rem
+      .stripe-form-group__inner-text
+        font-family: "Proxima Nova", $system
+        font-size: 1.2rem
+        line-height: 2rem
+        text-align: center
+      .form-input--third-width
+        flex: 1 0 33%
+      .form-input--half-width
+        flex: 1 0 50%
+      .form-input--full-width
+        flex: 1 0 100%
+      #card-element
+        background-color: white
+        padding: 5px
+        border-radius: 2px
+      button
+        background-color: #75AF61
+        color: white
+        font-weight: 700
+        letter-spacing: 1px
+        border: none
+        padding: 12px 24px
+        border-radius: 3px
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3)
+        transition: all 0.1s ease-in-out
+        margin: 20px auto 10px
+        &:hover
+          transform: translateY(-1px)
+          box-shadow: 0 6px 9px -2px rgba(0,0,0,0.25)
+    .stripe-form-group--name
+      border-bottom: 1px solid #dddddd
+      margin-bottom: 10px
+      padding-bottom: 10px
+    .radio-groups
+      display: flex
+      margin: 10px 0
+      padding: 10px 0
+      justify-content: space-around
+      border-top: 1px solid #dddddd
+      border-bottom: 1px solid #dddddd
+    .stripe-form-group--radio
+      flex-direction: column
+      padding: 0 15px
+      justify-content: space-between
+      .radio-item
+        margin: 2px 0
+        display: flex
+        justify-content: flex-start
+        align-items: center
+        input, label
+          display: inline-flex
+    .stripe-form-group--delivery
+      flex: 1 0 50%
+      border-right: 1px solid #dddddd
+    .stripe-form-group--issue
+      flex: 1 0 25%
+      border-right: 1px solid #ddd
+    .stripe-form-group--gift
+      flex: 1 0 25%
+    .stripe-form-group--gifted
+      display: none
+      border-bottom: 1px solid #dddddd
+      margin-bottom: 10px
+      padding-bottom: 10px
+
+.spinner
+  position: absolute
+  top: 0
+  left: 0
+  transition: opacity 0.25s ease-in
+  opacity: 0
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  height: 100%
+  width: 100%
+  &.invisible
+    display: none
+  &.animate-in
+    display: flex
+  &.animate-out
+    opacity: 0
+  &.visible
+    display: flex
+    opacity: 1
+  p 
+    text-align: center
+    grid-column: none
+    font-family: "Proxima Nova", $sans, $system
+    font-size: 16px
+    color: c('secondary')
+
+.sk-folding-cube 
+  margin: 20px auto
+  width: 40px
+  height: 40px
+  transform: rotateZ(45deg)
+  .sk-cube 
+    float: left
+    width: 50%
+    height: 50%
+    position: relative
+    transform: scale(1.1)
+    &:before 
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      background-color: c('primary')
+      animation: sk-foldCubeAngle 2.4s infinite linear both
+      transform-origin: 100% 100%
+  .sk-cube2 
+    transform: scale(1.1) rotateZ(90deg)
+    &:before
+      animation-delay: 0.3s
+  .sk-cube3 
+    transform: scale(1.1) rotateZ(180deg)
+    &:before
+      animation-delay: 0.6s
+  .sk-cube4 
+    transform: scale(1.1) rotateZ(270deg)
+    &:before
+      animation-delay: 0.9s
+
+@keyframes sk-foldCubeAngle 
+  0%, 10% 
+    transform: perspective(140px) rotateX(-180deg)
+    opacity: 0 
+  25%, 75% 
+    transform: perspective(140px) rotateX(0deg)
+    opacity: 1 
+  90%, 100% 
+    transform: perspective(140px) rotateY(180deg)
+    opacity: 0 
+  
+#success-container, #failure-container
+  display: block
+  &.invisible
+    display: none
+  h3 
+    font-size: 2.2rem
+    text-align: center
+  p
+    text-align: center
+    grid-column: none
+    font-family: "Proxima Nova", $sans, $system
+    font-size: 14px
+    line-height: 22px
+    a 
+      color: c('primary')
+      &:hover
+        color: c('secondary')

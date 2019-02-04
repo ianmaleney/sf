@@ -7,266 +7,139 @@
 <?php
 	$url = site_url();
 ?>
-<style>
-	.stripe-form-wrapper {
-		width: 100%;
-		max-width: 700px;
-		position: relative;
-		grid-column: 1 / -1;
-	}
 
-	#card-element {
-		z-index: 5;
-		padding: 8px 10px;
-		flex: 1;
-	}
-	
-	form {
-		width: 100%;
-		margin: 20px 0;
-	}
-
-	#payment-form {
-		opacity: 1;
-		pointer-events: auto;
-		transition: all 0.35s ease-in-out;
-	}
-
-	#payment-form.invisible {
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	#payment-form.locked {
-		opacity: 0.35;
-		pointer-events: none;
-	}
-	.group {
-		background: white;
-		box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10), 0 3px 6px 0 rgba(0, 0, 0, 0.08);
-		border-radius: 4px;
-		margin-bottom: 20px;
-	}
-
-	label {
-		position: relative;
-		color: #8898AA;
-		font-weight: 300;
-		height: 40px;
-		line-height: 40px;
-		margin-left: 20px;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.group label:not(:last-child) {
-		border-bottom: 1px solid #F0F5FA;
-	}
-
-	label > span {
-		width: 120px;
-		text-align: right;
-		margin-right: 30px;
-		font-size: 16px;
-		font-family: 'Open Sans', "Helvetica Neue";
-	}
-
-	.field {
-		background: transparent;
-		font-weight: 300;
-		border: 0;
-		color: #31325F;
-		outline: none;
-		flex: 1;
-		padding-right: 10px;
-		padding-left: 10px;
-		cursor: text;
-		font-size: 16px;
-		font-family: 'Open Sans', "Helvetica Neue";
-	}
-
-	.field::-webkit-input-placeholder {
-		color: #CFD7E0;
-	}
-
-	.field::-moz-placeholder {
-		color: #CFD7E0;
-	}
-
-	button {
-		float: left;
-		display: block;
-		background: #666EE8;
-		color: white;
-		box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10), 0 3px 6px 0 rgba(0, 0, 0, 0.08);
-		border-radius: 4px;
-		border: 0;
-		margin-top: 20px;
-		font-size: 15px;
-		font-weight: 400;
-		width: 100%;
-		height: 40px;
-		line-height: 38px;
-		outline: none;
-	}
-
-	button:focus {
-		background: #555ABF;
-	}
-
-	button:active {
-		background: #43458B;
-	}
-
-	#success-container {
-		width: 100%;
-		max-width: 400px;
-		opacity: 1;
-		pointer-events: auto;
-		transform: translateX(0);
-		transition: all 0.35s ease-in-out;
-		background-color: white;
-		box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10), 0 3px 6px 0 rgba(0, 0, 0, 0.08);
-		border-radius: 4px;
-		margin-bottom: 20px;
-		padding: 8px 10px;
-	}
-	#success-container.invisible {
-		opacity: 0;
-		pointer-events: none;
-		transform: translateX(400px);
-	}
-
-	#success-container h2 {
-		font-family: 'Open Sans', "Helvetica Neue";
-		font-size: 32px;
-		margin: 12px auto;
-		text-align: center;
-		width: 80%;
-		border-bottom: 1px solid rgba(49, 49, 93, 0.10);
-		color: #8898AA;
-	}
-
-	#success-container p {
-		color: #8898AA;
-		font-weight: 300;
-		font-size: 16px;
-		font-family: 'Open Sans', "Helvetica Neue";
-		margin: 32px 0;
-		text-align: center;
-	}
-
-	.spinner {
-		margin: 100px auto 0;
-		width: 70px;
-		text-align: center;
-		opacity: 0;
-		position: absolute;
-		top: 100px;
-		left: calc(50% - 35px);
-		transition: opacity 0.3s ease-in-out;
-	}
-
-	.spinner.visible {
-		opacity: 1;
-	}
-
-	.spinner > div {
-		width: 18px;
-		height: 18px;
-		background-color: #8898AA;
-
-		border-radius: 100%;
-		display: inline-block;
-		-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-		animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-	}
-
-	.spinner .bounce1 {
-		-webkit-animation-delay: -0.32s;
-		animation-delay: -0.32s;
-	}
-
-	.spinner .bounce2 {
-		-webkit-animation-delay: -0.16s;
-		animation-delay: -0.16s;
-	}
-
-	@-webkit-keyframes sk-bouncedelay {
-		0%, 80%, 100% { -webkit-transform: scale(0) }
-		40% { -webkit-transform: scale(1.0) }
-	}
-
-	@keyframes sk-bouncedelay {
-		0%, 80%, 100% { 
-			-webkit-transform: scale(0);
-			transform: scale(0);
-		} 40% { 
-			-webkit-transform: scale(1.0);
-			transform: scale(1.0);
-		}
-	}
-</style>
-<article class="o-article o-article--info">
-	<?php the_content() ?>
-	<div class="stripe-form-wrapper">
-		<form action="" method="post" id="payment-form">
-			<!-- a Stripe Element will be inserted here. -->
-			<div class="group">
-				<label>
-					<span>Card</span>
-					<div id="card-element"></div>
-				</label>
-			</div>
-			<div class="group">
-				<label>
-					<span>Name</span>
-					<input id="name" name="name" class="field" placeholder="Jane Doe" />
-				</label>
-				<label>
-					<span>Email</span>
-					<input id="email" name="email" class="field" placeholder="you@example.com" />
-				</label>
-			</div>
-			<div class="group">
-				<label>
-					<span>Address</span>
-					<input id="address-line1" name="address_line1" class="field" placeholder="77 Winchester Lane" />
-				</label>
-				<label>
-					<span>Address (cont.)</span>
-					<input id="address-line2" name="address_line2" class="field" placeholder="" />
-				</label>
-				<label>
-					<span>City</span>
-					<input id="address-city" name="address_city" class="field" placeholder="Coachella" />
-				</label>
-				<label>
-					<span>State</span>
-					<input id="address-state" name="address_state" class="field" placeholder="CA" />
-				</label>
-				<label>
-					<span>ZIP</span>
-					<input id="address-zip" name="address_zip" class="field" placeholder="92236" />
-				</label>
-				<label>
-					<span>Country</span>
-					<input id="address-country" name="address_country" class="field" placeholder="United States" />
-				</label>
-			</div>
-			<button>Submit Payment</button>
-		</form>
-		<div class="spinner">
-			<div class="bounce1"></div>
-			<div class="bounce2"></div>
-			<div class="bounce3"></div>
-		</div>
+<article class="o-article o-article--subs">
+	<div class="subs-image">
+		<img class="subs-image__cover" src="https://stingingfly.org/wp-content/uploads/2018/11/SF-Winter-2018-Front-cover-hi-res-708x1024.jpg">
 	</div>
-	<div id="card-errors"></div>
-	<div id="success-container" class="invisible">
-		<h2>Success!</h2>
-		<p>Thank you for subscribing to The Stinging Fly. You will receive an email with your login details shortly – these will allow you to access our entire online archive.</p>
-		<p>If you have any questions, or if your email doesn't show up, please email web.stingingfly@gmail.com with your query.</p>  
+	<div class="subs-text">
+		<div class="subs-text__content">
+			<h1><?php the_title() ?></h1>
+			<?php the_content() ?>
+		</div>
+		<div class="subs-text__form">
+			<div class="stripe-form-wrapper">
+				<form action="" method="post" id="payment-form">
+					<div class="stripe-form-group stripe-form-group--name">
+						<label class="form-input--half-width">
+							<span>First Name</span>
+							<input id="first_name" name="first_name" class="field" />
+						</label>
+						<label class="form-input--half-width">
+							<span>Last Name</span>
+							<input id="last_name" name="last_name" class="field" />
+						</label>
+						<label class="form-input--full-width">
+							<span>Email</span>
+							<input id="email" name="email" class="field" />
+						</label>
+					</div>
+					<div class="stripe-form-group stripe-form-group--address">
+						<label class="form-input--full-width">
+							<span>Address Line 1</span>
+							<input id="address-line1" name="address_line1" class="field"/>
+						</label>
+						<label class="form-input--full-width">
+							<span>Address Line 2</span>
+							<input id="address-line2" name="address_line2" class="field"/>
+						</label>
+						<label class="form-input--third-width">
+							<span>City</span>
+							<input id="address-city" name="address_city" class="field" />
+						</label>
+						<label class="form-input--third-width">
+							<span>Country</span>
+							<input id="address-country" name="address_country" class="field"/>
+						</label>
+						<label class="form-input--third-width">
+							<span>Postcode</span>
+							<input id="address-postcode" name="address_postcode" class="field"/>
+						</label>
+					</div>
+					<div class="radio-groups">
+						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--delivery">
+							<span>Delivery Region</span>
+							<div class="radio-item">
+								<input type="radio" id="irl" name="delivery" value="irl" required checked>
+								<label for="irl">Republic of Ireland / Northern Ireland</label>
+							</div>
+							<div class="radio-item">
+								<input type="radio" id="row" name="delivery" value="row">
+								<label for="row">Rest of the World</label>
+							</div>
+						</div>
+						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--issue">
+							<span>Starting Issue</span>
+							<div class="radio-item">
+								<input type="radio" id="current_issue" name="issue" value="current_issue" required checked>
+								<label for="current_issue">Current Issue</label>
+							</div>
+							<div class="radio-item">
+								<input type="radio" id="next_issue" name="issue" value="next_issue">
+								<label for="next_issue">Next Issue</label>
+							</div>
+						</div>
+						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--gift">
+							<span>Is This A Gift?</span>
+							<div class="radio-item">
+								<input type="radio" id="gift_yes" name="gift" value="true" required>
+								<label for="gift_yes">Yes</label>
+							</div>
+							<div class="radio-item">
+								<input type="radio" id="gift_no" name="gift" value="false" checked>
+								<label for="gift_no">No</label>
+							</div>
+						</div>
+					</div>
+					<div class="stripe-form-group stripe-form-group--gifted">
+						<p class="stripe-form-group__inner-text">OK, we'll need your details too. Great gift, by the way!</p>
+						<label class="form-input--half-width">
+							<span>First Name</span>
+							<input id="gifter_first_name" name="gifter_first_name" class="field" />
+						</label>
+						<label class="form-input--half-width">
+							<span>Last Name</span>
+							<input id="gifter_last_name" name="gifter_last_name" class="field" />
+						</label>
+						<label class="form-input--full-width">
+							<span>Email</span>
+							<input id="gifter_email" name="gifter_email" class="field" />
+						</label>
+					</div>
+					<div class="stripe-form-group stripe-form-group--card-details">
+						<!-- a Stripe Element will be inserted here. -->
+						<label class="form-input--full-width">
+							<span>Card</span>
+							<div id="card-element"></div>
+						</label>
+						<button>Subscribe</button>	
+					</div>
+				</form>
+				<div class="spinner invisible">
+					<p>Hang on one second...</p>
+					<div class="sk-folding-cube">
+						<div class="sk-cube1 sk-cube"></div>
+						<div class="sk-cube2 sk-cube"></div>
+						<div class="sk-cube4 sk-cube"></div>
+						<div class="sk-cube3 sk-cube"></div>
+					</div>
+				</div>
+				<div id="success-container" class="invisible">
+					<h3>You've subscribed to the Stinging Fly!</h3>
+					<p>Check your email for details of your subscription, and a full guide for accessing the Stinging Fly online archive.</p>
+					<p>If this is a gift subscription...</p>
+					<p>If you have any trouble related to the postal delivery of your subscription, please contact <a href="mailto:info@stingingfly.org">info@stingingfly.org</a>.</p>
+					<p>For all matters relating to the online archive, please contact <a href="mailto:web.stingingfly@gmail.com">web.stingingfly@gmail.com</a>.</p>
+					<p>Thanks for your support!</p>
+				</div>
+				<div id="failure-container" class="invisible">
+					<h3>We've got a problem!</h3>
+					<p>It seems that we already have a subscriber with that email address. Are you trying to update your subscription? You can do that from <a href="/my-account">your account page</a>.</p>
+				</div>
+			</div>
+			<div id="card-errors"></div>
+			
+		</div>
 	</div>
 	<!-- The needed JS files -->
 	<!-- JQUERY File -->

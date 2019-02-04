@@ -1209,4 +1209,40 @@ function ajax_search_handler(){
 add_action('wp_ajax_filter', 'ajax_search_handler'); // wp_ajax_{action}
 add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{action}
 
+
+//
+//
+// Custom Email for New Subscribers
+//
+//
+
+/*$wp_new_user_notification_email
+
+apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );*/
+
+
+/************************************************/
+//
+// Custom Dashboard Page For Subscriber Management
+//
+/************************************************/
+
+add_action( 'admin_menu', 'subscriber_management_page' );
+
+function subscriber_management_page() {
+	add_menu_page( 
+		'Subscriber Management Dashboard', 
+		'Subscribers', 
+		'manage_options', 
+		'subs-dash.php', 
+		'subs_admin_dash', 
+		'dashicons-admin-users', 
+		6
+	);
+}
+
+function subs_admin_dash(){
+	locate_template('./template-parts/dash/subs-admin.php', true, true);
+}
+
 ?>
