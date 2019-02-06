@@ -1245,4 +1245,30 @@ function subs_admin_dash(){
 	locate_template('./template-parts/dash/subs-admin.php', true, true);
 }
 
+
+function subs_admin_load_scripts($hook) {
+	if( $hook != 'toplevel_page_subs-dash' ) 
+		return;
+	wp_enqueue_script( 'preact-js', '/wp-content/themes/stingingfly/js/preact.js' );
+	wp_enqueue_script( 'subs-dash-js', '/wp-content/themes/stingingfly/js/subs-dash.js', 'preact-js', null, true );
+}
+
+add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
+
+add_filter( 'rest_user_query' , 'custom_rest_user_query' );
+function custom_rest_user_query( $prepared_args, $request = null ) {
+  unset($prepared_args['has_published_posts']);
+  return $prepared_args;
+}
+
+register_rest_field( 'user', 'user_email',
+    array(
+        'get_callback'    => function ( $user ) {
+            return $user['email'];
+        },
+        'update_callback' => null,
+        'schema'          => null,
+    )
+);
+
 ?>
