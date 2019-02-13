@@ -13,6 +13,17 @@ class App extends Component {
     this.backgroundFetch = this.backgroundFetch.bind(this);
   }
 
+  handleSearch(searchterm) {
+    console.log(searchterm);
+    let subs = this.state.subscribers;
+    let filtered = subs.filter(sub => {
+      if (sub.contains(searchterm)) {
+        return true;
+      }
+    });
+    this.setState({ subscribers: filtered });
+  }
+
   async backgroundFetch(page, url, array) {
     let result = await fetch(`${url}&page=${page}`);
     let data = await result.json();
@@ -20,7 +31,7 @@ class App extends Component {
       array.push(sub);
     });
     if (data.length !== 100) {
-      let fullArray = array.concat(new_subscribers);
+      let fullArray = array.concat(new_subscribers).reverse();
       this.setState({ subscribers: fullArray });
       return;
     } else {
@@ -43,6 +54,9 @@ class App extends Component {
       h(Header, {
         subscribers: s.length
       }),
+      h(Filter, {
+        onInputChange: this.handleSearch
+      }),
       h(SubsList, { subscribers: s })
     );
   }
@@ -53,6 +67,24 @@ const Header = props => {
   let headline = `${props.subscribers} Subscribers`;
   return h("header", null, h("h1", null, headline));
 };
+
+class Filter extends Component {
+  constructor(props) {
+    super();
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    console.log(e.target.value);
+    this.props.onInputChange(e.target.value);
+  }
+
+  render() {
+    return h("input", {
+      onChange: this.handleChange
+    });
+  }
+}
 
 class SubsHeader extends Component {
   render(props) {
@@ -91,7 +123,11 @@ class SubsList extends Component {
         h(
           "span",
           { class: "subscriber__span subscriber__name" },
-          h("a", { href: `mailto:${sub.email}` }, sub.email || sub.user_email)
+          h(
+            "a",
+            { href: `mailto:${sub.email || sub.user_email}` },
+            sub.email || sub.user_email
+          )
         ),
         h(
           "span",

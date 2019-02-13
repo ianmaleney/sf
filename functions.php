@@ -1108,7 +1108,7 @@ function sf_archive_cron_exec() {
 			array_push($email_content, $output);
 		}
 
-		$recipients = ["web.stingingfly@gmail.com", "stingingfly@gmail.com"];
+		$recipients = ["web.stingingfly@gmail.com"];
 		$subject = 'Newly Unlocked Posts - ' . date("d-m-Y");
 
 		wp_mail($recipients, $subject, implode($email_content));
@@ -1270,5 +1270,36 @@ register_rest_field( 'user', 'user_email',
         'schema'          => null,
     )
 );
+
+
+// Cron jobs for subs
+
+/* Function to Run with WP_Cron */
+function sf_sub_check_cron_exec() {
+		global $wpdb;
+		$subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ", 'ARRAY_N');
+
+		$update = $wpdb->get_results("UPDATE stinging_fly_subscribers SET sub_status = 'expired' WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ");
+
+		foreach($subscribers as $sub) {
+			$id = $sub['wp_user_id'];
+			$user_id = wp_update_user( array( 'ID' => $id, 'role' => 'contributor' ) );
+		}
+
+		$recipients = ["web.stingingfly@gmail.com"];
+		$subject = 'Expired Subs - ' . date("d-m-Y");
+		$email_content = $subscribers[0]['wp_user_id'];
+
+		wp_mail($recipients, $subject, $email_content);
+		
+}
+
+// Custom Hook for WP_Cron 
+add_action( 'sf_sub_check_cron_hook', 'sf_sub_check_cron_exec' );
+
+// Schedule WP_Cron function 
+if ( ! wp_next_scheduled( 'sf_sub_check_cron_hook' ) ) {
+    wp_schedule_event( time(), 'daily', 'sf_sub_check_cron_hook' );
+}
 
 ?>
