@@ -133,10 +133,10 @@
 				<div id="success-container" class="invisible">
 					<h3>You've subscribed to the Stinging Fly!</h3>
 					<p>Check your email for details of your subscription, and a full guide for accessing the Stinging Fly online archive.</p>
-					<p>If this is a gift subscription...</p>
+					<p>If this is a gift, the person receiving the gift will get an email about their subscription on the day you have selected. We've sent you a receipt for your records.</p>
 					<p>If you have any trouble related to the postal delivery of your subscription, please contact <a href="mailto:info@stingingfly.org">info@stingingfly.org</a>.</p>
-					<p>For all matters relating to the online archive, please contact <a href="mailto:web.stingingfly@gmail.com">web.stingingfly@gmail.com</a>.</p>
-					<p>Thanks for your support!</p>
+					<p>For all matters relating to the website and online archive, please contact <a href="mailto:web.stingingfly@gmail.com">web.stingingfly@gmail.com</a>.</p>
+					<p>Thank you for your support!</p>
 				</div>
 				<div id="failure-container" class="invisible">
 					<h3>We've got a problem!</h3>
