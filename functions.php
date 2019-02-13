@@ -1220,8 +1220,44 @@ add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{a
 
 apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );*/
 
+/*function add_new_role() {
+    $result = add_role(
+		'active_subscriber',
+		__( 'Active Subscriber' ),
+		array(
+			'read' => true  // true allows this capability
+		)
+	);
+	if ( null !== $result ) {
+		$to = 'web.stingingfly@gmail.com';
+		$subject = "New Role Created";
+		$message = 'Yay! New role created!';
+		wp_mail($to, $subject, $message);
+	}
+}
 
+add_action( 'init', 'add_new_role' );*/
 
+// Check Current User Role – https://catapultthemes.com/get-current-user-role-in-wordpress/
+function get_current_user_role() {
+  if( is_user_logged_in() ) {
+    $user = wp_get_current_user();
+    $role = ( array ) $user->roles;
+    return $role[0];
+  } else {
+    return FALSE;
+  }
+ }
+
+function paywall() {
+	$roles = ['administrator', 'editor', 'author', 'contributor', 'active_subscriber'];
+	$user_role = get_current_user_role();
+	if ($user_role && in_array($user_role, $roles)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
 
 /************************************************/
 //

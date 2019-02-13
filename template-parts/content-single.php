@@ -2,6 +2,26 @@
 /**
  * The template part for displaying single posts
  */
+
+ function display_content() {
+	echo '<div class="entry-content c-article__body">';
+	the_content();
+	echo '</div>';
+	echo '<section class="entry-footer c-article__footer"><p>';
+	guest_author_bio();
+	echo '</p></section>';
+}
+
+function display_paywall() {
+	$sub_url = home_url( '/shop/#subs' );
+		echo '<div class="c-subscriber-only-message c-article__body">
+		<p>Sorry, this content is only available to subscribers.</p>
+		<p>You can subscribe <a href="' . $sub_url . '">here</a>.</p>
+		<p>If you are already a subscriber, you can log in here:</p><p>';
+		wp_login_form();
+		echo '</p></div>';
+}
+
 ?>
 
 	<article class="o-article" id="post-<?php the_ID(); ?>">
@@ -15,14 +35,10 @@
 				<h1 class="c-article__info--title">
 					<?php
 						if ( in_category('magazine') && in_category('archive') ) {
-							if ( in_category('unlocked') ) {
+							if ( in_category('unlocked') || paywall() ) {
 								// Do Nothing
 							} else {
-								if ( current_user_can('read') ) {
-									// Do Nothing
-								} else {
-									echo '<span class="lock-icon">&#128274;</span> ';
-								}
+								echo '<span class="lock-icon">&#128274;</span> ';
 							}
 						} else {
 							// Do Nothing
@@ -56,39 +72,14 @@
 			<?php get_template_part('template-parts/social-icons'); ?>
 		</div>
 		<?php
-			if ( in_category('magazine') && in_category('archive') ) {
-				if ( in_category('unlocked') ) {
-					echo '<div class="entry-content c-article__body">';
-					the_content();
-					echo '</div>';
-					echo '<section class="entry-footer c-article__footer"><p>';
-					guest_author_bio();
-					echo '</p></section>';
+ 			if ( in_category('magazine') && in_category('archive') ) {
+				if ( in_category('unlocked') || paywall() ) {
+					display_content();
 				} else {
-					if ( current_user_can('read') ) {
-						echo '<div class="entry-content c-article__body">';
-						the_content();
-						echo '</div>';
-						echo '<section class="entry-footer c-article__footer"><p>';
-						guest_author_bio();
-						echo '</p></section>';
-					} else {
-						$sub_url = home_url( '/shop/#subs' );
-						echo '<div class="c-subscriber-only-message c-article__body">
-						<p>Sorry, this content is only available to subscribers.</p>
-						<p>You can subscribe <a href="' . $sub_url . '">here</a>.</p>
-						<p>If you are already a subscriber, you can log in here:</p><p>';
-						wp_login_form( $args );
-						echo '</p></div>';
-					}
+					display_paywall();
 				}
 			} else {
-					echo '<div class="entry-content c-article__body">';
-					the_content();
-					echo '</div>';
-					echo '<section class="entry-footer c-article__footer"><p>';
-					guest_author_bio();
-					echo '</p></section>';
+				display_content();
 			};
 			?>
 	</article>

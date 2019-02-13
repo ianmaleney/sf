@@ -11,12 +11,13 @@
 <article class="o-article o-article--subs">
 	<div class="subs-image">
 		<img class="subs-image__cover" src="https://stingingfly.org/wp-content/uploads/2018/11/SF-Winter-2018-Front-cover-hi-res-708x1024.jpg">
-	</div>
-	<div class="subs-text">
 		<div class="subs-text__content">
 			<h1><?php the_title() ?></h1>
 			<?php the_content() ?>
 		</div>
+	</div>
+	<div class="subs-text">
+		
 		<div class="subs-text__form">
 			<div class="stripe-form-wrapper">
 				<form action="" method="post" id="payment-form">
@@ -116,6 +117,7 @@
 							<span>Card</span>
 							<div id="card-element"></div>
 						</label>
+						<div id="card-errors"></div>
 						<button>Subscribe</button>	
 					</div>
 				</form>
@@ -141,7 +143,6 @@
 					<p>It seems that we already have a subscriber with that email address. Are you trying to update your subscription? You can do that from <a href="/my-account">your account page</a>.</p>
 				</div>
 			</div>
-			<div id="card-errors"></div>
 			
 		</div>
 	</div>
