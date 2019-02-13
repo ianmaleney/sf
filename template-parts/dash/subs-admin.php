@@ -1,6 +1,6 @@
 <?php 
 global $wpdb;
-$subscribers = $wpdb->get_results("Select * from stinging_fly_subscribers");
+$subscribers = $wpdb->get_results("Select * from stinging_fly_subscribers ORDER BY next_renewal_date");
 ?>
 <script>
 var new_subscribers = <?php echo json_encode($subscribers); ?>;
@@ -8,7 +8,7 @@ var new_subscribers = <?php echo json_encode($subscribers); ?>;
 
 <style>
 	.subscriber_table {
-		--grid-columns: 5% 30% 25% 10% 15%;
+		--grid-columns: 30% 25% 10% 20%;
 		display: flex;
 		flex-direction: column;
 		/* Supports Grid */
@@ -33,6 +33,13 @@ var new_subscribers = <?php echo json_encode($subscribers); ?>;
 	}
 	.column_title {
 		font-weight: bold;
+	}
+	.column_title:hover {
+		cursor: pointer;
+		color: blue;
+	}
+	.filter-box__title {
+		margin-right: 8px;
 	}
 </style>
 <div class="wrap"></div>

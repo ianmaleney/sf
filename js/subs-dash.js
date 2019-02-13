@@ -1,49 +1,67 @@
 const wrap = document.querySelector(".wrap");
 const { Component, h, render } = window.preact;
-let baseURL = "/wp-json/wp/v2/users?context=view&per_page=100&role=subscriber";
+
+compareFirstNames = (a, b) => a.first_name.localeCompare(b.first_name);
+compareEmails = (a, b) => a.email.localeCompare(b.email);
+compareStatus = (a, b) => a.sub_status.localeCompare(b.sub_status);
+compareDate = (a, b) => a.next_renewal_date.localeCompare(b.next_renewal_date);
 
 /** Example classful component */
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      subscribers: [],
-      page: 1
+      init_subscribers: window.new_subscribers,
+      subscribers: window.new_subscribers
     };
-    this.backgroundFetch = this.backgroundFetch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSort = this.handleSort.bind(this);
+  }
+
+  handleSort(term) {
+    switch (term) {
+      case "name":
+        this.setState({
+          subscribers: this.state.subscribers.sort(compareFirstNames)
+        });
+        break;
+      case "email":
+        this.setState({
+          subscribers: this.state.subscribers.sort(compareEmails)
+        });
+        break;
+      case "status":
+        this.setState({
+          subscribers: this.state.subscribers.sort(compareStatus)
+        });
+        break;
+      case "renewal date":
+        this.setState({
+          subscribers: this.state.subscribers.sort(compareDate)
+        });
+        break;
+
+      default:
+        this.setState({
+          subscribers: this.state.init_subscribers
+        });
+        break;
+    }
   }
 
   handleSearch(searchterm) {
-    console.log(searchterm);
-    let subs = this.state.subscribers;
+    if (searchterm === "") {
+      this.setState({ subscribers: this.state.init_subscribers });
+      return;
+    }
+    let subs = this.state.init_subscribers;
     let filtered = subs.filter(sub => {
-      if (sub.contains(searchterm)) {
+      let searchable = `${sub.first_name} ${sub.last_name} ${sub.email}`;
+      if (searchable.toLowerCase().includes(searchterm.toLowerCase())) {
         return true;
       }
     });
     this.setState({ subscribers: filtered });
-  }
-
-  async backgroundFetch(page, url, array) {
-    let result = await fetch(`${url}&page=${page}`);
-    let data = await result.json();
-    data.forEach(sub => {
-      array.push(sub);
-    });
-    if (data.length !== 100) {
-      let fullArray = array.concat(new_subscribers).reverse();
-      this.setState({ subscribers: fullArray });
-      return;
-    } else {
-      this.setState({ subscribers: array });
-      let next = page + 1;
-      this.backgroundFetch(next, url, array);
-    }
-  }
-
-  async componentDidMount() {
-    let subsArray = [];
-    this.backgroundFetch(this.state.page, baseURL, subsArray);
   }
 
   render(props, state) {
@@ -57,7 +75,7 @@ class App extends Component {
       h(Filter, {
         onInputChange: this.handleSearch
       }),
-      h(SubsList, { subscribers: s })
+      h(SubsList, { subscribers: s, handleSort: this.handleSort })
     );
   }
 }
@@ -75,21 +93,43 @@ class Filter extends Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value);
     this.props.onInputChange(e.target.value);
   }
 
   render() {
-    return h("input", {
-      onChange: this.handleChange
-    });
+    return h(
+      "div",
+      {
+        class: "filter-box"
+      },
+      h(
+        "span",
+        {
+          class: "filter-box__title"
+        },
+        "Search Subscribers:"
+      ),
+      h("input", {
+        class: "filter-box__input",
+        onKeyUp: this.handleChange
+      })
+    );
   }
 }
 
 class SubsHeader extends Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.props.onSortChange(e.target.innerHTML.toLowerCase());
+  }
+
   render(props) {
     const items = props.columns.map(column =>
-      h("span", { class: "column_title" }, column)
+      h("span", { class: "column_title", onClick: this.handleClick }, column)
     );
     return h(
       "li",
@@ -103,6 +143,11 @@ class SubsHeader extends Component {
 class SubsList extends Component {
   constructor(props) {
     super();
+    this.handleHeadingClick = this.handleHeadingClick.bind(this);
+  }
+
+  handleHeadingClick(term) {
+    this.props.handleSort(term);
   }
 
   render(props, state) {
@@ -110,11 +155,6 @@ class SubsList extends Component {
       h(
         "li",
         { id: sub.sub_id || sub.id, class: "subscriber_table__row" },
-        h(
-          "span",
-          { class: "subscriber__span subscriber_id" },
-          sub.sub_id || sub.id
-        ),
         h(
           "span",
           { class: "subscriber__span subscriber__name" },
@@ -137,7 +177,7 @@ class SubsList extends Component {
         h(
           "span",
           { class: "subscriber__span subscriber__renewal" },
-          sub.next_renewal_date
+          new Date(sub.next_renewal_date).toLocaleDateString()
         )
       )
     );
@@ -145,7 +185,8 @@ class SubsList extends Component {
       "ul",
       { class: "subscriber_table" },
       h(SubsHeader, {
-        columns: ["ID", "Name", "Email", "Status", "Renewal Date"]
+        columns: ["Name", "Email", "Status", "Renewal Date"],
+        onSortChange: this.handleHeadingClick
       }),
       items
     );
