@@ -1221,6 +1221,27 @@ add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{a
 apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );*/
 
 
+
+
+/************************************************/
+//
+// Scripts for Subscription page
+//
+/************************************************/
+
+function sf_enqueue_subscribe_page_scripts() {
+    if( is_page(184) )
+    {
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_register_style( 'jquery-ui', 'http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
+    	wp_enqueue_style( 'jquery-ui' ); 
+    }
+}
+add_action( 'wp_enqueue_scripts', 'sf_enqueue_subscribe_page_scripts' );
+
+
+
+
 /************************************************/
 //
 // Custom Dashboard Page For Subscriber Management

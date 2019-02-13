@@ -105,6 +105,10 @@
 							<span>Email</span>
 							<input id="gifter_email" name="gifter_email" class="field" />
 						</label>
+						<label class="form-input--full-width">
+							<span>When Should The Lucky Subscriber Receive Their Gift?</span>
+							<input id="gift_start_date" name="gift_start_date" class="field" />
+						</label>
 					</div>
 					<div class="stripe-form-group stripe-form-group--card-details">
 						<!-- a Stripe Element will be inserted here. -->
