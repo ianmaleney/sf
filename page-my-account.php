@@ -18,10 +18,10 @@ if ( is_user_logged_in() ) {
 			<section>
 			<h1>Hey, <?php echo $first_name ?>!</h1>
 			<?php if ( $sub_status == 'active') { ?>
-				<p>Your subscription will automatically renew on: <strong><?php echo date("d F, Y", strtotime($expiry_date)); ?></strong></p>
+				<p>Your subscription will automatically renew on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong></p>
 			<?php } ?>
 			<?php if ( $sub_status == 'legacy') { ?>
-				<p>Your subscription will expire on: <strong><?php echo date("d F, Y", strtotime($expiry_date)); ?></strong>. <a href="https://stingingfly.org/subscribe">Renew your subscription here.</a></p>
+				<p>Your subscription will expire on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong>. <a href="https://stingingfly.org/subscribe">Renew your subscription here.</a></p>
 			<?php } ?>
 			</section>
 			<?php get_template_part('template-parts/account-page/form-address'); ?>
@@ -44,7 +44,7 @@ if ( is_user_logged_in() ) {
 		}
 		var errorFunctionCancel = function() {
 			var p = document.createElement("p");
-			p.classList.add("message error-message");
+			p.classList.add("error-message");
 			p.innerHTML = "Sorry, something has gone wrong. Try again, or send us an email: <a href='mailto:web.stingingfly@gmail.com'>web.stingingfly@gmail.com</a>";
 			cancelSubWrapper.appendChild(p);
 		}
@@ -110,7 +110,7 @@ if ( is_user_logged_in() ) {
 
 		var errorFunction = function() {
 			var newInput = document.createElement("p");
-			newInput.classList.add("message error-message");
+			newInput.classList.add("error-message");
 			newInput.innerHTML = "Sorry, it appears something has gone wrong. Try again."
 			addressForm.appendChild(newInput);
 		}
