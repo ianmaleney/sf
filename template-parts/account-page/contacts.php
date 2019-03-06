@@ -1,4 +1,4 @@
-<section>
+<section class="half-width">
 <h2>Helpful Contacts</h2>
 <ul class="contact-list">
 	<li class="contact-list__item">Subscription Queries: <a href="mailto:info@stingingfly.org">info@stingingfly.org</a></li>

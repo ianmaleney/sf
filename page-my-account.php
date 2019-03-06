@@ -14,6 +14,7 @@ get_header('primary'); ?>
 
 <div class="u-page-wrapper u-page-wrapper--primary-header u-page-wrapper--full-width">
 	<main id="main" class="site-main" role="main">
+		<section>
 		<h1>Hey, <?php echo $first_name ?>!</h1>
 		<?php if ( $sub_status == 'active') { ?>
 			<p>Your subscription will automatically renew on: <strong><?php echo date("d F, Y", strtotime($expiry_date)); ?></strong></p>
@@ -21,9 +22,10 @@ get_header('primary'); ?>
 		<?php if ( $sub_status == 'legacy') { ?>
 			<p>Your subscription will expire on: <strong><?php echo date("d F, Y", strtotime($expiry_date)); ?></strong>. <a href="https://stingingfly.org/subscribe">Renew your subscription here.</a></p>
 		<?php } ?>
+		</section>
 		<?php get_template_part('template-parts/account-page/form-address'); ?>
-		<?php get_template_part('template-parts/account-page/contacts'); ?>
 		<?php get_template_part('template-parts/account-page/cancel-sub'); ?>
+		<?php get_template_part('template-parts/account-page/contacts'); ?>
 		<?php get_template_part('template-parts/account-page/latest-posts'); ?>
 	</main><!-- .site-main -->
 
@@ -35,11 +37,13 @@ get_header('primary'); ?>
 	var cancelSubWrapper = document.querySelector(".cancel-sub__wrapper");
 	var successFunctionCancel = function() {
 		var p = document.createElement("p");
+		p.classList.add("message");
 		p.innerHTML = "Success! You've cancelled your subscription. We're sorry to see you go!";
 		cancelSubWrapper.appendChild(p);
 	}
 	var errorFunctionCancel = function() {
 		var p = document.createElement("p");
+		p.classList.add("message error-message");
 		p.innerHTML = "Sorry, something has gone wrong. Try again, or send us an email: <a href='mailto:web.stingingfly@gmail.com'>web.stingingfly@gmail.com</a>";
 		cancelSubWrapper.appendChild(p);
 	}
@@ -98,12 +102,14 @@ get_header('primary'); ?>
 
 	var successFunction = function() {
 		var newInput = document.createElement("p");
+		newInput.classList.add("message");
 		newInput.innerHTML = "Success! You've updated your address."
 		addressForm.appendChild(newInput);
 	}
 
 	var errorFunction = function() {
 		var newInput = document.createElement("p");
+		newInput.classList.add("message error-message");
 		newInput.innerHTML = "Sorry, it appears something has gone wrong. Try again."
 		addressForm.appendChild(newInput);
 	}

@@ -304,8 +304,73 @@ main
 //
 
 .woocommerce-account
-  .o-article
-    .woocommerce
-      grid-column: 2
+  .site-content
+    max-width: 960px
+    margin: 0 auto
+    .site-main
       display: flex
-      flex-direction: column-reverse
+      flex-wrap: wrap
+      padding: 10px
+      section 
+        border-bottom: 1px solid c('spacer')
+        padding: 0 0 20px
+        margin-bottom: 20px
+      section, h1
+        flex: 1 0 100%
+      section.half-width
+        flex: 1 0 50%
+      h1 
+        font-family: $sans
+      h2 
+        font-size: 2rem
+        font-family: $sans
+      p 
+        font-size: 1.6rem
+        line-height: 2.1rem
+        max-width: 420px
+        &.message
+          color: c('primary')
+        &.error-message
+          color: c('highlight')
+      li 
+        font-size: 1.6rem
+        line-height: 2.5rem
+      button
+        background-color: c('primary')
+        border: none
+        color: white
+        font-family: $sans
+        letter-spacing: 0.4px
+        padding: 11px 16px 8px
+        font-size: 1.2rem
+        border-radius: 2px
+        margin: 5px 0
+        display: block
+        box-shadow: 0 2px 3px rgba(0,0,0,0.3)
+        transition: all 0.1s ease-in-out
+        &:hover
+          transform: translateY(-1px)
+          box-shadow: 0 3px 6px -2px rgba(0,0,0,0.25)
+          background-color: c('accent')
+  .account-page__form
+    background-color: #fbfbfb
+    padding: 10px
+    max-width: 440px
+  .account-page__button
+    display: flex
+    justify-content: center
+  .account-page__form-item
+    display: flex
+    flex-direction: column
+    max-width: 420px
+    label 
+      font-family: $sans
+      font-size: 1.2rem
+      font-weight: bold
+    input
+      font-size: 1.4rem
+      font-family: $sans
+      padding: 3px
+      border: 1px solid c('spacer')
+      margin: 4px 0 10px
+  

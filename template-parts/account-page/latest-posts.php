@@ -1,4 +1,4 @@
-<section>
+<section class="half-width">
 <h2>Latest Posts</h2>
 <div class="latest_posts__wrapper">
 <?php 
@@ -17,7 +17,7 @@ if ( $the_query->have_posts() ) {
 	echo '<ul>';
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
-		echo '<li>' . get_the_title() . '</li>';
+		echo '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
 	}
 	echo '</ul>';
 	/* Restore original Post Data */
