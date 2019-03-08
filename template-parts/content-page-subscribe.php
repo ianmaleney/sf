@@ -9,8 +9,7 @@
 ?>
 
 <article class="o-article o-article--subs">
-	<div class="subs-image">
-		<img class="subs-image__cover" src="https://stingingfly.org/wp-content/uploads/2018/11/SF-Winter-2018-Front-cover-hi-res-708x1024.jpg">
+	<div class="subs-info">
 		<div class="subs-text__content">
 			<h1><?php the_title() ?></h1>
 			<?php the_content() ?>
@@ -19,108 +18,125 @@
 	<div class="subs-text">
 		
 		<div class="subs-text__form">
-			<div class="stripe-form-wrapper">
+			<div class="stripe-form-wrapper" data-stage=1>
 				<form action="" method="post" id="payment-form">
-					<div class="stripe-form-group stripe-form-group--name">
-						<label class="form-input--half-width">
-							<span>First Name</span>
-							<input id="first_name" name="first_name" class="field" />
-						</label>
-						<label class="form-input--half-width">
-							<span>Last Name</span>
-							<input id="last_name" name="last_name" class="field" />
-						</label>
-						<label class="form-input--full-width">
-							<span>Email</span>
-							<input id="email" name="email" class="field" />
-						</label>
-					</div>
-					<div class="stripe-form-group stripe-form-group--address">
-						<label class="form-input--full-width">
-							<span>Address Line 1</span>
-							<input id="address-line1" name="address_line1" class="field"/>
-						</label>
-						<label class="form-input--full-width">
-							<span>Address Line 2</span>
-							<input id="address-line2" name="address_line2" class="field"/>
-						</label>
-						<label class="form-input--third-width">
-							<span>City</span>
-							<input id="address-city" name="address_city" class="field" />
-						</label>
-						<label class="form-input--third-width">
-							<span>Country</span>
-							<input id="address-country" name="address_country" class="field"/>
-						</label>
-						<label class="form-input--third-width">
-							<span>Postcode</span>
-							<input id="address-postcode" name="address_postcode" class="field"/>
-						</label>
-					</div>
-					<div class="radio-groups">
-						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--delivery">
-							<span>Delivery Region</span>
-							<div class="radio-item">
-								<input type="radio" id="irl" name="delivery" value="irl" required checked>
-								<label for="irl">Republic of Ireland / Northern Ireland</label>
+					<fieldset class="stripe-form__section">
+						<div class="stripe-form-group stripe-form-group--name">
+							<label class="form-input--half-width">
+								<span>First Name</span>
+								<input id="first_name" name="first_name" class="field" />
+							</label>
+							<label class="form-input--half-width">
+								<span>Last Name</span>
+								<input id="last_name" name="last_name" class="field" />
+							</label>
+							<label class="form-input--full-width">
+								<span>Email</span>
+								<input id="email" name="email" class="field" />
+							</label>
+						</div>
+						<div class="stripe-form-group stripe-form-group--address">
+							<label class="form-input--full-width">
+								<span>Address Line 1</span>
+								<input id="address-line1" name="address_line1" class="field"/>
+							</label>
+							<label class="form-input--full-width">
+								<span>Address Line 2</span>
+								<input id="address-line2" name="address_line2" class="field"/>
+							</label>
+							<label class="form-input--third-width">
+								<span>City</span>
+								<input id="address-city" name="address_city" class="field" />
+							</label>
+							<label class="form-input--third-width">
+								<span>Country</span>
+								<input id="address-country" name="address_country" class="field"/>
+							</label>
+							<label class="form-input--third-width">
+								<span>Postcode</span>
+								<input id="address-postcode" name="address_postcode" class="field"/>
+							</label>
+						</div>
+					</fieldset>
+					<fieldset class="stripe-form__section">
+						<div class="radio-groups">
+							<div class="stripe-form-group stripe-form-group--radio stripe-form-group--delivery">
+								<span>Delivery Region</span>
+								<div class="radio-item">
+									<input type="radio" id="irl" name="delivery" value="irl" required checked>
+									<label for="irl">Republic of Ireland / Northern Ireland –  €25</label>
+								</div>
+								<div class="radio-item">
+									<input type="radio" id="row" name="delivery" value="row">
+									<label for="row">Rest of the World – €30</label>
+								</div>
 							</div>
-							<div class="radio-item">
-								<input type="radio" id="row" name="delivery" value="row">
-								<label for="row">Rest of the World</label>
+							<div class="stripe-form-group stripe-form-group--radio stripe-form-group--issue">
+								<span>Starting Issue</span>
+								<div class="radio-item">
+									<input type="radio" id="current_issue" name="issue" value="current_issue" required checked>
+									<label for="current_issue">Current Issue</label>
+								</div>
+								<div class="radio-item">
+									<input type="radio" id="next_issue" name="issue" value="next_issue">
+									<label for="next_issue">Next Issue</label>
+								</div>
+							</div>
+							<div class="stripe-form-group stripe-form-group--radio stripe-form-group--gift">
+								<span>Is This A Gift?</span>
+								<div class="radio-item">
+									<input type="radio" id="gift_yes" name="gift" value="true" required>
+									<label for="gift_yes">Yes</label>
+								</div>
+								<div class="radio-item">
+									<input type="radio" id="gift_no" name="gift" value="false" checked>
+									<label for="gift_no">No</label>
+								</div>
 							</div>
 						</div>
-						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--issue">
-							<span>Starting Issue</span>
-							<div class="radio-item">
-								<input type="radio" id="current_issue" name="issue" value="current_issue" required checked>
-								<label for="current_issue">Current Issue</label>
-							</div>
-							<div class="radio-item">
-								<input type="radio" id="next_issue" name="issue" value="next_issue">
-								<label for="next_issue">Next Issue</label>
-							</div>
+						<div class="stripe-form-group stripe-form-group--gifted">
+							<p class="stripe-form-group__inner-text">OK, we'll need your details too. Great gift, by the way!</p>
+							<label class="form-input--half-width">
+								<span>First Name</span>
+								<input id="gifter_first_name" name="gifter_first_name" class="field" />
+							</label>
+							<label class="form-input--half-width">
+								<span>Last Name</span>
+								<input id="gifter_last_name" name="gifter_last_name" class="field" />
+							</label>
+							<label class="form-input--full-width">
+								<span>Email</span>
+								<input id="gifter_email" name="gifter_email" class="field" />
+							</label>
+							<label class="form-input--full-width">
+								<span>When Should The Lucky Subscriber Receive Their Gift?</span>
+								<input id="gift_start_date" name="gift_start_date" class="field" />
+							</label>
 						</div>
-						<div class="stripe-form-group stripe-form-group--radio stripe-form-group--gift">
-							<span>Is This A Gift?</span>
-							<div class="radio-item">
-								<input type="radio" id="gift_yes" name="gift" value="true" required>
-								<label for="gift_yes">Yes</label>
-							</div>
-							<div class="radio-item">
-								<input type="radio" id="gift_no" name="gift" value="false" checked>
-								<label for="gift_no">No</label>
-							</div>
+					</fieldset>
+					<fieldset class="stripe-form__section">
+						<div class="stripe-form-group stripe-form-group--card-details">
+							<!-- a Stripe Element will be inserted here. -->
+							<label class="form-input--full-width">
+								<span>Card</span>
+								<div id="card-element"></div>
+							</label>
+							<p>When you click 'subscribe', your card will be charged, and you will receive an email with the full details of your subscription, including how to access our online archive.</p>
+							<p>If this is a gift subscription, you will receive an email receipt for your records, and the person receiving the subscription will be notified on the date you have selected.</p>
+							<div id="card-errors"></div>
+							<button>Subscribe</button>	
 						</div>
-					</div>
-					<div class="stripe-form-group stripe-form-group--gifted">
-						<p class="stripe-form-group__inner-text">OK, we'll need your details too. Great gift, by the way!</p>
-						<label class="form-input--half-width">
-							<span>First Name</span>
-							<input id="gifter_first_name" name="gifter_first_name" class="field" />
-						</label>
-						<label class="form-input--half-width">
-							<span>Last Name</span>
-							<input id="gifter_last_name" name="gifter_last_name" class="field" />
-						</label>
-						<label class="form-input--full-width">
-							<span>Email</span>
-							<input id="gifter_email" name="gifter_email" class="field" />
-						</label>
-						<label class="form-input--full-width">
-							<span>When Should The Lucky Subscriber Receive Their Gift?</span>
-							<input id="gift_start_date" name="gift_start_date" class="field" />
-						</label>
-					</div>
-					<div class="stripe-form-group stripe-form-group--card-details">
-						<!-- a Stripe Element will be inserted here. -->
-						<label class="form-input--full-width">
-							<span>Card</span>
-							<div id="card-element"></div>
-						</label>
-						<div id="card-errors"></div>
-						<button>Subscribe</button>	
-					</div>
+					</fieldset>
 				</form>
+				<div class="stripe-form__progress">
+					<button class="stripe-form__button stripe-form__button--previous">Previous</button>
+					<div class="stripe-form__progress-indicators">
+						<span class="indicator active"></span>
+						<span class="indicator"></span>
+						<span class="indicator"></span>
+					</div>
+					<button class="stripe-form__button stripe-form__button--next active">Next</button>
+				</div>
 				<div class="spinner invisible">
 					<p>Hang on one second...</p>
 					<div class="sk-folding-cube">
