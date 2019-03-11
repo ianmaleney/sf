@@ -1108,7 +1108,7 @@ function sf_archive_cron_exec() {
 			array_push($email_content, $output);
 		}
 
-		$recipients = ["web.stingingfly@gmail.com", "stingingfly@gmail.com"];
+		$recipients = ["web.stingingfly@gmail.com"];
 		$subject = 'Newly Unlocked Posts - ' . date("d-m-Y");
 
 		wp_mail($recipients, $subject, implode($email_content));
@@ -1208,5 +1208,214 @@ function ajax_search_handler(){
 
 add_action('wp_ajax_filter', 'ajax_search_handler'); // wp_ajax_{action}
 add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{action}
+
+
+//
+//
+// Custom Email for New Subscribers
+//
+//
+
+/*$wp_new_user_notification_email
+
+apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );*/
+
+/*function add_new_role() {
+    $result = add_role(
+		'active_subscriber',
+		__( 'Active Subscriber' ),
+		array(
+			'read' => true  // true allows this capability
+		)
+	);
+	if ( null !== $result ) {
+		$to = 'web.stingingfly@gmail.com';
+		$subject = "New Role Created";
+		$message = 'Yay! New role created!';
+		wp_mail($to, $subject, $message);
+	}
+}
+
+add_action( 'init', 'add_new_role' );*/
+
+// Check Current User Role – https://catapultthemes.com/get-current-user-role-in-wordpress/
+function get_current_user_role() {
+  if( is_user_logged_in() ) {
+    $user = wp_get_current_user();
+    $role = ( array ) $user->roles;
+    return $role[0];
+  } else {
+    return FALSE;
+  }
+ }
+
+function paywall() {
+	$roles = ['administrator', 'editor', 'author', 'contributor', 'active_subscriber'];
+	$user_role = get_current_user_role();
+	if ($user_role && in_array($user_role, $roles)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+/************************************************/
+//
+// Scripts for Subscription page
+//
+/************************************************/
+
+function sf_enqueue_subscribe_page_scripts() {
+    if( is_page(184) )
+    {
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_register_style( 'jquery-ui', 'http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
+    	wp_enqueue_style( 'jquery-ui' ); 
+    }
+}
+add_action( 'wp_enqueue_scripts', 'sf_enqueue_subscribe_page_scripts' );
+
+
+
+
+/************************************************/
+//
+// Custom Dashboard Page For Subscriber Management
+//
+/************************************************/
+
+add_action( 'admin_menu', 'subscriber_management_page' );
+
+function subscriber_management_page() {
+	add_menu_page( 
+		'Subscriber Management Dashboard', 
+		'Subscribers', 
+		'manage_options', 
+		'subs-dash.php', 
+		'subs_admin_dash', 
+		'dashicons-admin-users', 
+		6
+	);
+}
+
+function subs_admin_dash(){
+	locate_template('./template-parts/dash/subs-admin.php', true, true);
+}
+
+
+function subs_admin_load_scripts($hook) {
+	if( $hook != 'toplevel_page_subs-dash' ) 
+		return;
+	wp_enqueue_script( 'preact-js', '/wp-content/themes/stingingfly/js/preact.js' );
+	wp_enqueue_script( 'subs-dash-js', '/wp-content/themes/stingingfly/js/subs-dash.js', 'preact-js', null, true );
+}
+
+add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
+
+// Cron jobs for subs
+
+/* Check for expired Subs */
+function sf_sub_check_cron_exec() {
+		global $wpdb;
+		$today = date('Y-m-d H:i:s');
+		$subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE next_renewal_date < CURDATE() AND sub_status = 'active'", 'ARRAY_A');
+
+		$update = $wpdb->get_results("UPDATE stinging_fly_subscribers SET sub_status = 'expired' WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ");
+
+		$expired_subs = array();
+
+		foreach($subscribers as $sub) {
+			$id = $sub['wp_user_id'];
+			$user_id = wp_update_user( array( 'ID' => $id, 'role' => 'subscriber' ) );
+			$sub_string = $sub['first_name'] . ' ' . $sub['last_name'] . ' | ' . $sub['email']; 
+			array_push($expired_subs, $sub_string);
+		}
+
+		$recipients = ["web.stingingfly@gmail.com"];
+		$subject = 'Expired Subs - ' . date("d-m-Y");
+		$email_content = implode(" ||| ", $expired_subs);
+		error_log($email_content);
+		wp_mail($recipients, $subject, $email_content);
+		
+}
+
+// Custom Hook for WP_Cron 
+add_action( 'sf_sub_check_cron_hook', 'sf_sub_check_cron_exec' );
+
+// Schedule WP_Cron function 
+if ( ! wp_next_scheduled( 'sf_sub_check_cron_hook' ) ) {
+    wp_schedule_event( time(), 'daily', 'sf_sub_check_cron_hook' );
+}
+
+
+// Check for gift subs
+function sf_gift_check_cron_exec() {
+	global $wpdb;
+	$today = date('Y-m-d H:i:s');
+
+	$new_subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE date_start = CURDATE() AND gift = true", 'ARRAY_A');
+
+	foreach($new_subscribers as $sub) {
+		$name = $sub['first_name'] . $sub['last_name'] . $sub['sub_id'];
+		$email = $sub['email'];
+		$user_login = strtolower(str_ireplace(" ", "", $name));
+		$userdata = array(
+			'user_login' => $user_login,
+			'first_name' => $sub['first_name'],
+			'user_email' => $email,
+			'user_registered' => $today,
+			'user_pass' => NULL,
+			'role' => 'active_subscriber'
+		);
+
+		// Create New WP User
+		$user_id = wp_insert_user( $userdata );
+
+		// Send login details to new subscriber
+		wp_new_user_notification( $user_id , null, "both" );
+
+		$wpdb->update( 
+			'stinging_fly_subscribers', 
+			array(
+				'wp_user_id' => $user_id,
+				'sub_status' => 'active'
+ 			), 
+			array(
+				'email' => $email,
+			)
+		);
+
+		// Send Email
+		error_log("Sending Subscriber Email: " . time());
+		// Set the email address for delivery
+		$subscriber_to = $email;
+
+		// Set the subject line of the email
+		$subscriber_subject = "You've Subscribed To The Stinging Fly!";
+
+		// Get the contents of the email template
+		$site_url = get_site_url();
+		$file_url = $site_url . '/wp-content/themes/stingingfly/template-parts/email/new-subscriber-gift-delivery.php';
+		$subscriber_message = file_get_contents($file_url);
+
+		// Add Headers to enable HTML
+		$subscriber_headers = array('Content-Type: text/html; charset=UTF-8');
+
+		// Send the email
+		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
+	}
+
+		
+}
+
+//sf_gift_check_cron_exec();
+
+// Custom Hook for WP_Cron 
+add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
+
+// Schedule WP_Cron function 
+if ( ! wp_next_scheduled( 'sf_gift_check_cron_hook' ) ) {
+    wp_schedule_event( time(), 'daily', 'sf_gift_check_cron_hook' );
+}
 
 ?>

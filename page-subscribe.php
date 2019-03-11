@@ -13,12 +13,11 @@ get_header('secondary'); ?>
 		while ( have_posts() ) : the_post();
 
 			// Include the page content template.
-			get_template_part( 'template-parts/content', 'page' );
+			get_template_part( 'template-parts/content', 'page-subscribe' );
 
 			// End of the loop.
 		endwhile;
 		?>
-		<?php get_sidebar('primary'); ?>
 
 	</div><!-- .content-area -->
 </main> <!--.site-main -->

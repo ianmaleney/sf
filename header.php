@@ -17,11 +17,6 @@
 	<meta name="google-site-verification" content="Lmtt__dhrumGOWi5jBSkWEekZMqCpPjkoWFNzxhjAbA" />
 	<?php if( is_author() ) : echo '<title>'; guest_author(); echo ' | '; bloginfo('title'); echo '</title>'; endif; ?>
 	<?php wp_head(); ?>
-	<?php 
-		if (is_page( 'Subscribe' )) { ?>
-			<script src="https://js.braintreegateway.com/web/dropin/1.9.2/js/dropin.min.js"></script>
-		<?php } 
-	?>
 </head>
 
 <body <?php body_class(); ?>>
@@ -59,7 +54,7 @@
 				</div>
 				<div class="c-log-in">
 					<?php if( is_user_logged_in() ) { ?>
-						<a href="<?php $url = home_url( 'my-account/customer-logout/' ); echo $url; ?>">Log Out</a> |
+						<a href="<?php echo wp_logout_url( home_url() ); ?>">Log Out</a> |
 						<a href="<?php $url = home_url( '/shop' ); echo $url; ?>">Shop</a>
 					<?php } else { ?>
 						<a href="<?php $url = home_url( '/wp-login.php' ); echo $url; ?>">Log In</a> |

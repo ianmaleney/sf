@@ -1,0 +1,191 @@
+.stripe-form-wrapper
+  max-width: 100%
+  background-color: #F5F5F5
+  padding: 2rem
+  font-family: "Proxima Nova", $sans
+  position: relative
+  @media (min-width: 768px)
+    max-width: 80%
+    margin: 0 auto
+  @media (min-width: 960px)
+    max-width: 66%
+    margin: 0 auto
+  @media (min-width: 1280px)
+    max-width: 40vw
+    margin: 0
+  &.locked
+    border: 1px solid c('primary')
+    #payment-form
+      opacity: 0.15
+      pointer-events: none
+  
+#payment-form
+  display: flex
+  overflow: hidden
+  fieldset
+    display: block
+    width: 100%
+    flex: 1 0 100%
+    border: none
+    transform: translateX(0)
+    transition: transform 0.2s ease-in
+    p 
+      font-size: 1.25rem
+      line-height: 1.8rem
+      text-align: center
+      margin: 10px auto
+      max-width: 96%
+      color: rgba(0,0,0,0.7)
+      font-family: "Proxima Nova", $sans
+  &.stage-2
+    fieldset
+      transform: translateX(-100%)
+  &.stage-3
+    fieldset
+      transform: translateX(-200%)
+
+.stripe-form-group
+  font-size: 1.2rem
+  display: flex
+  max-width: 100%
+  flex-wrap: wrap
+  label
+    display: flex
+    flex-direction: column
+    padding: 10px
+  span
+    font-weight: 700
+    margin-bottom: 4px
+  input
+    border: none
+    background-color: white
+    padding: 3px 5px
+    border-radius: 2px
+    line-height: 1.8rem
+  .stripe-form-group__inner-text
+    font-family: "Proxima Nova", $sans
+    font-size: 1.2rem
+    line-height: 2rem
+    text-align: center
+  .form-input--third-width
+    flex: 1 0 33%
+    @media (max-width: 767px)
+      flex: 1 0 50%
+  .form-input--half-width
+    flex: 1 0 50%
+    @media (max-width: 767px)
+      flex: 1 0 100%
+  .form-input--full-width
+    flex: 1 0 100%
+  #card-element
+    background-color: white
+    padding: 5px
+    border-radius: 2px
+  button
+    background-color: #75AF61
+    color: white
+    font-weight: 700
+    letter-spacing: 1px
+    border: none
+    padding: 12px 24px
+    border-radius: 3px
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3)
+    transition: all 0.1s ease-in-out
+    margin: 20px auto 10px
+    &:hover
+      transform: translateY(-1px)
+      box-shadow: 0 6px 9px -2px rgba(0,0,0,0.25)
+    
+.stripe-form-group--name
+  border-bottom: 1px solid #dddddd
+  margin-bottom: 10px
+  padding-bottom: 10px
+.radio-groups
+  display: flex
+  margin: 10px 0
+  padding: 10px 0
+  justify-content: space-around
+  border-top: 1px solid #dddddd
+  border-bottom: 1px solid #dddddd
+  @media (max-width: 768px)
+    flex-wrap: wrap
+.stripe-form-group--radio
+  flex-direction: column
+  padding: 0 15px
+  justify-content: space-between
+.radio-item
+  margin: 2px 0
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  input, label
+    display: inline-flex
+.stripe-form-group--delivery
+  flex: 1 0 100%
+  border-bottom: 1px solid #dddddd
+  margin-bottom: 20px
+  @media (min-width: 767px)
+    flex: 1 0 50%
+    border-right: 1px solid #dddddd
+    border-bottom: none
+    margin-bottom: 0
+.stripe-form-group--issue
+  flex: 1 0 25%
+  border-right: 1px solid #ddd
+.stripe-form-group--gift
+  flex: 1 0 25%
+.stripe-form-group--gifted
+  display: none
+  margin-bottom: 10px
+  padding-bottom: 10px
+  
+  
+  
+.stripe-form__progress
+  display: flex
+  justify-content: space-between
+  width: 100%
+  border-top: 1px solid #dddddd
+  margin: 10px 0
+  &.invisible
+    opacity: 0
+
+    
+  
+.stripe-form__button
+  background-color: #75AF61
+  color: white
+  font-weight: 700
+  letter-spacing: 1px
+  border: none
+  padding: 12px 24px
+  border-radius: 3px
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3)
+  transition: all 0.1s ease-in-out
+  margin: 20px 0
+  opacity: 0
+  pointer-events: none
+  visibility: hidden
+  &:hover
+    transform: translateY(-1px)
+    box-shadow: 0 6px 9px -2px rgba(0,0,0,0.25)
+    cursor: pointer
+  &.active
+    opacity: 1
+    pointer-events: auto
+    visibility: visible
+    
+.stripe-form__progress-indicators
+  max-width: 50px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  .indicator
+    width: 8px
+    height: 8px
+    border-radius: 50%
+    display: block
+    background-color: #ddd
+    margin: 0 4px
+    &.active
+      background-color: #75AF61
