@@ -1222,8 +1222,8 @@ apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email
 
 /*function add_new_role() {
     $result = add_role(
-		'active_subscriber',
-		__( 'Active Subscriber' ),
+		'patron',
+		__( 'Patron' ),
 		array(
 			'read' => true  // true allows this capability
 		)
@@ -1417,5 +1417,19 @@ add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
 if ( ! wp_next_scheduled( 'sf_gift_check_cron_hook' ) ) {
     wp_schedule_event( time(), 'daily', 'sf_gift_check_cron_hook' );
 }
+
+
+
+
+// One-off function to convert subscribers
+
+function change_subscriber_role($subscriber, $field, $role) {
+	$user = get_user_by( $field, $subscriber );
+	if ( ! empty( $user ) ) {
+		var_dump($user);
+		$user->set_role( $role );
+	};
+}
+
 
 ?>
