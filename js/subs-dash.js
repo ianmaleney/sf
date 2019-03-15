@@ -172,12 +172,25 @@ class SubsList extends Component {
         h(
           "span",
           { class: "subscriber__span subscriber__status" },
-          sub.sub_status || "Old"
+          sub.status || "Old"
         ),
         h(
           "span",
           { class: "subscriber__span subscriber__renewal" },
           new Date(sub.next_renewal_date).toLocaleDateString()
+        ),
+        h(
+          "span",
+          { class: "subscriber__span subscriber__renewal" },
+          sub.address_one +
+            ", " +
+            sub.address_two +
+            ", " +
+            sub.city +
+            ", " +
+            sub.country +
+            ", " +
+            sub.postcode
         )
       )
     );
@@ -185,7 +198,7 @@ class SubsList extends Component {
       "ul",
       { class: "subscriber_table" },
       h(SubsHeader, {
-        columns: ["Name", "Email", "Status", "Renewal Date"],
+        columns: ["Name", "Email", "Status", "Renewal Date", "Address"],
         onSortChange: this.handleHeadingClick
       }),
       items

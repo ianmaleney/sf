@@ -8,7 +8,7 @@ var new_subscribers = <?php echo json_encode($subscribers); ?>;
 
 <style>
 	.subscriber_table {
-		--grid-columns: 30% 25% 10% 20%;
+		--grid-columns: 25% 25% 10% 20% 20%;
 		display: flex;
 		flex-direction: column;
 		/* Supports Grid */
