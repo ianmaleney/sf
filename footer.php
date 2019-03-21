@@ -51,7 +51,7 @@
         </div>
 
         <div class="c-support-logos">
-					<img src="/wp-content/themes/stingingfly/img/AC_FUND_TheArts_WHT.png" class="ac-logo">
+					<img data-src="/wp-content/themes/stingingfly/img/AC_FUND_TheArts_WHT.png" class="ac-logo">
 				</div>
 
       </div>

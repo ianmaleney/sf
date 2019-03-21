@@ -52,14 +52,14 @@ get_header(); ?>
 		var loadImages = function(entries, observer) {
 			entries.forEach(entry => {
 				if (entry.isIntersecting) {
-					//console.log(entry);
+					// console.log(entry.target);
 					entry.target.src = entry.target.dataset.src;
 					observer.unobserve(entry.target);
 				}
 			});
 		}
 		var observer = new IntersectionObserver(loadImages, options);
-		var ll_images = document.querySelectorAll("img[data-src]");
+		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
 		ll_images.forEach(target => {
 			observer.observe(target);
 		});
