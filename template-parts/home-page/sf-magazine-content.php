@@ -22,7 +22,7 @@ if($magazine) {
 
     <div class="c-mag-home__image">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener">
-        <img src="<?php the_post_thumbnail_url( 'large' ); ?>">
+        <img data-src="<?php the_post_thumbnail_url( 'large' ); ?>">
       </a>
     </div>
 

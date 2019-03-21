@@ -42,5 +42,27 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
+	<script defer>
+		// Load Images on Homepage
+		var options = {
+			root: null,
+			rootMargin: '50px 0px',
+			threshold: 0
+		}
+		var loadImages = function(entries, observer) {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					//console.log(entry);
+					entry.target.src = entry.target.dataset.src;
+					observer.unobserve(entry.target);
+				}
+			});
+		}
+		var observer = new IntersectionObserver(loadImages, options);
+		var ll_images = document.querySelectorAll("img[data-src]");
+		ll_images.forEach(target => {
+			observer.observe(target);
+		});
 
+	</script>
 <?php get_footer(); ?>

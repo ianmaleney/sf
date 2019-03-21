@@ -21,9 +21,9 @@ if ( $featuredPost->have_posts() ) {
       <?php 
       $image = get_field('featured_image');
       if( !empty($image) ) { ?>
-        <img class="c-content-image" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
+        <img class="c-content-image" data-src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>">
       <?php } else {
-        ?> <img class="c-content-image" src="<?php the_post_thumbnail_url(); ?>">
+        ?> <img class="c-content-image" data-src="<?php the_post_thumbnail_url(); ?>">
       <?php } ?>
     </a>
     <div class="c-content-text">
@@ -62,7 +62,7 @@ if($secondaryPosts) {
 
   <div class="c-content-module c-content-module--secondary-featured">
     <a href="<?php the_permalink(); ?>" class="c-content-image-link">
-      <img class="c-content-image" src="<?php the_post_thumbnail_url( 'large' ); ?>">
+      <img class="c-content-image" data-src="<?php the_post_thumbnail_url( 'large' ); ?>">
     </a>
     <div class="c-content-text">
       <p class="c-content-type"><?php sf_single_cat() ?></p>
@@ -86,9 +86,7 @@ if($secondaryPosts) {
 
   <?php if ( is_active_sidebar( 'home_featured_image' ) ) : ?>
     <div class="c-featured-content__big-sub-ad" role="complementary">
-      <a href="/subscribe">
         <?php dynamic_sidebar( 'home_featured_image' ); ?>
-      </a>
     </div>
   <?php endif; ?>
 </div>

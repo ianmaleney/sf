@@ -24,7 +24,7 @@ if($latestBook) {
 
     <div class="books-image">
       <a href="<?php the_permalink(); ?>">
-        <img src="<?php the_field('book_cover'); ?>">
+        <img data-src="<?php the_field('book_cover'); ?>">
       </a>
     </div>
 

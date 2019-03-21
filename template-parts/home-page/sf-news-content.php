@@ -27,7 +27,7 @@ if($newsPosts) {
         <p class="news-time"><?php the_date(); ?></p>
       </div>
     </div>
-    <div class="news-module__image"><img src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>"></div>
+    <div class="news-module__image"><img data-src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>"></div>
   </div>
 
   <?php endforeach;
