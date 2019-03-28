@@ -58,7 +58,7 @@
 						<a href="<?php $url = home_url( '/shop' ); echo $url; ?>">Shop</a>
 					<?php } else { ?>
 						<a href="<?php $url = home_url( '/wp-login.php' ); echo $url; ?>">Log In</a> |
-						<a href="<?php $url = home_url( '/shop/#subs' ); echo $url; ?>">Subscribe</a>
+						<a href="<?php $url = home_url( '/subscribe' ); echo $url; ?>">Subscribe</a>
 					<?php } ?>
 					
 				</div>

@@ -43,26 +43,32 @@ get_header(); ?>
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 	<script defer>
-		// Load Images on Homepage
-		var options = {
-			root: null,
-			rootMargin: '50px 0px',
-			threshold: 0
-		}
-		var loadImages = function(entries, observer) {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					// console.log(entry.target);
-					entry.target.src = entry.target.dataset.src;
-					observer.unobserve(entry.target);
-				}
+		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
+		if ('IntersectionObserver' in window) {
+			// Load Images on Homepage
+			var options = {
+				root: null,
+				rootMargin: '50px 0px',
+				threshold: 0
+			}
+			var loadImages = function(entries, observer) {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						// console.log(entry.target);
+						entry.target.src = entry.target.dataset.src;
+						observer.unobserve(entry.target);
+					}
+				});
+			}
+			var observer = new IntersectionObserver(loadImages, options);
+			ll_images.forEach(target => {
+				observer.observe(target);
+			});
+		} else {
+			ll_images.forEach(image => {
+				image.src = image.dataset.src;
 			});
 		}
-		var observer = new IntersectionObserver(loadImages, options);
-		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
-		ll_images.forEach(target => {
-			observer.observe(target);
-		});
 
 	</script>
 <?php get_footer(); ?>
