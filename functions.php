@@ -1306,8 +1306,8 @@ function subs_admin_dash(){
 function subs_admin_load_scripts($hook) {
 	if( $hook != 'toplevel_page_subs-dash' ) 
 		return;
-	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/bundle.css' );
-	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/bundle.js', null, null, true );
+	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.css' );
+	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.js', null, null, true );
 }
 
 add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
