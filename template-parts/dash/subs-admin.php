@@ -4,6 +4,7 @@ $subscribers = $wpdb->get_results("Select * from stinging_fly_subscribers ORDER 
 ?>
 <script>
 var new_subscribers = <?php echo json_encode($subscribers); ?>;
+console.log(new_subscribers);
 </script>
 
 <style>

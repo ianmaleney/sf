@@ -1299,15 +1299,15 @@ function subscriber_management_page() {
 }
 
 function subs_admin_dash(){
-	locate_template('./template-parts/dash/subs-admin.php', true, true);
+	locate_template('./template-parts/dash/index.php', true, true);
 }
 
 
 function subs_admin_load_scripts($hook) {
 	if( $hook != 'toplevel_page_subs-dash' ) 
 		return;
-	wp_enqueue_script( 'preact-js', '/wp-content/themes/stingingfly/js/preact.js' );
-	wp_enqueue_script( 'subs-dash-js', '/wp-content/themes/stingingfly/js/subs-dash.js', 'preact-js', null, true );
+	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/bundle.css' );
+	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/bundle.js', null, null, true );
 }
 
 add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
