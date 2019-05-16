@@ -17,6 +17,7 @@ if ( is_user_logged_in() ) {
 		<main id="main" class="site-main" role="main">
 			<section>
 			<h1>Hey, <?php echo $first_name ?>!</h1>
+			<p>Welcome to the Stinging Fly! You have access to all the content on our website. You can see the archive <a href="https://stingingfly.org/category/archive">here</a>, or click <a href="/">here</a> to browse the homepage.</p>
 			<?php if ( $sub_status == 'active') { ?>
 				<p>Your subscription will automatically renew on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong></p>
 			<?php } ?>
