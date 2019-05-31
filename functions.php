@@ -1315,29 +1315,29 @@ add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
 // Cron jobs for subs
 
 /* Check for expired Subs */
-function sf_sub_check_cron_exec() {
-		global $wpdb;
-		$today = date('Y-m-d H:i:s');
-		$subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE next_renewal_date < CURDATE() AND sub_status = 'active'", 'ARRAY_A');
+// function sf_sub_check_cron_exec() {
+// 		global $wpdb;
+// 		$today = date('Y-m-d H:i:s');
+// 		$subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE next_renewal_date < CURDATE() AND sub_status = 'active'", 'ARRAY_A');
 
-		$update = $wpdb->get_results("UPDATE stinging_fly_subscribers SET sub_status = 'expired' WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ");
+// 		$update = $wpdb->get_results("UPDATE stinging_fly_subscribers SET sub_status = 'expired' WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ");
 
-		$expired_subs = array();
+// 		$expired_subs = array();
 
-		foreach($subscribers as $sub) {
-			$id = $sub['wp_user_id'];
-			$user_id = wp_update_user( array( 'ID' => $id, 'role' => 'subscriber' ) );
-			$sub_string = $sub['first_name'] . ' ' . $sub['last_name'] . ' | ' . $sub['email']; 
-			array_push($expired_subs, $sub_string);
-		}
+// 		foreach($subscribers as $sub) {
+// 			$id = $sub['wp_user_id'];
+// 			$user_id = wp_update_user( array( 'ID' => $id, 'role' => 'subscriber' ) );
+// 			$sub_string = $sub['first_name'] . ' ' . $sub['last_name'] . ' | ' . $sub['email']; 
+// 			array_push($expired_subs, $sub_string);
+// 		}
 
-		$recipients = ["web.stingingfly@gmail.com"];
-		$subject = 'Expired Subs - ' . date("d-m-Y");
-		$email_content = implode(" ||| ", $expired_subs);
-		error_log($email_content);
-		wp_mail($recipients, $subject, $email_content);
+// 		$recipients = ["web.stingingfly@gmail.com"];
+// 		$subject = 'Expired Subs - ' . date("d-m-Y");
+// 		$email_content = implode(" ||| ", $expired_subs);
+// 		error_log($email_content);
+// 		wp_mail($recipients, $subject, $email_content);
 		
-}
+// }
 
 // Custom Hook for WP_Cron 
 add_action( 'sf_sub_check_cron_hook', 'sf_sub_check_cron_exec' );
