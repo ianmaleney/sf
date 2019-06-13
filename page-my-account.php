@@ -19,12 +19,17 @@ if ( is_user_logged_in() ) {
 			<h1>Hey, <?php echo $first_name ?>!</h1>
 			<p>Welcome to the Stinging Fly! You have access to all the content on our website. You can see the archive <a href="https://stingingfly.org/category/archive">here</a>, or click <a href="/">here</a> to browse the homepage.</p>
 			<?php if ( $sub_status == 'active') { ?>
-				<p>Your subscription will automatically renew on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong></p>
+				<p>Your subscription will automatically renew on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong><br>If you want to cancel the auto-renewal, click the 'Cancel Subscription' button further down this page.</p>
+				
 			<?php } ?>
 			<?php if ( $sub_status == 'legacy') { ?>
 				<p>Your subscription will expire on: <br><strong><?php echo date("F d, Y", strtotime($expiry_date)); ?></strong>. <a href="https://stingingfly.org/subscribe">Renew your subscription here.</a></p>
 			<?php } ?>
 			</section>
+			<div class="heading">
+				<h2>Your account details</h2>
+				<p>You can edit and update your account details here.</p>
+			</div>
 			<?php get_template_part('template-parts/account-page/form-address'); ?>
 			<?php get_template_part('template-parts/account-page/cancel-sub'); ?>
 			<?php get_template_part('template-parts/account-page/contacts'); ?>
