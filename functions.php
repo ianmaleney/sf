@@ -1420,16 +1420,114 @@ if ( ! wp_next_scheduled( 'sf_gift_check_cron_hook' ) ) {
 
 
 
+/*
+//
+// Create custom box on dash for new subs
+//
+*/
 
-// One-off function to convert subscribers
+add_action('wp_dashboard_setup', 'subs_custom_dashboard_widgets');
+  
+function subs_custom_dashboard_widgets() {
+	global $wp_meta_boxes;
+	wp_add_dashboard_widget('custom_subs_widget', 'New Subscribers', 'custom_subs_dashboard');
+	wp_enqueue_script ( 'handle_new_subs_dash', get_template_directory_uri() . '/js/handle_new_subs_dash.js', [], false, true );
+}
+	
+function custom_subs_dashboard() {
+	global $wpdb;
+	$subs = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE admin_status='processing'");
 
-function change_subscriber_role($subscriber, $field, $role) {
-	$user = get_user_by( $field, $subscriber );
-	if ( ! empty( $user ) ) {
-		var_dump($user);
-		$user->set_role( $role );
+	if (!$subs) {
+		echo "No new subscribers";
+		return;
+	}
+
+	// Insert styles
+	echo '<style>
+		.subs-dash__sub {
+			padding: 8px 8px 12px; 
+			display: flex; 
+			justify-content: space-between; 
+			align-items: flex-start;
+		}
+		.subs-dash__sub.processed {
+			opacity: 0.2;
+			pointer-events: none;
+		}
+		.subs-dash__sub:nth-child(odd) {background-color: #eee;}
+		.subs-dash__sub-details {
+			flex: 1 0 80%;
+		} 
+		.subs-dash__sub-details p {margin: 0;} 
+		.subs-dash__sub-process-button {
+			background-color: rgba(255,255,255,0);
+			border: 1px solid blue;
+			font-size: 11px;
+			padding: 8px 16px;
+			color: blue;
+		}
+		.subs-dash__sub-process-button:hover {
+			background-color: blue;
+			color: white;
+			cursor: pointer;
+		}
+		.subs-dash__sub-details details {
+			margin-top: 8px;
+			padding-top: 8px;
+			border-top: 1px solid #ddd;
+		}
+		.subs-dash__sub-details ul {
+			margin-top: 0;
+		}
+		.subs-dash__sub-details li {
+			margin-bottom: 0;
+		}
+		.subs-dash__sub-details .details__inner p {
+			padding: 0 10px;
+			min-width: 25%;
+		}
+		.subs-dash__sub-details .details__inner {
+			display: flex;
+			justify-content: space-around;
+			align-items: flex-start;
+			padding: 8px 0;
+		}
+		</style>';
+
+
+	// Loop through the subs
+	foreach ($subs as $sub) {
+		if ($sub->gift) {
+			$gift = "<span class='gift-notice'>Gift</span>";
+		} else {
+			$gift = null;
+		}
+		echo "
+		<div class='subs-dash__sub'>
+			<div class='subs-dash__sub-details'>
+				<p><strong>{$gift}{$sub->first_name} {$sub->last_name}</strong></p>
+				<p>{$sub->email}</p>
+				<details>
+					<summary>More...</summary>
+					<div class='details__inner'>
+						<ul>
+							<li><strong>Address:</strong></li>
+							<li>{$sub->address_one}</li>
+							<li>{$sub->address_two}</li>
+							<li>{$sub->city}</li>
+							<li>{$sub->country}</li>
+							<li>{$sub->postcode}</li>
+						</ul>
+						<p><strong>Starting Issue:</strong> {$sub->start_issue}</p>
+						<p><strong>Status:</strong> {$sub->sub_status}</p>
+					</div>
+				</details>
+			</div>
+			<button class='subs-dash__sub-process-button' data-sub='{$sub->sub_id}'>Mark As Read</button>
+		</div>
+		";
 	};
 }
-
 
 ?>
