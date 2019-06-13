@@ -6,6 +6,35 @@
 ?>
 <?php
 	$url = site_url();
+
+	// Get details of the latest issue, convert to number, create next_issue_number
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => 1,
+			'product_cat' => 'magazine',
+			'orderby' =>'date',
+			'order' => 'DESC' 
+		);
+		$loop = new WP_Query( $args );
+		$current_issue;
+
+		if ($loop->have_posts()) {
+			while($loop->have_posts()) {
+				$loop->the_post();
+				$value = get_field('issue_volume');
+				$link = get_the_permalink();
+				$current_issue = $value;
+			}
+		}
+
+		$string_array = explode(" ", $current_issue);
+		$num_array = explode("/", $string_array[1]);
+		$current_issue_number = intval($num_array[0]);
+		$next_issue_number = $current_issue_number + 1;
+
+		$current_issue_title = $value . ": " . $loop->posts[0]->post_title;
+		$next_issue_title = "Issue {$next_issue_number} / Volume 2";
+		wp_reset_query();
 ?>
 
 <article class="o-article o-article--subs">
@@ -74,12 +103,12 @@
 							<div class="stripe-form-group stripe-form-group--radio stripe-form-group--issue">
 								<span>Starting Issue</span>
 								<div class="radio-item">
-									<input type="radio" id="current_issue" name="issue" value="current_issue" required checked>
-									<label for="current_issue">Current Issue</label>
+									<input type="radio" id="current_issue" name="issue" value="<?php echo $current_issue_number ?>" required checked>
+									<label for="current_issue">Current Issue: <a href="<?php echo $link ?>" target="_blank" rel="noopener"><?php echo $current_issue_title ?></a></label>
 								</div>
 								<div class="radio-item">
-									<input type="radio" id="next_issue" name="issue" value="next_issue">
-									<label for="next_issue">Next Issue</label>
+									<input type="radio" id="next_issue" name="issue" value="<?php echo $next_issue_number ?>">
+									<label for="next_issue">Next Issue: <?php echo $next_issue_title ?></label>
 								</div>
 							</div>
 							<div class="stripe-form-group stripe-form-group--radio stripe-form-group--gift">
