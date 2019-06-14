@@ -23,7 +23,16 @@ function createSubStore() {
         .then(res => res.json())
         .then(data => {
           let filtered = data.filter(sub => {
-            let searchable = `${sub.first_name} ${sub.last_name} ${sub.email}`;
+            let searchable = [
+              sub.first_name,
+              sub.last_name,
+              sub.email,
+              sub.address_one,
+              sub.address_two,
+              sub.city,
+              sub.country,
+              sub.postcode
+            ].join(" | ");
             if (searchable.toLowerCase().includes(searchterm.toLowerCase())) {
               return true;
             }
