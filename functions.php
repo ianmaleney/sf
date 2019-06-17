@@ -1493,6 +1493,11 @@ function custom_subs_dashboard() {
 			align-items: flex-start;
 			padding: 8px 0;
 		}
+		.gift-notice {
+			padding: 4px 12px;
+			color: blue;
+			border: 1px solid blue;
+		}
 		</style>';
 
 
@@ -1520,7 +1525,7 @@ function custom_subs_dashboard() {
 							<li>{$sub->postcode}</li>
 						</ul>
 						<p><strong>Starting Issue:</strong> {$sub->start_issue}</p>
-						<p><strong>Status:</strong> {$sub->sub_status}</p>
+						<p><strong>Status:</strong> {$sub->sub_status}<br><strong>Starts:</strong> {$sub->date_start}</p>
 					</div>
 				</details>
 			</div>
