@@ -1494,9 +1494,10 @@ function custom_subs_dashboard() {
 			padding: 8px 0;
 		}
 		.gift-notice {
-			padding: 4px 12px;
+			padding: 0 12px;
 			color: blue;
 			border: 1px solid blue;
+			margin-right: 5px;
 		}
 		</style>';
 
