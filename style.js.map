@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.js"],"names":[],"mappings":";;;AAAA,aAAA,QAAA","file":"style.js","sourceRoot":"build/js","sourcesContent":["import \"../sass/style.sass\";\n"]}
