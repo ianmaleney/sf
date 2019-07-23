@@ -44,7 +44,6 @@ get_header(); ?>
 	</div><!-- .content-area -->
 	<script async>
 		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
-		console.log(ll_images);
 		if ('IntersectionObserver' in window) {
 			// Load Images on Homepage
 			var options = {
@@ -55,7 +54,7 @@ get_header(); ?>
 			var loadImages = function(entries, observer) {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
-						// console.log(entry.target);
+						console.log(entry.target);
 						entry.target.src = entry.target.dataset.src;
 						observer.unobserve(entry.target);
 					}
