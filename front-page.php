@@ -42,8 +42,9 @@ get_header(); ?>
 
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
-	<script defer>
+	<script async>
 		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
+		console.log(ll_images);
 		if ('IntersectionObserver' in window) {
 			// Load Images on Homepage
 			var options = {
