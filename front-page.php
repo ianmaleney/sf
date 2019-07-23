@@ -44,7 +44,10 @@ get_header(); ?>
 	</div><!-- .content-area -->
 	<script async>
 		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
-		if ('IntersectionObserver' in window) {
+		ll_images.forEach(image => {
+				image.src = image.dataset.src;
+			});
+		/*if ('IntersectionObserver' in window) {
 			// Load Images on Homepage
 			var options = {
 				root: null,
@@ -54,7 +57,7 @@ get_header(); ?>
 			var loadImages = function(entries, observer) {
 				entries.forEach(entry => {
 					if (entry.isIntersecting) {
-						console.log(entry.target);
+						// console.log(entry.target);
 						entry.target.src = entry.target.dataset.src;
 						observer.unobserve(entry.target);
 					}
@@ -68,7 +71,7 @@ get_header(); ?>
 			ll_images.forEach(image => {
 				image.src = image.dataset.src;
 			});
-		}
+		}*/
 
 	</script>
 <?php get_footer(); ?>
