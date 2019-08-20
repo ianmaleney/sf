@@ -13,7 +13,7 @@ get_header(); ?>
 			<?php
 			// Featured Content. 
 				if ( is_active_sidebar( 'home_page' ) ) {
-			    dynamic_sidebar( 'home_page' );
+				dynamic_sidebar( 'home_page' );
 				} else {
 					// Featured Content.
 						get_template_part( 'template-parts/home-page/sf-featured-content' );
