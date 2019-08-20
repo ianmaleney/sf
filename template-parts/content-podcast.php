@@ -165,19 +165,14 @@
 			return d < 10 && (d = "0" + d), e < 10 && (e = "0" + e), c + ":" + d + ":" + e
 	}
 
-	function fileLength() {
-		audioPlayer.addEventListener('loadedmetadata', function() {
-			var time = audioPlayer.duration;
-			var formatted = formatSecondsAsTime(time);
-			audioDuration.innerHTML = formatted;
-		});
-	}
+	audioPlayer.addEventListener('loadedmetadata', function() {
+		var time = audioPlayer.duration;
+		var formatted = formatSecondsAsTime(time);
+		audioDuration.innerHTML = formatted;
+		audioElapsed.innerHTML = "0:00:00";
+	});
 
 	window.addEventListener("load", function(){
-
-		audioElapsed.innerHTML = "00:00";
-		fileLength();
-
 		audioPlayPause.addEventListener("click", function(){
 			if (audioPlayer.paused) {
 				audioPlayer.play();
