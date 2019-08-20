@@ -1,191 +1,163 @@
-.stripe-form-wrapper
-  max-width: 100%
-  background-color: #F5F5F5
-  padding: 2rem
-  font-family: "Proxima Nova", $sans
-  position: relative
-  @media (min-width: 768px)
-    max-width: 80%
-    margin: 0 auto
-  @media (min-width: 960px)
-    max-width: 66%
-    margin: 0 auto
-  @media (min-width: 1280px)
-    max-width: 40vw
-    margin: 0
-  &.locked
-    border: 1px solid c('primary')
-    #payment-form
-      opacity: 0.15
-      pointer-events: none
-  
-#payment-form
-  display: flex
+#subs-page__form
+  width: 100vw
   overflow: hidden
+  background-color: white
+  position: relative
+  counter-reset: heading-counter
+
+#subs-page__form--background
+  display: block
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 0
+  height: 150%
+  width: 150vw
+  transform: rotate(-3deg) translate(-25vw,-35px)
+  transform-origin: top right
+  background-color: #F7FAFC
+
+#payment-form
+  position: relative
+  z-index: 2
+  max-width: 640px
+  margin-top: 150px
+  margin-bottom: 150px
+  margin-left: calc(calc(calc(100vw - 960px) / 2) + 200px)
+  padding-left: 20px
+  border-left: 2px solid #1A202C
   fieldset
-    display: block
-    width: 100%
-    flex: 1 0 100%
+    margin: 0 0 8rem
+    padding: 2rem
+    color: #1A202C
     border: none
-    transform: translateX(0)
-    transition: transform 0.2s ease-in
-    p 
-      font-size: 1.25rem
-      line-height: 1.8rem
+    background-color: #E2E8F0
+    position: relative
+    border-radius: 4px
+    legend
+      font-weight: bold
+      font-size: 1.8rem
+      counter-increment: heading-counter
+      background-color: #F7FAFC
+      padding: 0 8px 2px
+      &::before
+        content: counter(heading-counter) ". "
+        color: currentColor
+        font-weight: bold
+    .fieldset-inputs
+      display: flex
+      flex-wrap: wrap
+    .fieldset-comment
+      position: absolute
+      top: 0
+      left: -240px
+      max-width: 200px
+      p 
+        color: #4A5568
+        font-size: 12px
+        font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        margin: 8px 0
+        line-height: 16px
+        text-align: right
+    label
+      font-size: 12px
+      font-weight: bold
+      color: #363636
+      padding: 3px 0
+      margin-bottom: 2rem
+      display: block
+      &.full-width
+        width: 98%
+        flex: 0 0 98%
+      &.half-width
+        width: calc(calc(100% - 24px) / 2)
+        flex: 1 0 45%
+        margin-right: 12px
+      &.third-width
+        width: calc(calc(100% - 36px) / 3)
+        flex: 1 0 31%
+        margin-right: 12px
+    .validation
+      display: none
+      margin-top: 5px
+    input
+      margin-right: 24px
+      width: 100%
+      font-size: 14px
+      line-height: 22px
+      font-weight: normal
+      color: #1A202C
+      padding: 4px 8px
+      border: none
+      background-color: #F9F9F9
+      border-radius: 4px
+      margin-top: 5px
+    input[type="radio"]
+      transform: scale(0)
+      position: absolute
+    input[type="radio"] + label
+      border: 2px solid #1A202C
+      display: inline-block
+      padding: 12px 24px
+      border-radius: 4px
       text-align: center
-      margin: 10px auto
-      max-width: 96%
-      color: rgba(0,0,0,0.7)
-      font-family: "Proxima Nova", $sans
-  &.stage-2
-    fieldset
-      transform: translateX(-100%)
-  &.stage-3
-    fieldset
-      transform: translateX(-200%)
+      margin-right: 12px
+      font-size: 14px
+      color: #1A202C
+      &:hover
+        background-color: #1A202C
+        color: white
+        cursor: pointer
+    input[type="radio"]:checked + label
+      background-color: #1A202C
+      color: white
+    input[type="text"]:required:valid, input[type="email"]:required:valid,
+      border: 1px solid #48BB78
+    input[type="text"]:required:invalid, input[type="email"]:required:invalid,
+      border: 1px solid #F56565
+      & + .validation
+        display: block
+    input[type="text"]:required:placeholder-shown, input[type="email"]:required:placeholder-shown, input[type="email"]:required:focus
+      border: none
+      & + .validation
+        display: none
+    button
+      border: 2px solid #1A202C
+      display: inline-block
+      padding: 12px 36px
+      border-radius: 4px
+      text-align: center
+      font-size: 14px
+      background-color: rgba(255,255,255,0)
+      font-weight: bold
+      position: absolute
+      bottom: 1rem
+      right: 12px
+      &:hover
+        background-color: #1A202C
+        color: white
+        cursor: pointer
 
-.stripe-form-group
-  font-size: 1.2rem
-  display: flex
-  max-width: 100%
-  flex-wrap: wrap
-  label
-    display: flex
-    flex-direction: column
-    padding: 10px
-  span
-    font-weight: 700
-    margin-bottom: 4px
-  input
-    border: none
-    background-color: white
-    padding: 3px 5px
-    border-radius: 2px
-    line-height: 1.8rem
-  .stripe-form-group__inner-text
-    font-family: "Proxima Nova", $sans
-    font-size: 1.2rem
-    line-height: 2rem
-    text-align: center
-  .form-input--third-width
-    flex: 1 0 33%
-    @media (max-width: 767px)
-      flex: 1 0 50%
-  .form-input--half-width
-    flex: 1 0 50%
-    @media (max-width: 767px)
-      flex: 1 0 100%
-  .form-input--full-width
-    flex: 1 0 100%
-  #card-element
-    background-color: white
-    padding: 5px
-    border-radius: 2px
-  button
-    background-color: #75AF61
-    color: white
-    font-weight: 700
-    letter-spacing: 1px
-    border: none
-    padding: 12px 24px
-    border-radius: 3px
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3)
-    transition: all 0.1s ease-in-out
-    margin: 20px auto 10px
-    &:hover
-      transform: translateY(-1px)
-      box-shadow: 0 6px 9px -2px rgba(0,0,0,0.25)
-    
-.stripe-form-group--name
-  border-bottom: 1px solid #dddddd
-  margin-bottom: 10px
-  padding-bottom: 10px
-.radio-groups
-  display: flex
-  margin: 10px 0
-  padding: 10px 0
-  justify-content: space-around
-  border-top: 1px solid #dddddd
-  border-bottom: 1px solid #dddddd
-  @media (max-width: 768px)
-    flex-wrap: wrap
-.stripe-form-group--radio
-  flex-direction: column
-  padding: 0 15px
-  justify-content: space-between
-.radio-item
-  margin: 2px 0
-  display: flex
-  justify-content: flex-start
-  align-items: center
-  input, label
-    display: inline-flex
-.stripe-form-group--delivery
-  flex: 1 0 100%
-  border-bottom: 1px solid #dddddd
-  margin-bottom: 20px
-  @media (min-width: 767px)
-    flex: 1 0 50%
-    border-right: 1px solid #dddddd
-    border-bottom: none
-    margin-bottom: 0
-.stripe-form-group--issue
-  flex: 1 0 25%
-  border-right: 1px solid #ddd
-.stripe-form-group--gift
-  flex: 1 0 25%
-.stripe-form-group--gifted
-  display: none
-  margin-bottom: 10px
-  padding-bottom: 10px
-  
-  
-  
-.stripe-form__progress
-  display: flex
-  justify-content: space-between
-  width: 100%
-  border-top: 1px solid #dddddd
-  margin: 10px 0
-  &.invisible
-    opacity: 0
+#card-element
+    background-color: #F9F9F9
+    padding: 12px 5px
+    border-radius: 4px
+    margin-right: 12px
+    margin-top: 5px
 
-    
-  
-.stripe-form__button
-  background-color: #75AF61
-  color: white
-  font-weight: 700
-  letter-spacing: 1px
-  border: none
-  padding: 12px 24px
-  border-radius: 3px
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3)
-  transition: all 0.1s ease-in-out
-  margin: 20px 0
-  opacity: 0
-  pointer-events: none
-  visibility: hidden
-  &:hover
-    transform: translateY(-1px)
-    box-shadow: 0 6px 9px -2px rgba(0,0,0,0.25)
-    cursor: pointer
-  &.active
-    opacity: 1
-    pointer-events: auto
-    visibility: visible
-    
-.stripe-form__progress-indicators
-  max-width: 50px
-  display: flex
-  justify-content: space-between
-  align-items: center
-  .indicator
-    width: 8px
-    height: 8px
-    border-radius: 50%
-    display: block
-    background-color: #ddd
-    margin: 0 4px
-    &.active
-      background-color: #75AF61
+#sub_payment
+  label[for="card-element"]
+    margin-bottom: 0 
+
+.stripe-info
+  color: #4A5568
+  font-size: 12px
+  font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  margin: 8px 0 5rem
+  line-height: 16px
+
+
+#gifter_contact_details
+  border-top: 1px solid #CBD5E0
+  margin-top: 1rem
+  padding: 1rem 0
