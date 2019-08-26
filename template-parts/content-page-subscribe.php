@@ -61,7 +61,6 @@
 
 
 <div id="subs-page__form">
-	<div id="subs-page__form--background"></div>
 	<form action="" method="post" id="payment-form">
 		<fieldset>
 			<legend>Is this subscription for you, or someone else?</legend>
@@ -152,14 +151,15 @@
 			<div id="card-element"></div>
 			<p class="stripe-info">We use Stripe to securely handle all our payments. The Stinging Fly will never process or store your card details.</p>
 			<div id="card-errors"></div>
-			<button>Subscribe</button>
+			<button id="submit-button">Subscribe</button>
 			<div class="fieldset-comment">
 				<p>When you click 'subscribe', your card will be charged, and you will receive an email with the full details of your subscription, including how to access our online archive.</p>
 			</div>
+			
 		</fieldset>
 	</form>
 
-	<div class="spinner invisible">
+	<div class="spinner form_modals invisible">
 		<p>Hang on one second...</p>
 		<div class="sk-folding-cube">
 			<div class="sk-cube1 sk-cube"></div>
@@ -168,7 +168,8 @@
 			<div class="sk-cube3 sk-cube"></div>
 		</div>
 	</div>
-	<div id="success-container" class="invisible">
+	
+	<div id="success-container" class="form_modals invisible">
 		<h3>You've subscribed to the Stinging Fly!</h3>
 		<p>Check your email for details of your subscription, and a full guide for accessing the Stinging Fly online archive.</p>
 		<p>If this is a gift, the person receiving the gift will get an email about their subscription on the day you have selected. We've sent you a receipt for your records.</p>
@@ -176,7 +177,7 @@
 		<p>For all matters relating to the website and online archive, please contact <a href="mailto:web.stingingfly@gmail.com">web.stingingfly@gmail.com</a>.</p>
 		<p>Thank you for your support!</p>
 	</div>
-	<div id="failure-container" class="invisible">
+	<div id="failure-container" class="form_modals invisible">
 		<h3>We've got a problem!</h3>
 		<p>It seems that we already have a subscriber with that email address. Are you trying to update your subscription? You can do that from <a href="/my-account">your account page</a>.</p>
 	</div>

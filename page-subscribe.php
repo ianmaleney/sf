@@ -6,7 +6,7 @@
 get_header('secondary'); ?>
 
 <main>
-	<div class="u-page-wrapper--blank" style="margin-top: 100px;">
+	<div class="u-page-wrapper--blank">
 
 		<?php
 		// Start the loop.
