@@ -1,56 +1,70 @@
-.u-page-wrapper--primary-header
-  margin: 0
-  margin-top: 0 !important
-  padding: 0
-  .o-article--subs
+#subs-page__landing
+  display: flex
+  overflow: hidden
+  flex-direction: column
+  box-shadow: none
+  @media (min-width: 1000px)
+    margin: 15vh auto 4rem
+    flex-direction: row
+    max-width: 960px
+    border-radius: 8px
+    box-shadow: 3px 6px 8px rgba(172,186,211,0.5)
+
+.subs-page__landing__image
+  object-fit: cover
+  max-height: 512px
+  max-width: 60vw
+  margin: 0 auto 1rem
+  display: none
+  @media (min-width: 1000px)
     display: block
-    @media (min-width: 1280px)
-      display: flex
-      flex-direction: row
-      justify-content: center
-      padding: 0 0 0 0
-      min-height: 100vh
-      .subs-info, .subs-text
-        flex: 1 0 50%
-        height: 100%
-        padding-top: 80px
-    .subs-info
-      background-color: #FDF2B9
-      display: flex
-      align-items: center
-      flex-direction: column
-      @media (max-width: 1279px)
-        margin-top: 80px
-      @media (min-width: 1280px)
-        padding-bottom: 40px
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffdd9c' fill-opacity='0.4'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
-    .subs-text
-      display: flex
-      flex-direction: column
-      justify-content: center
-      align-items: center
-      padding-bottom: 40px
-      .subs-text__form
-        max-width: 100vw
-    .subs-text__content
-      width: 100vw
-      background-color: white
-      padding: 1.6rem
-      @media (min-width: 1280px)
-        max-width: 40vw
-        background-color: rgba(255,255,255,0)
-      h1
-        font-size: 3.5rem
-        line-height: 3.5rem
-        text-align: center
-        margin: 0
-        display: none
-      p 
-        font-family: "Proxima Nova", $serif, $system
-        font-size: 1.6rem
-        line-height: 2.2rem
-        @media (max-width: 1279px)
-          max-width: 520px
-          margin: 1rem auto
-        @media (min-width: 1280px)
-          text-align: center
+    max-width: 35%
+    min-width: 300px
+    flex: 1 0 35%
+    margin: 0
+
+.subs-page__landing__text
+  display: flex
+  flex-direction: column
+  padding: 80px 20px 5px
+  background-color: #F9F9F9
+  font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  @media (min-width: 1000px)
+    padding: 5px 20px
+  .landing__text__heading
+    border-bottom: 1px solid #EEF1F6
+    @media (min-width: 640px) and (max-width: 1000px)
+      max-width: 640px
+      margin: 0 auto
+    h1 
+      font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+      font-size: 30px
+      line-height: 30px
+      color: #1A202C
+      position: relative
+      display: inline-block
+      margin: 2rem 0 1rem
+      &:after
+        content: ''
+        width: 100%
+        height: 8px
+        background: linear-gradient(90deg, #4A5568, #E2E8F0)
+        display: inline-block
+        position: absolute
+        bottom: -8px
+        left: 0
+        border-radius: 4px
+    ul 
+      font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+      font-size: 14px
+      line-height: 22px
+      padding-left: 20px
+      color: #4A5568
+  .landing__text__body
+    p 
+      font-family: "proxima-nova", "Proxima Nova", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+      font-size: 16px
+      line-height: 22px
+      @media (min-width: 640px) and (max-width: 1000px)
+        max-width: 640px
+        margin: 2rem auto
