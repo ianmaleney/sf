@@ -2171,8 +2171,8 @@ footer {
     text-align: left; }
     @media (max-width: 800px) {
       .c-side-nav__menu li {
-        height: 5rem;
-        line-height: 5rem;
+        height: 3rem;
+        line-height: 4rem;
         padding: 0 16px;
         flex: none; } }
     .c-side-nav__menu li a {
