@@ -56,13 +56,6 @@ get_header('secondary'); ?>
 		padding: 0 2vw;
 	}
 
-	article p:first-of-type {
-		border-top: 1px solid #333;
-		border-bottom: 1px solid #333;
-		padding: 1.6rem 0;
-		margin-bottom: 3.6rem;
-	}
-
 	article h2 {
 		margin: 4rem auto;
 		text-decoration: underline;
