@@ -267,8 +267,8 @@ async function handleSubCancel(e) {
 		</div>
 		<div class="subscriber-card__info-section subscriber-card__secondary-info">
 			<p><strong>Starting Issue:</strong> {start_issue} </p>
+			<p><strong>Last Issue:</strong> {subscribe_until} </p>
 			<p><strong>Access Ends:</strong> {next_renewal_date} </p>
-			<p><strong>Renewals:</strong> {renewals} </p>
 			<p><strong>Username:</strong> <a href="https://stingingfly.org/wp-admin/user-edit.php?user_id={wp_user_id}">{first_name}{last_name}{sub_id}</a></p>
 		</div>
 		<div class="subscriber-card__info-section subscriber-card__cancel">
