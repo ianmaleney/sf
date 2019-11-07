@@ -133,10 +133,10 @@
 		<fieldset id="sub_start">
 			<legend>When would you like the subscription to start?</legend>
 			
-			<input type="radio" id="current_issue" name="issue" value="<?php echo $current_issue_number ?>">
+			<input type="radio" id="current_issue" name="issue" value="<?php echo $current_issue_number ?>" checked>
 			<label for="current_issue">Current Issue: <?php echo $current_issue_title ?></label>
 			
-			<input type="radio" id="next_issue" name="issue" value="<?php echo $next_issue_number ?>" checked>
+			<input type="radio" id="next_issue" name="issue" value="<?php echo $next_issue_number ?>">
 			<label for="next_issue">Next Issue: <?php echo $next_issue_title ?></label>
 			<div class="fieldset-comment">
 				<p>You can choose to have your subscription start with the current issue, or the next issue.</p>
