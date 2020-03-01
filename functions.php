@@ -1221,7 +1221,7 @@ function get_current_user_role() {
  }
 
 function paywall() {
-	$roles = ['administrator', 'editor', 'author', 'contributor', 'active_subscriber'];
+	$roles = ['administrator', 'editor', 'author', 'contributor', 'active_subscriber', 'patron'];
 	$user_role = get_current_user_role();
 	if ($user_role && in_array($user_role, $roles)) {
 		return TRUE;
@@ -1329,7 +1329,7 @@ function sf_gift_check_cron_exec() {
 	foreach($new_subscribers as $sub) {
 		$name = $sub['first_name'] . $sub['last_name'] . $sub['sub_id'];
 		$email = $sub['email'];
-		$user_login = strtolower(str_ireplace(" ", "", $name));
+		$user_login = strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $name));
 		$userdata = array(
 			'user_login' => $user_login,
 			'first_name' => $sub['first_name'],
@@ -1507,35 +1507,35 @@ function custom_subs_dashboard() {
 	};
 }
 
-function email_expiring_legacy_subs() {
-	global $wpdb;
-	// $subs = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE sub_status='expiring' AND stripe_customer_id IS NULL");
+// function email_expiring_legacy_subs() {
+// 	global $wpdb;
+// 	// $subs = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE sub_status='expiring' AND stripe_customer_id IS NULL");
 
-	// $subs = array('first_name' => 'Ian', 'email' => 'imaleney@gmail.com' );
-	// foreach ($subs as $sub) {
-		// $name = $sub['first_name'];
-		// $email = $sub['email'];
+// 	// $subs = array('first_name' => 'Ian', 'email' => 'imaleney@gmail.com' );
+// 	// foreach ($subs as $sub) {
+// 		// $name = $sub['first_name'];
+// 		// $email = $sub['email'];
 
-		$email = 'imaleney@gmail.com';
+// 		$email = 'imaleney@gmail.com';
 
-		$subscriber_to = $email;
+// 		$subscriber_to = $email;
 
-		// Set the subject line of the email
-		$subscriber_subject = "Your Stinging Fly subscription is ending";
+// 		// Set the subject line of the email
+// 		$subscriber_subject = "Your Stinging Fly subscription is ending";
 
-		// Get the contents of the email template
-		$site_url = get_site_url(null, '', 'http');
-		$file_url = $site_url . '/wp-content/themes/stingingfly/template-parts/email/subscriber-expiring.php';
-		$subscriber_message = file_get_contents($file_url);
+// 		// Get the contents of the email template
+// 		$site_url = get_site_url(null, '', 'http');
+// 		$file_url = $site_url . '/wp-content/themes/stingingfly/template-parts/email/subscriber-expiring.php';
+// 		$subscriber_message = file_get_contents($file_url);
 
-		// Add Headers to enable HTML
-		$subscriber_headers = array('Content-Type: text/html; charset=UTF-8');
+// 		// Add Headers to enable HTML
+// 		$subscriber_headers = array('Content-Type: text/html; charset=UTF-8');
 
-		// Send the email
-		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
-	// };
-}
+// 		// Send the email
+// 		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
+// 	// };
+// }
 
-email_expiring_legacy_subs();
+// email_expiring_legacy_subs();
 
 ?>
