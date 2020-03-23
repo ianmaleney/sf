@@ -43,7 +43,7 @@ if($magazine) {
             <a href="<?php the_permalink(); ?>">Find Out More</a>
           </div>
           <div class="o-button c-mag-home__button c-mag-home__button--subscribe-now">
-            <a href="https://stingingfly.org/product/subscription/">Subscribe Now</a>
+            <a href="https://stingingfly.org/subscribe">Subscribe Now</a>
           </div>
         </div>
       </div>

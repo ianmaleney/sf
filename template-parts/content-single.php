@@ -34,15 +34,15 @@ function display_paywall() {
 				<h3 class="c-article__category"><?php sf_single_cat(); ?></h3>
 				<h1 class="c-article__info--title">
 					<?php
-						if ( in_category('magazine') && in_category('archive') ) {
-							if ( in_category('unlocked') || paywall() ) {
-								// Do Nothing
-							} else {
-								echo '<span class="lock-icon">&#128274;</span> ';
-							}
-						} else {
-							// Do Nothing
-						}
+						// if ( in_category('magazine') && in_category('archive') ) {
+						// 	if ( in_category('unlocked') || paywall() ) {
+						// 		// Do Nothing
+						// 	} else {
+						// 		echo '<span class="lock-icon">&#128274;</span> ';
+						// 	}
+						// } else {
+						// 	// Do Nothing
+						// }
 					?>
 					<?php the_title(); ?>
 				</h1>
@@ -72,14 +72,15 @@ function display_paywall() {
 			<?php get_template_part('template-parts/social-icons'); ?>
 		</div>
 		<?php
- 			if ( in_category('magazine') && in_category('archive') ) {
-				if ( in_category('unlocked') || paywall() ) {
-					display_content();
-				} else {
-					display_paywall();
-				}
-			} else {
-				display_content();
-			};
+ 			// if ( in_category('magazine') && in_category('archive') ) {
+			// 	if ( in_category('unlocked') || paywall() ) {
+			// 		display_content();
+			// 	} else {
+			// 		display_paywall();
+			// 	}
+			// } else {
+			// 	display_content();
+			// };
+			display_content();
 			?>
 	</article>
