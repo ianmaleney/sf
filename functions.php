@@ -1270,18 +1270,18 @@ function subscriber_management_page() {
 }
 
 function subs_admin_dash(){
-	locate_template('./template-parts/dash/index.php', true, true);
+	locate_template('./template-parts/subs/index.php', true, true);
 }
 
 
-function subs_admin_load_scripts($hook) {
-	if( $hook != 'toplevel_page_subs-dash' ) 
-		return;
-	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.css' );
-	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.js', null, null, true );
-}
+// function subs_admin_load_scripts($hook) {
+// 	if( $hook != 'toplevel_page_subs-dash' ) 
+// 		return;
+// 	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.css' );
+// 	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.js', null, null, true );
+// }
 
-add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
+// add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
 
 // Cron jobs for subs
 
