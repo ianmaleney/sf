@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/main.441ceb7c.chunk.css",
-    "main.js": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/main.419bb8a4.chunk.js",
-    "main.js.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/main.419bb8a4.chunk.js.map",
+    "main.css": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/main.25badc63.chunk.css",
+    "main.js": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/main.673b109f.chunk.js",
+    "main.js.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/main.673b109f.chunk.js.map",
     "runtime-main.js": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/runtime-main.a314bb34.js",
     "runtime-main.js.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/runtime-main.a314bb34.js.map",
     "static/css/2.c3f1451c.chunk.css": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/2.c3f1451c.chunk.css",
     "static/js/2.0da3ab5e.chunk.js": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/2.0da3ab5e.chunk.js",
     "static/js/2.0da3ab5e.chunk.js.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/2.0da3ab5e.chunk.js.map",
     "index.html": "/wp-content/themes/stingingfly/template-parts/subs/build/index.html",
-    "precache-manifest.7c1712d2698ef4f01efcf8817cb27563.js": "/wp-content/themes/stingingfly/template-parts/subs/build/precache-manifest.7c1712d2698ef4f01efcf8817cb27563.js",
+    "precache-manifest.012d54976298d41f7270559faf0bb531.js": "/wp-content/themes/stingingfly/template-parts/subs/build/precache-manifest.012d54976298d41f7270559faf0bb531.js",
     "service-worker.js": "/wp-content/themes/stingingfly/template-parts/subs/build/service-worker.js",
     "static/css/2.c3f1451c.chunk.css.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/2.c3f1451c.chunk.css.map",
-    "static/css/main.441ceb7c.chunk.css.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/main.441ceb7c.chunk.css.map",
+    "static/css/main.25badc63.chunk.css.map": "/wp-content/themes/stingingfly/template-parts/subs/build/static/css/main.25badc63.chunk.css.map",
     "static/js/2.0da3ab5e.chunk.js.LICENSE": "/wp-content/themes/stingingfly/template-parts/subs/build/static/js/2.0da3ab5e.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.a314bb34.js",
     "static/css/2.c3f1451c.chunk.css",
     "static/js/2.0da3ab5e.chunk.js",
-    "static/css/main.441ceb7c.chunk.css",
-    "static/js/main.419bb8a4.chunk.js"
+    "static/css/main.25badc63.chunk.css",
+    "static/js/main.673b109f.chunk.js"
   ]
 }
