@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/ianmaleney/sf#readme",
   "dependencies": {
-    "node-sass": "^4.9.2",
-    "posthtml-include": "^1.2.0"
+    "node-sass": "^4.13.1",
+    "posthtml-include": "^1.4.1"
   },
   "devDependencies": {
     "cssnano": "^4.0.5",
-    "sass": "^1.16.1"
+    "sass": "^1.26.3"
   }
 }
