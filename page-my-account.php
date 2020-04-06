@@ -5,13 +5,33 @@ if ( is_user_logged_in() ) {
 	$current_user = wp_get_current_user();
 	$subscriber_details = $wpdb->get_row("SELECT * FROM stinging_fly_subscribers WHERE wp_user_id = $current_user->ID");
 
-	$url = site_url();
+	$url;
+	if (site_url() == 'https://stingingfly.org') {
+		$url = "https://enigmatic-basin-09064.herokuapp.com";
+	} else {
+		$url = 'http://localhost:8001';
+	}
 	$first_name = $current_user->user_firstname;
 	$expiry_date = $subscriber_details->next_renewal_date;
 	$sub_status = $subscriber_details->sub_status;
 	$name = $subscriber_details->first_name . ' ' . $subscriber_details->last_name;
+	$sub_id = $subscriber_details->sub_id;
+	$stripe_sub_id = $subscriber_details->stripe_subscription_id;
+
+	function outputUrl($sub_id, $stripe_sub_id, $url) {
+		$endpoint;
+		if( $stripe_sub_id !== null){
+			$endpoint = "sub_id={$sub_id}&stripe_subscription_id={$stripe_sub_id}";
+		} else {
+			$endpoint = "sub_id={$sub_id}";
+		}
+		$api_url = "{$url}/api/subscribers?{$endpoint}";
+		echo $api_url;
+	};
+
 
 	get_header('primary'); ?>
+	
 
 	<div class="u-page-wrapper u-page-wrapper--primary-header u-page-wrapper--full-width">
 		<main id="main" class="site-main" role="main">
@@ -57,21 +77,15 @@ if ( is_user_logged_in() ) {
 
 		cancelSubButton.addEventListener("click", function(e) {
 			e.preventDefault();
+
 			$.ajax({
-			url: "<?php echo $url ?>/stripe/cancel_subscription.php",
-			type: "post",
-			data: {
-				stripe_customer_id: "<?php echo $subscriber_details->stripe_customer_id; ?>"
-				},
+			url: "<?php outputUrl($sub_id, $stripe_sub_id, $url); ?>",
+			type: "DELETE",
 			success: function(res) {
 					console.log(res);
 					switch (res) {
-						case "success":
+						case "canceled":
 						successFunctionCancel();
-						break;
-
-						case "error":
-						errorFunctionCancel();
 						break;
 
 						default:
@@ -125,7 +139,7 @@ if ( is_user_logged_in() ) {
 			e.preventDefault();
 			// Submit form
 			$.ajax({
-			url: "<?php echo $url ?>/stripe/change_address.php",
+			url: "<?php echo site_url(); ?>/stripe/change_address.php",
 			type: "post",
 			data: $("#change_address_form").serialize(),
 			beforeSend: function() {
