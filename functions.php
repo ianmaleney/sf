@@ -212,27 +212,6 @@ function twentysixteen_scripts() {
 	// Load the Internet Explorer 7 specific stylesheet.
 	wp_enqueue_style( 'twentysixteen-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'twentysixteen-style' ), '20160816' );
 	wp_style_add_data( 'twentysixteen-ie7', 'conditional', 'lt IE 8' );
-
-	// Load the html5 shiv.
-	wp_enqueue_script( 'twentysixteen-html5', get_template_directory_uri() . '/js/html5.js', array(), '3.7.3' );
-	wp_script_add_data( 'twentysixteen-html5', 'conditional', 'lt IE 9' );
-
-	wp_enqueue_script( 'twentysixteen-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20160816', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-
-	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'twentysixteen-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20160816' );
-	}
-
-	wp_enqueue_script( 'twentysixteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20160816', true );
-
-	wp_localize_script( 'twentysixteen-script', 'screenReaderText', array(
-		'expand'   => __( 'expand child menu', 'twentysixteen' ),
-		'collapse' => __( 'collapse child menu', 'twentysixteen' ),
-	) );
 }
 add_action( 'wp_enqueue_scripts', 'twentysixteen_scripts' );
 
@@ -353,28 +332,13 @@ function twentysixteen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 }
 add_filter( 'wp_get_attachment_image_attributes', 'twentysixteen_post_thumbnail_sizes_attr', 10 , 3 );
 
-/**
- * Modifies tag cloud widget arguments to have all tags in the widget same font size.
- *
- * @since Twenty Sixteen 1.1
- *
- * @param array $args Arguments for tag cloud widget.
- * @return array A new modified arguments.
- */
-function twentysixteen_widget_tag_cloud_args( $args ) {
-	$args['largest'] = 1;
-	$args['smallest'] = 1;
-	$args['unit'] = 'em';
-	return $args;
-}
-add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
 
+/************************************************/
+//
+// Register Menus
+//
+/************************************************/
 
-//
-//
-// Registering Footer Menu
-//
-//
 function register_my_menus() {
 	register_nav_menus(
     array(
@@ -385,7 +349,14 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
-// Registering Sidebars
+
+
+/************************************************/
+//
+// Register Sidebars
+//
+/************************************************/
+
 add_action( 'widgets_init', 'my_register_sidebars' );
 
 function my_register_sidebars() {
@@ -430,7 +401,16 @@ function my_register_sidebars() {
 	);
 }
 
-// Enqueueing Custom JS
+
+
+
+
+/************************************************/
+//
+// Enqueue Custom Scripts
+//
+/************************************************/
+
 function my_assets() {
 	wp_enqueue_script( 'theme-scripts', '/wp-content/themes/stingingfly/js/scripts.js', array( 'jquery' ), '1.0', true );
 }
@@ -438,23 +418,16 @@ function my_assets() {
 
 add_action( 'wp_enqueue_scripts', 'my_assets' );
 
-// Defer Custom JS
-function add_defer_attribute($tag, $handle) {
-   // add script handles to the array below
-   $scripts_to_defer = array('theme-scripts', 'twentysixteen-html5', 'twentysixteen-skip-link-focus-fix', 'twentysixteen-script', );
-
-   foreach($scripts_to_defer as $defer_script) {
-      if ($defer_script === $handle) {
-         return str_replace(' src', ' defer="defer" src', $tag);
-      }
-   }
-   return $tag;
-}
-
-add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
 
 
-//* Adding DNS Prefetching
+
+
+/************************************************/
+//
+// DNS Prefetching
+//
+/************************************************/
+
 function ism_dns_prefetch() {
     echo '<meta http-equiv="x-dns-prefetch-control" content="on">
 		<link rel="dns-prefetch" href="//fonts.gstatic.com/" />
@@ -496,35 +469,12 @@ function archive_image_output() {
 
 
 
+/************************************************/
 //
-// Popular Posts Functionality - https://digwp.com/2016/03/diy-popular-posts/
+// Woocommerce Setup
 //
+/************************************************/
 
-function shapeSpace_popular_posts($post_id) {
-	$count_key = 'popular_posts';
-	$count = get_post_meta($post_id, $count_key, true);
-	if ($count == '') {
-		$count = 0;
-		delete_post_meta($post_id, $count_key);
-		add_post_meta($post_id, $count_key, '0');
-	} else {
-		$count++;
-		update_post_meta($post_id, $count_key, $count);
-	}
-}
-function shapeSpace_track_posts($post_id) {
-	if (!is_single()) return;
-	if (empty($post_id)) {
-		global $post;
-		$post_id = $post->ID;
-	}
-	shapeSpace_popular_posts($post_id);
-}
-add_action('wp_head', 'shapeSpace_track_posts');
-
-//
-// WooCommerce Setup
-//
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
@@ -550,10 +500,15 @@ add_filter( 'woocommerce_product_tabs', 'wcs_woo_remove_reviews_tab', 98 );
     return $tabs;
 }
 
-/**
- * Optimize WooCommerce Scripts
- * Remove WooCommerce Generator tag, styles, and scripts from non WooCommerce pages.
- */
+
+
+
+/************************************************/
+//
+// Optimize Scripts, Remove Cruft
+//
+/************************************************/
+
 add_action( 'wp_enqueue_scripts', 'child_manage_woocommerce_styles', 99 );
 
 function child_manage_woocommerce_styles() {
@@ -593,9 +548,14 @@ function child_manage_woocommerce_styles() {
 
 }
 
+
+
+
+/************************************************/
 //
 // Guest Authors
 //
+/************************************************/
 
 function guest_author_link() {
 	global $post;
@@ -636,9 +596,13 @@ function guest_author_bio() {
 		}
 }
 
+
+
+/************************************************/
 //
 // Single Category Display Function
 //
+/************************************************/
 
 // 
 function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252, 251, 161, 128, 32)){
@@ -1131,86 +1095,14 @@ if ( ! wp_next_scheduled( 'sf_archive_cron_hook' ) ) {
 }
 
 
-/*************************
-*
-* Custom Category Pages 
-*
-*************************/
-
-function category_load_more_scripts() {
-	
-		global $wp_query; 
-	
-		// register our main script but do not enqueue it yet
-		wp_register_script( 'category_loadmore', get_stylesheet_directory_uri() . '/js/category_loadmore.js', array('jquery') );
-	
-		wp_localize_script( 'category_loadmore', 'misha_loadmore_params', array(
-			'ajaxurl' => site_url() . '/wp-admin/admin-ajax.php', // WordPress AJAX
-			'posts' => json_encode( $wp_query->query_vars ), // everything about your loop is here
-			'current_page' => get_query_var( 'paged' ) ? get_query_var('paged') : 1,
-			'max_page' => $wp_query->max_num_pages
-		) );
-	
-		wp_enqueue_script( 'category_loadmore' );
-
-	}
-	
-add_action( 'wp_enqueue_scripts', 'category_load_more_scripts' );
-
-add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
 
 
-function ajax_localize() {
-	global $wp_query; 
-	
-	wp_register_script( 'ajax_search', get_stylesheet_directory_uri() . '/js/ajax_search.js', array('jquery') );
+/************************************************/
+//
+// Check Current User Role
+//
+/************************************************/
 
-	wp_localize_script( 'ajax_search', 'myAjax', 
-		array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' ) // WordPress AJAX
-		) 
-	);
-
-	wp_enqueue_script( 'ajax_search' );
-}
-
-add_action( 'wp_enqueue_scripts', 'ajax_localize' );
-
-function ajax_search_handler(){
-	remove_filter( 'posts_search_orderby', 'wpautop' );
-	$query = $_POST['query'];
-	$order = $_POST['order'];
-	$orderby = $_POST['orderby'];
-	$category_name = $_POST['category_name'];
-	$sentence = $_Post['sentence'];
-    
-    $args = array(
-        'post_status' => 'publish',
-		'orderby' => $orderby,
-		'order' => $order,
-		's' => $query,
-		'category_name' => $category_name,
-		'posts_per_page' => 50,
-		'sentence' => $sentence
-    );
-	$search = new WP_Query( $args );
-    
-	if ( $search->have_posts() ) :
-		while ( $search->have_posts() ) : $search->the_post();
-			get_template_part( 'template-parts/content', 'archive__module' );
-		endwhile;
-		wp_reset_postdata();
-	endif;
- 
-	
-	die();
-}
-
-add_action('wp_ajax_filter', 'ajax_search_handler'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_filter', 'ajax_search_handler'); // wp_ajax_nopriv_{action}
-
-// Check Current User Role – https://catapultthemes.com/get-current-user-role-in-wordpress/
 function get_current_user_role() {
   if( is_user_logged_in() ) {
     $user = wp_get_current_user();
@@ -1219,7 +1111,17 @@ function get_current_user_role() {
   } else {
     return FALSE;
   }
- }
+}
+
+
+
+
+
+/************************************************/
+//
+// Paywall
+//
+/************************************************/
 
 function paywall() {
 	$roles = ['administrator', 'editor', 'author', 'contributor', 'active_subscriber', 'patron'];

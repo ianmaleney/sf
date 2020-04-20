@@ -2,10 +2,10 @@
   "name": "stingingfly",
   "version": "1.0.0",
   "description": "Stinging Fly Wordpress Theme",
-  "main": "build/js/index.js",
   "scripts": {
     "test": "null",
     "start": "parcel build/js/style.js -d ./ --hmr-hostname sfwp.test",
+    "dev": "gulp",
     "build": "parcel build build/js/style.js -d ./"
   },
   "repository": {
@@ -13,17 +13,21 @@
     "url": "git+https://github.com/ianmaleney/sf.git"
   },
   "author": "Ian Maleney",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ianmaleney/sf/issues"
-  },
-  "homepage": "https://github.com/ianmaleney/sf#readme",
-  "dependencies": {
-    "node-sass": "^4.13.1",
-    "posthtml-include": "^1.4.1"
-  },
+  "license": "MIT",
   "devDependencies": {
-    "cssnano": "^4.0.5",
-    "sass": "^1.26.3"
+    "@babel/core": "^7.7.7",
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-terser": "^1.2.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^4.13.1",
+    "postcss-css-variables": "^0.14.0",
+    "posthtml-include": "^1.4.1"
   }
 }
