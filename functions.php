@@ -977,11 +977,14 @@ function site_login_styles() { ?>
 add_action( 'login_enqueue_scripts', 'site_login_styles' );
 
 
-/*
-/
-/ Guest Authors Endpoints for WP-API
-/
-*/
+
+
+
+/************************************************/
+//
+// Guest Authors Endpoints for WP-API
+//
+/************************************************/
 
 if ( function_exists('get_coauthors') ) {
     add_action( 'rest_api_init', 'custom_register_coauthors' );
@@ -1012,11 +1015,15 @@ if ( function_exists('get_coauthors') ) {
     }
 }
 
-/*
-*
-* Function To Stop Archive Posts Being Emailed to Blog Followers
-*
-*/
+
+
+
+
+/************************************************/
+//
+// Function To Stop Archive Posts Being Emailed to Blog Followers
+//
+/************************************************/
 
 add_filter( 'jetpack_subscriptions_exclude_these_categories', 'exclude_these' );
 function exclude_these( $categories ) {
@@ -1154,12 +1161,6 @@ add_action('wp_ajax_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_{actio
 add_action('wp_ajax_nopriv_loadmore', 'misha_loadmore_ajax_handler'); // wp_ajax_nopriv_{action}
 
 
-
-
-
-
-
-
 function ajax_localize() {
 	global $wp_query; 
 	
@@ -1230,6 +1231,10 @@ function paywall() {
 	}
 }
 
+
+
+
+
 /************************************************/
 //
 // Scripts for Subscription page
@@ -1274,41 +1279,13 @@ function subs_admin_dash(){
 }
 
 
-// function subs_admin_load_scripts($hook) {
-// 	if( $hook != 'toplevel_page_subs-dash' ) 
-// 		return;
-// 	wp_enqueue_style( 'svelte-css', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.css' );
-// 	wp_enqueue_script( 'svelte-js', '/wp-content/themes/stingingfly/template-parts/dash/sfwp-svelte/public/bundle.js', null, null, true );
-// }
 
-// add_action('admin_enqueue_scripts', 'subs_admin_load_scripts');
 
-// Cron jobs for subs
-
-/* Check for expired Subs */
-// function sf_sub_check_cron_exec() {
-// 		global $wpdb;
-// 		$today = date('Y-m-d H:i:s');
-// 		$subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE next_renewal_date < CURDATE() AND sub_status = 'active'", 'ARRAY_A');
-
-// 		$update = $wpdb->get_results("UPDATE stinging_fly_subscribers SET sub_status = 'expired' WHERE next_renewal_date < CURDATE() AND sub_status = 'active' ");
-
-// 		$expired_subs = array();
-
-// 		foreach($subscribers as $sub) {
-// 			$id = $sub['wp_user_id'];
-// 			$user_id = wp_update_user( array( 'ID' => $id, 'role' => 'subscriber' ) );
-// 			$sub_string = $sub['first_name'] . ' ' . $sub['last_name'] . ' | ' . $sub['email']; 
-// 			array_push($expired_subs, $sub_string);
-// 		}
-
-// 		$recipients = ["web.stingingfly@gmail.com"];
-// 		$subject = 'Expired Subs - ' . date("d-m-Y");
-// 		$email_content = implode(" ||| ", $expired_subs);
-// 		error_log($email_content);
-// 		wp_mail($recipients, $subject, $email_content);
-		
-// }
+/************************************************/
+//
+// Subscriber-related Cron Jobs
+//
+/************************************************/
 
 // Custom Hook for WP_Cron 
 add_action( 'sf_sub_check_cron_hook', 'sf_sub_check_cron_exec' );
@@ -1375,11 +1352,7 @@ function sf_gift_check_cron_exec() {
 		// Send the email
 		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
 	}
-
-		
 }
-
-//sf_gift_check_cron_exec();
 
 // Custom Hook for WP_Cron 
 add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
@@ -1388,154 +1361,5 @@ add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
 if ( ! wp_next_scheduled( 'sf_gift_check_cron_hook' ) ) {
     wp_schedule_event( time(), 'daily', 'sf_gift_check_cron_hook' );
 }
-
-
-
-/*
-//
-// Create custom box on dash for new subs
-//
-*/
-
-add_action('wp_dashboard_setup', 'subs_custom_dashboard_widgets');
-  
-function subs_custom_dashboard_widgets() {
-	global $wp_meta_boxes;
-	wp_add_dashboard_widget('custom_subs_widget', 'New Subscribers', 'custom_subs_dashboard');
-	wp_enqueue_script ( 'handle_new_subs_dash', get_template_directory_uri() . '/js/handle_new_subs_dash.js', [], false, true );
-}
-	
-function custom_subs_dashboard() {
-	global $wpdb;
-	$subs = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE admin_status='processing'");
-
-	if (!$subs) {
-		echo "No new subscribers";
-		return;
-	}
-
-	// Insert styles
-	echo '<style>
-		.subs-dash__sub {
-			padding: 8px 8px 12px; 
-			display: flex; 
-			justify-content: space-between; 
-			align-items: flex-start;
-		}
-		.subs-dash__sub.processed {
-			opacity: 0.2;
-			pointer-events: none;
-		}
-		.subs-dash__sub:nth-child(odd) {background-color: #eee;}
-		.subs-dash__sub-details {
-			flex: 1 0 80%;
-		} 
-		.subs-dash__sub-details p {margin: 0;} 
-		.subs-dash__sub-process-button {
-			background-color: rgba(255,255,255,0);
-			border: 1px solid blue;
-			font-size: 11px;
-			padding: 8px 16px;
-			color: blue;
-		}
-		.subs-dash__sub-process-button:hover {
-			background-color: blue;
-			color: white;
-			cursor: pointer;
-		}
-		.subs-dash__sub-details details {
-			margin-top: 8px;
-			padding-top: 8px;
-			border-top: 1px solid #ddd;
-		}
-		.subs-dash__sub-details ul {
-			margin-top: 0;
-		}
-		.subs-dash__sub-details li {
-			margin-bottom: 0;
-		}
-		.subs-dash__sub-details .details__inner p {
-			padding: 0 10px;
-			min-width: 25%;
-		}
-		.subs-dash__sub-details .details__inner {
-			display: flex;
-			justify-content: space-around;
-			align-items: flex-start;
-			padding: 8px 0;
-		}
-		.gift-notice {
-			padding: 0 12px;
-			color: blue;
-			border: 1px solid blue;
-			margin-right: 5px;
-		}
-		</style>';
-
-
-	// Loop through the subs
-	foreach ($subs as $sub) {
-		if ($sub->gift) {
-			$gift = "<span class='gift-notice'>Gift</span>";
-		} else {
-			$gift = null;
-		}
-		echo "
-		<div class='subs-dash__sub'>
-			<div class='subs-dash__sub-details'>
-				<p><strong>{$gift}{$sub->first_name} {$sub->last_name}</strong></p>
-				<p>{$sub->email}</p>
-				<details>
-					<summary>More...</summary>
-					<div class='details__inner'>
-						<ul>
-							<li><strong>Address:</strong></li>
-							<li>{$sub->address_one}</li>
-							<li>{$sub->address_two}</li>
-							<li>{$sub->city}</li>
-							<li>{$sub->country}</li>
-							<li>{$sub->postcode}</li>
-						</ul>
-						<p><strong>Starting Issue:</strong> {$sub->start_issue}</p>
-						<p><strong>Status:</strong> {$sub->sub_status}<br><strong>Starts:</strong> {$sub->date_start}</p>
-					</div>
-				</details>
-			</div>
-			<button class='subs-dash__sub-process-button' data-sub='{$sub->sub_id}'>Mark As Read</button>
-		</div>
-		";
-	};
-}
-
-// function email_expiring_legacy_subs() {
-// 	global $wpdb;
-// 	// $subs = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE sub_status='expiring' AND stripe_customer_id IS NULL");
-
-// 	// $subs = array('first_name' => 'Ian', 'email' => 'imaleney@gmail.com' );
-// 	// foreach ($subs as $sub) {
-// 		// $name = $sub['first_name'];
-// 		// $email = $sub['email'];
-
-// 		$email = 'imaleney@gmail.com';
-
-// 		$subscriber_to = $email;
-
-// 		// Set the subject line of the email
-// 		$subscriber_subject = "Your Stinging Fly subscription is ending";
-
-// 		// Get the contents of the email template
-// 		$site_url = get_site_url(null, '', 'http');
-// 		$file_url = $site_url . '/wp-content/themes/stingingfly/template-parts/email/subscriber-expiring.php';
-// 		$subscriber_message = file_get_contents($file_url);
-
-// 		// Add Headers to enable HTML
-// 		$subscriber_headers = array('Content-Type: text/html; charset=UTF-8');
-
-// 		// Send the email
-// 		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
-// 	// };
-// }
-
-// email_expiring_legacy_subs();
 
 ?>
