@@ -9,8 +9,8 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="preload" as="style">
-	<link as="style" rel="preload" href="https://use.typekit.net/zsp1myo.css">
+	<link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/zsp1myo.css">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -36,7 +36,7 @@
 			
 
 		<div class="c-primary-header__title">
-    	<a href="http://stingingfly.org/" rel="home">
+    	<a href="/" rel="home">
     		<?php get_template_part( 'svg/inline', 'wordmarkbodoni' ); ?>
     	</a>
     </div>
