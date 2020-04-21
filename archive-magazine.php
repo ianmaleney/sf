@@ -9,14 +9,6 @@ get_header('primary'); ?>
 
 <div class="u-page-wrapper u-page-wrapper--primary-header">
 	<main id="main" class="site-main" role="main">
-		<div class="c-magazine-archive__info">
-			<div class="c-magazine-archive__info--text">
-				<?php the_content(); ?>
-			</div>
-			<div class="c-magazine-archive__info--image">
-				<img src="<?php the_post_thumbnail_url( 'large' ); ?>">
-			</div>
-		</div>
 		<div class="c-publication-wrapper">
 			<div class="c-product-category" id="magazines">
 		    <h2 class="c-row-header">Magazines</h2>

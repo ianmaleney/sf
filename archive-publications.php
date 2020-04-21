@@ -8,23 +8,18 @@ get_header(); ?>
 
 <div class="u-page-wrapper u-page-wrapper--primary-header">
 	<main id="main" class="site-main" role="main">
-		<div class="c-magazine-archive__info">
-			<div class="c-magazine-archive__info--text">
-				<?php the_content(); ?>
-			</div>
-		</div>
 		<div class="c-publication-wrapper">
-
+		<h2 class="c-row-header">Books</h2>
 		<?php
 			// Include the page content template.
 			$args = array(
-		    'post_type'      => 'page',
-		    'posts_per_page' => -1,
-		    'post_parent'    => $post->ID,
-				'meta_key'			=> 'date_published',
+				'post_type'      => 'product',
+				'meta_key'	     => 'date_published',
 				'orderby'        => 'meta_value_num',
-		    'order'          => 'DESC',
- 			);
+				'order'          => 'DESC',
+				'product_cat'    => 'book',
+				'posts_per_page' => -1
+			);
 
 			$parent = new WP_Query( $args );
 
@@ -40,9 +35,9 @@ get_header(); ?>
 						</a>
 				    <div class="c-content-text">
 				      <?php
-								if (is_page('books')) {
-									guest_author_link();
-								}
+								if (is_page('books')) { ?>
+									<p class="author"><?php the_field('author'); ?></p>
+								<?php }
 								if(is_page('magazine')) {
 									echo '<p class="c-mag-issue">';
 									the_field('issue_volume');
