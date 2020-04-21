@@ -5,13 +5,14 @@
   max-width: 670px
   p, form
     font-size: 1.8rem
+    line-height: 1.6
 		font-family: $serif
   @supports (display: grid)
     grid-column: 1 / -1
     width: 100%
     display: grid
     max-width: none
-    grid-template-columns: 1fr minmax(300px, 780px) 1fr
+    grid-template-columns: 1fr minmax(300px, 740px) 1fr
     figure 
       margin: 0 -30px
     p img 
@@ -58,12 +59,12 @@
 
 .c-article__footer
   font-style: italic
-  border-top: 1px solid $spacer
-  max-width: 700px
-  padding: 0 $grid-gutter $grid-unit
+  border-top: 1px solid $black
+  max-width: 740px
+  background-color: $spacer
   p
-    font-size: 1.2rem
-		font-family: $serif
+    font-size: 1.65rem
+    line-height: 1.6
   @supports (display: grid)
     grid-column: 2
     max-width: none

@@ -605,12 +605,15 @@ function guest_author_bio() {
 /************************************************/
 
 // 
-function sf_single_cat($primarycats = array(118, 1480, 27, 92, 540, 159, 1344,252, 251, 161, 128, 32)){
+function sf_single_cat(
+	$primarycats = array(
+		'News', 'Fiction', 'Essay', 'Poetry', 'Drama', 'Criticism', 'Podcast', 'Blog Post', 'Editorial', 'Interview', 'RE:fresh'
+		)){
 
     $categories = get_the_category();
     $output = '';
     foreach($categories as $category) {
-        if ( in_array($category->cat_ID, $primarycats) ) {
+        if ( in_array($category->name, $primarycats) ) {
             $output .= '<a href="' . esc_url( get_category_link( $category->term_id ) ) . '">' . esc_html( $category->name ) . '</a> ';
         }
     }

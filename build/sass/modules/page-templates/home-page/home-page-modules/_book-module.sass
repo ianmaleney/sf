@@ -3,13 +3,15 @@
 	flex-wrap: wrap
 	align-content: center
 	margin-bottom: 0
+	border-right: 1px solid $spacer
+	padding-right: 3vw
 	@media #{$max-six-forty}
 		padding-top: 0
 
 .books-image
 	flex: 1 0 33%
 	flex-grow: 1
-	margin: 0 5%
+	margin: 10px
 	min-width: 150px
 	@media #{$min-six-forty}
 		max-width: 100%
@@ -17,22 +19,25 @@
 		display: block
 		max-width: 100%
 		max-height: 300px
-		margin: 0 auto 20px
+		margin: 0 auto 0
 		@media #{$min-six-forty}
 			max-height: 350px
-			margin: 0 auto 0
 
 
 .books-info
 	flex: 1 0 33%
-	margin: 0 5%
+	margin: 0
 	min-width: 280px
 
 .books-title
-	font-size: 3.5rem
 	display: block
-	@media #{$max-nine-sixty}
-		font-size: 2.8rem
+	color: $black
+	text-align: center
+	font-size: 2.8rem
+	margin: 10px 0
+	@media #{$min-twelve-eighty}
+		font-size: 3.8rem
+		line-height: 4.8rem
 	&:hover
 		color: $primary
 		text-decoration: none
@@ -45,10 +50,10 @@
 	margin: 0
 
 .books-description
-	font-size: 1.2rem
-	padding: $grid-gutter 0
-	border-bottom: 1px solid $spacer
-	line-height: 2rem
+	font-size: 1.6rem
+	padding: 0
+	line-height: 1.4
+	text-align: center
 
 .books-extra
 	flex: 1 0 100%

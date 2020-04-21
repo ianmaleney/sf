@@ -21,6 +21,8 @@
     img
       max-height: 300px
       object-fit: contain
+      @media (max-width: 960px)
+        margin-bottom: 20px
 
 
 .c-mag-home__text--wrapper
@@ -35,10 +37,15 @@
   max-width: 550px
   margin: 0 auto
   box-shadow: 0 10px 25px rgba(0,0,0,0.2)
+  @media (max-width: 768px)
+    padding: 10px
   .c-mag-issue
     font-size: 1.8rem
     font-family: $sans
     color: $secondary
+    @media (max-width: 768px)
+      margin: 10px
+      font-size: 1.6rem
     &:after
       content: ''
       display: block
@@ -52,11 +59,12 @@
 
 .c-mag-home__issue-title
   text-align: center
+  @media (max-width: 768px)
+    margin: 0
   a
-    font-size: 3.5rem
+    font-size: 3.8rem
     font-family: $serif
     color: $black
-    +underlineHover(currentColor, 1px, 80%)
     @media #{$max-nine-sixty}
       font-size: 3rem
       line-height: 3.8rem
@@ -80,6 +88,8 @@
   max-width: 400px
   justify-content: space-between
   margin-top: 1.5rem
+  @media #{$max-six-forty}
+    width: 96%
 
 
 .c-mag-home__button
@@ -87,8 +97,8 @@
   margin: 0 10px
   @media #{$max-six-forty}
     text-align: center
-    font-size: 1.2rem
-    font-family: $sans
+    font-size: 1.6rem
+    padding: 8px 12px
   &:hover
     a
       color: $white

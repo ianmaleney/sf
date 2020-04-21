@@ -7,23 +7,28 @@
 .news__wrapper
 	+pattern
 	width: 100%
-	padding: 10px
+	padding: 0 10px
 	display: flex
 	flex-flow: column nowrap
+	@media (min-width: 768px)
+		padding: 10px
 
 .news-module
 	width: 100%
 	min-width: 225px
+	max-width: 640px
 	display: flex
 	flex-direction: row
 	justify-content: space-between
 	padding: 10px
 	background-color: $white
-	margin: 5px
+	margin: 5px auto
+	border-bottom: 1px solid $spacer
 	@media #{$min-six-forty}
 		max-width: 90%
-		margin: $grid-gutter 5%
+		margin: 10px auto
 		box-shadow: 0 3px 8px rgba(0,0,0,0.3)
+		border: none
 
 .news-module__image
 	height: 86px
@@ -44,17 +49,17 @@
 	max-width: calc(100% - 100px)
 
 .news-title
-	font-size: 1.2rem
+	font-size: 1.8rem
 	display: block
 	text-decoration: none
-	+underlineHover(currentColor, 1px, 100%)
 	max-width: 100%
+	color: $black
 	&:after
 		transform-origin: top left
 	@media #{$min-twelve-eighty}
-		font-size: 1.8rem
+		font-size: 2rem
 	&:hover
-		color: $black
+		color: $accent
 		text-decoration: none
 
 .news-info

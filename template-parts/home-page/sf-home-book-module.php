@@ -30,7 +30,9 @@ if($latestBook) {
 
     <div class="books-info">
       <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener" class="books-title"><?php the_title(); ?></a>
-      <p class="books-author"><?php the_field('author') ?></p>
+      <div class="c-content-text--meta">
+          <p class="books-author"><?php the_field('author') ?></p>
+      </div>
       <?php if (get_field('blurb_quote')) { ?>
          <p class="books-description"><?php the_field('blurb_quote'); ?> — <?php the_field('blurb_attribution'); ?></p>
       <?php } ?>

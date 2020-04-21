@@ -33,10 +33,15 @@ if($archivePosts) {
           //   }
           // }
         ?>
-        <?php sf_single_cat(); ?>
       </p>
       <a href="<?php the_permalink(); ?>" class="c-content-title"><?php the_title(); ?></a>
-      <p class="c-content-author"><i>by</i> <?php guest_author_link(); ?></p>
+      <div class="c-content-text--meta">
+            <?php if ('page' != get_post_type()) { ?>
+              <p class="c-content-type"><?php sf_single_cat() ?></p>
+              <p class="sep">|</p>
+            <?php } ?>
+          <p class="c-content-author"><?php guest_author_link(); ?></p>
+      </div>
       <p class="c-content-description
         <?php
           if ( in_category('magazine') ) {

@@ -1,6 +1,6 @@
 /* Base Content Module Styling */
 .o-content-row
-	margin-top: 1.8rem
+	margin-top: 3rem
 	display: flex
 	flex-direction: row
 	justify-content: center
@@ -11,28 +11,29 @@
 
 .o-content-row--half-width
 	@media #{$min-six-forty}
-		min-width: 50vw
-		max-width: 50vw
+		min-width: 50%
+		max-width: 50%
 		float: left
 		clear: none
 
 .c-row-header
-	font-size: 2.8rem
+	font-size: 2.2rem
 	line-height: 3.8rem
-	font-family: $serif
+	font-family: $sans
+	border-top: 1px solid $spacer
+	border-bottom: 1px solid $spacer
 	color: $secondary
-	letter-spacing: 1px
-	font-style: italic
 	text-align: center
-	width: 100%
+	width: 90%
 	margin-bottom: 1.2rem
+	padding: 5px
 	&:before, &:after
 		content: ''
 		display: inline-block
 		position: relative
 		width: 20px
-		height: 2px
-		background-color: currentColor
+		height: 1px
+		background-color: $spacer
 		right: 20px
 		bottom: 0.7rem
 		z-index: 1 !important
@@ -50,20 +51,23 @@
 	justify-content: flex-start
 	align-items: center
 .c-content-module--basic
+	max-width: 640px
 	&:nth-of-type(odd)
 		background-color: $background-light
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23ffffff' fill-opacity='0.6'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
 
+.c-content-module--archive
+	max-width: 350px
+	@media (max-width: 768px)
+		background: none
+		background-image: none !important
+		background-color: white !important
+
 .c-content-image-link
-	max-width: 60%
-	margin-bottom: 1.8rem
 	position: relative
-	max-width: 1.8rem * 10
-	height: 1.8rem * 10 / 14 * 9
-	overflow: hidden
+	height: 160px
 	@media #{$min-six-forty}
-		max-width: 80%
-		max-height: calc(550px / 14 * 9)
+		max-height: calc(calc(550px / 14) * 9)
 		object-fit: cover
 		&:after
 			content: ''
@@ -79,43 +83,45 @@
 	min-width: 100%
 	height: 100%
 	object-fit: cover
+	box-shadow: 2px 2px $accent, 4px 4px salmon
 
 .c-content-text
 	max-width: 96%
 	text-align: center
-	@media #{$min-six-forty}
-		max-width: 80%
 
 .c-content-title
-	@media #{$max-nine-sixty}
-		font-size: 2.2rem
 	display: block
 	max-width: 100%
-	margin-bottom: 0
-	margin-left: 0
+	margin: 20px 0 10px
 	font-size: 2.8rem
+	line-height: 3.2rem
 	text-decoration: none
-	+underlineHover(currentColor, 1px, 80%)
+	color: $black
+	@media #{$max-nine-sixty}
+		font-size: 24px
 	&:hover
-		color: $black
+		color: $accent
 		text-decoration: none
 
-
-.c-content-type
-	display: block
-	text-align: center
-	margin: 0
-	a
-		font-size: 1.2rem
+.c-content-text--meta
+	border-top: 1px solid $spacer
+	border-bottom: 1px solid $spacer
+	margin: 10px 0
+	display: flex
+	justify-content: center
+	p 
 		font-family: $sans
-		color: $secondary
-		font-size: 12px
-		padding: 1.8rem / 4
-		letter-spacing: 1px
-		text-decoration: none
-		text-transform: uppercase
-		display: inline-block
-		+underlineHover
+		font-weight: 400
+		padding: 0 10px
+		margin: 4px 0
+		font-size: 1.6rem
+		&.sep 
+			color: $spacer
+		a 
+			color: $secondary
+			&:hover
+				color: $accent
+
 
 .c-content-module--archive
 	.c-content-type
@@ -124,27 +130,12 @@
 	&:last-of-type
 		justify-content: center
 
-.c-content-author
-	display: block
-	letter-spacing: 0.5px
-	padding: 1.8rem / 4
-	text-decoration: none
-	height: 1.8rem * 1.5
-	margin: 0
-	a.c-author-link
-		font-size: 1.8rem
-		font-family: $sans
-		color: $black
-		text-decoration: none
-		+underlineHover
-		display: inline
-		border: none
-		&:after
-			left: calc(40% + 11px)
-
 .c-content-description
 	font-size: 1.8rem
+	line-height: 1.5
 	margin: 8px 0
+	@media (max-width: 960px)
+		line-height: 1.35
 
 .c-content-description--issue
 	font-size: 1.2rem

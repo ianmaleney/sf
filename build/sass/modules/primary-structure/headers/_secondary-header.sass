@@ -13,12 +13,15 @@
 
 .c-secondary-header
   display: flex
-  width: 100%
   height: 100%
+  width: 100%
   padding: 0 10px
   align-items: center
   @media #{$max-six-forty}
     justify-content: space-between
+  @media (min-width: 1280px)
+    width: calc(100vw - 30px)
+    transform: translate(15px, 15px)
 
 .c-secondary-header__nav
   display: flex
@@ -47,11 +50,11 @@
     padding: 0 5px
     margin: -5px 0 0
   p
-    font-size: 1.2rem
-		font-family: $sans
-    font-size: 1.2rem
-    text-transform: uppercase
+    font-size: 1.5rem
     padding: 0 5px
+    font-family: $sans
+    color: $secondary
+    font-weight: 600
 
 
 .c-secondary-header__title
@@ -83,22 +86,6 @@
   //height: 86px
   min-width: 250px
   margin-left: -5%
-
-.c-secondary-header__logo
-  @extend .c-secondary-header__nav--item
-  flex: 1 0 15%
-  padding: 0
-  align-items: center
-  &:hover
-    svg
-      stroke: $accent
-  @media #{$max-six-forty}
-    align-self: flex-end
-  svg
-    margin-top: 0.5rem
-    width: 5rem
-    height: 5rem
-    stroke: $black
 
 
 .u-secondary-header-wrapper
@@ -187,11 +174,9 @@
 .c-secondary-header.is-scrolling
   box-shadow: 0 3px 8px rgba(0,0,0,0.3)
   background-color: white
-  .c-secondary-header__nav--item
-    border-right: 1px solid $spacer
+  @media (min-width: 1280px)
+    transform: translate(15px, 0)
   #c-secondary-header__wordmark
     transform: scale(0.5)
     margin-top: 8px
     min-width: 180px
-  .c-secondary-header__logo
-    border-right: none

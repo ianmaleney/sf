@@ -42,12 +42,6 @@
           </div>
         </nav>
 
-        <div class="c-secondary-header__logo">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <?php get_template_part( 'svg/inline', 'logo' ); ?>
-          </a>
-        </div>
-
       </header>
 
       <nav class="c-side-nav">

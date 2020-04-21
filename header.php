@@ -24,16 +24,6 @@
 <div id="page" class="site">
 	<div class="site-inner">
 		<header id="masthead" class="c-primary-header c-home-header" role="banner">
-		<?php if( is_user_logged_in() ) { ?>
-				<!-- Do Nothing -->
-		<?php } else { ?>
-				<div class="c-primary-header__sub-ad">
-					<a href="/shop">
-						<img data-src="/wp-content/themes/stingingfly/img/sf-header-ad-v1.jpg" alt="Stinging Fly Sale!">
-					</a>
-				</div>
-		<?php } ?>
-			
 
 		<div class="c-primary-header__title">
     	<a href="/" rel="home">

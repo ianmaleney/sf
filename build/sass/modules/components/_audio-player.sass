@@ -12,6 +12,9 @@
   position: relative
   @supports (display: grid)
     grid-column: 2
+  @media (max-width: 768px)
+    max-width: 96%
+    margin: 0 auto
 
 .c-podcast-player__image
   height: 160px
@@ -55,7 +58,7 @@
 
 .c-podcast-player__title
   font-size: 1.8rem
-  line-height: 2rem
+  line-height: 3rem
   font-family: $sans
   color: $black
   margin: 0 0
