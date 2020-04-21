@@ -19,25 +19,15 @@ $system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubu
 //
 //
 
-// Colour Palette
-$swatch: ( 'white': rgb(255,255,255), 'black': #212529, 'primary': #336897, 'accent': #3e92d3, 'secondary': #868e96, 'highlight': #f03e3e, 'background-light': #f1f3f5, 'background-dark': #343a40, 'spacer': #dee2e6 )
-
-@function swatch-pick($key: 'primary')
-  @return map-get($swatch, $key)
-
-// Tinting & Shading Interval
-$color-interval: 10% !global
-
-// Colour Picking Function
-@function c($color-name: primary, $level: 0, $base: white)
-
-  // Get Color from Swatch
-  $sf-color: swatch-pick($color-name)
-  // Choose Tinting/Shading Base
-  $color-base: if($level < 0, black, $base)
-
-  // Return final colour
-  @return mix($color-base, $sf-color, $level * $color-interval)
+$white: #ffffff
+$black: #212529
+$primary: #336897
+$accent: #3e92d3
+$secondary: #868e96 
+$highlight: #f03e3e 
+$background-light: #f1f3f5 
+$background-dark: #343a40 
+$spacer: #dee2e6
 
 
 //
@@ -46,42 +36,9 @@ $color-interval: 10% !global
 //
 //
 
-// Modular Scale
-$ms-base: 1.8rem
-$ms-ratio: $major-third
-
-// Baseline
-$baseline: $ms-base * 1.75
-
 // Fonts
-$serif: 'Amiri', Palatino, Georgia
-$sans: 'Myriad Pro', 'Gill Sans', $system
-
-// Typographic Scale
-$type-scale: ( -1: ms(-1), 0: ms(0), 1: ms(1), 2: ms(2), 3: ms(3), 4: ms(4), 5: ms(5), 6: ms(6))
-
-@function type-scale($level)
-  @return map-get($type-scale, $level)
-
-// Baseline Scale
-$line-height: ( -1: ms(-1) * 1.9, 0: ms(0) * 1.6, 1: ms(1) * 1.6, 2: ms(2) * 1.4, 3: ms(3) * 1.4, 4: ms(4) * 1.3, 5: ms(5) * 1.3, 6: ms(6) * 1.3)
-
-@function line-height($level)
-  @return map-get($line-height, $level)
-
-// Type-Setting Mixin
-@mixin type-setting($level: 0, $family: $serif, $color: c('black'))
-  font-size: type-scale($level)
-  line-height: line-height($level)
-  font-family: $family
-  color: $color
-  @if $family == $sans
-    font-weight: 600
-    font-size: type-scale($level - 1)
-
-// Baseline Multiplier
-@mixin baseline($multiplier)
-  line-height: $baseline * $multiplier
+$serif: 'ETBookOT', 'Amiri', Palatino, Georgia, Times, serif
+$sans: 'Proxima Nova', 'Gill Sans', $system
 
 
 //

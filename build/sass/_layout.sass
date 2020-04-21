@@ -3,17 +3,17 @@
   flex-wrap: wrap
   padding: 0 0
   @media #{$min-six-forty}
-    padding: 0 $grid-gutter
+    padding: 0 10px
 
 .u-page-wrapper--primary-header
   margin: 0 2vw 0
   @media #{$min-six-forty}
-    margin: 0 $grid-unit 0
+    margin: 0 16px 0
 
 .u-page-wrapper--secondary-header
-  margin: 84px $grid-gutter 0
+  margin: 84px 10px 0
   @media #{$min-six-forty}
-    margin: 168px $grid-unit 0
+    margin: 168px 16px 0
   @supports (display: grid)
     margin: 10vh 0 0 
 
@@ -29,7 +29,7 @@ main
   width: 100%
 
 .o-article
-  padding: $grid-gutter
+  padding: 10px
   max-width: 100%
   display: flex
   flex-direction: column
@@ -67,7 +67,7 @@ main
 #card-errors
   text-align: center
   grid-column: none
-  font-family: "Proxima Nova", $sans, $system
+  font-family: $sans
   font-size: 16px
   color: red
 
@@ -95,10 +95,10 @@ main
   p 
     text-align: center
     grid-column: none
-    font-family: "Proxima Nova", $sans
+    font-family: $sans
     font-size: 22px
     font-weight: bold
-    color: c('black')
+    color: $black
 
 .sk-folding-cube 
   margin: 20px auto
@@ -118,7 +118,7 @@ main
       left: 0
       width: 100%
       height: 100%
-      background-color: c('primary')
+      background-color: $primary
       animation: sk-foldCubeAngle 2.4s infinite linear both
       transform-origin: 100% 100%
   .sk-cube2 
@@ -161,7 +161,7 @@ main
       flex-wrap: wrap
       padding: 10px
       section 
-        border-bottom: 1px solid c('spacer')
+        border-bottom: 1px solid $spacer
         padding: 0 0 20px
         margin-bottom: 20px
       section, h1
@@ -178,14 +178,14 @@ main
         line-height: 2.1rem
         max-width: 420px
         &.message
-          color: c('primary')
+          color: $primary
         &.error-message
-          color: c('highlight')
+          color: $highlight
       li 
         font-size: 1.6rem
         line-height: 2.5rem
       button
-        background-color: c('primary')
+        background-color: $primary
         border: none
         color: white
         font-family: $sans
@@ -200,7 +200,7 @@ main
         &:hover
           transform: translateY(-1px)
           box-shadow: 0 3px 6px -2px rgba(0,0,0,0.25)
-          background-color: c('accent')
+          background-color: $accent
   .account-page__form
     background-color: #fbfbfb
     padding: 10px
@@ -220,6 +220,6 @@ main
       font-size: 1.4rem
       font-family: $sans
       padding: 3px
-      border: 1px solid c('spacer')
+      border: 1px solid $spacer
       margin: 4px 0 10px
   

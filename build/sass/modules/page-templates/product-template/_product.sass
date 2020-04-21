@@ -10,7 +10,7 @@
     padding: 50px 0
     align-items: center
     &:nth-of-type(2n+4)
-      background-color: c('background-light')
+      background-color: $background-light
 
 .c-product-headline
   @extend %fwh
@@ -27,7 +27,9 @@
   +title-oversize
 
 .c-product__author
-  +type-setting(2, $serif, c('white'))
+  font-size: 2.2rem
+  font-family: $serif
+  color: $white
   font-weight: 400
 
 .c-product-headline__buttons
@@ -60,7 +62,7 @@
     left: 15%
     width: 70%
     height: 2px
-    background-color: c('spacer')
+    background-color: $spacer
     @media (max-width: 768px)
       left: 0
 
@@ -83,7 +85,7 @@
 .c-product__magazine-image
   flex: 1 0 30%
   margin: 0 5% 0 10%
-  background-color: c('background-light')
+  background-color: $background-light
   display: flex
   justify-content: center
   align-items: center
@@ -103,14 +105,19 @@
   margin: 0 10% 0 5%
 
 .c-product__pullquote--quote
-  +type-setting(1, $serif)
+  font-family: $serif
+  font-size: 2.2rem
   font-style: italic
   @media #{$min-nine-sixty}
-    +type-setting(2, $serif)
+    font-size: 2.2rem
+    font-family: $serif
+    font-size: 2.8rem
 
 .c-product__pullquote--attrib
   font-weight: 800
-  +type-setting(1, $sans, c('secondary'))
+  font-family: $sans
+  font-size: 2.2rem
+  color: $secondary
 
 .c-product__excerpt
   @media (max-width: 768px)
@@ -125,7 +132,7 @@
   text-align: center
   h3
     @extend .heading-4
-    padding-top: $baseline
+    padding-top: 1.8rem
     &:after
       content: ''
       display: block
@@ -134,19 +141,23 @@
       width: 30%
       top: 0
       left: 35%
-      background-color: c('accent')
+      background-color: $accent
 
 .c-magazine-intro
   flex: 1 0 30%
   margin: 0 10% 0 5%
   ul.c-product__purchase-info__list
     padding: 20px 0
-    border-bottom: 1px solid c('spacer')
+    border-bottom: 1px solid $spacer
     li
       text-align: left
-      +type-setting(1, $serif, c('black'))
+      font-size: 2.2rem
+      font-family: $serif
+      color: $black
   p
-    +type-setting(1, $serif, c('black'))
+    font-size: 2.2rem
+    font-family: $serif
+    color: $black
     font-style: italic
 
 .c-product__author-bio__text
@@ -157,10 +168,10 @@
     padding: 0 10% 0 2%
   .heading-4
     text-align: center
-    color: c('secondary')
+    color: $secondary
     font-family: $sans
     a
-      color: c('secondary')
+      color: $secondary
     @media #{$max-six-forty}
       font-size: 2rem
     @media #{$min-nine-sixty}
@@ -184,7 +195,9 @@
   justify-content: center
   padding: 80px 0
   a
-    +type-setting(2, $sans, c('primary'))
+    font-family: $sans
+    font-size: 2.8rem
+    color: $primary
     line-height: 3.2rem
     padding: 10px 32px
     height: 56px
@@ -203,12 +216,12 @@
   .heading-4
     flex: 1 0 100%
     text-align: center
-    color: c('secondary')
+    color: $secondary
     font-family: $sans
   p
     flex: 1 0 50%
     text-align: center
-    border: 1px solid c('spacer')
+    border: 1px solid $spacer
     padding: 10px 0
     &:nth-of-type(even)
       border-left: none
@@ -224,37 +237,39 @@
     flex: 1 0 50%
     align-items: center
     &:first-child
-      border-right: 1px solid c('spacer')
+      border-right: 1px solid $spacer
     a
       margin: 20px auto
 
 .c-product-price
   font-size: 6rem
-  color: c('black')
-  border-bottom: 2px solid c('secondary')
+  color: $black
+  border-bottom: 2px solid $secondary
   padding: 40px
   margin-bottom: 20px
 
 .c-product__purchase-info__list
-  +type-setting(-1, $sans, c('secondary'))
+  font-size: 1.2rem
+  font-family: $sans
+  color: $secondary
   list-style: none
   -webkit-padding-start: 0
   text-align: center
   li
-    color: c('secondary')
+    color: $secondary
 
 .c-product__blurb-group
   flex-direction: column
   align-items: center
   .heading-3
-    color: c('secondary')
+    color: $secondary
     @media #{$max-nine-sixty}
       padding: 0 5%
 
 .c-product__blurb
   max-width: 700px
   margin-bottom: 30px
-  color: c('background-dark')
+  color: $background-dark
   @media #{$max-nine-sixty}
     padding: 0 5%
   &:after
@@ -265,7 +280,7 @@
     left: 15%
     width: 70%
     height: 1px
-    background-color: c('spacer', 1, black)
+    background-color: $spacer
 
 .c-product__blurb-attrib
   text-align: right

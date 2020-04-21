@@ -12,21 +12,23 @@
     margin-top: 0
 
   .search-form
-    +type-setting(0, $sans, c('black'))
+    font-size: 1.8rem
+		font-family: $sans
+		color: $black
     display: flex
     justify-content: flex-start
     align-items: center
+    
+.search-form input
+  height: 1.8rem
 
-    input
-      height: $baseline
+.search-submit
+  @extend %button
+  +o-button
+  margin: 0
 
-    .search-submit
-      @extend %button
-      +o-button
-      margin: 0
-
-  .error-image
-    padding: 50px
-    svg
-      width: 25vw
-      height: 25vw
+.error-image
+  padding: 50px
+  svg
+    width: 25vw
+    height: 25vw

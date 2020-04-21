@@ -1,6 +1,6 @@
 .c-podcast-player
-  border: 1px solid c('primary')
-  background-color: c('white')
+  border: 1px solid $primary
+  background-color: $white
   box-shadow: 0px 12px 24px rgba(black, 0.3)
   display: flex
   width: 100%
@@ -36,15 +36,15 @@
 .js-podcast-player__play-pause svg
   height: 100%
   width: 100%
-  border: 5px solid c('primary')
+  border: 5px solid $primary
   border-radius: 100%
-  fill: c('primary')
+  fill: $primary
   #Pause
     display: none
   &:hover
     cursor: pointer
-    fill: c('white')
-    background-color: c('primary')
+    fill: $white
+    background-color: $primary
 
 .js-podcast-player__play-pause svg.is-playing
   #Pause
@@ -54,10 +54,12 @@
     display: none
 
 .c-podcast-player__title
-  +type-setting(0, $sans, c('black'))
+  font-size: 1.8rem
+  line-height: 2rem
+  font-family: $sans
+  color: $black
   margin: 0 0
   padding: 10px 10px
-  line-height: 2rem
   height: auto
   width: calc(100% - 100px)
   @media (max-width: 700px)
@@ -67,7 +69,7 @@
   .c-podcast-player__series-title
     font-size: 12px
     line-height: 18px
-    color: c('accent')
+    color: $accent
 
 .c-podcast-player__info
   display: flex
@@ -78,7 +80,7 @@
   font-family: $sans
   font-size: 1.4rem
   line-height: 1.4rem
-  color: c('secondary')
+  color: $secondary
   padding: 0 10px 0 110px
   margin-top: -30px
   flex-wrap: wrap
@@ -90,7 +92,7 @@
     width: 100%
     display: block
     height: 10px
-    border: 1px solid c('primary')
+    border: 1px solid $primary
     margin-bottom: 10px
     position: relative
     .c-podcast-player__progress-bar--overlay
@@ -99,7 +101,7 @@
       top: 0
       height: 8px
       width: 100%
-      background-color: c('primary')
+      background-color: $primary
       transform: scaleX(0)
       transform-origin: left
   .c-podcast-player__progress
@@ -114,7 +116,7 @@
       font-family: $sans
       font-size: 1.4rem
       line-height: 1.4rem
-      color: c('secondary')
+      color: $secondary
   #vol-control
     margin: 0 10px 0
     vertical-align: middle
@@ -141,7 +143,7 @@
   height: 100%
   width: calc(100% - 160px)
   display: block
-  background-color: c('white')
+  background-color: $white
   padding: 10px
   transform: translateY(100%)
   transform-origin: bottom
@@ -163,9 +165,9 @@
   line-height: 16px
   font-family: $sans
   padding: 4px 8px
-  border-top: 1px solid c('primary')
-  background-color: c('primary')
-  color: c('white')
+  border-top: 1px solid $primary
+  background-color: $primary
+  color: $white
   display: flex
   justify-content: flex-end
   z-index: 100
@@ -179,16 +181,17 @@
       text-decoration: underline
 
 .c-podcast-player__slide--text
-  +type-setting(1, $sans, c('secondary'))
+  font-size: 1.8rem
+  line-height: 2.8rem
+  font-family: $sans
+  color: $secondary
   clear: right
   display: inline-block
   padding-bottom: 5px
-  border-bottom: 1px solid c('spacer')
+  border-bottom: 1px solid $spacer
   max-width: calc(100% - 45px)
-  @media (max-width: 700px)
-    +type-setting(0, $sans, c('secondary'))
   .c-podcast-player__slide--text__podcast-title
-    color: c('primary')
+    color: $primary
 
 .o-close-button
   position: absolute
@@ -197,10 +200,10 @@
   svg
     height: 25px
     width: 25px
-    fill: c('secondary')
+    fill: $secondary
     opacity: 0.6
     &:hover
-      fill: c('primary')
+      fill: $primary
       opacity: 1
       cursor: pointer
 
@@ -213,7 +216,7 @@
   svg
     height: 30px
     width: 30px
-    fill: c('accent')
+    fill: $accent
     &:hover
-      fill: c('primary')
+      fill: $primary
       cursor: pointer

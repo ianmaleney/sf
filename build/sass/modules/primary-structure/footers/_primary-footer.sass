@@ -1,8 +1,8 @@
 footer
 	width: 100vw
 	float: left
-	background-color: c('background-dark', 0.5, black)
-	color: c('background-light')
+	background-color: $background-dark
+	color: $background-light
 	z-index: 1
 
 .u-footer-wrapper
@@ -20,7 +20,10 @@ footer
 		padding: 80px 0
 
 .c-footer-nav
-	+type-setting(0, $sans, c('background-light', 1, black))
+	font-size: 1.8rem
+	line-height: 2.8rem
+	font-family: $sans
+	color: $background-light
 
 .c-footer-nav__menu
 	list-style: none
@@ -39,20 +42,24 @@ footer
 		li
 			flex: 1 0 50%
 	a
-		color: c('background-light', 1, black)
+		color: $background-light
 		text-decoration: none
 		&:hover
-			color: c('accent', 1)
+			color: $accent
 
 .c-footer-logo
-	+type-setting(4, $serif, c('background-light', 1, black))
+	font-size: 3.5rem
+	font-family: $serif
+	color: $background-light
 	padding: 20px 0
 	text-align: center
 
 .c-footer-info
-	border-top: 1px solid c('background-light', 1, black)
+	border-top: 1px solid $background-light
 	p
-		+type-setting(-1, $serif, c('background-light', 1, black))
+		font-size: 1.2rem
+		font-family: $serif
+		color: $background-light
 
 .c-footer-social
 	padding: 20px 0
@@ -63,18 +70,21 @@ footer
 		display: flex
 		justify-content: center
 	a
-		+type-setting(3, $sans, c('background-light', 1, black))
+		font-size: 2.8rem
+		line-height: 3.8rem
+		font-family: $sans
+		color: $background-light
 		padding: 10px
 		text-decoration: none
 		svg
 			height: 4rem
 			width: 4rem
-			fill: c('background-light', 1, black)
+			fill: $background-light
 		@media #{$max-six-forty}
 			padding: 15px
 		&:hover
 			svg
-				fill: c('accent', 1, white)
+				fill: $accent
 
 
 .c-support-logos

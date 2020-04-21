@@ -1,13 +1,13 @@
 /* Base Content Module Styling */
 .o-content-row
-	margin-top: $baseline
+	margin-top: 1.8rem
 	display: flex
 	flex-direction: row
 	justify-content: center
 	flex-wrap: wrap
 	clear: both
 	@media #{$min-six-forty}
-		margin-bottom: $baseline * 2
+		margin-bottom: 1.8rem * 2
 
 .o-content-row--half-width
 	@media #{$min-six-forty}
@@ -17,7 +17,10 @@
 		clear: none
 
 .c-row-header
-	+type-setting(3, $serif, c('secondary'))
+	font-size: 2.8rem
+	line-height: 3.8rem
+	font-family: $serif
+	color: $secondary
 	letter-spacing: 1px
 	font-style: italic
 	text-align: center
@@ -36,7 +39,7 @@
 	&:after
 		left: 20px
 	@media #{$min-six-forty}
-		margin-bottom: $baseline
+		margin-bottom: 1.8rem
 
 .c-content-module
 	width: 100%
@@ -48,15 +51,15 @@
 	align-items: center
 .c-content-module--basic
 	&:nth-of-type(odd)
-		background-color: c('background-light')
+		background-color: $background-light
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%23ffffff' fill-opacity='0.6'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
 
 .c-content-image-link
 	max-width: 60%
-	margin-bottom: $baseline
+	margin-bottom: 1.8rem
 	position: relative
-	max-width: $baseline * 10
-	height: $baseline * 10 / 14 * 9
+	max-width: 1.8rem * 10
+	height: 1.8rem * 10 / 14 * 9
 	overflow: hidden
 	@media #{$min-six-forty}
 		max-width: 80%
@@ -80,22 +83,21 @@
 .c-content-text
 	max-width: 96%
 	text-align: center
-	+baseline(1)
 	@media #{$min-six-forty}
 		max-width: 80%
 
 .c-content-title
 	@media #{$max-nine-sixty}
-		+type-setting(2)
+		font-size: 2.2rem
 	display: block
 	max-width: 100%
 	margin-bottom: 0
 	margin-left: 0
-	+type-setting(3)
+	font-size: 2.8rem
 	text-decoration: none
 	+underlineHover(currentColor, 1px, 80%)
 	&:hover
-		color: c('black')
+		color: $black
 		text-decoration: none
 
 
@@ -104,9 +106,11 @@
 	text-align: center
 	margin: 0
 	a
-		+type-setting(-1, $sans, c('secondary'))
+		font-size: 1.2rem
+		font-family: $sans
+		color: $secondary
 		font-size: 12px
-		padding: $baseline / 4
+		padding: 1.8rem / 4
 		letter-spacing: 1px
 		text-decoration: none
 		text-transform: uppercase
@@ -123,12 +127,14 @@
 .c-content-author
 	display: block
 	letter-spacing: 0.5px
-	padding: $baseline / 4
+	padding: 1.8rem / 4
 	text-decoration: none
-	height: $baseline * 1.5
+	height: 1.8rem * 1.5
 	margin: 0
 	a.c-author-link
-		+type-setting(0, $sans, c('black'))
+		font-size: 1.8rem
+		font-family: $sans
+		color: $black
 		text-decoration: none
 		+underlineHover
 		display: inline
@@ -137,11 +143,13 @@
 			left: calc(40% + 11px)
 
 .c-content-description
-	+type-setting(0)
+	font-size: 1.8rem
 	margin: 8px 0
 
 .c-content-description--issue
-	+type-setting(-1, $sans, c('secondary'))
+	font-size: 1.2rem
+	font-family: $sans
+	color: $secondary
 
 .o-content-row--basic > .c-content-module
 	@media #{$min-six-forty}
@@ -149,28 +157,30 @@
 		max-width: 33%
 
 .c-home-sub__info
-	+type-setting(1, $serif, c('black'))
+	font-family: $serif
+	font-size: 2.2rem
+	color: $black
 	text-align: center
 	a
-		color: c('primary')
+		color: $primary
 		+underlineHover(currentColor, 1px, 80%)
 
 .c-content-module--archive__button
 	line-height: 3rem
 	font-family: $sans
-	color: c('primary')
+	color: $primary
 	font-size: 2rem
 	background-color: rgba(255,255,255,0)
-	border-color: c('primary')
+	border-color: $primary
 	display: block
 	text-align: center
 	margin: 0 auto
 	border: none
-	border-bottom: 2px solid c('primary')
+	border-bottom: 2px solid $primary
 	padding: 15px
 	&:hover
-		background-color: c('primary')
-		color: c('white')
+		background-color: $primary
+		color: $white
 		text-decoration: none
 		cursor: pointer
 		box-shadow: 0 15px 12px -10px rgba(0, 0, 0, 0.15)

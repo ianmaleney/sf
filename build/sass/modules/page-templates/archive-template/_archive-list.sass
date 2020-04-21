@@ -28,20 +28,20 @@ $mont: $sans
   .page-nav
     font-size: 1.8rem
     padding: 12px 16px
-    font-family: "proxima-nova", $sans
+    font-family: $sans
     font-variant: small-caps
-    border: 1px solid c('secondary')
+    border: 1px solid $secondary
     margin: 28px
     a
-      color: c('secondary')
+      color: $secondary
       text-decoration: none
       &:hover
-        color: c('primary')
+        color: $primary
         text-decoration: none
 
 
 .search-error-message
-  font-family: "proxima-nova", $sans
+  font-family: $sans
   padding: 2rem
   text-align: center
   font-weight: 400
@@ -66,7 +66,7 @@ $mont: $sans
   width: 100%
   margin-top: 20px
   padding: 0 22px 10px
-  border-bottom: 1px solid c('spacer')
+  border-bottom: 1px solid $spacer
   &.removed
     display: none
 
@@ -80,10 +80,10 @@ $mont: $sans
   line-height: 3.2rem
   margin: 10px 0
   color: #212529
-  font-family: ETBookOT,Helvetica,Georgia
+  font-family: $serif
   order: 2
   &:hover
-    color: c('secondary')
+    color: $secondary
     text-decoration: none
 
 .c-archive-module__description
@@ -106,7 +106,7 @@ $mont: $sans
 
 .c-archive-module
   .c-author-link 
-    font-family: "proxima-nova", $sans
+    font-family: $sans
     font-weight: 600
     font-size: 1.5rem
     line-height: 2.3rem
@@ -114,7 +114,7 @@ $mont: $sans
     border: none
     display: inline-flex
     padding-right: 30px
-    border-right: 1px solid c('spacer')
+    border-right: 1px solid $spacer
     a
       line-height: 1.65
       color: #2D9CDB
@@ -124,7 +124,7 @@ $mont: $sans
     
 
 .c-archive-module__type, .c-archive-module__issue
-  font-family: "proxima-nova", $sans
+  font-family: $sans
   font-weight: 600
   color: #686e75
   font-size: 1.1rem
@@ -141,7 +141,7 @@ $mont: $sans
     padding: 1px 0 0 0
     margin: 0 0 0 0
   @media (min-width: 900px)
-    background-color: c('spacer')
+    background-color: $spacer
     letter-spacing: 0.8px
 
 .c-archive-module__issue
@@ -152,7 +152,7 @@ $mont: $sans
 //
 
 .c-search-query-box p
-  font-family: "proxima-nova"
+  font-family: $sans
   font-size: 1.5rem
   @media (max-width: 900px)
     text-align: center
@@ -168,7 +168,7 @@ $mont: $sans
   height: 2rem
   width: 60%
   font-size: 1.4rem
-  font-family: "proxima-nova"
+  font-family: $sans
   border-radius: 3px
   border: 1px solid #ddd
   padding: 4px
@@ -177,12 +177,12 @@ $mont: $sans
   background-color: transparent
   border: none
   padding: 5px 12px
-  font-family: "proxima-nova"
+  font-family: $sans
   font-size: 1.4rem
   font-weight: 600
-  color: c('background-dark')
+  color: $background-dark
   &:hover
-    color: c('secondary')
+    color: $secondary
 
 .c-filter-list
   @media (max-width: 900px)
@@ -253,13 +253,13 @@ $mont: $sans
     font-size: 1.4rem
     color: rgba(#081D29, 0.9)
     letter-spacing: 0.3px
-    font-family: "proxima-nova", $sans
+    font-family: $sans
     font-weight: 600
     @media (max-width: 900px)
       font-size: 2.2rem
   .author-description
     font-size: 1.4rem
-    font-family: "proxima-nova", $sans
+    font-family: $sans
     color: rgba(#081D29, 0.9)
     line-height: 2.3rem
 
@@ -296,7 +296,7 @@ $lbg: #68767e
   content: ''
 
 .loader:after 
-  background: #ffffff
+  background: $white
   width: 75%
   height: 75%
   border-radius: 50%

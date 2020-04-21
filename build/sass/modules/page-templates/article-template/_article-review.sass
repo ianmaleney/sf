@@ -59,12 +59,12 @@
     font-size: 14px
     line-height: 20px
     .c-list-item--title
-      color: c('secondary')
+      color: $secondary
       margin-right: 2px
 
 .c-book-review__author
   padding-bottom: 2rem
-  border-bottom: 1px solid c('spacer')
+  border-bottom: 1px solid $spacer
   margin-bottom: 10px
   margin-top: 8px
   @media (max-width: 600px)
@@ -84,7 +84,7 @@
   font-size: 12px
 
 .c-event__info-list
-  border-top: 1px solid c('spacer')
+  border-top: 1px solid $spacer
   list-style: none
   margin: 20px 0
   padding: 10px 0
@@ -93,8 +93,11 @@
   .c-event__info-list-item
     font-weight: 400
     margin-left: 0px
-    +type-setting(0, $sans, c('black'))
+    font-family: 1.8rem
+    line-height: 2.8rem
+    font-family: $sans
+    color: $black
     line-height: 2.4rem
     .c-list-item--title
-      color: c('secondary')
+      color: $secondary
       margin-right: 2px

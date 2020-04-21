@@ -1,6 +1,6 @@
 .c-article__header
   max-width: 80vw
-  border-bottom: 1px solid c('spacer')
+  border-bottom: 1px solid $spacer
   @supports (display: grid)
     grid-column: 2
     max-width: none
@@ -10,7 +10,7 @@
   height: 50vh
   max-height: 400px
   padding: 20px 0
-  border-top: 1px solid c('spacer')
+  border-top: 1px solid $spacer
   img
     width: 100%
     height: 100%
@@ -20,9 +20,9 @@
   padding-bottom: 8px
 
 .c-article__category
-  font-family: "Proxima Nova", $sans
+  font-family: $sans
   font-size: 1.7rem
-  color: c('primary')
+  color: $primary
   margin: 0
 
 .c-article__info--title
@@ -35,28 +35,30 @@
 .c-article__info--author
   margin: 0
   font-size: 1.4rem
-  font-family: "Proxima Nova", $sans
+  font-family: $sans
   font-weight: normal
   display: inline
   margin-right: 10px
   .c-author-link
-    +type-setting(1, $sans, c('black'))
+    font-size: 1.8rem
+		font-family: $sans
+		color: $black
     letter-spacing: 0.5px
     font-weight: 600
 
 .c-article__info--date
   font-size: 1.4rem
-  font-family: "Proxima Nova", $sans
-  color: c('secondary')
+  font-family: $sans
+  color: $secondary
   display: inline
   font-weight: normal
   a 
-    color: c('secondary')
-    border-left: 1px solid c('spacer')
+    color: $secondary
+    border-left: 1px solid $spacer
     padding-left: 10px
     margin-left: 10px
   a:hover
-    color: c('accent')
+    color: $accent
 
 .c-article__social-icons
   position: absolute
@@ -74,7 +76,7 @@
       width: 30px
       height: 30px
       &:hover
-        fill: c('accent')
+        fill: $accent
   .c-social-icons--hidden
     display: flex
     flex-direction: column
@@ -109,7 +111,7 @@
     &:hover
       svg
         cursor: pointer
-        fill: c('accent')
+        fill: $accent
 
   .social-expand.social-visible
     svg

@@ -4,7 +4,10 @@
 
 .woocommerce
   input, label
-    +type-setting(0, $sans, c('black'))
+    font-family: $sans
+    font-size: 1.8rem
+    line-height: 2.8rem
+    color: $black
   .button
     @extend %button
     +o-button
@@ -20,12 +23,14 @@
     justify-content: space-around
     align-items: center
     margin: -20px 0 0
-    border-bottom: 1px solid c('spacer')
-    padding: 0 0 $baseline
+    border-bottom: 1px solid $spacer
+    padding: 0 0 1.8rem
 
 
   .page-title
-    +type-setting(4, $serif, c('black'))
+    font-family: $serif
+    font-size: 3.5rem
+    color: $black
     display: block
     padding: 5px 16px
     flex: 1 0 33%
@@ -42,7 +47,10 @@
     min-width: 280px
 
   .c-shop-header__nav__title
-    +type-setting(0, $sans, c('secondary'))
+    font-family: $sans
+    font-size: 1.8rem
+    line-height: 2.8rem
+    color: $secondary
 
   .c-shop-header__nav__links
     display: flex
@@ -59,7 +67,10 @@
 
   .woocommerce-ordering
     background: rgba(0,0,0,0)
-    +type-setting(-1, $sans, c('black'))
+    font-family: $sans
+    color: $black
+    font-size: 1.2rem
+    line-height: 2rem
 
   ul.products
     width: 100%
@@ -88,8 +99,8 @@
           margin: 0 10px
       &:nth-of-type(3n + 2)
         @media #{$min-twelve-eighty}
-          border-left: 1px solid c('spacer')
-          border-right: 1px solid c('spacer')
+          border-left: 1px solid $spacer
+          border-right: 1px solid $spacer
           padding-right: 15px
       &:last-of-type
         border-right: none
@@ -111,10 +122,10 @@
         text-align: center
         font-size: 2rem
         line-height: 2.65rem
-        color: c('black')
-        font-family: "Proxima Nova", $sans
+        color: $black
+        font-family: $sans
         a 
-          color: c('black')
+          color: $black
         &:after
           display: none
       .c-product__text
@@ -127,7 +138,7 @@
         line-height: 1.8rem
         font-weight: 400
         color: rgba(33, 37, 41, 0.72)
-        font-family: "Proxima Nova", $sans
+        font-family: $sans
         margin: 0 0
         text-align: center
       .c-product-loop__author
@@ -135,7 +146,7 @@
         font-size: 1.44rem
         line-height: 1.9rem
         color: rgba(33, 37, 41, 0.72)
-        font-family: "Proxima Nova", $sans
+        font-family: $sans
         font-weight: 400
         margin: 0 0 5px
         a
@@ -148,13 +159,13 @@
           display: block
           top: 1px
           left: 40%
-          background-color: c('spacer')
+          background-color: $spacer
       .price
         text-align: center
         font-size: 1.28rem
         line-height: 2.8rem
         color: rgba(33, 37, 41, 0.72)
-        font-family: "Proxima Nova", $sans
+        font-family: $sans
         font-weight: 400
         margin-bottom: 0
       .button
@@ -165,7 +176,7 @@
         text-align: center
         margin: 0 auto
         border: none
-        border-bottom: 2px solid c('primary')
+        border-bottom: 2px solid $primary
         font-size: 1.2rem
 
 
@@ -190,14 +201,14 @@
     .c-product-page__author
       font-size: 1.6rem
       line-height: 3.6rem
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       color: rgba(33, 37, 41, 0.72)
-      margin-bottom: $baseline / 2
+      margin-bottom: 10px
 
     .c-product-page__issue-volume
       font-size: 1.6rem
       line-height: 3.6rem
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       color: rgba(33, 37, 41, 0.72)
 
     .product_title
@@ -206,13 +217,17 @@
       line-height: 5rem
     p.price
       .woocommerce-Price-amount
-        +type-setting(1, $sans, c('secondary'))
-        font-family: "Proxima Nova", $sans
+        font-size: 1.8rem
+        line-height: 2.8rem
+        font-family: $sans
         font-weight: 400
         color: rgba(33, 37, 41, 0.72)
 
     .quantity
-      +type-setting(0, $sans, c('black'))
+      font-family: $sans
+      font-size: 1.8rem
+      line-height: 2.8rem
+      color: $black
       .qty
         height: 36px
 
@@ -220,7 +235,10 @@
       display: none
 
     p.stock
-      +type-setting(0, $sans, c('black'))
+      font-family: $sans
+      font-size: 1.8rem
+      line-height: 2.8rem
+      color: $black
 
     .single_add_to_cart_button.button.alt
       @extend %button
@@ -232,14 +250,16 @@
 
     .product-info
       p
-        +type-setting(-1, $sans, c('secondary'))
+        font-size: 1.2rem
+        font-family: $sans
+        color: $secondary
 
     ul.c-product-page__meta-info
       list-style: none
       li
         margin-left: -40px
-        color: c('secondary')
-        font-family: "Proxima Nova", $sans
+        color: $secondary
+        font-family: $sans
         font-size: 1.28rem
         line-height: 2.8rem
 
@@ -260,8 +280,8 @@
       padding-bottom: 2rem
       font-size: 2.5rem
       .price
-        color: c('primary')
-        font-family: "Proxima Nova", $sans
+        color: $primary
+        font-family: $sans
 
     .product-description
       padding: 20px 0
@@ -274,12 +294,12 @@
         left: 0
         height: 1px
         width: 100%
-        background: c('spacer')
+        background: $spacer
 
     .wc-tabs-wrapper
       max-width: 700px
       margin: 0 auto 100px
-      border-bottom: 1px solid c('spacer')
+      border-bottom: 1px solid $spacer
 
     .woocommerce-tabs ul.tabs.wc-tabs
       display: none
@@ -288,12 +308,14 @@
       display: flex !important
       flex-direction: column
       align-items: center
-      border-top: 1px solid c('spacer')
+      border-top: 1px solid $spacer
       h2
         display: none
       h3
         display: inline-block
-        +type-setting(2, $serif, c('black'))
+        font-size: 2.2rem
+        font-family: $serif
+        color: $black
         &:after
           content: ''
           display: block
@@ -302,7 +324,7 @@
           left: 0
           height: 1px
           width: 100%
-          background: c('secondary')
+          background: $secondary
       p
         text-align: left
 
@@ -318,7 +340,9 @@
             content: none
         .description_tab
           a
-            +type-setting(3, $serif, c('black'))
+            font-size: 2.8rem
+            font-family: $serif
+            color: $black
             text-align: center
       .c-table-of-contents 
         margin-top: 0
@@ -333,12 +357,16 @@
         list-style: none
         text-align: left
       .c-table-of-contents__link
-        +type-setting(0, $serif)
+        font-family: $serif
+        font-size: 1.8rem
+        line-height: 2.8rem
         font-weight: normal
         .c-author-link
           padding-right: 0
         a
-          +type-setting(0, $serif)
+          font-family: $serif
+          font-size: 1.8rem
+          line-height: 2.8rem
           font-weight: 400
 
   .shop_attributes
@@ -348,8 +376,8 @@
     clear: both
     padding: 40px 0 20px
     h2:first-child
-      font-family: "Proxima Nova", $sans
-      color: c('black')
+      font-family: $sans
+      color: $black
       font-size: 2rem
       width: 100%
       text-align: center
@@ -363,7 +391,7 @@
         left: 0
         height: 1px
         width: 100%
-        background: c('spacer')
+        background: $spacer
     ul.products
       width: 100%
       display: flex
@@ -392,31 +420,34 @@
             line-height: 1.8rem
             padding-bottom: 5px
           .c-product-loop__author a, .c-product-loop__issue-volume a
-            color: c('secondary')
+            color: $secondary
           h2
             @media #{$min-six-forty}
-              +type-setting(-1, $sans, c('black'))
+              color: $black
               font-size: 1.58rem
               line-height: 2rem
               padding: 0 0 0 0
             a
-              color: c('black')
+              color: $black
               line-height: 2rem
           .price
             display: none
             @media #{$min-six-forty}
-              +type-setting(-1, $sans, c('secondary'))
+              font-family: $sans
+              color: $secondary
               letter-spacing: 0.5px
         .button
           @media #{$min-six-forty}
-            +type-setting(-1, $sans, c('primary'))
+            font-family: $sans
             font-size: 1.2rem
             line-height: 2.2rem
+            color: $primary
             margin-top: 10px
             &:hover
-              +type-setting(-1, $sans, c('white'))
+              font-family: $sans
               font-size: 1.2rem
               line-height: 2.2rem
+              color: $white
           padding-top: 5px
           width: 100%
           max-width: 150px
@@ -425,11 +456,13 @@
 
 
   .woocommerce-message
-    +type-setting(0, $serif, c('black'))
-    border-top-color: c('primary')
-    background-color: c('background-light')
+    font-size: 1.2rem
+    font-family: $serif
+    color: $black
+    border-top-color: $primary
+    background-color: $background-light
     &:before
-      color: c('primary')
+      color: $primary
     a
       @extend %button
       +o-button
@@ -437,12 +470,18 @@
 
   .shop_table
     background-color: white
-    +type-setting(0, $sans)
+    font-family: $sans
+    font-size: 1.8rem
+    line-height: 2.8rem
     th
-      +type-setting(0, $sans, c('secondary'))
+      font-family: $sans
+      font-size: 1.8rem
+      line-height: 2.8rem
+      color: $secondary
     tr
-      +type-setting(0, $sans)
-    +type-setting(0)
+      font-family: $sans
+      font-size: 1.8rem
+      line-height: 2.8rem
     .actions
       @media #{$max-six-forty}
         display: flex
@@ -454,7 +493,8 @@
           input
             margin: 10px 0
       #coupon_code
-        +type-setting(-1, $sans)
+        font-size: 1.2rem
+		    font-family: $sans
         width: 80px
       .button
         @extend %button
@@ -466,23 +506,32 @@
           box-shadow: none
 
   .shipping-calculator-button
-    +type-setting(0, $sans, c('primary'))
+    font-family: $sans
+    font-size: 1.8rem
+    line-height: 2.8rem
+    color: $primary
 
   .variation-Edition
-    +type-setting(0, $sans, c('black'))
+    font-family: $sans
+    font-size: 1.8rem
+    line-height: 2.8rem
+    color: $black
     p
-      +type-setting(0, $sans, c('black'))
+      font-family: $sans
+      font-size: 1.8rem
+      line-height: 2.8rem
+      color: $black
       margin-top: 0
 
   .wc-proceed-to-checkout
     .checkout-button.button.alt.wc-forward
       @extend %button
-      +o-button(c('primary'), c('white'))
+      +o-button($primary, $white)
       margin: 0 20px
       &:hover
-        border-color: c('primary')
+        border-color: $primary
   .woocommerce-shipping-destination
-    font-family: "Proxima Nova", $sans, $system
+    font-family: $sans, $system
     font-weight: 400
     font-size: 12px
     line-height: 16px
@@ -495,26 +544,30 @@
       width: 30%
       min-width: 300px
       height: 72px
-      +type-setting(2, $sans, c('primary'))
+      font-family: $sans
+      font-size: 2.8rem
+      color: $primary
       @media #{$max-six-forty}
-        +type-setting(1, $sans, c('primary'))
+        font-size: 2.2rem
+        font-family: $sans
+        color: $primary
         min-width: 260px
 
   form
     input.input-text
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       font-size: 14px
       padding: 5px
     .form-row.woocommerce-validated
       input.input-text
         border: 3px solid
-        border-color: c('primary')
+        border-color: $primary
     .woocommerce-invalid
       input.input-text
         border: 3px solid
-        border-color: c('highlight')
+        border-color: $highlight
     .selection
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       font-size: 14px
 
 
@@ -525,37 +578,41 @@
   right: 30px
   padding: 10px
   text-align: center
-  background-color: rgba( c('spacer'), 0.6)
+  background-color: rgba( $spacer, 0.6)
   h3
-    +type-setting(0, $sans, c('secondary'))
+    font-family: $sans
+    font-size: 1.8rem
+    color: $secondary
     line-height: 1.5rem
     display: inline-block
     margin: 0 0
     svg
       width: 18px
       height: 14px
-      fill: c('secondary')
+      fill: $secondary
   a
-    +type-setting(0, $sans, c('primary'))
+    font-family: $sans
+    font-size: 1.8rem
+    color: $primary
     line-height: 1.5rem
 
 
 .wc_payment_method
   p 
     font-size: 14px
-    font-family: "Proxima Nova", $sans
+    font-family: $sans
     margin: 0 0 0 0
 
 .woocommerce-billing-fields, .woocommerce-additional-fields
   p 
     font-size: 14px
-    font-family: "Proxima Nova", $sans
+    font-family: $sans
     margin: 0 0 0 0
 
 #wc-stripe-payment-request-button-separator
   font-size: 1.28rem
   line-height: 2.8rem
-  font-family: "Proxima Nova", $sans
+  font-family: $sans
   color: rgba(33, 37, 41, 0.72)
   text-align: left !important
 

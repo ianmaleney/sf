@@ -64,7 +64,7 @@
     position: relative
     width: 85vw
     max-width: 420px
-    background: c('white')
+    background: $white
     height: 100vh
     box-shadow: 2px 0 12px rgba(0,0,0,0.4)
     transform: translateX(-102%)
@@ -78,8 +78,8 @@
   text-transform: uppercase
   width: 100%
   -webkit-padding-start: 0px
-  border-top: 1px solid c('spacer')
-  border-bottom: 1px solid c('spacer')
+  border-top: 1px solid $spacer
+  border-bottom: 1px solid $spacer
   @media #{$max-six-forty}
     padding-top: 32px
     flex: 1
@@ -118,7 +118,7 @@
 
 .c-primary-header__nav--menu
   li
-    font-family: "proxima-nova", $sans
+    font-family: $sans
     font-weight: 400
     letter-spacing: 0.5px
     font-size: 1.3rem
@@ -137,23 +137,23 @@
       text-align: left
     &:nth-last-child(2)
       a
-        color: c('highlight')
+        color: $highlight
     &:last-child
       @media #{$max-six-forty}
         display: none
     a
-      color: c('black')
+      color: $black
       text-decoration: none
       &:hover
-        color: c('accent')
+        color: $accent
 
 .c-bottom-nav
   position: fixed
   bottom: 0
   left: 0
   width: 100vw
-  border-top: 1px solid c('spacer')
-  background-color: c('white')
+  border-top: 1px solid $spacer
+  background-color: $white
   z-index: 500
   @media #{$min-six-forty}
     display: none
@@ -176,17 +176,17 @@
   justify-content: space-between
   align-items: center
   width: 25%
-  border-right: 1px solid c('spacer')
+  border-right: 1px solid $spacer
   padding: 0.7rem 1.5rem
   &:last-of-type
     span
       margin-top: 13px
   svg
-    fill: c('black')
+    fill: $black
     height: 3rem
     &:hover
       cursor: pointer
-      fill: c('accent')
+      fill: $accent
   .c-burger
     margin-top: 15px
   span
@@ -194,19 +194,19 @@
     text-transform: uppercase
     letter-spacing: 1px
     margin-top: -20px
-    font-family: 'Proxima Nova', $sans
+    font-family: $sans
     font-weight: 400
   &:hover
     .c-burger, .c-burger:before, .c-burger:after
       cursor: pointer
-      background-color: c('accent')
+      background-color: $accent
   &:last-child
     border-right: none
 
 .c-bottom-nav__menu--item.search-item
   svg
     margin-top: -5px
-    fill: c('black')
+    fill: $black
 
 .c-primary-header__social-icons
   display: none
@@ -225,21 +225,21 @@
       a
         font-size: 12px
         font-family: $system
-        color: c('secondary')
+        color: $secondary
         font-weight: 600
         &:hover
-          color: c('accent')
+          color: $accent
     svg
-      fill: c('spacer')
+      fill: $spacer
       height: 3rem
       width: 3rem
   a
-    color: c('spacer')
+    color: $spacer
     padding: 0 5px
     text-decoration: none
     &:hover
       svg
-        fill: c('accent')
+        fill: $accent
 
 .search-item
   svg
@@ -248,8 +248,8 @@
     padding-bottom: 0
     margin-top: -6px
     margin-bottom: 0
-    fill: c('secondary')
+    fill: $secondary
   &:hover
     cursor: pointer
     svg
-      fill: c('accent')
+      fill: $accent

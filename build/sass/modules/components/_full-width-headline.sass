@@ -9,7 +9,7 @@
   position: relative
   overflow: hidden
 
-@mixin fwh-color($background: c('black'))
+@mixin fwh-color($background: $black)
   background-color: $background
 
 %fwh__background
@@ -40,11 +40,12 @@
   z-index: 2
   min-width: 320px
 
-@mixin title-oversize($title-color: c('white'))
-  +type-setting(3, $serif, $title-color)
+@mixin title-oversize($title-color: $white)
+  font-family: $serif
+  font-size: 3.5rem
   font-weight: 400
   @media #{$min-nine-sixty}
-    +type-setting(6, $serif, $title-color)
+    font-size: 5rem
 
 @mixin vertical-buttons($flex-width)
   flex: 1 0 $flex-width
@@ -59,10 +60,10 @@
     flex-direction: column
 
 .c-product-button--dark
-  +o-button(rgba(0,0,0,0), c('white'))
+  +o-button(rgba(0,0,0,0), $white)
   margin: 10px auto
   max-width: 100px
   text-align: center
   &:hover
-    color: c('black')
+    color: $black
     text-decoration: none

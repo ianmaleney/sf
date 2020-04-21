@@ -1,16 +1,11 @@
 .c-article__body
-  +type-setting(0)
+  font-size: 1.8rem
+  font-family: $serif
   padding: 24px 0 20px
   max-width: 670px
   p, form
-    +type-setting(0)
-    margin-bottom: 1rem
-    @supports (display: grid)
-      grid-column: 2
-      @media (min-width: 400px)
-        padding: 0 20px
-      @media (min-width: 640px)
-        padding: 0 40px
+    font-size: 1.8rem
+		font-family: $serif
   @supports (display: grid)
     grid-column: 1 / -1
     width: 100%
@@ -22,14 +17,14 @@
     p img 
       margin-left: -70px
   figcaption
-    font-family: "Proxima Nova", $sans
+    font-family: $sans
     font-size: 1.2rem
-    color: c('secondary') 
+    color: $secondary
   #loginform
-    background-color: c('spacer')
+    background-color: $spacer
     border-radius: 2px
     p 
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       font-size: 1.3rem
       display: flex
       flex-direction: column
@@ -45,15 +40,15 @@
       border-radius: 3px
       width: 90%
       &.button
-        background-color: c('primary')
+        background-color: $primary
         color: white
       &.button:hover
-        background-color: rgba(c('primary'), 0.8)
+        background-color: rgba($primary, 0.8)
     .login-remember
       label, input
         width: auto
   blockquote
-    background-color: rgba(c('accent'), 0.1)
+    background-color: rgba($accent, 0.1)
     max-width: 80%
     margin: 0 auto
     p
@@ -63,11 +58,12 @@
 
 .c-article__footer
   font-style: italic
-  border-top: 1px solid c('spacer')
+  border-top: 1px solid $spacer
   max-width: 700px
   padding: 0 $grid-gutter $grid-unit
   p
-    +type-setting(-1)
+    font-size: 1.2rem
+		font-family: $serif
   @supports (display: grid)
     grid-column: 2
     max-width: none
@@ -78,7 +74,7 @@
   right: 0
   top: 100px
   border: none
-  border-left: 1px solid c('spacer')
+  border-left: 1px solid $spacer
   padding: 0 20px
   max-width: 16vw
   transform: translateX(301px)
@@ -101,12 +97,12 @@
   .c-sidebar-section__readmore--title, .c-sidebar-section__readmore--author
     font-family: $sans
     font-weight: 600
-    color: c('black')
+    color: $black
     font-size: 1.3rem
     line-height: 1.6rem
     margin: 0
   .c-sidebar-section__readmore--author a 
-    color: c('secondary')
+    color: $secondary
     &:hover
-      color: c('primary')
+      color: $primary
 

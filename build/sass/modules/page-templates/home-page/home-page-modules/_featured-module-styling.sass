@@ -1,7 +1,7 @@
 /* Featured Content Module Styling */
 .o-content-row--featured
-	margin-top: $baseline * -1
-	padding-top: $grid-gutter
+	margin-top: 1.8rem * -1
+	padding-top: 10px
 	overflow: hidden
 
 // Headline Module
@@ -13,7 +13,7 @@
 	align-items: center
 	flex: 0 1 100%
 	@media #{$min-six-forty}
-		margin-bottom: $baseline * 2
+		margin-bottom: 1.8rem * 2
 	.c-content-image-link
 		width: 45%
 		max-width: 600px
@@ -34,12 +34,12 @@
 			padding-left: 5%
 	.c-content-title
 		@media #{$max-nine-sixty}
-			+type-setting(3)
+			font-size: 2.8rem
 			margin-top: 16px
 		font-size: 3.8rem
 		line-height: 4.8rem
 		&:hover
-			color: c('black')
+			color: $black
 			text-decoration: none
 
 .o-content-row--featured > .c-row-header
@@ -64,10 +64,10 @@
 		flex: 1 0 50%
 		&:nth-of-type(even)
 			@media #{$min-six-forty}
-				border-left: 1px solid c('spacer')
+				border-left: 1px solid $spacer
 		&:nth-last-of-type(1)
 			@media #{$min-six-forty}
-				border-left: 1px solid c('spacer')
+				border-left: 1px solid $spacer
 		.c-content-image-link
 			max-height: 160px
 			margin-bottom: 20px
@@ -80,7 +80,7 @@
 			.c-content-title
 				max-width: 96%
 				margin-left: 2%
-				+type-setting(2)
+				font-size: 2.2rem
 			.c-content-description
 				@media (max-width: 768px)
 					font-size: 1.8rem
@@ -91,7 +91,7 @@
 	.c-content-module--secondary-featured:nth-of-type(5)
 		flex: 1 0 33%
 		margin-top: 15px
-		border-top: 1px solid c('spacer')
+		border-top: 1px solid $spacer
 		@media #{$max-six-forty}
 			display: none
 		.c-content-image-link
@@ -104,7 +104,7 @@
 .c-featured-content__big-sub-ad
 	@media #{$min-nine-sixty}
 		flex: 1 0 33%
-		border-left: 1px solid c('spacer')
+		border-left: 1px solid $spacer
 		margin-left: 15px
 		height: 100%
 		img
@@ -142,7 +142,7 @@ $quarters: 15 16 17 18
 	max-width: 1280px
 	margin: 0 auto
 	margin-bottom: 6.4rem
-	border-bottom: 1px solid c('spacer')
+	border-bottom: 1px solid $spacer
 
 .c-content-module--issue-one
 	padding-top: 3rem
@@ -170,7 +170,7 @@ $quarters: 15 16 17 18
 .c-content-module--notice
 	flex: 1 0 100%
 	max-width: 100%
-	border-bottom: 1px solid c('spacer')
+	border-bottom: 1px solid $spacer
 	display: flex
 	flex-direction: row
 	justify-content: center
@@ -196,7 +196,7 @@ $quarters: 15 16 17 18
 .c-content-module--notice__title
 	font-size: 4.2rem
 	line-height: 5.5rem
-	border-bottom: 1px solid c('black')
+	border-bottom: 1px solid $black
 	padding: 25px 0
 	font-weight: normal
 	@media (min-width: 768px)

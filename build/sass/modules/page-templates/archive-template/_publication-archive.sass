@@ -4,13 +4,13 @@
   flex-wrap: wrap
 
 .c-magazine-archive__info
-  border-bottom: 1px solid c('spacer')
+  border-bottom: 1px solid $spacer
   margin-bottom: 10px
   padding-bottom: 10px
 
 .c-publication-module
   flex: 1 0 33%
-  background-color: c('white') !important
+  background-color: $white !important
   .c-publication__image
     height: 355px
     max-height: 355px
@@ -24,11 +24,14 @@
     .author
       display: block
       font-size: 1.6rem
-      font-family: "Proxima Nova", $sans
+      font-family: $sans
       margin-top: 12px
-      color: c('secondary')
+      color: $secondary
   .c-mag-issue
-    +type-setting(0, $sans, c('secondary'))
+    font-size: 1.8rem
+    line-height: 2.8rem
+    font-family: $sans
+    color: $secondary
     &:after
       content: ''
       display: block
@@ -37,9 +40,12 @@
       left: 10%
       height: 1px
       width: 80%
-      background: c('spacer')
+      background: $spacer
   .c-content-title
-    +type-setting(2, $serif, c('black'))
+    font-size: 2.8rem
+    line-height: 3.8rem
+    font-family: $serif
+    color: $black
     font-style: italic
     display: inline-block
     clear: both
@@ -57,10 +63,13 @@
     @media #{$max-six-forty}
       padding: 0 10px
     h2
-      +type-setting(2, $sans)
+      font-size: 2.8rem
+      line-height: 3.8rem
+      font-family: $sans
       margin-top: 0
       @media #{$min-six-forty}
-        +type-setting(5, $sans)
+        font-size: 3.5rem
+        line-height: 4.2rem
       &:after
         content: ''
         display: block
@@ -69,7 +78,7 @@
         width: 100%
         top: 0
         left: 0
-        background-color: c('primary')
+        background-color: $primary
         @media #{$min-six-forty}
           top: -10px
 .c-product-category
@@ -88,4 +97,4 @@
   .c-content-text
     margin-top: 10px
     padding: 10px
-    border-top: 1px solid c('spacer')
+    border-top: 1px solid $spacer

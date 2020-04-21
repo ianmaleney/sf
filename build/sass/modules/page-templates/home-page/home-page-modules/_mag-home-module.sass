@@ -1,5 +1,5 @@
 .o-content-row--magazine
-  +pattern(c('accent'))
+  +pattern($accent)
   @media #{$min-nine-sixty}
     max-height: 450px
 
@@ -30,13 +30,15 @@
   display: flex
   flex-direction: column
   align-items: center
-  background-color: rgba(c('white'), 1)
+  background-color: rgba($white, 1)
   padding: 30px 0
   max-width: 550px
   margin: 0 auto
   box-shadow: 0 10px 25px rgba(0,0,0,0.2)
   .c-mag-issue
-    +type-setting(0, $sans, c('secondary'))
+    font-size: 1.8rem
+    font-family: $sans
+    color: $secondary
     &:after
       content: ''
       display: block
@@ -45,26 +47,30 @@
       left: 0
       width: 100%
       height: 2px
-      background-color: c('secondary')
+      background-color: $secondary
 
 
 .c-mag-home__issue-title
   text-align: center
   a
-    +type-setting(4, $serif, c('black'))
+    font-size: 3.5rem
+    font-family: $serif
+    color: $black
     +underlineHover(currentColor, 1px, 80%)
     @media #{$max-nine-sixty}
       font-size: 3rem
       line-height: 3.8rem
     &:hover
-      color: c('primary')
+      color: $primary
       text-decoration: none
 
 
 .c-mag-home__issue-contents
   max-width: 80%
   p
-    +type-setting(0, $serif, c('black'))
+    font-size: 1.8rem
+    font-family: $serif
+    color: $black
     font-style: italic
     font-weight: 400
 
@@ -81,8 +87,9 @@
   margin: 0 10px
   @media #{$max-six-forty}
     text-align: center
-    +type-setting(-1, $sans)
+    font-size: 1.2rem
+    font-family: $sans
   &:hover
     a
-      color: c('white')
+      color: $white
       text-decoration: none
