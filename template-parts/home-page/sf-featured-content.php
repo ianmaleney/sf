@@ -80,8 +80,8 @@ if($secondaryPosts) {
             <p class="sep">|</p>
           <?php } ?>
           <p class="c-content-author"><?php guest_author_link(); ?></p>
+          <?php } ?>
       </div>
-      <?php } ?>
       <p class="c-content-description"><?php the_field('lede'); ?></p>
     </div>
   </div>
