@@ -36,13 +36,21 @@
   .author
     border: none
     font-size: 1.6rem
-    font-family: "Proxima Nova", $sans
+    font-family: $sans
     line-height: 2.1rem
+  .c-article__info--author
+    border-bottom: 1px solid $spacer
+    padding-bottom: 10px
+    .c-author-link--unlinked, a.author 
+      font-size: 1.6rem
+      font-weight: 600
+
+
 
 .c-article__info--title--review
   font-size: 4rem
   line-height: 4.3rem
-  margin: 12px 0 0
+  margin: 12px 0
   @media (max-width: 600px)
     font-size: 2.5rem
     line-height: 4rem
@@ -70,15 +78,6 @@
   @media (max-width: 600px)
     font-size: 2rem
     line-height: 2.8rem
-
-.c-author-link--unlinked
-  padding-right: 0 !important
-  border-right: none !important
-  margin-right: 0 !important
-  font-size: 1.6rem !important
-  line-height: 2.1rem !important
-  font-family: "Proxima Nova", $sans !important
-  font-weight: normal !important
 
 .c-article__info--date--event
   font-size: 12px

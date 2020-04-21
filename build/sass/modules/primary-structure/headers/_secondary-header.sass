@@ -17,6 +17,9 @@
   width: 100%
   padding: 0 10px
   align-items: center
+  position: relative
+  z-index: 2
+  background-color: white
   @media #{$max-six-forty}
     justify-content: space-between
   @media (min-width: 1280px)
@@ -92,32 +95,38 @@
   .c-side-nav
     position: fixed
     left: 0
-    top: 60px
     width: 100%
     height: 100vh
     overflow: hidden
     pointer-events: none
+    z-index: 2
+    top: 60px
+    @media (min-width: 1280px)
+      top: 70px
   .c-side-nav__container
     position: relative
     width: 85%
-    max-width: 420px
+    max-width: 435px
     padding-top: 50px
     background: $white
     height: 100%
-    box-shadow: 2px 0 12px rgba(0,0,0,0.4)
     transform: translateX(-102%)
     display: flex
     flex-direction: column
     will-change: transform
+    @media (min-width: 1280px)
+      margin-left: 15px
+      transform: translateX(calc(-102% - 15px))
   .c-side-nav__menu
     display: flex
     flex-direction: column
     font-size: 1.8rem
-		font-family: $sans
+    font-family: $sans
     text-transform: uppercase
     width: 100%
     -webkit-padding-start: 0px
     padding-top: 32px
+    text-align: center
     flex: 1
     list-style: none
     padding: 0
@@ -134,11 +143,9 @@
     transform: translateX(-15vw)
 
   .o-underlay.side-nav--visible
-    opacity: 0
-    pointer-events: none
-    @media #{$max-six-forty}
-      opacity: 1
-      pointer-events: auto
+    opacity: 1
+    pointer-events: auto
+    z-index: 1
 
   .c-side-nav__container.side-nav--animatable
     transition: transform 0.33s cubic-bezier(0,0,0.3,1)
@@ -149,16 +156,15 @@
   .c-side-nav__container.side-nav--visible
     transform: none
 
-  .o-underlay
-    top: 60px
-
 
 .c-side-nav__menu
   height: auto
   padding: 20px 0
   li
+    @media (min-width: 960px) and (min-height: 700px)
+      margin: 0.5rem auto
     min-height: 36px
-    font-size: 1.2rem
+    font-size: 1.6rem
 		font-family: $sans
     font-weight: 600
     letter-spacing: 0.5px
@@ -169,6 +175,11 @@
     margin: 0 auto
     flex: 1
     text-align: left
+
+.c-side-nav__menu li a
+  color: $black
+  &:hover
+    color: $accent
 
 
 .c-secondary-header.is-scrolling

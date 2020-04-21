@@ -8,6 +8,8 @@
   border-left: 1px solid $spacer
   @media #{$min-six-forty}
     padding: 10px
+  section:not(:first-child)
+    margin: 6rem 0
 
 .c-sidebar--bottom
   max-width: 100%
@@ -43,15 +45,18 @@
   font-family: $sans
   margin: 18px 0 10px
   padding: 0 10px
+  border-top: 1px solid $spacer
   border-bottom: 1px solid $spacer
 
 .c-sidebar-section__item
   display: flex
   align-content: flex-start
   max-width: 100%
-  height: 135px
   align-items: center
   padding: 10px
+  margin-bottom: 10px
+  &:not(:last-child)
+    border-bottom: 1px solid $spacer
   @media #{$min-six-forty}
     align-items: flex-start
 
@@ -67,26 +72,30 @@
 
 .c-sidebar-section__item--title
   flex: 1 0 100%
-  font-size: 1.8rem
+  font-size: 2rem
   font-family: $sans
-  line-height: 2.2rem
+  color: $black
+  line-height: 1.25
   padding: 0
-  margin: 0 0 -10px 0
+  margin: 0 0 -5px
+  font-weight: 600
 
 .c-sidebar-section__item--author
-  font-size: 1.2rem
+  font-size: 1.4rem
   font-family: $sans
   color: $secondary
   padding: 0 10px 0 0
   border-right: 1px solid $spacer
   margin-bottom: 0
+  font-weight: 600
 
 .c-sidebar-section__item--date
-  font-size: 1.2rem
+  font-size: 1.4rem
   font-family: $sans
   color: $secondary
   padding: 0 0 0 10px
   margin-bottom: 0
+  font-weight: 600
 
 .c-sidebar-section__input
   display: flex
@@ -132,9 +141,10 @@
 .widget_search
   .widget-title
     font-size: 1.8rem
-		font-family: $sans
+    font-family: $sans
     margin: 18px 0 0
     padding: 0 10px
+    border-top: 1px solid $spacer
     border-bottom: 1px solid $spacer
   .search-form
     display: flex
@@ -149,22 +159,27 @@
     font-family: $sans
     font-size: 14px
     height: 28px
+    border: none
+    background-color: #eee
+    padding: 3px
   .search-submit
     @extend %button
     +o-button
     margin-left: 5px
+    font-weight: 400
+    font-size: 1.4rem
 
 .widget_mc4wp_form_widget
   .widget-title
     font-size: 1.8rem
-		font-family: $sans
+    font-family: $sans
     margin: 18px 0 0
     padding: 0 10px
+    border-top: 1px solid $spacer
     border-bottom: 1px solid $spacer
 
 .mc4wp-form-basic
-  margin: 0 0 0 0 !important
-  margin-top: 0 !important
+  margin-top: 20px
 
 .mc4wp-form-fields
   p
@@ -181,8 +196,14 @@
       font-family: $sans
       font-size: 14px
       height: 28px
+      border: none
+      background-color: #eee
+      padding: 3px
+      border-radius: 3px
     input[type="submit"] 
       display: inline-block
       @extend %button
       +o-button
+      margin: 0
       margin-left: 5px
+      font-size: 1.4rem
