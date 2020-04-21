@@ -24,8 +24,25 @@ get_header(); ?>
 	</div>
 	<script async>
 		var ll_images = document.querySelectorAll("img[data-src], .ll-img");
-		ll_images.forEach(image => {
-			image.src = image.dataset.src;
+
+		document.addEventListener("scroll", () => {
+			let vh = window.innerHeight;
+			[...ll_images].forEach(image => {
+				let pos = image.getBoundingClientRect().top;
+				if (pos < vh + 50 && !image.src) {
+					image.src = image.dataset.src;
+				}
+			});
+		});
+
+		document.addEventListener("DOMContentLoaded", () => {
+			let vh = window.innerHeight;
+			[...ll_images].forEach(image => {
+				let pos = image.getBoundingClientRect().top;
+				if (pos < vh + 50 && !image.src) {
+					image.src = image.dataset.src;
+				}
+			});
 		});
 	</script>
 <?php get_footer(); ?>
