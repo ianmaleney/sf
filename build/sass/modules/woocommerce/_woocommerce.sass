@@ -191,11 +191,12 @@
           max-width: 400px
 
     .c-product-page__author
-      font-size: 1.6rem
+      font-size: 3.2rem
       line-height: 3.6rem
       font-family: $sans
       color: rgba(33, 37, 41, 0.72)
-      margin-bottom: 10px
+      margin-bottom: 0
+      margin-top: 3rem
 
     .c-product-page__issue-volume
       font-size: 1.6rem
@@ -205,8 +206,8 @@
 
     .product_title
       font-family: $sans
-      font-size: 3.5rem
-      line-height: 5rem
+      font-size: 5rem
+      line-height: 6rem
     p.price
       .woocommerce-Price-amount
         font-size: 1.8rem
@@ -299,7 +300,7 @@
     .woocommerce-Tabs-panel
       display: flex !important
       flex-direction: column
-      align-items: center
+      align-items: flex-start
       border-top: 1px solid $spacer
       h2
         display: none
@@ -308,6 +309,7 @@
         font-size: 2.2rem
         font-family: $serif
         color: $black
+        margin: 10px 0 0
         &:after
           content: ''
           display: block
@@ -319,6 +321,7 @@
           background: $secondary
       p
         text-align: left
+        margin-top: 5px
 
     .woocommerce-tabs
       ul.tabs
@@ -354,12 +357,18 @@
         line-height: 2.8rem
         font-weight: normal
         .c-author-link
+          color: $black
           padding-right: 0
+          &:hover
+            color: $accent
         a
           font-family: $serif
+          color: $black
           font-size: 1.8rem
           line-height: 2.8rem
           font-weight: 400
+          &:hover
+            color: $accent
 
   .shop_attributes
     display: none
