@@ -80,7 +80,8 @@ $mont: $sans
   line-height: 3.2rem
   margin: 10px 0
   color: #212529
-  font-family: $serif
+  font-family: $sans
+  font-weight: 800
   order: 2
   &:hover
     color: $secondary
@@ -93,16 +94,29 @@ $mont: $sans
   letter-spacing: 0.3px
   font-size: 1.5rem
   line-height: 2.2rem
-  font-style: italic
-  margin: 10px 0
+  margin: 4px 0 10px
   order: 3
 
 .c-archive-module__details
   display: flex
   justify-content: flex-start
+  border-top: 1px solid $spacer
+  border-bottom: 1px solid $spacer
+  margin: 10px 0
+  align-items: center
+  padding: 10px 0
   @media (max-width: 900px)
     order: 1
     margin: 8px 0
+  .author
+    font-family: $sans
+    font-size: 1.4rem
+    line-height: 1.8rem
+    color: $secondary
+    display: inline-flex
+    padding: 0 20px 0 0
+    &:hover
+      color: $accent
 
 .c-archive-module
   .c-author-link 
@@ -110,7 +124,7 @@ $mont: $sans
     font-weight: 600
     font-size: 1.5rem
     line-height: 2.3rem
-    margin: 0 20px 0 0
+    margin: 0 10px 0 0
     border: none
     display: inline-flex
     padding-right: 30px
@@ -125,24 +139,17 @@ $mont: $sans
 
 .c-archive-module__type, .c-archive-module__issue
   font-family: $sans
-  font-weight: 600
-  color: #686e75
-  font-size: 1.1rem
+  font-weight: 400
+  color: $secondary
+  font-size: 1.4rem
   line-height: 1.8rem
-  padding: 6px 10px
+  padding: 0 20px
   display: inline-flex
-  border-radius: 100px
-  margin: 0 10px
+  border-left: 1px solid $spacer
   a
-    color: #686e75
-  @media (max-width: 900px)
-    font-size: 1.5rem
-    line-height: 2.3rem
-    padding: 1px 0 0 0
-    margin: 0 0 0 0
-  @media (min-width: 900px)
-    background-color: $spacer
-    letter-spacing: 0.8px
+    color: $secondary
+    &:hover
+      color: $accent
 
 .c-archive-module__issue
   @media (max-width: 900px)

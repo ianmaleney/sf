@@ -19,22 +19,21 @@
 .c-article__info
   padding-bottom: 8px
 
-.c-article__category
-  font-family: $sans
-  font-size: 1.7rem
-  color: $primary
-  margin: 0
-
 .c-article__info--title
   margin: 0.8rem 0 1.3rem
   font-size: 4.8rem
   line-height: 5.8rem
+  font-family: $sans
   .lock-icon
     font-size: 3rem
 
+.c-article__info--details
+  border-top: 1px solid $spacer
+  padding-top: 8px
+
 .c-article__info--author
   margin: 0
-  font-size: 1.4rem
+  font-size: 1.6rem
   font-weight: normal
   display: inline
   margin-right: 10px
@@ -46,17 +45,30 @@
 		font-family: $sans
 
 .c-article__info--date
-  font-size: 1.4rem
+  font-size: 1.6rem
   font-family: $sans
   color: $secondary
   display: inline
   font-weight: normal
   a 
-    color: $secondary
-    border-left: 1px solid $spacer
     padding-left: 10px
     margin-left: 10px
+    border-left: 1px solid $spacer
+    color: $secondary
   a:hover
+    color: $accent
+
+.c-article__category
+  font-family: $sans
+  font-size: 1.6rem
+  color: $secondary
+  margin: 0
+  font-weight: 400
+  display: inline
+  border-left: 1px solid $spacer
+  padding-left: 10px
+  margin-left: 10px
+  &:hover
     color: $accent
 
 .c-article__social-icons

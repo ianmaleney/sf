@@ -31,7 +31,6 @@ function display_paywall() {
 			echo $category->name." ";
 		} ?>">
 			<div class="c-article__info">
-				<h3 class="c-article__category"><?php sf_single_cat(); ?></h3>
 				<h1 class="c-article__info--title">
 					<?php
 						// if ( in_category('magazine') && in_category('archive') ) {
@@ -60,6 +59,8 @@ function display_paywall() {
 							}
 						?>
 					</div>
+
+					<div class="c-article__category"><?php sf_single_cat(); ?></div>
 				</div>
 			</div>
 			<?php if ( get_the_post_thumbnail_url() && !in_category( array('Fiction', 'Poetry', 'Drama'))){ ?>
