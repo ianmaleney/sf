@@ -7,8 +7,7 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Amiri:400,400i,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.typekit.net/zsp1myo.css">
+ <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
