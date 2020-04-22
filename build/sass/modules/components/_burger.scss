@@ -139,8 +139,9 @@ $sass-burger-add-vendor-prefixes: true !default;
 }
 
 .c-burger {
-  @include burger(20px, 3px, 3px, $black);
-  margin-top: 0;
+  @include burger(20px, 3px, 3px, $secondary);
+  margin-top: 4px;
+  margin-right: 10px;
 }
 
 .js-menu-show.is-active .c-burger {

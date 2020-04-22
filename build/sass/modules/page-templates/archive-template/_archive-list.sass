@@ -66,7 +66,12 @@ $mont: $sans
   width: 100%
   margin-top: 20px
   padding: 0 22px 10px
-  border-bottom: 1px solid $spacer
+  @media (max-width: 600px)
+    margin: 0
+    &:nth-child(even)
+      background-color: rgba($spacer, 0.4)
+  @media (min-width: 600px)
+    border-bottom: 1px solid $spacer
   &.removed
     display: none
 
@@ -78,11 +83,13 @@ $mont: $sans
 .c-archive-module__title 
   font-size: 2.2rem
   line-height: 3.2rem
-  margin: 10px 0
   color: #212529
   font-family: $sans
   font-weight: 800
   order: 2
+  margin: 5px 0
+  @media (min-width: 600px)
+    margin: 10px 0
   &:hover
     color: $secondary
     text-decoration: none
@@ -105,7 +112,10 @@ $mont: $sans
   margin: 10px 0
   align-items: center
   padding: 10px 0
-  @media (max-width: 900px)
+  @media (max-width: 600px)
+    margin: 0 0 0 0
+    border-top: none
+  @media (min-width: 601px) and (max-width: 900px)
     order: 1
     margin: 8px 0
   .author
@@ -212,6 +222,7 @@ $mont: $sans
 
 
 .c-category-list
+  display: none
   @media (min-width: 900px)
     margin: 40px 0
     max-height: 500px
@@ -243,6 +254,9 @@ $mont: $sans
     cursor: pointer
   &.c-author-name
     max-width: 80%
+
+.c-results-sort__list
+  display: none
 
 .c-results-sort__reverse
   font-size: 1.4rem
