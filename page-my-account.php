@@ -60,6 +60,21 @@ if ( is_user_logged_in() ) {
 
 	<?php get_footer(); ?>
 	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			$.ajax({
+				url: "<?php echo $url; ?>/wakeup",
+				type: "GET",
+				success: function(res) {
+						console.log(res);
+					},
+				error: function(err) {
+					console.log(err);
+					errorFunctionCancel();
+				}
+			});
+		});
+	</script>
+	<script>
 		var cancelSubButton = document.querySelector(".cancel-sub__button");
 		var cancelSubWrapper = document.querySelector(".cancel-sub__wrapper");
 		var successFunctionCancel = function() {
@@ -83,8 +98,8 @@ if ( is_user_logged_in() ) {
 			type: "DELETE",
 			success: function(res) {
 					console.log(res);
-					switch (res) {
-						case "canceled":
+					switch (res.success) {
+						case true:
 						successFunctionCancel();
 						break;
 
