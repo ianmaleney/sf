@@ -98,6 +98,7 @@ if ( is_user_logged_in() ) {
 			type: "DELETE",
 			success: function(res) {
 					console.log(res);
+					error_log(res.message);
 					switch (res.success) {
 						case true:
 						successFunctionCancel();
