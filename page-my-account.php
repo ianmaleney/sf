@@ -51,6 +51,7 @@ if ( is_user_logged_in() ) {
 				<p>You can edit and update your account details here.</p>
 			</div>
 			<?php get_template_part('template-parts/account-page/form-address'); ?>
+			<?php get_template_part('template-parts/account-page/update-card'); ?>
 			<?php get_template_part('template-parts/account-page/cancel-sub'); ?>
 			<?php get_template_part('template-parts/account-page/contacts'); ?>
 			<?php get_template_part('template-parts/account-page/latest-posts'); ?>
@@ -59,6 +60,8 @@ if ( is_user_logged_in() ) {
 	</div><!-- .content-area -->
 
 	<?php get_footer(); ?>
+	<!-- Stripe JS -->
+	<script src="https://js.stripe.com/v3/"></script>
 	<script>
 		document.addEventListener("DOMContentLoaded", () => {
 			$.ajax({
@@ -182,6 +185,52 @@ if ( is_user_logged_in() ) {
 					errorFunction();
 				}
 				});
+		});
+	</script>
+	<script>
+		var url = window.location.hostname;
+		var pkey, endpoint;
+		if (url === "stingingfly.org") {
+			pkey = "pk_live_EPVd6u1amDegfDhpvbp57swa";
+			endpoint = "https://stingingfly.org/stripe/api/index.php";
+		} else {
+			pkey = "pk_test_0lhyoG9gxOmK5V15FobQbpUs";
+			endpoint = "http://localhost:8001/api/subscribers";
+		}
+		var stripe = Stripe(pkey);
+		var elements = stripe.elements();
+		var form = document.getElementById("update-card");
+		// Custom Styling
+		var style = {
+			base: {
+				color: "#32325d",
+				fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+				fontSmoothing: "antialiased",
+				fontSize: "15px",
+				"::placeholder": {
+				color: "#aab7c4"
+				}
+			},
+			invalid: {
+				color: "#fa755a",
+				iconColor: "#fa755a"
+			}
+		};
+
+		// Create an instance of the card Element
+		var card = elements.create("card", { style: style });
+
+		// Add an instance of the card Element into the `card-element` <div>
+		card.mount("#card-element");
+
+		// Handle real-time validation errors from the card Element.
+		card.addEventListener("change", function(event) {
+		var displayError = document.getElementById("card-errors");
+		if (event.error) {
+			displayError.textContent = event.error.message;
+		} else {
+			displayError.textContent = "";
+		}
 		});
 	</script>
 <?php } else {
