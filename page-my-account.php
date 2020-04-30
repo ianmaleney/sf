@@ -17,6 +17,7 @@ if ( is_user_logged_in() ) {
 	$name = $subscriber_details->first_name . ' ' . $subscriber_details->last_name;
 	$sub_id = $subscriber_details->sub_id;
 	$stripe_sub_id = $subscriber_details->stripe_subscription_id;
+	$stripe_customer_id = $subscriber_details->stripe_customer_id;
 
 	function outputUrl($sub_id, $stripe_sub_id, $url) {
 		$endpoint;
@@ -192,14 +193,15 @@ if ( is_user_logged_in() ) {
 		var pkey, endpoint;
 		if (url === "stingingfly.org") {
 			pkey = "pk_live_EPVd6u1amDegfDhpvbp57swa";
-			endpoint = "https://stingingfly.org/stripe/api/index.php";
+			endpoint = "https://enigmatic-basin-09064.herokuapp.com";
 		} else {
 			pkey = "pk_test_0lhyoG9gxOmK5V15FobQbpUs";
-			endpoint = "http://localhost:8001/api/subscribers";
+			endpoint = "http://localhost:8001/api/cards";
 		}
 		var stripe = Stripe(pkey);
 		var elements = stripe.elements();
 		var form = document.getElementById("update-card");
+		var errorElement = document.getElementById("card-errors");
 		// Custom Styling
 		var style = {
 			base: {
@@ -225,13 +227,55 @@ if ( is_user_logged_in() ) {
 
 		// Handle real-time validation errors from the card Element.
 		card.addEventListener("change", function(event) {
-		var displayError = document.getElementById("card-errors");
-		if (event.error) {
-			displayError.textContent = event.error.message;
-		} else {
-			displayError.textContent = "";
-		}
+			if (event.error) {
+				errorElement.textContent = event.error.message;
+			} else {
+				errorElement.textContent = "";
+			}
 		});
+				// Handle Stripe Token
+		function stripeTokenHandler(token) {
+
+			let data = {
+				stripeToken: token.id,
+				customer_id: "cus_H8ICtSWNGVXciW"
+			}
+
+			// Submit form
+			$.ajax({
+				url: endpoint,
+				type: "post",
+				data: data,
+				dataType: "json",
+				success: function(res) {
+					// Remove spinner
+					console.log(res);
+
+					if (res.success) {
+						errorElement.textContent = res.message;
+					} else {
+						errorElement.textContent = res.message;
+					}
+				},
+				error: function(err) {
+					console.log(err);
+					errorElement.textContent = err;
+				}
+			});
+		}
+
+		// Handle Form Submit
+		form.addEventListener("submit", e => {
+			e.preventDefault();
+			stripe.createToken(card).then(function(result) {
+			if (result.error) {
+				// Inform the user if there was an error
+				errorElement.textContent = result.error.message;
+			} else {
+				stripeTokenHandler(result.token);
+			}
+		});
+	});
 	</script>
 <?php } else {
 	
