@@ -193,7 +193,7 @@ if ( is_user_logged_in() ) {
 		var pkey, endpoint;
 		if (url === "stingingfly.org") {
 			pkey = "pk_live_EPVd6u1amDegfDhpvbp57swa";
-			endpoint = "https://enigmatic-basin-09064.herokuapp.com";
+			endpoint = "https://enigmatic-basin-09064.herokuapp.com/api/cards";
 		} else {
 			pkey = "pk_test_0lhyoG9gxOmK5V15FobQbpUs";
 			endpoint = "http://localhost:8001/api/cards";
