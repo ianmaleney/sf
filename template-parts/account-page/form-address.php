@@ -23,7 +23,7 @@
 		<input id="address-postcode" name="address-postcode">
 	</div>
 	<div class="account-page__button">
-		<button>Submit</button>
+		<button <?php if (!$sub_id) echo "disabled"; ?>>Submit</button>
 	</div>
 </form>
 </div>
