@@ -238,7 +238,7 @@ if ( is_user_logged_in() ) {
 
 			let data = {
 				stripeToken: token.id,
-				customer_id: "cus_H8ICtSWNGVXciW"
+				customer_id: "<?php $stripe_customer_id ?>"
 			}
 
 			// Submit form
