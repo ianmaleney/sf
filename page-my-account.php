@@ -19,6 +19,7 @@ if ( is_user_logged_in() ) {
 	$stripe_sub_id = $subscriber_details->stripe_subscription_id;
 	$stripe_customer_id = $subscriber_details->stripe_customer_id;
 
+
 	function outputUrl($sub_id, $stripe_sub_id, $url) {
 		$endpoint;
 		if( $stripe_sub_id !== null){
@@ -52,7 +53,9 @@ if ( is_user_logged_in() ) {
 				<p>You can edit and update your account details here.</p>
 			</div>
 			<?php get_template_part('template-parts/account-page/form-address'); ?>
-			<?php get_template_part('template-parts/account-page/update-card'); ?>
+			<?php if ($stripe_customer_id) { 
+				get_template_part('template-parts/account-page/update-card'); 
+			}?>
 			<?php get_template_part('template-parts/account-page/cancel-sub'); ?>
 			<?php get_template_part('template-parts/account-page/contacts'); ?>
 			<?php get_template_part('template-parts/account-page/latest-posts'); ?>
