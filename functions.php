@@ -1267,4 +1267,37 @@ if ( ! wp_next_scheduled( 'sf_gift_check_cron_hook' ) ) {
     wp_schedule_event( time(), 'daily', 'sf_gift_check_cron_hook' );
 }
 
+
+/*************************/
+/*
+/* WooCommerce Max Shipping
+/*
+/*************************/
+
+function wc_ninja_change_flat_rates_cost( $rates, $package ) {
+	// Make sure flat rate is available
+	if ( isset( $rates['flat_rate:8'] ) ) {
+		// Set the cost to $100
+		if ($rates['flat_rate:8']->cost > 12) {
+			$rates['flat_rate:8']->cost = 12;
+		}
+	}
+	if ( isset( $rates['flat_rate:12'] ) ) {
+		// Set the cost to $100
+		if ($rates['flat_rate:12']->cost > 25) {
+			$rates['flat_rate:12']->cost = 25;
+		}
+	}
+	if ( isset( $rates['flat_rate:13'] ) ) {
+		// Set the cost to $100
+		if ($rates['flat_rate:13']->cost > 18) {
+			$rates['flat_rate:13']->cost = 18;
+		}
+	}
+
+	return $rates;
+}
+
+add_filter( 'woocommerce_package_rates', 'wc_ninja_change_flat_rates_cost', 10, 2 );
+
 ?>
