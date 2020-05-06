@@ -3,7 +3,7 @@
 	import BookForm from "./BookForm.svelte";
 	import MBForm from "./MBForm.svelte";
 	import PatronForm from "./PatronForm.svelte";
-	export let form;
+	export let form = undefined;
 </script>
 
 {#if form === 'magonly'}

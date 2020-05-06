@@ -1,7 +1,8 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import env from "../utilities/env.js";
 	import handleFormSubmit from "../utilities/handleFormSubmit.js";
+	const dispatch = createEventDispatcher();
 
 	/* Set Variables */
 	const {url, pkey, endpoint} = env();
@@ -41,7 +42,10 @@
 		});
 	});
 
-	const handleSubmit = e => handleFormSubmit(e, card, stripe, endpoint);
+	const handleSubmit = e => {
+		handleFormSubmit(e, card, stripe, endpoint, dispatch);
+		dispatch("formSubmit", e);
+	}
 
 </script>
 

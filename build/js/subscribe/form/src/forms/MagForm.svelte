@@ -1,13 +1,17 @@
 <script>
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	import FormFieldset from "../form-elements/FormFieldset.svelte";
 	import StripeElement from "../form-elements/StripeElement.svelte";
-
-	const spush = (array, item_to_add) => [...array, item_to_add];
-	const spop = (array, attr, name) => array.filter(i => i[attr] !== name);
+	import Spinner from "../form-elements/Spinner.svelte";
+	import handleSuccess from "../utilities/handleSuccess";
+	import handleFailure from "../utilities/handleFailure";
+	import spush from "../utilities/spush.js";
+	import spop from "../utilities/spop.js";
 
 	let gift = false;
-	const dispatch = createEventDispatcher();
+	let closed = false;
+
 	const meta = {
 		current_number: document.querySelector(".meta").dataset.current,
 		current_title: document.querySelector(".meta").dataset.title,
@@ -83,6 +87,16 @@
 		start_comment: "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year."
 	}
 
+	let modal = {
+		display: false,
+		data: {
+			title: "Success!",
+			message: "You have successfully subscribed to The Stinging Fly. You will receive a receipt and an email with your login details shortly. Happy reading!",
+			link: "/",
+			button_text: "Return To The Stinging Fly"
+		}
+	}
+
 	const handleGift = e => {
 		if (e.target.checked) {
 			gift = JSON.parse(e.target.value);
@@ -98,6 +112,39 @@
 		}
 	}
 
+	const handleFormSubmit = e => {
+		let f = document.querySelector("#payment-form");
+		f.disabled = true;
+		closed = true;
+	}
+
+	const handleFormSuccess = e => {
+		let f = document.querySelector("#payment-form");
+		f.disabled = false;
+		closed = false;
+		// Create Modal With Success Notice
+		modal.display = true;
+		f.reset();
+	}
+	
+	const handleFormFailure = e => {
+		let f = document.querySelector("#payment-form");
+		f.disabled = false;
+		closed = false;
+		// This should just return the appropriate message?
+		let res = handleFailure(e);
+		// Create Modal with Failure Notice
+		if (res) {
+			modal.data = {
+				title: "Uh oh!",
+				message: res.message,
+				link: "#",
+				button_text: "Try Again?"
+			}
+			modal.display = true;
+		}
+	}
+
 	onMount(() => {
 		// Gift Toggle
 		let giftButtons = document.querySelectorAll("input[name='gift']");
@@ -107,7 +154,7 @@
 	});
 </script>
 
-<form action="" method="post" class="payment-form" id="payment-form">
+<form action="" method="post" class="payment-form" id="payment-form" class:closed>
 	
 	<FormFieldset f_id="sub_gift_toggle" f_legend="Is this subscription for you, or someone else?" inputs={inputs.gift_toggle_inputs} />
 	
@@ -121,5 +168,84 @@
 
 	<FormFieldset f_id="sub_start" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment} />
 	
-	<StripeElement />
+	<StripeElement on:formSubmit="{handleFormSubmit}" on:success="{handleFormSuccess}" on:failure="{handleFormFailure}"/>
 </form>
+
+
+{#if closed}
+<Spinner />
+{/if}
+
+{#if modal.display}
+<div class="modal" transition:fade>
+	<div class="modal__underlay" on:click="{() => modal.display = false}"></div>
+	<div class="modal__text">
+		<h2>{modal.data.title}</h2>
+		<p>{modal.data.message}</p>
+		<a href="{modal.data.link}" on:click="{() => modal.display = false}">{modal.data.button_text}</a>
+	</div>
+</div>
+{/if}
+
+<style>
+
+	#payment-form {
+		margin-top: 80px;
+	}
+	.closed {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	.modal {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		position: fixed;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		left: 0;
+		z-index: 997;
+	}
+	.modal__underlay {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(0,0,0,0.3);
+		z-index: 998;
+	}
+	.modal__text {
+		background-color: white;
+		max-width: 720px;
+		padding: 20px;
+		margin: 20px;
+		text-align: center;
+		z-index: 999;
+		box-shadow: 2px 4px 8px rgba(0,0,0,0.5)
+	}
+	.modal__text > * {
+		font-family: "IBM Plex Sans Condensed";
+	}
+	.modal__text h2 {
+		font-size: 2.8rem;
+		text-decoration: underline;
+	}
+	.modal__text a {
+		display: inline-block;
+		margin: 16px 0;
+		border: 2px solid black;
+		padding: 12px 36px;
+		font-size: 1.6rem;
+		border-radius: 4px;
+		font-weight: 800;
+		color: black;
+	}
+	.modal__text a:hover {
+		background-color: black;
+		color: white;
+		cursor: pointer;
+	}
+</style>

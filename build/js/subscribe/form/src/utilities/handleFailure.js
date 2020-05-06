@@ -1,23 +1,20 @@
 import handle_sca_confirmation from "./handleScaConfirmation";
 
-const handleFailure = res => {
-  console.log(res);
+const handleFailure = e => {
+  let { res, card } = e.detail;
   switch (res.message) {
-    case "customer_exists":
-      setTimeout(() => {
-        console.log(res.message);
-      }, 250);
-      break;
+    case "Existing Customer":
+      return {
+        message:
+          "It seems we already have a customer with that email address – are you trying to renew your subscription? Subscriptions renew automatically, so there's no need to resubscribe. If you believe there's a problem, contact us at web.stingingfly@gmail.com."
+      };
 
     case "confirmation_needed":
       handle_sca_confirmation(res.data.client_secret, card);
-      break;
+      return null;
 
     default:
-      setTimeout(() => {
-        console.log(res.message);
-      }, 250);
-      break;
+      return res;
   }
 };
 

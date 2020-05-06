@@ -65,7 +65,8 @@
 		display: flex;
 		justify-content: center;
 		border-top: 1px solid #E5E5E5;
-		padding-top: 16px;
+		border-bottom: 1px solid #E5E5E5;
+		padding: 16px 0;
 		max-width: 1280px;
 		margin: 0 auto;
 	}

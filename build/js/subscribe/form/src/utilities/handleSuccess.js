@@ -1,5 +1,5 @@
-const handleSuccess = result => {
-  console.log(result);
+const handleSuccess = e => {
+  console.log(e.detail);
 };
 
 export default handleSuccess;

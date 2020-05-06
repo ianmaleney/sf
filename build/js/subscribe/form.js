@@ -2,6 +2,7 @@ var app = (function () {
     'use strict';
 
     function noop() { }
+    const identity = x => x;
     function assign(tar, src) {
         // @ts-ignore
         for (const k in src)
@@ -32,6 +33,41 @@ var app = (function () {
         return value == null ? '' : value;
     }
 
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+
     function append(target, node) {
         target.appendChild(node);
     }
@@ -49,6 +85,9 @@ var app = (function () {
     }
     function element(name) {
         return document.createElement(name);
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
     }
     function text(data) {
         return document.createTextNode(data);
@@ -72,6 +111,9 @@ var app = (function () {
     function children(element) {
         return Array.from(element.childNodes);
     }
+    function set_style(node, key, value, important) {
+        node.style.setProperty(key, value, important ? 'important' : '');
+    }
     function toggle_class(element, name, toggle) {
         element.classList[toggle ? 'add' : 'remove'](name);
     }
@@ -79,6 +121,67 @@ var app = (function () {
         const e = document.createEvent('CustomEvent');
         e.initCustomEvent(type, false, false, detail);
         return e;
+    }
+
+    const active_docs = new Set();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = node.ownerDocument;
+        active_docs.add(doc);
+        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = doc.head.appendChild(element('style')).sheet);
+        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
+        if (!current_rules[name]) {
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            active_docs.forEach(doc => {
+                const stylesheet = doc.__svelte_stylesheet;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                doc.__svelte_rules = {};
+            });
+            active_docs.clear();
+        });
     }
 
     let current_component;
@@ -170,6 +273,20 @@ var app = (function () {
             $$.after_update.forEach(add_render_callback);
         }
     }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
     const outroing = new Set();
     let outros;
     function group_outros() {
@@ -206,6 +323,112 @@ var app = (function () {
             });
             block.o(local);
         }
+    }
+    const null_transition = { duration: 0 };
+    function create_bidirectional_transition(node, fn, params, intro) {
+        let config = fn(node, params);
+        let t = intro ? 0 : 1;
+        let running_program = null;
+        let pending_program = null;
+        let animation_name = null;
+        function clear_animation() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function init(program, duration) {
+            const d = program.b - t;
+            duration *= Math.abs(d);
+            return {
+                a: t,
+                b: program.b,
+                d,
+                duration,
+                start: program.start,
+                end: program.start + duration,
+                group: program.group
+            };
+        }
+        function go(b) {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            const program = {
+                start: now() + delay,
+                b
+            };
+            if (!b) {
+                // @ts-ignore todo: improve typings
+                program.group = outros;
+                outros.r += 1;
+            }
+            if (running_program) {
+                pending_program = program;
+            }
+            else {
+                // if this is an intro, and there's a delay, we need to do
+                // an initial tick and/or apply CSS animation immediately
+                if (css) {
+                    clear_animation();
+                    animation_name = create_rule(node, t, b, duration, delay, easing, css);
+                }
+                if (b)
+                    tick(0, 1);
+                running_program = init(program, duration);
+                add_render_callback(() => dispatch(node, b, 'start'));
+                loop(now => {
+                    if (pending_program && now > pending_program.start) {
+                        running_program = init(pending_program, duration);
+                        pending_program = null;
+                        dispatch(node, running_program.b, 'start');
+                        if (css) {
+                            clear_animation();
+                            animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+                        }
+                    }
+                    if (running_program) {
+                        if (now >= running_program.end) {
+                            tick(t = running_program.b, 1 - t);
+                            dispatch(node, running_program.b, 'end');
+                            if (!pending_program) {
+                                // we're done
+                                if (running_program.b) {
+                                    // intro — we can tidy up immediately
+                                    clear_animation();
+                                }
+                                else {
+                                    // outro — needs to be coordinated
+                                    if (!--running_program.group.r)
+                                        run_all(running_program.group.c);
+                                }
+                            }
+                            running_program = null;
+                        }
+                        else if (now >= running_program.start) {
+                            const p = now - running_program.start;
+                            t = running_program.a + running_program.d * easing(p / running_program.duration);
+                            tick(t, 1 - t);
+                        }
+                    }
+                    return !!(running_program || pending_program);
+                });
+            }
+        }
+        return {
+            run(b) {
+                if (is_function(config)) {
+                    wait().then(() => {
+                        // @ts-ignore
+                        config = config();
+                        go(b);
+                    });
+                }
+                else {
+                    go(b);
+                }
+            },
+            end() {
+                clear_animation();
+                running_program = pending_program = null;
+            }
+        };
     }
 
     function get_spread_update(levels, updates) {
@@ -774,11 +997,11 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(h2, "class", "options-heading svelte-12el218");
+    			attr_dev(h2, "class", "options-heading svelte-8v5vxm");
     			add_location(h2, file$1, 44, 1, 1022);
-    			attr_dev(div, "class", "options-table svelte-12el218");
+    			attr_dev(div, "class", "options-table svelte-8v5vxm");
     			add_location(div, file$1, 45, 1, 1081);
-    			attr_dev(section, "class", "formHeader svelte-12el218");
+    			attr_dev(section, "class", "formHeader svelte-8v5vxm");
     			add_location(section, file$1, 43, 0, 992);
     		},
     		l: function claim(nodes) {
@@ -941,6 +1164,16 @@ var app = (function () {
     			id: create_fragment$1.name
     		});
     	}
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity }) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
     }
 
     /* src/form-elements/FormInput.svelte generated by Svelte v3.22.2 */
@@ -1976,7 +2209,6 @@ var app = (function () {
     };
 
     const handlePost = async (form, token, url) => {
-      console.log(form, token, url);
       let p = await fetch(url, {
         method: "POST",
         body: formData(form, token),
@@ -1988,53 +2220,7 @@ var app = (function () {
       return p.json();
     };
 
-    const handleSuccess = result => {
-      console.log(result);
-    };
-
-    // Handle SCA Confirmation
-    const handle_sca_confirmation = function(
-      client_secret,
-      card,
-      stripe,
-      errorElement,
-      successCallback
-    ) {
-      stripe.handleCardPayment(client_secret, card).then(function(result) {
-        if (result.error) {
-          // Display error.message in your UI.
-          errorElement.textContent = result.error.message;
-        } else {
-          // The payment has succeeded. Display a success message.
-          setTimeout(() => {
-            successCallback();
-          }, 150);
-        }
-      });
-    };
-
-    const handleFailure = res => {
-      console.log(res);
-      switch (res.message) {
-        case "customer_exists":
-          setTimeout(() => {
-            console.log(res.message);
-          }, 250);
-          break;
-
-        case "confirmation_needed":
-          handle_sca_confirmation(res.data.client_secret, card);
-          break;
-
-        default:
-          setTimeout(() => {
-            console.log(res.message);
-          }, 250);
-          break;
-      }
-    };
-
-    const handleFormSubmit = async (e, card, stripe, url) => {
+    const handleFormSubmit = async (e, card, stripe, url, dispatch) => {
       e.preventDefault();
       let f = document.getElementById("payment-form");
       let first_name = document.getElementById("first_name").value;
@@ -2053,7 +2239,9 @@ var app = (function () {
       try {
         let stripeToken = await createStripeToken(card, options, stripe);
         let result = await handlePost(f, stripeToken, url);
-        result.success ? handleSuccess(result) : handleFailure(result);
+        result.success
+          ? dispatch("success", { res: result })
+          : dispatch("failure", { res: result, card: card });
       } catch (error) {
         console.log(error);
       }
@@ -2102,23 +2290,23 @@ var app = (function () {
     			div2 = element("div");
     			p1 = element("p");
     			p1.textContent = "When you click 'subscribe', your card will be charged, and you will receive an email with the full details of your subscription, including how to access our online archive.";
-    			add_location(legend, file$4, 48, 1, 1244);
+    			add_location(legend, file$4, 52, 1, 1356);
     			attr_dev(label, "for", "card-element");
     			attr_dev(label, "class", "svelte-1ytjumv");
-    			add_location(label, file$4, 50, 1, 1346);
+    			add_location(label, file$4, 54, 1, 1458);
     			attr_dev(div0, "id", "card-element");
-    			add_location(div0, file$4, 51, 1, 1399);
+    			add_location(div0, file$4, 55, 1, 1511);
     			attr_dev(p0, "class", "stripe-info");
-    			add_location(p0, file$4, 52, 1, 1430);
+    			add_location(p0, file$4, 56, 1, 1542);
     			attr_dev(div1, "id", "card-errors");
-    			add_location(div1, file$4, 53, 1, 1573);
+    			add_location(div1, file$4, 57, 1, 1685);
     			attr_dev(button, "id", "submit-button");
-    			add_location(button, file$4, 54, 1, 1603);
-    			add_location(p1, file$4, 56, 2, 1707);
+    			add_location(button, file$4, 58, 1, 1715);
+    			add_location(p1, file$4, 60, 2, 1819);
     			attr_dev(div2, "class", "fieldset-comment");
-    			add_location(div2, file$4, 55, 1, 1674);
+    			add_location(div2, file$4, 59, 1, 1786);
     			attr_dev(fieldset, "id", "sub_payment");
-    			add_location(fieldset, file$4, 47, 0, 1215);
+    			add_location(fieldset, file$4, 51, 0, 1327);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2163,6 +2351,9 @@ var app = (function () {
     }
 
     function instance$4($$self, $$props, $$invalidate) {
+    	const dispatch = createEventDispatcher();
+
+    	/* Set Variables */
     	const { url, pkey, endpoint } = env();
 
     	/* Initiate Stripe */
@@ -2199,7 +2390,11 @@ var app = (function () {
     		});
     	});
 
-    	const handleSubmit = e => handleFormSubmit(e, card, stripe, endpoint);
+    	const handleSubmit = e => {
+    		handleFormSubmit(e, card, stripe, endpoint, dispatch);
+    		dispatch("formSubmit", e);
+    	};
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -2211,8 +2406,10 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
+    		createEventDispatcher,
     		env,
     		handleFormSubmit,
+    		dispatch,
     		url,
     		pkey,
     		endpoint,
@@ -2239,19 +2436,296 @@ var app = (function () {
     	}
     }
 
-    /* src/forms/MagForm.svelte generated by Svelte v3.22.2 */
-    const file$5 = "src/forms/MagForm.svelte";
+    /* src/form-elements/Spinner.svelte generated by Svelte v3.22.2 */
+    const file$5 = "src/form-elements/Spinner.svelte";
 
-    // (116:1) {#if gift == true}
-    function create_if_block$2(ctx) {
+    function create_fragment$5(ctx) {
+    	let svg;
+    	let circle;
+    	let circle_stroke_dasharray_value;
+    	let svg_transition;
+    	let current;
+
+    	const block = {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			circle = svg_element("circle");
+    			attr_dev(circle, "role", "presentation");
+    			attr_dev(circle, "cx", "16");
+    			attr_dev(circle, "cy", "16");
+    			attr_dev(circle, "r", /*radius*/ ctx[4]);
+    			attr_dev(circle, "stroke", /*color*/ ctx[2]);
+    			attr_dev(circle, "fill", "none");
+    			attr_dev(circle, "stroke-width", /*thickness*/ ctx[3]);
+    			attr_dev(circle, "stroke-dasharray", circle_stroke_dasharray_value = "" + (/*dash*/ ctx[5] + ",100"));
+    			attr_dev(circle, "stroke-linecap", "round");
+    			add_location(circle, file$5, 13, 1, 411);
+    			attr_dev(svg, "height", /*size*/ ctx[0]);
+    			attr_dev(svg, "width", /*size*/ ctx[0]);
+    			set_style(svg, "--speed", /*speed*/ ctx[1] + "ms");
+    			attr_dev(svg, "class", "svelte-spinner svelte-1hr8yec");
+    			attr_dev(svg, "viewBox", "0 0 32 32");
+    			add_location(svg, file$5, 12, 0, 288);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, svg, anchor);
+    			append_dev(svg, circle);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (!current || dirty & /*radius*/ 16) {
+    				attr_dev(circle, "r", /*radius*/ ctx[4]);
+    			}
+
+    			if (!current || dirty & /*color*/ 4) {
+    				attr_dev(circle, "stroke", /*color*/ ctx[2]);
+    			}
+
+    			if (!current || dirty & /*thickness*/ 8) {
+    				attr_dev(circle, "stroke-width", /*thickness*/ ctx[3]);
+    			}
+
+    			if (!current || dirty & /*dash*/ 32 && circle_stroke_dasharray_value !== (circle_stroke_dasharray_value = "" + (/*dash*/ ctx[5] + ",100"))) {
+    				attr_dev(circle, "stroke-dasharray", circle_stroke_dasharray_value);
+    			}
+
+    			if (!current || dirty & /*size*/ 1) {
+    				attr_dev(svg, "height", /*size*/ ctx[0]);
+    			}
+
+    			if (!current || dirty & /*size*/ 1) {
+    				attr_dev(svg, "width", /*size*/ ctx[0]);
+    			}
+
+    			if (!current || dirty & /*speed*/ 2) {
+    				set_style(svg, "--speed", /*speed*/ ctx[1] + "ms");
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!svg_transition) svg_transition = create_bidirectional_transition(svg, fade, {}, true);
+    				svg_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!svg_transition) svg_transition = create_bidirectional_transition(svg, fade, {}, false);
+    			svg_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(svg);
+    			if (detaching && svg_transition) svg_transition.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$5.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$5($$self, $$props, $$invalidate) {
+    	let { size = 200 } = $$props;
+    	let { speed = 750 } = $$props;
+    	let { color = "rgba(0,0,0,0.4)" } = $$props;
+    	let { thickness = 2 } = $$props;
+    	let { gap = 40 } = $$props;
+    	let { radius = 10 } = $$props;
+    	let dash;
+    	const writable_props = ["size", "speed", "color", "thickness", "gap", "radius"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Spinner> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("Spinner", $$slots, []);
+
+    	$$self.$set = $$props => {
+    		if ("size" in $$props) $$invalidate(0, size = $$props.size);
+    		if ("speed" in $$props) $$invalidate(1, speed = $$props.speed);
+    		if ("color" in $$props) $$invalidate(2, color = $$props.color);
+    		if ("thickness" in $$props) $$invalidate(3, thickness = $$props.thickness);
+    		if ("gap" in $$props) $$invalidate(6, gap = $$props.gap);
+    		if ("radius" in $$props) $$invalidate(4, radius = $$props.radius);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		fade,
+    		size,
+    		speed,
+    		color,
+    		thickness,
+    		gap,
+    		radius,
+    		dash
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ("size" in $$props) $$invalidate(0, size = $$props.size);
+    		if ("speed" in $$props) $$invalidate(1, speed = $$props.speed);
+    		if ("color" in $$props) $$invalidate(2, color = $$props.color);
+    		if ("thickness" in $$props) $$invalidate(3, thickness = $$props.thickness);
+    		if ("gap" in $$props) $$invalidate(6, gap = $$props.gap);
+    		if ("radius" in $$props) $$invalidate(4, radius = $$props.radius);
+    		if ("dash" in $$props) $$invalidate(5, dash = $$props.dash);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*radius, gap*/ 80) {
+    			 $$invalidate(5, dash = 2 * Math.PI * radius * (100 - gap) / 100);
+    		}
+    	};
+
+    	return [size, speed, color, thickness, radius, dash, gap];
+    }
+
+    class Spinner extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
+    			size: 0,
+    			speed: 1,
+    			color: 2,
+    			thickness: 3,
+    			gap: 6,
+    			radius: 4
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Spinner",
+    			options,
+    			id: create_fragment$5.name
+    		});
+    	}
+
+    	get size() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set size(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get speed() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set speed(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get color() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set color(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get thickness() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set thickness(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get gap() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set gap(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get radius() {
+    		throw new Error("<Spinner>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set radius(value) {
+    		throw new Error("<Spinner>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    const handleSuccess = e => {
+      console.log(e.detail);
+    };
+
+    // Handle SCA Confirmation
+    const handle_sca_confirmation = function(
+      client_secret,
+      card,
+      stripe,
+      errorElement,
+      successCallback
+    ) {
+      stripe.handleCardPayment(client_secret, card).then(function(result) {
+        if (result.error) {
+          // Display error.message in your UI.
+          errorElement.textContent = result.error.message;
+        } else {
+          // The payment has succeeded. Display a success message.
+          setTimeout(() => {
+            successCallback();
+          }, 150);
+        }
+      });
+    };
+
+    const handleFailure = e => {
+      let { res, card } = e.detail;
+      switch (res.message) {
+        case "Existing Customer":
+          return {
+            message:
+              "It seems we already have a customer with that email address – are you trying to renew your subscription? Subscriptions renew automatically, so there's no need to resubscribe. If you believe there's a problem, contact us at web.stingingfly@gmail.com."
+          };
+
+        case "confirmation_needed":
+          handle_sca_confirmation(res.data.client_secret, card);
+          return null;
+
+        default:
+          return res;
+      }
+    };
+
+    const spush = (array, item_to_add) => [...array, item_to_add];
+
+    const spop = (array, attr, name) => array.filter(i => i[attr] !== name);
+
+    /* src/forms/MagForm.svelte generated by Svelte v3.22.2 */
+    const file$6 = "src/forms/MagForm.svelte";
+
+    // (163:1) {#if gift == true}
+    function create_if_block_2$1(ctx) {
     	let current;
 
     	const formfieldset = new FormFieldset({
     			props: {
     				f_id: "sub_gifter",
     				f_legend: "Your Contact Details",
-    				inputs: /*inputs*/ ctx[1].gifter_inputs,
-    				comment: /*comments*/ ctx[2].gifter_comment
+    				inputs: /*inputs*/ ctx[2].gifter_inputs,
+    				comment: /*comments*/ ctx[3].gifter_comment
     			},
     			$$inline: true
     		});
@@ -2266,8 +2740,8 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const formfieldset_changes = {};
-    			if (dirty & /*inputs*/ 2) formfieldset_changes.inputs = /*inputs*/ ctx[1].gifter_inputs;
-    			if (dirty & /*comments*/ 4) formfieldset_changes.comment = /*comments*/ ctx[2].gifter_comment;
+    			if (dirty & /*inputs*/ 4) formfieldset_changes.inputs = /*inputs*/ ctx[2].gifter_inputs;
+    			if (dirty & /*comments*/ 8) formfieldset_changes.comment = /*comments*/ ctx[3].gifter_comment;
     			formfieldset.$set(formfieldset_changes);
     		},
     		i: function intro(local) {
@@ -2286,29 +2760,183 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(116:1) {#if gift == true}",
+    		source: "(163:1) {#if gift == true}",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$5(ctx) {
+    // (175:0) {#if closed}
+    function create_if_block_1$1(ctx) {
+    	let current;
+    	const spinner = new Spinner({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			create_component(spinner.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(spinner, target, anchor);
+    			current = true;
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(spinner.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(spinner.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(spinner, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(175:0) {#if closed}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (179:0) {#if modal.display}
+    function create_if_block$2(ctx) {
+    	let div2;
+    	let div0;
+    	let t0;
+    	let div1;
+    	let h2;
+    	let t1_value = /*modal*/ ctx[4].data.title + "";
+    	let t1;
+    	let t2;
+    	let p;
+    	let t3_value = /*modal*/ ctx[4].data.message + "";
+    	let t3;
+    	let t4;
+    	let a;
+    	let t5_value = /*modal*/ ctx[4].data.button_text + "";
+    	let t5;
+    	let a_href_value;
+    	let div2_transition;
+    	let current;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			div0 = element("div");
+    			t0 = space();
+    			div1 = element("div");
+    			h2 = element("h2");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			p = element("p");
+    			t3 = text(t3_value);
+    			t4 = space();
+    			a = element("a");
+    			t5 = text(t5_value);
+    			attr_dev(div0, "class", "modal__underlay svelte-1yl1jhh");
+    			add_location(div0, file$6, 180, 1, 6408);
+    			attr_dev(h2, "class", "svelte-1yl1jhh");
+    			add_location(h2, file$6, 182, 2, 6514);
+    			attr_dev(p, "class", "svelte-1yl1jhh");
+    			add_location(p, file$6, 183, 2, 6544);
+    			attr_dev(a, "href", a_href_value = /*modal*/ ctx[4].data.link);
+    			attr_dev(a, "class", "svelte-1yl1jhh");
+    			add_location(a, file$6, 184, 2, 6574);
+    			attr_dev(div1, "class", "modal__text svelte-1yl1jhh");
+    			add_location(div1, file$6, 181, 1, 6486);
+    			attr_dev(div2, "class", "modal svelte-1yl1jhh");
+    			add_location(div2, file$6, 179, 0, 6371);
+    		},
+    		m: function mount(target, anchor, remount) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, div0);
+    			append_dev(div2, t0);
+    			append_dev(div2, div1);
+    			append_dev(div1, h2);
+    			append_dev(h2, t1);
+    			append_dev(div1, t2);
+    			append_dev(div1, p);
+    			append_dev(p, t3);
+    			append_dev(div1, t4);
+    			append_dev(div1, a);
+    			append_dev(a, t5);
+    			current = true;
+    			if (remount) run_all(dispose);
+
+    			dispose = [
+    				listen_dev(div0, "click", /*click_handler*/ ctx[10], false, false, false),
+    				listen_dev(a, "click", /*click_handler_1*/ ctx[11], false, false, false)
+    			];
+    		},
+    		p: function update(ctx, dirty) {
+    			if ((!current || dirty & /*modal*/ 16) && t1_value !== (t1_value = /*modal*/ ctx[4].data.title + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*modal*/ 16) && t3_value !== (t3_value = /*modal*/ ctx[4].data.message + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty & /*modal*/ 16) && t5_value !== (t5_value = /*modal*/ ctx[4].data.button_text + "")) set_data_dev(t5, t5_value);
+
+    			if (!current || dirty & /*modal*/ 16 && a_href_value !== (a_href_value = /*modal*/ ctx[4].data.link)) {
+    				attr_dev(a, "href", a_href_value);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (!div2_transition) div2_transition = create_bidirectional_transition(div2, fade, {}, true);
+    				div2_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (!div2_transition) div2_transition = create_bidirectional_transition(div2, fade, {}, false);
+    			div2_transition.run(0);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (detaching && div2_transition) div2_transition.end();
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(179:0) {#if modal.display}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$6(ctx) {
     	let form;
     	let t0;
     	let t1;
     	let t2;
     	let t3;
     	let t4;
+    	let t5;
+    	let t6;
+    	let if_block2_anchor;
     	let current;
 
     	const formfieldset0 = new FormFieldset({
     			props: {
     				f_id: "sub_gift_toggle",
     				f_legend: "Is this subscription for you, or someone else?",
-    				inputs: /*inputs*/ ctx[1].gift_toggle_inputs
+    				inputs: /*inputs*/ ctx[2].gift_toggle_inputs
     			},
     			$$inline: true
     		});
@@ -2317,20 +2945,20 @@ var app = (function () {
     			props: {
     				f_id: "sub_contact",
     				f_legend: "Who should we send it to?",
-    				inputs: /*inputs*/ ctx[1].contact_inputs,
-    				comment: /*comments*/ ctx[2].contact_comment
+    				inputs: /*inputs*/ ctx[2].contact_inputs,
+    				comment: /*comments*/ ctx[3].contact_comment
     			},
     			$$inline: true
     		});
 
-    	let if_block = /*gift*/ ctx[0] == true && create_if_block$2(ctx);
+    	let if_block0 = /*gift*/ ctx[0] == true && create_if_block_2$1(ctx);
 
     	const formfieldset2 = new FormFieldset({
     			props: {
     				f_id: "sub_address",
     				f_legend: "Where should we send it?",
-    				inputs: /*inputs*/ ctx[1].address_inputs,
-    				comment: /*comments*/ ctx[2].address_comment
+    				inputs: /*inputs*/ ctx[2].address_inputs,
+    				comment: /*comments*/ ctx[3].address_comment
     			},
     			$$inline: true
     		});
@@ -2339,13 +2967,18 @@ var app = (function () {
     			props: {
     				f_id: "sub_start",
     				f_legend: "When would you like the subscription to start?",
-    				inputs: /*inputs*/ ctx[1].start_inputs,
-    				comment: /*comments*/ ctx[2].start_comment
+    				inputs: /*inputs*/ ctx[2].start_inputs,
+    				comment: /*comments*/ ctx[3].start_comment
     			},
     			$$inline: true
     		});
 
     	const stripeelement = new StripeElement({ $$inline: true });
+    	stripeelement.$on("formSubmit", /*handleFormSubmit*/ ctx[5]);
+    	stripeelement.$on("success", /*handleFormSuccess*/ ctx[6]);
+    	stripeelement.$on("failure", /*handleFormFailure*/ ctx[7]);
+    	let if_block1 = /*closed*/ ctx[1] && create_if_block_1$1(ctx);
+    	let if_block2 = /*modal*/ ctx[4].display && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -2354,18 +2987,24 @@ var app = (function () {
     			t0 = space();
     			create_component(formfieldset1.$$.fragment);
     			t1 = space();
-    			if (if_block) if_block.c();
+    			if (if_block0) if_block0.c();
     			t2 = space();
     			create_component(formfieldset2.$$.fragment);
     			t3 = space();
     			create_component(formfieldset3.$$.fragment);
     			t4 = space();
     			create_component(stripeelement.$$.fragment);
+    			t5 = space();
+    			if (if_block1) if_block1.c();
+    			t6 = space();
+    			if (if_block2) if_block2.c();
+    			if_block2_anchor = empty();
     			attr_dev(form, "action", "");
     			attr_dev(form, "method", "post");
-    			attr_dev(form, "class", "payment-form");
+    			attr_dev(form, "class", "payment-form svelte-1yl1jhh");
     			attr_dev(form, "id", "payment-form");
-    			add_location(form, file$5, 109, 0, 4225);
+    			toggle_class(form, "closed", /*closed*/ ctx[1]);
+    			add_location(form, file$6, 156, 0, 5369);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2376,89 +3015,151 @@ var app = (function () {
     			append_dev(form, t0);
     			mount_component(formfieldset1, form, null);
     			append_dev(form, t1);
-    			if (if_block) if_block.m(form, null);
+    			if (if_block0) if_block0.m(form, null);
     			append_dev(form, t2);
     			mount_component(formfieldset2, form, null);
     			append_dev(form, t3);
     			mount_component(formfieldset3, form, null);
     			append_dev(form, t4);
     			mount_component(stripeelement, form, null);
+    			insert_dev(target, t5, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, t6, anchor);
+    			if (if_block2) if_block2.m(target, anchor);
+    			insert_dev(target, if_block2_anchor, anchor);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
     			const formfieldset0_changes = {};
-    			if (dirty & /*inputs*/ 2) formfieldset0_changes.inputs = /*inputs*/ ctx[1].gift_toggle_inputs;
+    			if (dirty & /*inputs*/ 4) formfieldset0_changes.inputs = /*inputs*/ ctx[2].gift_toggle_inputs;
     			formfieldset0.$set(formfieldset0_changes);
     			const formfieldset1_changes = {};
-    			if (dirty & /*inputs*/ 2) formfieldset1_changes.inputs = /*inputs*/ ctx[1].contact_inputs;
-    			if (dirty & /*comments*/ 4) formfieldset1_changes.comment = /*comments*/ ctx[2].contact_comment;
+    			if (dirty & /*inputs*/ 4) formfieldset1_changes.inputs = /*inputs*/ ctx[2].contact_inputs;
+    			if (dirty & /*comments*/ 8) formfieldset1_changes.comment = /*comments*/ ctx[3].contact_comment;
     			formfieldset1.$set(formfieldset1_changes);
 
     			if (/*gift*/ ctx[0] == true) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
 
     					if (dirty & /*gift*/ 1) {
-    						transition_in(if_block, 1);
+    						transition_in(if_block0, 1);
     					}
     				} else {
-    					if_block = create_if_block$2(ctx);
-    					if_block.c();
-    					transition_in(if_block, 1);
-    					if_block.m(form, t2);
+    					if_block0 = create_if_block_2$1(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(form, t2);
     				}
-    			} else if (if_block) {
+    			} else if (if_block0) {
     				group_outros();
 
-    				transition_out(if_block, 1, 1, () => {
-    					if_block = null;
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
     				});
 
     				check_outros();
     			}
 
     			const formfieldset2_changes = {};
-    			if (dirty & /*inputs*/ 2) formfieldset2_changes.inputs = /*inputs*/ ctx[1].address_inputs;
-    			if (dirty & /*comments*/ 4) formfieldset2_changes.comment = /*comments*/ ctx[2].address_comment;
+    			if (dirty & /*inputs*/ 4) formfieldset2_changes.inputs = /*inputs*/ ctx[2].address_inputs;
+    			if (dirty & /*comments*/ 8) formfieldset2_changes.comment = /*comments*/ ctx[3].address_comment;
     			formfieldset2.$set(formfieldset2_changes);
     			const formfieldset3_changes = {};
-    			if (dirty & /*inputs*/ 2) formfieldset3_changes.inputs = /*inputs*/ ctx[1].start_inputs;
-    			if (dirty & /*comments*/ 4) formfieldset3_changes.comment = /*comments*/ ctx[2].start_comment;
+    			if (dirty & /*inputs*/ 4) formfieldset3_changes.inputs = /*inputs*/ ctx[2].start_inputs;
+    			if (dirty & /*comments*/ 8) formfieldset3_changes.comment = /*comments*/ ctx[3].start_comment;
     			formfieldset3.$set(formfieldset3_changes);
+
+    			if (dirty & /*closed*/ 2) {
+    				toggle_class(form, "closed", /*closed*/ ctx[1]);
+    			}
+
+    			if (/*closed*/ ctx[1]) {
+    				if (if_block1) {
+    					if (dirty & /*closed*/ 2) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block_1$1(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(t6.parentNode, t6);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*modal*/ ctx[4].display) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+
+    					if (dirty & /*modal*/ 16) {
+    						transition_in(if_block2, 1);
+    					}
+    				} else {
+    					if_block2 = create_if_block$2(ctx);
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
+    				}
+    			} else if (if_block2) {
+    				group_outros();
+
+    				transition_out(if_block2, 1, 1, () => {
+    					if_block2 = null;
+    				});
+
+    				check_outros();
+    			}
     		},
     		i: function intro(local) {
     			if (current) return;
     			transition_in(formfieldset0.$$.fragment, local);
     			transition_in(formfieldset1.$$.fragment, local);
-    			transition_in(if_block);
+    			transition_in(if_block0);
     			transition_in(formfieldset2.$$.fragment, local);
     			transition_in(formfieldset3.$$.fragment, local);
     			transition_in(stripeelement.$$.fragment, local);
+    			transition_in(if_block1);
+    			transition_in(if_block2);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(formfieldset0.$$.fragment, local);
     			transition_out(formfieldset1.$$.fragment, local);
-    			transition_out(if_block);
+    			transition_out(if_block0);
     			transition_out(formfieldset2.$$.fragment, local);
     			transition_out(formfieldset3.$$.fragment, local);
     			transition_out(stripeelement.$$.fragment, local);
+    			transition_out(if_block1);
+    			transition_out(if_block2);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(form);
     			destroy_component(formfieldset0);
     			destroy_component(formfieldset1);
-    			if (if_block) if_block.d();
+    			if (if_block0) if_block0.d();
     			destroy_component(formfieldset2);
     			destroy_component(formfieldset3);
     			destroy_component(stripeelement);
+    			if (detaching) detach_dev(t5);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(t6);
+    			if (if_block2) if_block2.d(detaching);
+    			if (detaching) detach_dev(if_block2_anchor);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2467,11 +3168,9 @@ var app = (function () {
     	return block;
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
-    	const spush = (array, item_to_add) => [...array, item_to_add];
-    	const spop = (array, attr, name) => array.filter(i => i[attr] !== name);
+    function instance$6($$self, $$props, $$invalidate) {
     	let gift = false;
-    	const dispatch = createEventDispatcher();
+    	let closed = false;
 
     	const meta = {
     		current_number: document.querySelector(".meta").dataset.current,
@@ -2628,13 +3327,23 @@ var app = (function () {
     		start_comment: "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year."
     	};
 
+    	let modal = {
+    		display: false,
+    		data: {
+    			title: "Success!",
+    			message: "You have successfully subscribed to The Stinging Fly. You will receive a receipt and an email with your login details shortly. Happy reading!",
+    			link: "/",
+    			button_text: "Return To The Stinging Fly"
+    		}
+    	};
+
     	const handleGift = e => {
     		if (e.target.checked) {
     			$$invalidate(0, gift = JSON.parse(e.target.value));
 
     			if (gift) {
     				$$invalidate(
-    					1,
+    					2,
     					inputs.start_inputs = spush(inputs.start_inputs, {
     						type: "date",
     						label: "On what date should the gift subscription begin?",
@@ -2643,11 +3352,53 @@ var app = (function () {
     					inputs
     				);
 
-    				$$invalidate(2, comments.start_comment = $$invalidate(2, comments.start_comment += " You can also choose a specific date for the subscription to start. This is when the person receiving the gift will be notified.", comments), comments);
+    				$$invalidate(3, comments.start_comment = $$invalidate(3, comments.start_comment += " You can also choose a specific date for the subscription to start. This is when the person receiving the gift will be notified.", comments), comments);
     			} else {
-    				$$invalidate(1, inputs.start_inputs = spop(inputs.start_inputs, "name", "gift_start_date"), inputs);
-    				$$invalidate(2, comments.start_comment = "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year.", comments);
+    				$$invalidate(2, inputs.start_inputs = spop(inputs.start_inputs, "name", "gift_start_date"), inputs);
+    				$$invalidate(3, comments.start_comment = "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year.", comments);
     			}
+    		}
+    	};
+
+    	const handleFormSubmit = e => {
+    		let f = document.querySelector("#payment-form");
+    		f.disabled = true;
+    		$$invalidate(1, closed = true);
+    	};
+
+    	const handleFormSuccess = e => {
+    		let f = document.querySelector("#payment-form");
+    		f.disabled = false;
+    		$$invalidate(1, closed = false);
+
+    		// Create Modal With Success Notice
+    		$$invalidate(4, modal.display = true, modal);
+
+    		f.reset();
+    	};
+
+    	const handleFormFailure = e => {
+    		let f = document.querySelector("#payment-form");
+    		f.disabled = false;
+    		$$invalidate(1, closed = false);
+
+    		// This should just return the appropriate message?
+    		let res = handleFailure(e);
+
+    		// Create Modal with Failure Notice
+    		if (res) {
+    			$$invalidate(
+    				4,
+    				modal.data = {
+    					title: "Uh oh!",
+    					message: res.message,
+    					link: "#",
+    					button_text: "Try Again?"
+    				},
+    				modal
+    			);
+
+    			$$invalidate(4, modal.display = true, modal);
     		}
     	};
 
@@ -2668,116 +3419,76 @@ var app = (function () {
 
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("MagForm", $$slots, []);
+    	const click_handler = () => $$invalidate(4, modal.display = false, modal);
+    	const click_handler_1 = () => $$invalidate(4, modal.display = false, modal);
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		createEventDispatcher,
+    		fade,
     		FormFieldset,
     		StripeElement,
+    		Spinner,
+    		handleSuccess,
+    		handleFailure,
     		spush,
     		spop,
     		gift,
-    		dispatch,
+    		closed,
     		meta,
     		inputs,
     		comments,
-    		handleGift
+    		modal,
+    		handleGift,
+    		handleFormSubmit,
+    		handleFormSuccess,
+    		handleFormFailure
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("gift" in $$props) $$invalidate(0, gift = $$props.gift);
-    		if ("inputs" in $$props) $$invalidate(1, inputs = $$props.inputs);
-    		if ("comments" in $$props) $$invalidate(2, comments = $$props.comments);
+    		if ("closed" in $$props) $$invalidate(1, closed = $$props.closed);
+    		if ("inputs" in $$props) $$invalidate(2, inputs = $$props.inputs);
+    		if ("comments" in $$props) $$invalidate(3, comments = $$props.comments);
+    		if ("modal" in $$props) $$invalidate(4, modal = $$props.modal);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [gift, inputs, comments];
+    	return [
+    		gift,
+    		closed,
+    		inputs,
+    		comments,
+    		modal,
+    		handleFormSubmit,
+    		handleFormSuccess,
+    		handleFormFailure,
+    		meta,
+    		handleGift,
+    		click_handler,
+    		click_handler_1
+    	];
     }
 
     class MagForm extends SvelteComponentDev {
-    	constructor(options) {
-    		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, {});
-
-    		dispatch_dev("SvelteRegisterComponent", {
-    			component: this,
-    			tagName: "MagForm",
-    			options,
-    			id: create_fragment$5.name
-    		});
-    	}
-    }
-
-    /* src/forms/BookForm.svelte generated by Svelte v3.22.2 */
-
-    const file$6 = "src/forms/BookForm.svelte";
-
-    function create_fragment$6(ctx) {
-    	let h2;
-
-    	const block = {
-    		c: function create() {
-    			h2 = element("h2");
-    			h2.textContent = "This is the Book Only Form";
-    			add_location(h2, file$6, 0, 0, 0);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, h2, anchor);
-    		},
-    		p: noop,
-    		i: noop,
-    		o: noop,
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h2);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_fragment$6.name,
-    		type: "component",
-    		source: "",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    function instance$6($$self, $$props) {
-    	const writable_props = [];
-
-    	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<BookForm> was created with unknown prop '${key}'`);
-    	});
-
-    	let { $$slots = {}, $$scope } = $$props;
-    	validate_slots("BookForm", $$slots, []);
-    	return [];
-    }
-
-    class BookForm extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
     		init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "BookForm",
+    			tagName: "MagForm",
     			options,
     			id: create_fragment$6.name
     		});
     	}
     }
 
-    /* src/forms/MBForm.svelte generated by Svelte v3.22.2 */
+    /* src/forms/BookForm.svelte generated by Svelte v3.22.2 */
 
-    const file$7 = "src/forms/MBForm.svelte";
+    const file$7 = "src/forms/BookForm.svelte";
 
     function create_fragment$7(ctx) {
     	let h2;
@@ -2785,7 +3496,7 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			h2 = element("h2");
-    			h2.textContent = "This is the Mag + Book Form";
+    			h2.textContent = "This is the Book Only Form";
     			add_location(h2, file$7, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -2817,6 +3528,70 @@ var app = (function () {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<BookForm> was created with unknown prop '${key}'`);
+    	});
+
+    	let { $$slots = {}, $$scope } = $$props;
+    	validate_slots("BookForm", $$slots, []);
+    	return [];
+    }
+
+    class BookForm extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "BookForm",
+    			options,
+    			id: create_fragment$7.name
+    		});
+    	}
+    }
+
+    /* src/forms/MBForm.svelte generated by Svelte v3.22.2 */
+
+    const file$8 = "src/forms/MBForm.svelte";
+
+    function create_fragment$8(ctx) {
+    	let h2;
+
+    	const block = {
+    		c: function create() {
+    			h2 = element("h2");
+    			h2.textContent = "This is the Mag + Book Form";
+    			add_location(h2, file$8, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h2, anchor);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h2);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$8.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$8($$self, $$props) {
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<MBForm> was created with unknown prop '${key}'`);
     	});
 
@@ -2828,22 +3603,22 @@ var app = (function () {
     class MBForm extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$7, create_fragment$7, safe_not_equal, {});
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "MBForm",
     			options,
-    			id: create_fragment$7.name
+    			id: create_fragment$8.name
     		});
     	}
     }
 
     /* src/forms/PatronForm.svelte generated by Svelte v3.22.2 */
 
-    const file$8 = "src/forms/PatronForm.svelte";
+    const file$9 = "src/forms/PatronForm.svelte";
 
-    function create_fragment$8(ctx) {
+    function create_fragment$9(ctx) {
     	let h2;
     	let t1;
     	let form;
@@ -2854,12 +3629,12 @@ var app = (function () {
     			h2.textContent = "This is the Patron Form";
     			t1 = space();
     			form = element("form");
-    			add_location(h2, file$8, 0, 0, 0);
+    			add_location(h2, file$9, 0, 0, 0);
     			attr_dev(form, "action", "");
     			attr_dev(form, "method", "post");
     			attr_dev(form, "class", "payment-form");
     			attr_dev(form, "id", "payment-form__patrons");
-    			add_location(form, file$8, 2, 0, 34);
+    			add_location(form, file$9, 2, 0, 34);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2881,7 +3656,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$8.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2890,7 +3665,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$8($$self, $$props) {
+    function instance$9($$self, $$props) {
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -2905,13 +3680,13 @@ var app = (function () {
     class PatronForm extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {});
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "PatronForm",
     			options,
-    			id: create_fragment$8.name
+    			id: create_fragment$9.name
     		});
     	}
     }
@@ -2957,7 +3732,7 @@ var app = (function () {
     }
 
     // (13:0) {#if form === 'bookonly'}
-    function create_if_block_2$1(ctx) {
+    function create_if_block_2$2(ctx) {
     	let current;
     	const bookform = new BookForm({ $$inline: true });
 
@@ -2985,7 +3760,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$1.name,
+    		id: create_if_block_2$2.name,
     		type: "if",
     		source: "(13:0) {#if form === 'bookonly'}",
     		ctx
@@ -2995,7 +3770,7 @@ var app = (function () {
     }
 
     // (17:0) {#if form === 'magbook'}
-    function create_if_block_1$1(ctx) {
+    function create_if_block_1$2(ctx) {
     	let current;
     	const mbform = new MBForm({ $$inline: true });
 
@@ -3023,7 +3798,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
     		source: "(17:0) {#if form === 'magbook'}",
     		ctx
@@ -3070,15 +3845,15 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$9(ctx) {
+    function create_fragment$a(ctx) {
     	let t0;
     	let t1;
     	let t2;
     	let if_block3_anchor;
     	let current;
     	let if_block0 = /*form*/ ctx[0] === "magonly" && create_if_block_3$1(ctx);
-    	let if_block1 = /*form*/ ctx[0] === "bookonly" && create_if_block_2$1(ctx);
-    	let if_block2 = /*form*/ ctx[0] === "magbook" && create_if_block_1$1(ctx);
+    	let if_block1 = /*form*/ ctx[0] === "bookonly" && create_if_block_2$2(ctx);
+    	let if_block2 = /*form*/ ctx[0] === "magbook" && create_if_block_1$2(ctx);
     	let if_block3 = /*form*/ ctx[0] === "patron" && create_if_block$3(ctx);
 
     	const block = {
@@ -3134,7 +3909,7 @@ var app = (function () {
     						transition_in(if_block1, 1);
     					}
     				} else {
-    					if_block1 = create_if_block_2$1(ctx);
+    					if_block1 = create_if_block_2$2(ctx);
     					if_block1.c();
     					transition_in(if_block1, 1);
     					if_block1.m(t1.parentNode, t1);
@@ -3155,7 +3930,7 @@ var app = (function () {
     						transition_in(if_block2, 1);
     					}
     				} else {
-    					if_block2 = create_if_block_1$1(ctx);
+    					if_block2 = create_if_block_1$2(ctx);
     					if_block2.c();
     					transition_in(if_block2, 1);
     					if_block2.m(t2.parentNode, t2);
@@ -3220,7 +3995,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$9.name,
+    		id: create_fragment$a.name,
     		type: "component",
     		source: "",
     		ctx
@@ -3229,8 +4004,8 @@ var app = (function () {
     	return block;
     }
 
-    function instance$9($$self, $$props, $$invalidate) {
-    	let { form } = $$props;
+    function instance$a($$self, $$props, $$invalidate) {
+    	let { form = undefined } = $$props;
     	const writable_props = ["form"];
 
     	Object.keys($$props).forEach(key => {
@@ -3266,21 +4041,14 @@ var app = (function () {
     class SubForm extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, { form: 0 });
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { form: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "SubForm",
     			options,
-    			id: create_fragment$9.name
+    			id: create_fragment$a.name
     		});
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-
-    		if (/*form*/ ctx[0] === undefined && !("form" in props)) {
-    			console.warn("<SubForm> was created without expected prop 'form'");
-    		}
     	}
 
     	get form() {
@@ -3293,9 +4061,9 @@ var app = (function () {
     }
 
     /* src/App.svelte generated by Svelte v3.22.2 */
-    const file$9 = "src/App.svelte";
+    const file$a = "src/App.svelte";
 
-    function create_fragment$a(ctx) {
+    function create_fragment$b(ctx) {
     	let t;
     	let div;
     	let current;
@@ -3314,7 +4082,8 @@ var app = (function () {
     			div = element("div");
     			create_component(subform.$$.fragment);
     			attr_dev(div, "id", "subs-page__form");
-    			add_location(div, file$9, 9, 0, 206);
+    			attr_dev(div, "class", "svelte-4bawas");
+    			add_location(div, file$a, 9, 0, 206);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3352,7 +4121,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$a.name,
+    		id: create_fragment$b.name,
     		type: "component",
     		source: "",
     		ctx
@@ -3361,8 +4130,8 @@ var app = (function () {
     	return block;
     }
 
-    function instance$a($$self, $$props, $$invalidate) {
-    	let form = "magonly";
+    function instance$b($$self, $$props, $$invalidate) {
+    	let form = undefined;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -3388,13 +4157,13 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {});
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "App",
     			options,
-    			id: create_fragment$a.name
+    			id: create_fragment$b.name
     		});
     	}
     }

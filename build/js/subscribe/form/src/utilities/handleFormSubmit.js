@@ -1,9 +1,7 @@
 import createStripeToken from "./createStripeToken";
 import handlePost from "./handlePost";
-import handleSuccess from "./handleSuccess";
-import handleFailure from "./handleFailure";
 
-const handleFormSubmit = async (e, card, stripe, url) => {
+const handleFormSubmit = async (e, card, stripe, url, dispatch) => {
   e.preventDefault();
   let f = document.getElementById("payment-form");
   let first_name = document.getElementById("first_name").value;
@@ -22,7 +20,9 @@ const handleFormSubmit = async (e, card, stripe, url) => {
   try {
     let stripeToken = await createStripeToken(card, options, stripe);
     let result = await handlePost(f, stripeToken, url);
-    result.success ? handleSuccess(result) : handleFailure(result);
+    result.success
+      ? dispatch("success", { res: result })
+      : dispatch("failure", { res: result, card: card });
   } catch (error) {
     console.log(error);
   }
