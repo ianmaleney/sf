@@ -419,6 +419,15 @@ function my_assets() {
 add_action( 'wp_enqueue_scripts', 'my_assets' );
 
 
+function subscribe_page_assets() {
+	wp_enqueue_script( 'subscribe-scripts', '/wp-content/themes/stingingfly/js/subscribe.js', array('jquery'), '1.0', true );
+	wp_enqueue_style( 'subscribe-styles', get_template_directory_uri() . '/css/svelte.css', array(), '20200505');
+}
+
+
+add_action( 'wp_enqueue_scripts', 'subscribe_page_assets' );
+
+
 
 
 
