@@ -2844,18 +2844,18 @@ var app = (function () {
     			a = element("a");
     			t5 = text(t5_value);
     			attr_dev(div0, "class", "modal__underlay svelte-1yl1jhh");
-    			add_location(div0, file$6, 180, 1, 6408);
+    			add_location(div0, file$6, 180, 1, 6429);
     			attr_dev(h2, "class", "svelte-1yl1jhh");
-    			add_location(h2, file$6, 182, 2, 6514);
+    			add_location(h2, file$6, 182, 2, 6535);
     			attr_dev(p, "class", "svelte-1yl1jhh");
-    			add_location(p, file$6, 183, 2, 6544);
+    			add_location(p, file$6, 183, 2, 6565);
     			attr_dev(a, "href", a_href_value = /*modal*/ ctx[4].data.link);
     			attr_dev(a, "class", "svelte-1yl1jhh");
-    			add_location(a, file$6, 184, 2, 6574);
+    			add_location(a, file$6, 184, 2, 6595);
     			attr_dev(div1, "class", "modal__text svelte-1yl1jhh");
-    			add_location(div1, file$6, 181, 1, 6486);
+    			add_location(div1, file$6, 181, 1, 6507);
     			attr_dev(div2, "class", "modal svelte-1yl1jhh");
-    			add_location(div2, file$6, 179, 0, 6371);
+    			add_location(div2, file$6, 179, 0, 6392);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div2, anchor);
@@ -3004,7 +3004,7 @@ var app = (function () {
     			attr_dev(form, "class", "payment-form svelte-1yl1jhh");
     			attr_dev(form, "id", "payment-form");
     			toggle_class(form, "closed", /*closed*/ ctx[1]);
-    			add_location(form, file$6, 156, 0, 5369);
+    			add_location(form, file$6, 156, 0, 5390);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3390,7 +3390,7 @@ var app = (function () {
     			$$invalidate(
     				4,
     				modal.data = {
-    					title: "Uh oh!",
+    					title: "Something has gone wrong...",
     					message: res.message,
     					link: "#",
     					button_text: "Try Again?"

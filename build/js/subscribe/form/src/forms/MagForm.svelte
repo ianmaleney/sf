@@ -136,7 +136,7 @@
 		// Create Modal with Failure Notice
 		if (res) {
 			modal.data = {
-				title: "Uh oh!",
+				title: "Something has gone wrong...",
 				message: res.message,
 				link: "#",
 				button_text: "Try Again?"
