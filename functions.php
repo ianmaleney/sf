@@ -419,15 +419,6 @@ function my_assets() {
 add_action( 'wp_enqueue_scripts', 'my_assets' );
 
 
-function subscribe_page_assets() {
-	wp_enqueue_script( 'subscribe-scripts', '/wp-content/themes/stingingfly/js/subscribe.js', array('jquery'), '1.0', true );
-	wp_enqueue_style( 'subscribe-styles', get_template_directory_uri() . '/css/svelte.css', array(), '20200505');
-}
-
-
-add_action( 'wp_enqueue_scripts', 'subscribe_page_assets' );
-
-
 
 
 
@@ -1158,12 +1149,12 @@ function paywall() {
 function sf_enqueue_subscribe_page_scripts() {
     if( is_page(184) )
     {
-        wp_enqueue_script( 'jquery-ui-datepicker' );
-        wp_register_style( 'jquery-ui', 'http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
-    	wp_enqueue_style( 'jquery-ui' ); 
+        wp_enqueue_script( 'subscribe-scripts', '/wp-content/themes/stingingfly/js/subscribe.js', array('jquery'), '1.0', true );
+		wp_enqueue_style( 'subscribe-styles', get_template_directory_uri() . '/css/svelte.css', array(), '20200505');
     }
 }
 add_action( 'wp_enqueue_scripts', 'sf_enqueue_subscribe_page_scripts' );
+
 
 
 

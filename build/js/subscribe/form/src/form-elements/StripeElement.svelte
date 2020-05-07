@@ -1,11 +1,12 @@
 <script>
+	export let subscription = undefined;
 	import { onMount, createEventDispatcher } from 'svelte';
 	import env from "../utilities/env.js";
 	import handleFormSubmit from "../utilities/handleFormSubmit.js";
 	const dispatch = createEventDispatcher();
 
 	/* Set Variables */
-	const {url, pkey, endpoint} = env();
+	const {url, pkey, endpoint} = env(subscription);
 	
 	/* Initiate Stripe */
 	const stripe = window.Stripe(pkey);
@@ -31,7 +32,7 @@
 	// Add an instance of the card Element into the `card-element` <div>
 	onMount(() => {
 		card.mount("#card-element");
-		const errorElement = document.getElementById("card-errors");
+		let errorElement = document.getElementById("card-errors");
 		// Handle real-time validation errors from the card Element.
 		card.addEventListener("change", function (event) {
 			if (event.error) {
@@ -43,7 +44,8 @@
 	});
 
 	const handleSubmit = e => {
-		handleFormSubmit(e, card, stripe, endpoint, dispatch);
+		let errorElement = document.getElementById("card-errors");
+		handleFormSubmit(e, card, stripe, subscription, endpoint, errorElement, dispatch);
 		dispatch("formSubmit", e);
 	}
 

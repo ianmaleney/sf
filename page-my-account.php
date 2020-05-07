@@ -36,7 +36,7 @@ if ( is_user_logged_in() ) {
 	
 
 	<div class="u-page-wrapper u-page-wrapper--primary-header u-page-wrapper--full-width">
-		<main id="main" class="site-main" role="main">
+		<main id="main" class="site-main" role="main" data-cus="<?php echo $stripe_customer_id; ?>">
 			<section>
 			<h1>Hey, <?php echo $first_name ?>!</h1>
 			<p>Welcome to the Stinging Fly! You have access to all the content on our website. You can see the archive <a href="https://stingingfly.org/category/archive">here</a>, or click <a href="/">here</a> to browse the homepage.</p>
@@ -205,6 +205,7 @@ if ( is_user_logged_in() ) {
 		var elements = stripe.elements();
 		var form = document.getElementById("update-card");
 		var errorElement = document.getElementById("card-errors");
+		var cus_id = document.querySelector("#main").dataset.cus;
 		// Custom Styling
 		var style = {
 			base: {
@@ -237,11 +238,11 @@ if ( is_user_logged_in() ) {
 			}
 		});
 				// Handle Stripe Token
-		function stripeTokenHandler(token) {
+		function stripeTokenHandler(token, cus_id) {
 
 			let data = {
 				stripeToken: token.id,
-				customer_id: "<?php $stripe_customer_id ?>"
+				customer_id: cus_id
 			}
 
 			// Submit form
@@ -275,7 +276,7 @@ if ( is_user_logged_in() ) {
 				// Inform the user if there was an error
 				errorElement.textContent = result.error.message;
 			} else {
-				stripeTokenHandler(result.token);
+				stripeTokenHandler(result.token, cus_id);
 			}
 		});
 	});

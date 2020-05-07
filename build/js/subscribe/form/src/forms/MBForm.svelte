@@ -1,1 +1,0 @@
-<h2>This is the Mag + Book Form</h2>

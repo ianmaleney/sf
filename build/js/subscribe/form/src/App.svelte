@@ -8,7 +8,7 @@
 
 <FormHeader on:formSelect="{e => form = e.detail}"/>
 <div id="subs-page__form">
-	<SubForm form={form} />
+	<SubForm formType={form} />
 </div>
 
 <style>
