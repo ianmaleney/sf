@@ -2427,23 +2427,23 @@ var app = (function () {
     			div2 = element("div");
     			p1 = element("p");
     			p1.textContent = "When you click 'subscribe', your card will be charged, and you will receive an email with the full details of your subscription, including how to access our online archive.";
-    			add_location(legend, file$4, 67, 1, 2198);
+    			add_location(legend, file$4, 67, 1, 2192);
     			attr_dev(label, "for", "card-element");
     			attr_dev(label, "class", "svelte-1ytjumv");
-    			add_location(label, file$4, 69, 1, 2300);
+    			add_location(label, file$4, 69, 1, 2294);
     			attr_dev(div0, "id", "card-element");
-    			add_location(div0, file$4, 70, 1, 2353);
+    			add_location(div0, file$4, 70, 1, 2347);
     			attr_dev(p0, "class", "stripe-info");
-    			add_location(p0, file$4, 71, 1, 2384);
+    			add_location(p0, file$4, 71, 1, 2378);
     			attr_dev(div1, "id", "card-errors");
-    			add_location(div1, file$4, 72, 1, 2527);
+    			add_location(div1, file$4, 72, 1, 2521);
     			attr_dev(button, "id", "submit-button");
-    			add_location(button, file$4, 73, 1, 2557);
-    			add_location(p1, file$4, 75, 2, 2661);
+    			add_location(button, file$4, 73, 1, 2551);
+    			add_location(p1, file$4, 75, 2, 2655);
     			attr_dev(div2, "class", "fieldset-comment");
-    			add_location(div2, file$4, 74, 1, 2628);
+    			add_location(div2, file$4, 74, 1, 2622);
     			attr_dev(fieldset, "id", "sub_payment");
-    			add_location(fieldset, file$4, 66, 0, 2169);
+    			add_location(fieldset, file$4, 66, 0, 2163);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, fieldset, anchor);
@@ -2513,7 +2513,7 @@ var app = (function () {
     			t6 = space();
     			div1 = element("div");
     			p1 = element("p");
-    			p1.textContent = "When you click 'subscribe', your card will be redirected to a checkout screen, where you can enter your card details. Once everything is completed, you will receive an email with the full details of your patronage, including how to access our online archive.";
+    			p1.textContent = "When you click 'subscribe', you will be redirected to a checkout screen, where you can enter your card details. Once everything is completed, you will receive an email with the full details of your patronage, including how to access our online archive.";
     			add_location(legend, file$4, 57, 1, 1572);
     			attr_dev(p0, "class", "stripe-info");
     			add_location(p0, file$4, 58, 1, 1598);

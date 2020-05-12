@@ -60,7 +60,7 @@
 	<div id="card-errors"></div>
 	<button id="submit-button" on:click={handleSubmit}>Subscribe</button>
 	<div class="fieldset-comment">
-		<p>When you click 'subscribe', your card will be redirected to a checkout screen, where you can enter your card details. Once everything is completed, you will receive an email with the full details of your patronage, including how to access our online archive.</p>
+		<p>When you click 'subscribe', you will be redirected to a checkout screen, where you can enter your card details. Once everything is completed, you will receive an email with the full details of your patronage, including how to access our online archive.</p>
 	</div>
 </fieldset>
 {:else}
