@@ -135,11 +135,9 @@
 	}
 
 	const handle_checkout = (data, stripe, errorElement) => {
-		console.log({data});
 		stripe.redirectToCheckout({
 			sessionId: data.id
 		}).then(function (result) {
-			console.log({result});
 			if (result.error) {
 				errorElement.textContent = result.error.message;
 				return;
