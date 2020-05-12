@@ -47,6 +47,7 @@
 
 	const handleSubmit = e => {
 		let errorElement = document.getElementById("card-errors");
+		console.log({endpoint});
 		handleFormSubmit(e, card, stripe, subscription, endpoint, errorElement, dispatch);
 		dispatch("formSubmit", e);
 	}

@@ -16,7 +16,7 @@ $userdata = array(
 	'user_email' => $sub_data->user_email,
 	'user_registered' => $now,
 	'user_pass' => NULL,
-	'role' => 'active_subscriber'
+	'role' => $sub_data->user_role
 );
 
 // Create New WP User
