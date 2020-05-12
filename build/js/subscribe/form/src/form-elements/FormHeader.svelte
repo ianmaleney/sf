@@ -69,5 +69,6 @@
 		padding: 16px 0;
 		max-width: 1280px;
 		margin: 0 auto;
+		flex-wrap: wrap;
 	}
 </style>

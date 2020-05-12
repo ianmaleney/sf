@@ -25,23 +25,43 @@ const handleFormSubmit = async (
     address_country: document.getElementById("address_country").value,
     address_zip: document.getElementById("address_postcode").value
   };
-  try {
-    let stripeToken = await createStripeToken(card, options, stripe);
-    let result = await handlePost(f, stripeToken, url, sub);
-    if (result.success) {
-      dispatch("success", { res: result });
-      return;
-    } else {
-      dispatch("failure", {
-        res: result,
-        card: card,
-        stripe: stripe,
-        errorElement: errorElement
-      });
-      return;
+  if (sub === "patron") {
+    try {
+      let result = await handlePost(f, null, url, sub);
+      if (result.success) {
+        dispatch("success", { res: result });
+        return;
+      } else {
+        dispatch("failure", {
+          res: result,
+          card: null,
+          stripe: stripe,
+          errorElement: errorElement
+        });
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
+  } else {
+    try {
+      let stripeToken = await createStripeToken(card, options, stripe);
+      let result = await handlePost(f, stripeToken, url, sub);
+      if (result.success) {
+        dispatch("success", { res: result });
+        return;
+      } else {
+        dispatch("failure", {
+          res: result,
+          card: card,
+          stripe: stripe,
+          errorElement: errorElement
+        });
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

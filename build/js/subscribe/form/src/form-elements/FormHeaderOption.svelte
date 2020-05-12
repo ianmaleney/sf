@@ -19,6 +19,7 @@
 		padding: 0 40px;
 		border-right: 1px solid #E5E5E5;
 		flex: 1 0 25%;
+		min-width: 280px;
 	}
 	.option:last-child {
 		border-right: none;

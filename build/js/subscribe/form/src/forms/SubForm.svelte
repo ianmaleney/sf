@@ -133,6 +133,21 @@
 		closed = false;
 		modal.display = true;
 	}
+
+	const handle_checkout = (data, stripe, errorElement) => {
+		console.log({data});
+		stripe.redirectToCheckout({
+			sessionId: data.id
+		}).then(function (result) {
+			console.log({result});
+			if (result.error) {
+				errorElement.textContent = result.error.message;
+				return;
+			} else {
+				modal.display = true;
+			}
+		});
+	}
 	
 	const handleFormFailure = async e => {
 		let { res, card, stripe, errorElement } = e.detail;
@@ -150,6 +165,10 @@
 
 			case "confirmation_needed":
 				handle_sca_confirmation(res.data.client_secret, card, stripe, errorElement, () => modal.display = true);
+				break;
+
+			case "session_created":
+				handle_checkout(res.data, stripe);
 				break;
 
 			default:
@@ -215,6 +234,12 @@
 		<span class="label-title">Amount in Euro – Minimum €100</span>
 		<input type="number" name="patron_amount" id="patron_amount" min="100" value="100">
 		</label>
+	</FormFieldset>
+	<FormFieldset f_id="patron_anon_toggle" f_legend="Would you like to be listed as a patron on our website?">
+		<input type="radio" name="anon" id="anon_yes" value=true checked>
+		<label for="anon_yes">Yes, List My Name</label>
+		<input type="radio" name="anon" id="anon_no" value=false >
+		<label for="anon_no">No, Don't List My Name</label>
 	</FormFieldset>
 	{/if}
 	

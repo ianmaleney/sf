@@ -37,25 +37,43 @@
 		$next_issue_title = "Issue {$next_issue_number} / Volume 2";
 		echo "<div class='meta' data-current=" . $current_issue_number . " data-title='" . $current_issue_title . "'></div>";
 		wp_reset_query();
+
+
+	// Get details of the latest book
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page' => 1,
+			'product_cat' => 'book',
+			'orderby' =>'date',
+			'order' => 'DESC' 
+		);
+		$loop = new WP_Query( $args );
+		$current_issue;
+
+		if ($loop->have_posts()) {
+			while($loop->have_posts()) {
+				$loop->the_post();
+				$book_title = get_the_title();
+				$book_link = get_the_permalink();
+				$book_thumbnail = get_the_post_thumbnail_url();
+			}
+		}
+
+		echo "<div class='meta' data-book='" . $book_title . "'></div>";
+		wp_reset_query();
 ?>
 
 <div id="subs-page__landing">
-	<img class="subs-page__landing__image" src="<?php echo $thumbnail ?>">
+	<div class="subs-page__landing__heading">
+		<h1>Support The Stinging Fly</h1>
+	</div>
+	<div class="subs-page__landing__images">
+		<img class="subs-page__landing__image" src="<?php echo $thumbnail ?>">
+		<img class="subs-page__landing__image" src="<?php echo $book_thumbnail ?>">
+	</div>
 	<div class="subs-page__landing__text">
-		<div class="landing__text__heading">
-			<h1>Become A Subscriber</h1>
-			<ul>
-				<li>Two Issues Every Year</li>
-				<li>Full Archive Access</li>
-				<li>Starting at just €25/year</li>
-			</ul>
-		</div>
-		<div class="landing__text__body">
-			<p><strong>The Stinging Fly</strong> magazine was established in 1997 to seek out, publish and promote the very best new Irish and international writing. Thanks to the support of our subscribers, we’re still doing that over twenty years later.</p>
-			<p>Subscribers receive <strong>two issues of the magazine delivered to their doors every year</strong>. Issues are 224 pages in length, and they’re published in May and November each year.</p>
-			<p>Subscribers also get <strong>exclusive access to our online archive</strong>, which includes almost 2000 stories, poems, and essays taken from every issue of the magazine.</p>
-			<p>Subscriptions, including postage, cost <strong>€25 per year for residents of Ireland and Northern Ireland, and €30 for anywhere else in the world.</strong> You can pay by credit or debit card using the form on this page. If you would like to pay by bank transfer, or any other method, please contact us at info@stingingfly.org.</p>
-		</div>
+		<p>The Stinging Fly magazine was established in 1997 to seek out, publish and promote the very best new Irish and international writing. Thanks to the support of our subscribers, we’re still doing that over twenty years later.</p>
+		<p>The Stinging Fly publishes two magazines and two books each year. Supporters can choose to receive the books, the magazines, or both together. Stinging Fly Patrons receive both the books and the magazines. All supporters receive exclusive access to our online archive, which includes almost 2000 stories, poems, and essays taken from every issue of the magazine. All prices include postage.</p>
 	</div>
 </div>
 
