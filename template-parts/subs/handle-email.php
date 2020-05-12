@@ -8,9 +8,11 @@ global $wpdb;
 
 http_response_code(200); // PHP 5.4 or greater
 
-$email_to = $sub_data->email;
-$email_subject = "Your Subscription Will Renew Soon";
-$email_message = file_get_contents('../../wp-content/themes/stingingfly/template-parts/email/upcoming-invoice.php');
+$email_type = $sub_data->email_type;
+
+$email_to = $sub_data->data->email;
+$email_subject = $sub_data->email_subject;
+$email_message = file_get_contents('../../wp-content/themes/stingingfly/template-parts/email/' . $email_type . '.php');
 $email_headers = array('Content-Type: text/html; charset=UTF-8');
 $sent = wp_mail( $email_to, $email_subject, $email_message, $email_headers );
 

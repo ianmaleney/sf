@@ -22,7 +22,7 @@ function css() {
 }
 
 function javascript() {
-  return src("build/js/*.js")
+  return src(["build/js/*.js"])
     .pipe(babel())
     .pipe(terser())
     .pipe(concat("scripts.js"))
@@ -30,7 +30,16 @@ function javascript() {
     .pipe(browserSync.stream());
 }
 
-exports.build = parallel(css, javascript);
+function subscribe() {
+  return src(["build/js/subscribe/*.js"])
+    .pipe(babel())
+    .pipe(terser())
+    .pipe(concat("subscribe.js"))
+    .pipe(dest("js"))
+    .pipe(browserSync.stream());
+}
+
+exports.build = parallel(css, javascript, subscribe);
 
 exports.default = function() {
   browserSync.init({
@@ -56,4 +65,5 @@ exports.default = function() {
   watch("./**/*.php").on("change", browserSync.reload);
   watch("./build/sass/**/*.sass", css);
   watch("./build/js/*.js", javascript);
+  watch("./build/js/subscribe/*.js", subscribe);
 };
