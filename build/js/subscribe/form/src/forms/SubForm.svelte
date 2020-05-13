@@ -90,8 +90,18 @@
 	let comments = {
 		contact_comment: "The name and email address of the recipient",
 		gifter_comment: "We’ll need your name and email address too, just so we can send you a receipt.",
-		address_comment: "This is the address where we’ll be sending the issues.",
-		start_comment: "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year."
+		address_comment: {
+			magonly: "This is the address where we’ll be sending the issues.",
+			bookonly: "This is the address where we’ll be sending the books.",
+			magbook: "This is the address where we’ll be sending the magazine issues and books during the year.",
+			patron: "This is the address where we’ll be sending the magazine issues and books during the year."
+		},
+		start_comment: {
+			magonly: "You can choose to have your subscription start with the current issue, or the next issue. Magazine subscriptions last for one year and include two issues of the magazine.",
+			bookonly: "You can choose to have your subscription start with the current title, or the next one. Book subscriptions include two books as they are published.",
+			magbook: "You can choose which issue and book you want your subscription to start with. Your subscription will last for one year and you will receive two issues of the magazine and two books.",
+			patron: "You can choose which issue and book you want your patron's subscription to start with. We will then send you a copy of each new issue and book as it is published."
+		}
 	}
 	let messages = {
 		customer_exists: {
@@ -191,9 +201,6 @@
 			inputs.start_inputs = [...inputs.start_inputs, {
 				type: "date", label: "On what date should the gift subscription begin?", name: "gift_start_date"
 			}];
-			comments.start_comment = comments.start_comment += " You can also choose a specific date for the subscription to start. This is when the person receiving the gift will be notified."
-		} else {
-			comments.start_comment = "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year.";
 		}
 	});
 </script>
@@ -220,10 +227,10 @@
 	{/if}
 	
 	<!-- Subscriber Address Details -->
-	<FormFieldset f_id="sub_address" f_legend="Where should we send it?" inputs={inputs.address_inputs} comment={comments.address_comment} />
+	<FormFieldset f_id="sub_address" f_legend="Where should we send it?" inputs={inputs.address_inputs} comment={comments.address_comment[formType]} />
 	
 	<!-- Subscription Start Details -->
-	<FormFieldset f_id="sub_start" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment} />
+	<FormFieldset f_id="sub_start" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment[formType]} gift={gift}/>
 
 	<!-- Donation Toggle -->
 	{#if formType === 'patron'}

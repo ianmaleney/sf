@@ -1844,14 +1844,14 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[6] = list[i];
+    	child_ctx[7] = list[i];
     	return child_ctx;
     }
 
     // (10:3) {#each inputs as input}
     function create_each_block$1(ctx) {
     	let current;
-    	const forminput_spread_levels = [/*input*/ ctx[6]];
+    	const forminput_spread_levels = [/*input*/ ctx[7]];
     	let forminput_props = {};
 
     	for (let i = 0; i < forminput_spread_levels.length; i += 1) {
@@ -1870,7 +1870,7 @@ var app = (function () {
     		},
     		p: function update(ctx, dirty) {
     			const forminput_changes = (dirty & /*inputs*/ 4)
-    			? get_spread_update(forminput_spread_levels, [get_spread_object(/*input*/ ctx[6])])
+    			? get_spread_update(forminput_spread_levels, [get_spread_object(/*input*/ ctx[7])])
     			: {};
 
     			forminput.$set(forminput_changes);
@@ -2000,27 +2000,47 @@ var app = (function () {
     function create_if_block$1(ctx) {
     	let div;
     	let p;
-    	let t;
+    	let t0;
+    	let t1;
+    	let if_block = /*f_id*/ ctx[0] === "sub_start" && create_if_block_1$1(ctx);
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			p = element("p");
-    			t = text(/*comment*/ ctx[3]);
-    			add_location(p, file$3, 17, 3, 364);
+    			t0 = text(/*comment*/ ctx[3]);
+    			t1 = space();
+    			if (if_block) if_block.c();
+    			add_location(p, file$3, 17, 3, 378);
     			attr_dev(div, "class", "fieldset-comment");
-    			add_location(div, file$3, 16, 2, 330);
+    			add_location(div, file$3, 16, 2, 344);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, p);
-    			append_dev(p, t);
+    			append_dev(p, t0);
+    			append_dev(div, t1);
+    			if (if_block) if_block.m(div, null);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*comment*/ 8) set_data_dev(t, /*comment*/ ctx[3]);
+    			if (dirty & /*comment*/ 8) set_data_dev(t0, /*comment*/ ctx[3]);
+
+    			if (/*f_id*/ ctx[0] === "sub_start") {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+    				} else {
+    					if_block = create_if_block_1$1(ctx);
+    					if_block.c();
+    					if_block.m(div, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
+    			if (if_block) if_block.d();
     		}
     	};
 
@@ -2035,6 +2055,78 @@ var app = (function () {
     	return block;
     }
 
+    // (19:3) {#if f_id === 'sub_start'}
+    function create_if_block_1$1(ctx) {
+    	let if_block_anchor;
+    	let if_block = /*gift*/ ctx[4] && create_if_block_2$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    		},
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert_dev(target, if_block_anchor, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*gift*/ ctx[4]) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_2$1(ctx);
+    					if_block.c();
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+    			if (detaching) detach_dev(if_block_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(19:3) {#if f_id === 'sub_start'}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (20:4) {#if gift}
+    function create_if_block_2$1(ctx) {
+    	let p;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "You can also choose a date on which your gift subscription will start. This is the day the recipient will be notified.";
+    			add_location(p, file$3, 20, 4, 444);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2$1.name,
+    		type: "if",
+    		source: "(20:4) {#if gift}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
     function create_fragment$3(ctx) {
     	let fieldset;
     	let legend;
@@ -2043,8 +2135,8 @@ var app = (function () {
     	let div;
     	let t2;
     	let current;
-    	const default_slot_template = /*$$slots*/ ctx[5].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
+    	const default_slot_template = /*$$slots*/ ctx[6].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
     	const default_slot_or_fallback = default_slot || fallback_block(ctx);
     	let if_block = /*comment*/ ctx[3] && create_if_block$1(ctx);
 
@@ -2058,11 +2150,11 @@ var app = (function () {
     			if (default_slot_or_fallback) default_slot_or_fallback.c();
     			t2 = space();
     			if (if_block) if_block.c();
-    			add_location(legend, file$3, 6, 1, 158);
+    			add_location(legend, file$3, 6, 1, 172);
     			attr_dev(div, "class", "fieldset-inputs");
-    			add_location(div, file$3, 7, 1, 187);
+    			add_location(div, file$3, 7, 1, 201);
     			attr_dev(fieldset, "id", /*f_id*/ ctx[0]);
-    			add_location(fieldset, file$3, 5, 0, 134);
+    			add_location(fieldset, file$3, 5, 0, 148);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2086,8 +2178,8 @@ var app = (function () {
     			if (!current || dirty & /*f_legend*/ 2) set_data_dev(t0, /*f_legend*/ ctx[1]);
 
     			if (default_slot) {
-    				if (default_slot.p && dirty & /*$$scope*/ 16) {
-    					default_slot.p(get_slot_context(default_slot_template, ctx, /*$$scope*/ ctx[4], null), get_slot_changes(default_slot_template, /*$$scope*/ ctx[4], dirty, null));
+    				if (default_slot.p && dirty & /*$$scope*/ 32) {
+    					default_slot.p(get_slot_context(default_slot_template, ctx, /*$$scope*/ ctx[5], null), get_slot_changes(default_slot_template, /*$$scope*/ ctx[5], dirty, null));
     				}
     			} else {
     				if (default_slot_or_fallback && default_slot_or_fallback.p && dirty & /*inputs*/ 4) {
@@ -2143,9 +2235,10 @@ var app = (function () {
     	let { f_id } = $$props,
     		{ f_legend } = $$props,
     		{ inputs = undefined } = $$props,
-    		{ comment = undefined } = $$props;
+    		{ comment = undefined } = $$props,
+    		{ gift = false } = $$props;
 
-    	const writable_props = ["f_id", "f_legend", "inputs", "comment"];
+    	const writable_props = ["f_id", "f_legend", "inputs", "comment", "gift"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<FormFieldset> was created with unknown prop '${key}'`);
@@ -2159,7 +2252,8 @@ var app = (function () {
     		if ("f_legend" in $$props) $$invalidate(1, f_legend = $$props.f_legend);
     		if ("inputs" in $$props) $$invalidate(2, inputs = $$props.inputs);
     		if ("comment" in $$props) $$invalidate(3, comment = $$props.comment);
-    		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
+    		if ("gift" in $$props) $$invalidate(4, gift = $$props.gift);
+    		if ("$$scope" in $$props) $$invalidate(5, $$scope = $$props.$$scope);
     	};
 
     	$$self.$capture_state = () => ({
@@ -2167,6 +2261,7 @@ var app = (function () {
     		f_legend,
     		inputs,
     		comment,
+    		gift,
     		FormInput
     	});
 
@@ -2175,13 +2270,14 @@ var app = (function () {
     		if ("f_legend" in $$props) $$invalidate(1, f_legend = $$props.f_legend);
     		if ("inputs" in $$props) $$invalidate(2, inputs = $$props.inputs);
     		if ("comment" in $$props) $$invalidate(3, comment = $$props.comment);
+    		if ("gift" in $$props) $$invalidate(4, gift = $$props.gift);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [f_id, f_legend, inputs, comment, $$scope, $$slots];
+    	return [f_id, f_legend, inputs, comment, gift, $$scope, $$slots];
     }
 
     class FormFieldset extends SvelteComponentDev {
@@ -2192,7 +2288,8 @@ var app = (function () {
     			f_id: 0,
     			f_legend: 1,
     			inputs: 2,
-    			comment: 3
+    			comment: 3,
+    			gift: 4
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -2243,6 +2340,14 @@ var app = (function () {
     	}
 
     	set comment(value) {
+    		throw new Error("<FormFieldset>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get gift() {
+    		throw new Error("<FormFieldset>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set gift(value) {
     		throw new Error("<FormFieldset>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -2979,7 +3084,7 @@ var app = (function () {
     /* src/forms/SubForm.svelte generated by Svelte v3.22.2 */
     const file$6 = "src/forms/SubForm.svelte";
 
-    // (201:0) {#if formType}
+    // (208:0) {#if formType}
     function create_if_block$3(ctx) {
     	let form;
     	let t0;
@@ -2999,7 +3104,7 @@ var app = (function () {
     				f_id: "sub_contact",
     				f_legend: "Who should we send it to?",
     				inputs: /*inputs*/ ctx[3].contact_inputs,
-    				comment: /*comments*/ ctx[4].contact_comment
+    				comment: /*comments*/ ctx[5].contact_comment
     			},
     			$$inline: true
     		});
@@ -3011,7 +3116,7 @@ var app = (function () {
     				f_id: "sub_address",
     				f_legend: "Where should we send it?",
     				inputs: /*inputs*/ ctx[3].address_inputs,
-    				comment: /*comments*/ ctx[4].address_comment
+    				comment: /*comments*/ ctx[5].address_comment[/*formType*/ ctx[0]]
     			},
     			$$inline: true
     		});
@@ -3021,7 +3126,8 @@ var app = (function () {
     				f_id: "sub_start",
     				f_legend: "When would you like the subscription to start?",
     				inputs: /*inputs*/ ctx[3].start_inputs,
-    				comment: /*comments*/ ctx[4].start_comment
+    				comment: /*comments*/ ctx[5].start_comment[/*formType*/ ctx[0]],
+    				gift: /*gift*/ ctx[1]
     			},
     			$$inline: true
     		});
@@ -3036,8 +3142,8 @@ var app = (function () {
     	stripeelement.$on("formSubmit", /*handleFormSubmit*/ ctx[6]);
     	stripeelement.$on("success", /*handleFormSuccess*/ ctx[7]);
     	stripeelement.$on("failure", /*handleFormFailure*/ ctx[8]);
-    	let if_block3 = /*closed*/ ctx[2] && create_if_block_2$1(ctx);
-    	let if_block4 = /*modal*/ ctx[5].display && create_if_block_1$1(ctx);
+    	let if_block3 = /*closed*/ ctx[2] && create_if_block_2$2(ctx);
+    	let if_block4 = /*modal*/ ctx[4].display && create_if_block_1$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -3065,7 +3171,7 @@ var app = (function () {
     			attr_dev(form, "class", "payment-form svelte-1yl1jhh");
     			attr_dev(form, "id", "payment-form");
     			toggle_class(form, "closed", /*closed*/ ctx[2]);
-    			add_location(form, file$6, 201, 0, 6770);
+    			add_location(form, file$6, 208, 0, 7313);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -3115,7 +3221,6 @@ var app = (function () {
 
     			const formfieldset0_changes = {};
     			if (dirty & /*inputs*/ 8) formfieldset0_changes.inputs = /*inputs*/ ctx[3].contact_inputs;
-    			if (dirty & /*comments*/ 16) formfieldset0_changes.comment = /*comments*/ ctx[4].contact_comment;
     			formfieldset0.$set(formfieldset0_changes);
 
     			if (/*gift*/ ctx[1] == true) {
@@ -3143,11 +3248,12 @@ var app = (function () {
 
     			const formfieldset1_changes = {};
     			if (dirty & /*inputs*/ 8) formfieldset1_changes.inputs = /*inputs*/ ctx[3].address_inputs;
-    			if (dirty & /*comments*/ 16) formfieldset1_changes.comment = /*comments*/ ctx[4].address_comment;
+    			if (dirty & /*formType*/ 1) formfieldset1_changes.comment = /*comments*/ ctx[5].address_comment[/*formType*/ ctx[0]];
     			formfieldset1.$set(formfieldset1_changes);
     			const formfieldset2_changes = {};
     			if (dirty & /*inputs*/ 8) formfieldset2_changes.inputs = /*inputs*/ ctx[3].start_inputs;
-    			if (dirty & /*comments*/ 16) formfieldset2_changes.comment = /*comments*/ ctx[4].start_comment;
+    			if (dirty & /*formType*/ 1) formfieldset2_changes.comment = /*comments*/ ctx[5].start_comment[/*formType*/ ctx[0]];
+    			if (dirty & /*gift*/ 2) formfieldset2_changes.gift = /*gift*/ ctx[1];
     			formfieldset2.$set(formfieldset2_changes);
 
     			if (/*formType*/ ctx[0] === "patron") {
@@ -3185,7 +3291,7 @@ var app = (function () {
     						transition_in(if_block3, 1);
     					}
     				} else {
-    					if_block3 = create_if_block_2$1(ctx);
+    					if_block3 = create_if_block_2$2(ctx);
     					if_block3.c();
     					transition_in(if_block3, 1);
     					if_block3.m(t7.parentNode, t7);
@@ -3200,15 +3306,15 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (/*modal*/ ctx[5].display) {
+    			if (/*modal*/ ctx[4].display) {
     				if (if_block4) {
     					if_block4.p(ctx, dirty);
 
-    					if (dirty & /*modal*/ 32) {
+    					if (dirty & /*modal*/ 16) {
     						transition_in(if_block4, 1);
     					}
     				} else {
-    					if_block4 = create_if_block_1$1(ctx);
+    					if_block4 = create_if_block_1$2(ctx);
     					if_block4.c();
     					transition_in(if_block4, 1);
     					if_block4.m(if_block4_anchor.parentNode, if_block4_anchor);
@@ -3269,14 +3375,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(201:0) {#if formType}",
+    		source: "(208:0) {#if formType}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (205:1) {#if formType !== 'patron'}
+    // (212:1) {#if formType !== 'patron'}
     function create_if_block_5(ctx) {
     	let current;
 
@@ -3325,14 +3431,14 @@ var app = (function () {
     		block,
     		id: create_if_block_5.name,
     		type: "if",
-    		source: "(205:1) {#if formType !== 'patron'}",
+    		source: "(212:1) {#if formType !== 'patron'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (206:1) <FormFieldset f_id="sub_gift_toggle" f_legend="Is this subscription for you, or someone else?">
+    // (213:1) <FormFieldset f_id="sub_gift_toggle" f_legend="Is this subscription for you, or someone else?">
     function create_default_slot_2(ctx) {
     	let input0;
     	let input0_value_value;
@@ -3363,18 +3469,18 @@ var app = (function () {
     			input0.value = input0.__value;
     			input0.checked = true;
     			/*$$binding_groups*/ ctx[13][0].push(input0);
-    			add_location(input0, file$6, 206, 2, 7005);
+    			add_location(input0, file$6, 213, 2, 7548);
     			attr_dev(label0, "for", "gift_no");
-    			add_location(label0, file$6, 207, 2, 7093);
+    			add_location(label0, file$6, 214, 2, 7636);
     			attr_dev(input1, "type", "radio");
     			attr_dev(input1, "name", "gift");
     			attr_dev(input1, "id", "gift_yes");
     			input1.__value = input1_value_value = true;
     			input1.value = input1.__value;
     			/*$$binding_groups*/ ctx[13][0].push(input1);
-    			add_location(input1, file$6, 208, 2, 7136);
+    			add_location(input1, file$6, 215, 2, 7679);
     			attr_dev(label1, "for", "gift_yes");
-    			add_location(label1, file$6, 209, 2, 7216);
+    			add_location(label1, file$6, 216, 2, 7759);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, input0, anchor);
@@ -3420,14 +3526,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(206:1) <FormFieldset f_id=\\\"sub_gift_toggle\\\" f_legend=\\\"Is this subscription for you, or someone else?\\\">",
+    		source: "(213:1) <FormFieldset f_id=\\\"sub_gift_toggle\\\" f_legend=\\\"Is this subscription for you, or someone else?\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (218:1) {#if gift == true}
+    // (225:1) {#if gift == true}
     function create_if_block_4$1(ctx) {
     	let current;
 
@@ -3436,7 +3542,7 @@ var app = (function () {
     				f_id: "sub_gifter",
     				f_legend: "Your Contact Details",
     				inputs: /*inputs*/ ctx[3].gifter_inputs,
-    				comment: /*comments*/ ctx[4].gifter_comment
+    				comment: /*comments*/ ctx[5].gifter_comment
     			},
     			$$inline: true
     		});
@@ -3452,7 +3558,6 @@ var app = (function () {
     		p: function update(ctx, dirty) {
     			const formfieldset_changes = {};
     			if (dirty & /*inputs*/ 8) formfieldset_changes.inputs = /*inputs*/ ctx[3].gifter_inputs;
-    			if (dirty & /*comments*/ 16) formfieldset_changes.comment = /*comments*/ ctx[4].gifter_comment;
     			formfieldset.$set(formfieldset_changes);
     		},
     		i: function intro(local) {
@@ -3473,14 +3578,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4$1.name,
     		type: "if",
-    		source: "(218:1) {#if gift == true}",
+    		source: "(225:1) {#if gift == true}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (229:1) {#if formType === 'patron'}
+    // (236:1) {#if formType === 'patron'}
     function create_if_block_3$1(ctx) {
     	let t;
     	let current;
@@ -3539,14 +3644,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3$1.name,
     		type: "if",
-    		source: "(229:1) {#if formType === 'patron'}",
+    		source: "(236:1) {#if formType === 'patron'}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (230:1) <FormFieldset f_id="patron_set_amount" f_legend="How much would you like to give?">
+    // (237:1) <FormFieldset f_id="patron_set_amount" f_legend="How much would you like to give?">
     function create_default_slot_1(ctx) {
     	let label;
     	let span;
@@ -3561,15 +3666,15 @@ var app = (function () {
     			t1 = space();
     			input = element("input");
     			attr_dev(span, "class", "label-title");
-    			add_location(span, file$6, 231, 2, 8199);
+    			add_location(span, file$6, 238, 2, 8773);
     			attr_dev(input, "type", "number");
     			attr_dev(input, "name", "patron_amount");
     			attr_dev(input, "id", "patron_amount");
     			attr_dev(input, "min", "100");
     			input.value = "100";
-    			add_location(input, file$6, 232, 2, 8264);
+    			add_location(input, file$6, 239, 2, 8838);
     			attr_dev(label, "for", "patron_amount");
-    			add_location(label, file$6, 230, 2, 8169);
+    			add_location(label, file$6, 237, 2, 8743);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, label, anchor);
@@ -3586,14 +3691,14 @@ var app = (function () {
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(230:1) <FormFieldset f_id=\\\"patron_set_amount\\\" f_legend=\\\"How much would you like to give?\\\">",
+    		source: "(237:1) <FormFieldset f_id=\\\"patron_set_amount\\\" f_legend=\\\"How much would you like to give?\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (236:1) <FormFieldset f_id="patron_anon_toggle" f_legend="Would you like to be listed as a patron on our website?">
+    // (243:1) <FormFieldset f_id="patron_anon_toggle" f_legend="Would you like to be listed as a patron on our website?">
     function create_default_slot(ctx) {
     	let input0;
     	let t0;
@@ -3619,16 +3724,16 @@ var app = (function () {
     			attr_dev(input0, "id", "anon_yes");
     			input0.value = "true";
     			input0.checked = true;
-    			add_location(input0, file$6, 236, 2, 8487);
+    			add_location(input0, file$6, 243, 2, 9061);
     			attr_dev(label0, "for", "anon_yes");
-    			add_location(label0, file$6, 237, 2, 8555);
+    			add_location(label0, file$6, 244, 2, 9129);
     			attr_dev(input1, "type", "radio");
     			attr_dev(input1, "name", "anon");
     			attr_dev(input1, "id", "anon_no");
     			input1.value = "false";
-    			add_location(input1, file$6, 238, 2, 8605);
+    			add_location(input1, file$6, 245, 2, 9179);
     			attr_dev(label1, "for", "anon_no");
-    			add_location(label1, file$6, 239, 2, 8666);
+    			add_location(label1, file$6, 246, 2, 9240);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, input0, anchor);
@@ -3654,15 +3759,15 @@ var app = (function () {
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(236:1) <FormFieldset f_id=\\\"patron_anon_toggle\\\" f_legend=\\\"Would you like to be listed as a patron on our website?\\\">",
+    		source: "(243:1) <FormFieldset f_id=\\\"patron_anon_toggle\\\" f_legend=\\\"Would you like to be listed as a patron on our website?\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (249:0) {#if closed}
-    function create_if_block_2$1(ctx) {
+    // (256:0) {#if closed}
+    function create_if_block_2$2(ctx) {
     	let current;
     	const spinner = new Spinner({ $$inline: true });
 
@@ -3690,31 +3795,31 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_2$1.name,
+    		id: create_if_block_2$2.name,
     		type: "if",
-    		source: "(249:0) {#if closed}",
+    		source: "(256:0) {#if closed}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (253:0) {#if modal.display}
-    function create_if_block_1$1(ctx) {
+    // (260:0) {#if modal.display}
+    function create_if_block_1$2(ctx) {
     	let div2;
     	let div0;
     	let t0;
     	let div1;
     	let h2;
-    	let t1_value = /*modal*/ ctx[5].data.title + "";
+    	let t1_value = /*modal*/ ctx[4].data.title + "";
     	let t1;
     	let t2;
     	let p;
-    	let t3_value = /*modal*/ ctx[5].data.message + "";
+    	let t3_value = /*modal*/ ctx[4].data.message + "";
     	let t3;
     	let t4;
     	let a;
-    	let t5_value = /*modal*/ ctx[5].data.button_text + "";
+    	let t5_value = /*modal*/ ctx[4].data.button_text + "";
     	let t5;
     	let a_href_value;
     	let div2_transition;
@@ -3736,18 +3841,18 @@ var app = (function () {
     			a = element("a");
     			t5 = text(t5_value);
     			attr_dev(div0, "class", "modal__underlay svelte-1yl1jhh");
-    			add_location(div0, file$6, 254, 1, 9014);
+    			add_location(div0, file$6, 261, 1, 9588);
     			attr_dev(h2, "class", "svelte-1yl1jhh");
-    			add_location(h2, file$6, 256, 2, 9120);
+    			add_location(h2, file$6, 263, 2, 9694);
     			attr_dev(p, "class", "svelte-1yl1jhh");
-    			add_location(p, file$6, 257, 2, 9150);
-    			attr_dev(a, "href", a_href_value = /*modal*/ ctx[5].data.link);
+    			add_location(p, file$6, 264, 2, 9724);
+    			attr_dev(a, "href", a_href_value = /*modal*/ ctx[4].data.link);
     			attr_dev(a, "class", "svelte-1yl1jhh");
-    			add_location(a, file$6, 258, 2, 9180);
+    			add_location(a, file$6, 265, 2, 9754);
     			attr_dev(div1, "class", "modal__text svelte-1yl1jhh");
-    			add_location(div1, file$6, 255, 1, 9092);
+    			add_location(div1, file$6, 262, 1, 9666);
     			attr_dev(div2, "class", "modal svelte-1yl1jhh");
-    			add_location(div2, file$6, 253, 0, 8977);
+    			add_location(div2, file$6, 260, 0, 9551);
     		},
     		m: function mount(target, anchor, remount) {
     			insert_dev(target, div2, anchor);
@@ -3771,11 +3876,11 @@ var app = (function () {
     			];
     		},
     		p: function update(ctx, dirty) {
-    			if ((!current || dirty & /*modal*/ 32) && t1_value !== (t1_value = /*modal*/ ctx[5].data.title + "")) set_data_dev(t1, t1_value);
-    			if ((!current || dirty & /*modal*/ 32) && t3_value !== (t3_value = /*modal*/ ctx[5].data.message + "")) set_data_dev(t3, t3_value);
-    			if ((!current || dirty & /*modal*/ 32) && t5_value !== (t5_value = /*modal*/ ctx[5].data.button_text + "")) set_data_dev(t5, t5_value);
+    			if ((!current || dirty & /*modal*/ 16) && t1_value !== (t1_value = /*modal*/ ctx[4].data.title + "")) set_data_dev(t1, t1_value);
+    			if ((!current || dirty & /*modal*/ 16) && t3_value !== (t3_value = /*modal*/ ctx[4].data.message + "")) set_data_dev(t3, t3_value);
+    			if ((!current || dirty & /*modal*/ 16) && t5_value !== (t5_value = /*modal*/ ctx[4].data.button_text + "")) set_data_dev(t5, t5_value);
 
-    			if (!current || dirty & /*modal*/ 32 && a_href_value !== (a_href_value = /*modal*/ ctx[5].data.link)) {
+    			if (!current || dirty & /*modal*/ 16 && a_href_value !== (a_href_value = /*modal*/ ctx[4].data.link)) {
     				attr_dev(a, "href", a_href_value);
     			}
     		},
@@ -3803,9 +3908,9 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(253:0) {#if modal.display}",
+    		source: "(260:0) {#if modal.display}",
     		ctx
     	});
 
@@ -4042,8 +4147,18 @@ var app = (function () {
     	let comments = {
     		contact_comment: "The name and email address of the recipient",
     		gifter_comment: "We’ll need your name and email address too, just so we can send you a receipt.",
-    		address_comment: "This is the address where we’ll be sending the issues.",
-    		start_comment: "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year."
+    		address_comment: {
+    			magonly: "This is the address where we’ll be sending the issues.",
+    			bookonly: "This is the address where we’ll be sending the books.",
+    			magbook: "This is the address where we’ll be sending the magazine issues and books during the year.",
+    			patron: "This is the address where we’ll be sending the magazine issues and books during the year."
+    		},
+    		start_comment: {
+    			magonly: "You can choose to have your subscription start with the current issue, or the next issue. Magazine subscriptions last for one year and include two issues of the magazine.",
+    			bookonly: "You can choose to have your subscription start with the current title, or the next one. Book subscriptions include two books as they are published.",
+    			magbook: "You can choose which issue and book you want your subscription to start with. Your subscription will last for one year and you will receive two issues of the magazine and two books.",
+    			patron: "You can choose which issue and book you want your patron's subscription to start with. We will then send you a copy of each new issue and book as it is published."
+    		}
     	};
 
     	let messages = {
@@ -4081,7 +4196,7 @@ var app = (function () {
 
     	const handleFormSuccess = e => {
     		$$invalidate(2, closed = false);
-    		$$invalidate(5, modal.display = true, modal);
+    		$$invalidate(4, modal.display = true, modal);
     	};
 
     	const handle_checkout = (data, stripe, errorElement) => {
@@ -4090,7 +4205,7 @@ var app = (function () {
     				errorElement.textContent = result.error.message;
     				return;
     			} else {
-    				$$invalidate(5, modal.display = true, modal);
+    				$$invalidate(4, modal.display = true, modal);
     			}
     		});
     	};
@@ -4101,22 +4216,22 @@ var app = (function () {
 
     		switch (res.message) {
     			case "Existing Customer":
-    				$$invalidate(5, modal.data = messages.customer_exists, modal);
-    				$$invalidate(5, modal.display = true, modal);
+    				$$invalidate(4, modal.data = messages.customer_exists, modal);
+    				$$invalidate(4, modal.display = true, modal);
     				break;
     			case "payment_failed":
-    				$$invalidate(5, modal.data = messages.payment_failed, modal);
-    				$$invalidate(5, modal.display = true, modal);
+    				$$invalidate(4, modal.data = messages.payment_failed, modal);
+    				$$invalidate(4, modal.display = true, modal);
     				break;
     			case "confirmation_needed":
-    				handle_sca_confirmation(res.data.client_secret, card, stripe, errorElement, () => $$invalidate(5, modal.display = true, modal));
+    				handle_sca_confirmation(res.data.client_secret, card, stripe, errorElement, () => $$invalidate(4, modal.display = true, modal));
     				break;
     			case "session_created":
     				handle_checkout(res.data, stripe);
     				break;
     			default:
-    				$$invalidate(5, modal.data = messages.unknown_error, modal);
-    				$$invalidate(5, modal.display = true, modal);
+    				$$invalidate(4, modal.data = messages.unknown_error, modal);
+    				$$invalidate(4, modal.display = true, modal);
     				break;
     		}
     	};
@@ -4150,10 +4265,6 @@ var app = (function () {
     				],
     				inputs
     			);
-
-    			$$invalidate(4, comments.start_comment = $$invalidate(4, comments.start_comment += " You can also choose a specific date for the subscription to start. This is when the person receiving the gift will be notified.", comments), comments);
-    		} else {
-    			$$invalidate(4, comments.start_comment = "You can choose to have your subscription start with the current issue, or the next issue. All subscriptions last for one year.", comments);
     		}
     	});
 
@@ -4177,8 +4288,8 @@ var app = (function () {
     		$$invalidate(1, gift);
     	}
 
-    	const click_handler = () => $$invalidate(5, modal.display = false, modal);
-    	const click_handler_1 = () => $$invalidate(5, modal.display = false, modal);
+    	const click_handler = () => $$invalidate(4, modal.display = false, modal);
+    	const click_handler_1 = () => $$invalidate(4, modal.display = false, modal);
 
     	$$self.$set = $$props => {
     		if ("formType" in $$props) $$invalidate(0, formType = $$props.formType);
@@ -4213,9 +4324,9 @@ var app = (function () {
     		if ("gift" in $$props) $$invalidate(1, gift = $$props.gift);
     		if ("closed" in $$props) $$invalidate(2, closed = $$props.closed);
     		if ("inputs" in $$props) $$invalidate(3, inputs = $$props.inputs);
-    		if ("comments" in $$props) $$invalidate(4, comments = $$props.comments);
+    		if ("comments" in $$props) $$invalidate(5, comments = $$props.comments);
     		if ("messages" in $$props) messages = $$props.messages;
-    		if ("modal" in $$props) $$invalidate(5, modal = $$props.modal);
+    		if ("modal" in $$props) $$invalidate(4, modal = $$props.modal);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -4227,8 +4338,8 @@ var app = (function () {
     		gift,
     		closed,
     		inputs,
-    		comments,
     		modal,
+    		comments,
     		handleFormSubmit,
     		handleFormSuccess,
     		handleFormFailure,
