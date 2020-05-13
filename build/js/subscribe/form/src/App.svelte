@@ -1,7 +1,6 @@
 <script>
 	import FormHeader from './form-elements/FormHeader.svelte';
 	import SubForm from './forms/SubForm.svelte';
-
 	let form = undefined;
 
 </script>

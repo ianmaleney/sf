@@ -1,6 +1,6 @@
 <script>
 	export let formType = undefined;
-	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { beforeUpdate, afterUpdate, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import FormFieldset from "../form-elements/FormFieldset.svelte";
 	import StripeElement from "../form-elements/StripeElement.svelte";
@@ -203,6 +203,8 @@
 			}];
 		}
 	});
+
+	onMount(() => fetch(`https://enigmatic-basin-09064.herokuapp.com/wakeup`));
 </script>
 
 {#if formType}
