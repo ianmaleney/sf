@@ -160,6 +160,7 @@
 	const handleFormFailure = async e => {
 		let { res, card, stripe, errorElement } = e.detail;
 		closed = false;
+		console.log({res});
 		switch (res.message) {
 			case "Existing Customer":
 				modal.data = messages.customer_exists
