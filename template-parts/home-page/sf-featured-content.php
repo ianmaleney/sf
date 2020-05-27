@@ -42,6 +42,7 @@ if ( $featuredPost->have_posts() ) {
       <p class="c-content-description"><?php the_field('lede'); ?></p>
     </div>
   </div>
+</div>
 
   <?php } wp_reset_postdata();
     } ?>
