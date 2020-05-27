@@ -71,10 +71,10 @@
 		],
 		mag_inputs: [
 			{
-				type:"radio", input_id:"current_issue", name:"issue", value: meta.current_number, disabled: true, checked: false, label: meta.current_title
+				type:"radio", input_id:"current_issue", name:"issue", value: meta.current_number, disabled: false, checked: true, label: meta.current_title
 			},
 			{
-				type:"radio", input_id:"next_issue", name:"issue", value: meta.next_issue_number, disabled: false, checked: true, label: meta.next_issue_title
+				type:"radio", input_id:"next_issue", name:"issue", value: meta.next_issue_number, disabled: false, checked: false, label: meta.next_issue_title
 			}
 		],
 		book_inputs: [
