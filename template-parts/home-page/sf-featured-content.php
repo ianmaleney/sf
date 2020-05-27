@@ -35,12 +35,11 @@ if ( $featuredPost->have_posts() ) {
           <?php if ('page' != get_post_type()) { ?>
             <p class="c-content-type"><?php sf_single_cat() ?></p>
             <p class="sep">|</p>
+            <p class="c-content-author"><?php guest_author_link(); ?></p>
           <?php } ?>
-          <p class="c-content-author"><?php guest_author_link(); ?></p>
-      </div>
       <?php } ?>
-      <p class="c-content-description"><?php the_field('lede'); ?></p>
     </div>
+    <p class="c-content-description"><?php the_field('lede'); ?></p>
   </div>
 </div>
 
