@@ -29,7 +29,7 @@ get_header( 'shop' ); ?>
 				<div class="c-shop-header__nav__links">
 					<a href="#magazines">Magazines</a>
 					<a href="#books">Books</a>
-					<a href="#subs">Subscriptions</a>
+					<a href="/subscribe">Subscriptions</a>
 					<a href="#anthologies">Anthologies</a>
 				</div>
 			</div>
