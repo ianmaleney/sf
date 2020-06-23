@@ -32,7 +32,7 @@ if ( $featuredPost->have_posts() ) {
         <?php if( get_field('issue_volume') || get_field('isbn')) { ?>
           <!-- Do Nothing -->
         <?php } else { ?>
-          <?php if ('page' != get_post_type()) { ?>
+          <?php if ('page' != get_post_type() && 'product' != get_post_type()) { ?>
             <p class="c-content-type"><?php sf_single_cat() ?></p>
             <p class="sep">|</p>
             <p class="c-content-author"><?php guest_author_link(); ?></p>
