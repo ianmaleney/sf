@@ -8,6 +8,7 @@ global $wpdb;
 
 http_response_code(200); // PHP 5.4 or greater
 
+
 $now = current_time( 'mysql' );
 $userdata = array(
 	'user_login' => $sub_data->user_login,
@@ -85,8 +86,14 @@ $type = type_setup($sub_data);
 $renewal = date_setup($sub_data);
 $start = start_setup($sub_data);
 
+
+
 // Mail Variables
-$admin_to = array('web.stingingfly@gmail.com', 'stingingfly@gmail.com', 'info@stingingfly.org');
+if (site_url() === 'https://stingingfly.org') {
+	$admin_to = array('web.stingingfly@gmail.com', 'stingingfly@gmail.com', 'info@stingingfly.org');
+} else {
+	$admin_to = array('web.stingingfly@gmail.com');
+}
 $admin_subject = "You've Got A New Subscriber";
 
 // Get email template
