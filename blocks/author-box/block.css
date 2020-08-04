@@ -3,6 +3,7 @@
   grid-column: 2;
   margin: 2rem 0;
   padding: 2rem 1rem;
+  min-width: 100%;
 }
 
 p.author-box__bio {
@@ -23,9 +24,12 @@ span.author-box-about {
   float: left;
   height: 325px;
   width: auto;
+  margin-right: 20px;
+  margin-bottom: 10px;
 }
 
 .author-image {
   height: 100%;
   object-fit: contain;
+  box-shadow: 4px 4px #648ec0, 8px 8px salmon;
 }
