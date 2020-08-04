@@ -1,12 +1,31 @@
 .author-box {
-  background-color: rgba(62, 146, 211, 0.2);
+  background-color: #f8f8f8;
   grid-column: 2;
   margin: 2rem 0;
-  padding: 1rem;
+  padding: 2rem 1rem;
 }
 
-.author-box__name {
+p.author-box__bio {
   font-family: "IBM Plex Sans Condensed", proxima-nova, "Gill Sans",
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+span.author-box__name,
+span.author-box-about {
+  font-weight: bold;
+}
+
+.author-image-wrapper {
+  float: left;
+  height: 325px;
+  width: auto;
+}
+
+.author-image {
+  height: 100%;
+  object-fit: contain;
 }
