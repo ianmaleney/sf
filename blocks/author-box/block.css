@@ -1,4 +1,12 @@
 .author-box {
-  background-color: #032c7e;
-  color: #f4f2d5;
+  background-color: rgba(62, 146, 211, 0.2);
+  grid-column: 2;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.author-box__name {
+  font-family: "IBM Plex Sans Condensed", proxima-nova, "Gill Sans",
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
