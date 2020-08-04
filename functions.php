@@ -1357,4 +1357,35 @@ function rudr_make_registered_column_sortable( $columns ) {
 	return wp_parse_args( array( 'registration_date' => 'registered' ), $columns );
 }
 
+
+
+//[nbsp] shortcode - Create a non-breaking space where I bloody-well want one.
+function nbsp_shortcode( $atts, $content = null ) {
+
+	//Set default $content
+	$content = '&nbsp';
+
+	//Set default count. This will be overriden if a count="" value is specified.
+	$a = shortcode_atts( array(
+        'count' => '1',
+    ), $atts );
+
+	//Set the count variable from the shortcode_atts array.
+    $count = $a['count'];
+
+    //Make it an integer value.
+    $count = intval($count);
+
+	//Check if $count is an integer value and is greater than 0. If so, string-repeat $content X $count.
+	if (is_int($count) && $count >= 1) {
+		$content = str_repeat($content, $count);
+	}
+
+	return $content;
+}
+
+add_shortcode( 'nbsp', 'nbsp_shortcode' );
+
 ?>
+
+
