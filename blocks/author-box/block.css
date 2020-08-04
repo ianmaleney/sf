@@ -1,5 +1,5 @@
 .author-box {
-  background-color: #f2f0e7;
+  background-color: #f1f3f5;
   grid-column: 2;
   margin: 2rem 0;
   padding: 2rem 1rem;
@@ -7,7 +7,7 @@
   --sans: "IBM Plex Sans Condensed", proxima-nova, "Gill Sans", -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --highlight: #283438;
+  --highlight: #343a40;
 }
 
 p.author-box__bio {
@@ -16,7 +16,7 @@ p.author-box__bio {
   padding: 10px 0;
   font-size: 1.6rem;
   line-height: 1.4;
-  color: #d4c1a8;
+  color: #f1f3f5;
   margin-top: 6px;
 }
 

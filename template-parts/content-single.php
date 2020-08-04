@@ -7,9 +7,11 @@
 	echo '<div class="entry-content c-article__body">';
 	the_content();
 	echo '</div>';
-	echo '<section class="entry-footer c-article__footer"><p>';
-	guest_author_bio();
-	echo '</p></section>';
+	if (!has_tag('monthly-fiction')) {
+		echo '<section class="entry-footer c-article__footer"><p>';
+		guest_author_bio();
+		echo '</p></section>';
+	}
 }
 
 function display_paywall() {
