@@ -1206,7 +1206,7 @@ function sf_gift_check_cron_exec() {
 	global $wpdb;
 	$today = date('Y-m-d H:i:s');
 
-	$new_subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE date_start = CURDATE() AND gift = true", 'ARRAY_A');
+	$new_subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE date_start < CURDATE() AND sub_status = 'pending_gift'", 'ARRAY_A');
 
 	foreach($new_subscribers as $sub) {
 		$name = $sub['first_name'] . $sub['last_name'] . $sub['sub_id'];
