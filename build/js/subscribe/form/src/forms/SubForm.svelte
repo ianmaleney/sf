@@ -140,7 +140,7 @@
         value: meta.next_issue_number,
         disabled: false,
         checked: true,
-        label: meta.next_issue_title,
+        label: `${meta.next_issue_title}: Winter 2020-21`,
       },
     ],
     book_inputs: [
