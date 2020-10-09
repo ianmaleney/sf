@@ -1,13 +1,11 @@
 <script>
   export let formType = undefined;
-  import { beforeUpdate, afterUpdate, onMount } from "svelte";
+  import { beforeUpdate, onMount } from "svelte";
   import { fade } from "svelte/transition";
   import FormFieldset from "../form-elements/FormFieldset.svelte";
   import StripeElement from "../form-elements/StripeElement.svelte";
   import Spinner from "../form-elements/Spinner.svelte";
   import handle_sca_confirmation from "../utilities/handleScaConfirmation";
-  import spush from "../utilities/spush.js";
-  import spop from "../utilities/spop.js";
 
   let gift = false;
   let closed = false;
@@ -21,7 +19,7 @@
       parseInt(document.querySelector(".meta").dataset.current) + 1
     } / Volume 2`,
     current_book: "Modern Times by Cathy Sweeney (Available now)",
-    next_book: "Trouble by Philip Ó Ceallaigh (Available Sept 2020)",
+    next_book: "Trouble by Philip Ó Ceallaigh (Available March 2021)",
   };
   let inputs = {
     contact_inputs: [
@@ -131,9 +129,9 @@
         input_id: "current_issue",
         name: "issue",
         value: meta.current_number,
-        disabled: false,
-        checked: true,
-        label: meta.current_title,
+        disabled: true,
+        checked: false,
+        label: `${meta.current_title} (Sold Out)`,
       },
       {
         type: "radio",
@@ -141,7 +139,7 @@
         name: "issue",
         value: meta.next_issue_number,
         disabled: false,
-        checked: false,
+        checked: true,
         label: meta.next_issue_title,
       },
     ],
@@ -405,7 +403,7 @@
     <FormFieldset f_id="sub_address" f_legend="Where should we send it?" inputs={inputs.address_inputs} comment={comments.address_comment[formType]} />
 
     <!-- Subscription Start Details -->
-    <FormFieldset f_id="sub_start" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment[formType]} gift={gift}/>
+    <FormFieldset f_id="sub_start test" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment[formType]} gift={gift}/>
 
     <!-- Donation Toggle -->
     {#if formType === 'patron'}
