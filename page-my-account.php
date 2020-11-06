@@ -6,6 +6,7 @@ if ( is_user_logged_in() ) {
 	$subscriber_details = $wpdb->get_row("SELECT * FROM stinging_fly_subscribers WHERE wp_user_id = $current_user->ID");
 
 	$first_name = $current_user->user_firstname;
+	$last_name = $current_user->user_lastname;
 	$expiry_date = $subscriber_details->next_renewal_date;
 	$sub_status = $subscriber_details->sub_status;
 	$sub_id = $subscriber_details->sub_id;
@@ -19,7 +20,8 @@ if ( is_user_logged_in() ) {
 			stripe_customer_id: "<?php echo $stripe_customer_id; ?>",
 			stripe_subscription_id: "<?php echo $stripe_sub_id; ?>",
 			sub_id: "<?php echo $sub_id; ?>",
-			name: "<?php echo $first_name . ' ' . $current_user->user_lastname; ?>"
+			first_name: "<?php echo $first_name; ?>",
+			last_name: "<?php echo $last_name; ?>"
 		}
 	</script>
 	<div class="u-page-wrapper u-page-wrapper--primary-header u-page-wrapper--full-width">

@@ -58,7 +58,7 @@ const stripeTokenHandler = async (token, cus_id, errorElement) => {
   errorElement.textContent = res.message || "Unable to fetch";
 };
 
-const handleAddressData = (sub_id, stripe_customer_id, name) => {
+const handleAddressData = (sub_id, stripe_customer_id, first_name, last_name) => {
   let v = el => document.getElementById(el).value;
   return {
     address_one: v("address-one"),
@@ -68,12 +68,13 @@ const handleAddressData = (sub_id, stripe_customer_id, name) => {
     postcode: v("address-postcode"),
     sub_id: sub_id,
     stripe_customer_id: stripe_customer_id || null,
-    name: name || null
+    first_name: first_name,
+    last_name: last_name
   };
 };
 
-const handleUpdateAddress = async (address_form, sub_id, customer_id, name) => {
-  let data = handleAddressData(sub_id, customer_id, name);
+const handleUpdateAddress = async (address_form, sub_id, customer_id, first_name, last_name) => {
+  let data = handleAddressData(sub_id, customer_id, first_name, last_name);
   let res = await fetch(return_api_url("api/subscribers"), {
     method: "PUT",
     body: JSON.stringify(data),
@@ -98,7 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let sub_id = document.meta.sub_id;
   let cus_id = document.meta.stripe_customer_id;
   let stripe_sub_id = document.meta.stripe_subscription_id;
-  let name = document.meta.name;
+  let first_name = document.meta.first_name;
+  let last_name = document.meta.last_name;
 
   /**********************************/
   /*
@@ -117,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let address_form = document.querySelector("#change_address_form");
   address_form.addEventListener("submit", e => {
     e.preventDefault();
-    handleUpdateAddress(address_form, sub_id, cus_id, name);
+    handleUpdateAddress(address_form, sub_id, cus_id, first_name, last_name);
   });
 
   /**********************************/
