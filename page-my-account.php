@@ -19,6 +19,7 @@ if ( is_user_logged_in() ) {
 			stripe_customer_id: "<?php echo $stripe_customer_id; ?>",
 			stripe_subscription_id: "<?php echo $stripe_sub_id; ?>",
 			sub_id: "<?php echo $sub_id; ?>",
+			name: "<?php echo $first_name . ' ' . $current_user->user_lastname; ?>"
 		}
 	</script>
 	<div class="u-page-wrapper u-page-wrapper--primary-header u-page-wrapper--full-width">
