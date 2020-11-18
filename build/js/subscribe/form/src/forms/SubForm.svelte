@@ -129,9 +129,9 @@
         input_id: "current_issue",
         name: "issue",
         value: meta.current_number,
-        disabled: true,
-        checked: false,
-        label: `${meta.current_title} (Sold Out)`,
+        disabled: false,
+        checked: true,
+        label: `${meta.current_title}`,
       },
       {
         type: "radio",
@@ -139,8 +139,8 @@
         name: "issue",
         value: meta.next_issue_number,
         disabled: false,
-        checked: true,
-        label: `${meta.next_issue_title}: Winter 2020-21 (Available November 2020)`,
+        checked: false,
+        label: `${meta.next_issue_title}: Summer 2021 (Available May 2021)`,
       },
     ],
     book_inputs: [
@@ -383,46 +383,94 @@
     class:closed>
     <!-- Gift Toggle -->
     {#if formType !== 'patron'}
-	<FormFieldset f_id="sub_gift_toggle" f_legend="Is this subscription for you, or someone else?">
-		<input type="radio" name="gift" id="gift_no" bind:group={gift} value={false} checked>
-		<label for="gift_no">It's For Me</label>
-		<input type="radio" name="gift" id="gift_yes" bind:group={gift} value={true}>
-		<label for="gift_yes">It's A Gift</label>
-	</FormFieldset>
-	{/if}
+      <FormFieldset
+        f_id="sub_gift_toggle"
+        f_legend="Is this subscription for you, or someone else?">
+        <input
+          type="radio"
+          name="gift"
+          id="gift_no"
+          bind:group={gift}
+          value={false}
+          checked />
+        <label for="gift_no">It's For Me</label>
+        <input
+          type="radio"
+          name="gift"
+          id="gift_yes"
+          bind:group={gift}
+          value={true} />
+        <label for="gift_yes">It's A Gift</label>
+      </FormFieldset>
+    {/if}
 
     <!-- Subscriber Contact Details -->
-    <FormFieldset f_id="sub_contact" f_legend="Who should we send it to?" inputs={inputs.contact_inputs} comment={comments.contact_comment} />
+    <FormFieldset
+      f_id="sub_contact"
+      f_legend="Who should we send it to?"
+      inputs={inputs.contact_inputs}
+      comment={comments.contact_comment} />
 
     <!-- Gifter Contact Details -->
     {#if gift == true}
-	<FormFieldset f_id="sub_gifter" f_legend="Your Contact Details" inputs={inputs.gifter_inputs} comment={comments.gifter_comment} />
-	{/if}
+      <FormFieldset
+        f_id="sub_gifter"
+        f_legend="Your Contact Details"
+        inputs={inputs.gifter_inputs}
+        comment={comments.gifter_comment} />
+    {/if}
 
     <!-- Subscriber Address Details -->
-    <FormFieldset f_id="sub_address" f_legend="Where should we send it?" inputs={inputs.address_inputs} comment={comments.address_comment[formType]} />
+    <FormFieldset
+      f_id="sub_address"
+      f_legend="Where should we send it?"
+      inputs={inputs.address_inputs}
+      comment={comments.address_comment[formType]} />
 
     <!-- Subscription Start Details -->
-    <FormFieldset f_id="sub_start test" f_legend="When would you like the subscription to start?" inputs={inputs.start_inputs} comment={comments.start_comment[formType]} gift={gift}/>
+    <FormFieldset
+      f_id="sub_start test"
+      f_legend="When would you like the subscription to start?"
+      inputs={inputs.start_inputs}
+      comment={comments.start_comment[formType]}
+      {gift} />
 
     <!-- Donation Toggle -->
     {#if formType === 'patron'}
-	<FormFieldset f_id="patron_set_amount" f_legend="How much would you like to give?">
-		<label for="patron_amount">
-		<span class="label-title">Amount in Euro – Minimum €100</span>
-		<input type="number" name="patron_amount" id="patron_amount" min="100" value="100">
-		</label>
-	</FormFieldset>
-	<FormFieldset f_id="patron_listed_toggle" f_legend="Would you like to be listed as a patron on our website?">
-		<input type="radio" name="listed" id="listed_yes" value=true checked>
-		<label for="listed_yes">Yes, List My Name</label>
-		<input type="radio" name="listed" id="listed_no" value=false >
-		<label for="listed_no">No, Don't List My Name</label>
-	</FormFieldset>
-	{/if}
+      <FormFieldset
+        f_id="patron_set_amount"
+        f_legend="How much would you like to give?">
+        <label for="patron_amount">
+          <span class="label-title">Amount in Euro – Minimum €100</span>
+          <input
+            type="number"
+            name="patron_amount"
+            id="patron_amount"
+            min="100"
+            value="100" />
+        </label>
+      </FormFieldset>
+      <FormFieldset
+        f_id="patron_listed_toggle"
+        f_legend="Would you like to be listed as a patron on our website?">
+        <input
+          type="radio"
+          name="listed"
+          id="listed_yes"
+          value="true"
+          checked />
+        <label for="listed_yes">Yes, List My Name</label>
+        <input type="radio" name="listed" id="listed_no" value="false" />
+        <label for="listed_no">No, Don't List My Name</label>
+      </FormFieldset>
+    {/if}
 
     <!-- Payment Details -->
-    <StripeElement on:formSubmit="{handleFormSubmit}" on:success="{handleFormSuccess}" on:failure="{handleFormFailure}" subscription="{formType}"/>
+    <StripeElement
+      on:formSubmit={handleFormSubmit}
+      on:success={handleFormSuccess}
+      on:failure={handleFormFailure}
+      subscription={formType} />
   </form>
 
   {#if closed}
