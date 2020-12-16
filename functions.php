@@ -1209,9 +1209,9 @@ function sf_gift_check_cron_exec() {
 	$new_subscribers = $wpdb->get_results("SELECT * FROM stinging_fly_subscribers WHERE date_start < CURDATE() AND sub_status = 'pending_gift'", 'ARRAY_A');
 
 	foreach($new_subscribers as $sub) {
-		$name = $sub['first_name'] . $sub['last_name'] . $sub['sub_id'];
+		$name = $sub['first_name'] . $sub['last_name'];	
 		$email = $sub['email'];
-		$user_login = strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $name));
+		$user_login = strtolower(preg_replace("/[^A-Za-z0-9 ]/", '', $name)) . $sub['sub_id'];
 		$userdata = array(
 			'user_login' => $user_login,
 			'first_name' => $sub['first_name'],
@@ -1238,26 +1238,41 @@ function sf_gift_check_cron_exec() {
 			)
 		);
 
+		// Setup the gift details
+		$gifter_name = $sub['gifter_first_name'] . " " . $sub['gifter_last_name'];
+		$gift_wrapper = "A message from ". $sub['gifter_first_name'] . ": <blockquote style='background-color: #f6f6f6; padding: 20px;'>" . $sub['gift_note'] . "</blockquote>";
+
+		if (strlen($sub['gift_note']) > 0) {
+			$gift_note = $gift_wrapper;
+		} else {
+			$gift_note = "";
+		}
+
 		// Send Email
 		error_log("Sending Subscriber Email: " . time());
 		// Set the email address for delivery
 		$subscriber_to = $email;
 
 		// Set the subject line of the email
-		$subscriber_subject = "You've Subscribed To The Stinging Fly!";
+		$subscriber_subject = "Welcome To The Stinging Fly!";
 
 		// Get the contents of the email template
 		$site_url = get_site_url();
 		$file_url = $site_url . '/wp-content/themes/stingingfly/template-parts/email/new-subscriber-gift-delivery.php';
 		$subscriber_message = file_get_contents($file_url);
+		$find = array("%name%", "%gifter_name%", "%gift_note%");
+		$replace = array($sub['first_name'], $gifter_name, $gift_note);
+		$custom_message = str_replace($find, $replace, $subscriber_message);
 
 		// Add Headers to enable HTML
 		$subscriber_headers = array('Content-Type: text/html; charset=UTF-8');
 
 		// Send the email
-		wp_mail( $subscriber_to, $subscriber_subject, $subscriber_message, $subscriber_headers );
+		wp_mail( $subscriber_to, $subscriber_subject, $custom_message, $subscriber_headers );
 	}
 }
+
+sf_gift_check_cron_exec();
 
 // Custom Hook for WP_Cron 
 add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
