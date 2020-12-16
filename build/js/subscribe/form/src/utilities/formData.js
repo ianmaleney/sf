@@ -23,7 +23,11 @@ const formData = (form, token, sub) => {
     gifter_last_name: v("#gifter_last_name"),
     gifter_email: v("#gifter_email"),
     gift_date: v('input[name="gift_start_date"]'),
+    gift_note: v("#gift_note")
   };
+
+  console.log({obj});
+  
   return JSON.stringify(obj);
 };
 

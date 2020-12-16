@@ -67,6 +67,13 @@
         required: true,
         classes: "full-width",
       },
+      {
+        name: "gift_note",
+        label: "Gift Note",
+        type: "textarea",
+        required: false,
+        classes: "full-width",
+      },
     ],
     address_inputs: [
       {
@@ -168,7 +175,7 @@
   let comments = {
     contact_comment: "The name and email address of the recipient",
     gifter_comment:
-      "We’ll need your name and email address too, just so we can send you a receipt.",
+      "We’ll need your name and email address too, just so we can send you a receipt. You can also include a note that will be sent when the recipient is notified about their gift.",
     address_comment: {
       magonly: "This is the address where we’ll be sending the issues.",
       bookonly: "This is the address where we’ll be sending the books.",
