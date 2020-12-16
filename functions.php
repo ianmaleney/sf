@@ -1272,8 +1272,6 @@ function sf_gift_check_cron_exec() {
 	}
 }
 
-sf_gift_check_cron_exec();
-
 // Custom Hook for WP_Cron 
 add_action( 'sf_gift_check_cron_hook', 'sf_gift_check_cron_exec' );
 
