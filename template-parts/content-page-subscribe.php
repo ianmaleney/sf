@@ -72,8 +72,7 @@
 		<img class="subs-page__landing__image" src="<?php echo $book_thumbnail ?>">
 	</div>
 	<div class="subs-page__landing__text">
-		<p>The Stinging Fly magazine was established in 1997 to seek out, publish and promote the very best new Irish and international writing. Thanks to the support of our subscribers, we’re still doing that over twenty years later.</p>
-		<p>The Stinging Fly publishes two magazines and two books each year. Supporters can choose to receive the books, the magazines, or both together. Stinging Fly Patrons receive both the books and the magazines. All supporters receive exclusive access to our online archive, which includes almost 2000 stories, poems, and essays taken from every issue of the magazine. All prices include postage.</p>
+		<?php the_content(); ?>
 	</div>
 </div>
 
