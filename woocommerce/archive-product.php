@@ -43,35 +43,16 @@ get_header( 'shop' ); ?>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php woocommerce_product_subcategories(); ?>
-				<!--<div class="c-product-category" id="specialoffers"> 
-				<ul id="specialoffers__list">
-					<?php
-						/*$args = array(
-							'post_type' => 'product',
-							'p' => 7766
-						);
-						$loop = new WP_Query( $args );
-						if ( $loop->have_posts() ) {
-							while ( $loop->have_posts() ) : $loop->the_post();
-								wc_get_template_part( 'content', 'product' );
-							endwhile;
-						} else {
-							echo __( 'No products found' );
-						}
-						wp_reset_postdata();*/
-					?>
-					</ul>
-				</div>-->
 				<div class="c-product-category" id="subs">
 					<ul class="c-products c-products--subs">
 						<?php
 							$args = array(
-								'post_type' => 'product',
-								'meta_key'	=> 'date_published',
-								'orderby'   => 'meta_value_num',
-						    'order'     => 'DESC',
-								'product_cat' => 'subscriptions, bundles, patron',
-								'posts_per_page' => -1
+								'post_type'      => 'product',
+								'meta_key'	     => 'date_published',
+								'orderby'        => 'meta_value_num',
+						    	'order'          => 'DESC',
+								'product_cat'    => 'bundles',
+								'posts_per_page' => 3
 							);
 							$loop = new WP_Query( $args );
 							if ( $loop->have_posts() ) {
@@ -83,7 +64,7 @@ get_header( 'shop' ); ?>
 							}
 							wp_reset_postdata();
 						?>
-					</ul><!--/.c-products-subscriptions-->
+					</ul>
 				</div>
 
 				<div class="c-product-category" id="books">
